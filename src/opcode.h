@@ -20,3 +20,10 @@ enum cond {
   le = 0xD,
   al = 0xE,
 };
+
+enum shift {
+  lsl = 0,
+  lsr = 1,
+  asr = 2,
+  ror = 3,
+};
