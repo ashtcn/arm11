@@ -15,9 +15,6 @@ enum opcode {
   CMP = 0xA,
   ORR = 0xC,
   MOV = 0xD,
-  MUL = 0xE,
-  SDT = 0xF,
-  BRA = 0x10,
 };
 
 enum cond {
@@ -35,4 +32,10 @@ enum shift {
   lsr = 1,
   asr = 2,
   ror = 3,
+};
+
+enum instruction_code {
+  MUL = 0,
+  SDT = 1,
+  BRA = 2,
 };
