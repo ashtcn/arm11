@@ -1,17 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "constants.h"
-#include "opcode.h"
 #include "toolbox.c"
 #include "system_state.c"
 
-unsigned char test_memory[NUM_ADDRESSES];
+void exit_program(); // Not made yet
 
-void exit_program();//Not made yet
-
-void load_file(char *fname, unsigned char memory[]) {
+void load_file(char *fname, unsigned char *memory) {
   FILE *file;
-
   file = fopen(fname,"rb");
   fread(memory, NUM_ADDRESSES, 1, file);
 }
@@ -19,7 +15,7 @@ void load_file(char *fname, unsigned char memory[]) {
 
 int condition(unsigned long instruction) {
   instruction >>= 28;
-  char flags = registers[CPSR] >>= 28;//how access registers
+  char flags = registers[CPSR] >>= 28; // How access registers
   const unsigned char V = 0x1;
   const unsigned char Z = 0x4;
   const unsigned char N = 0x8;
@@ -39,8 +35,8 @@ int condition(unsigned long instruction) {
     case al:
       return 1;
     default:
-      fprintf(stderr, "Incorrect cond flag, PC: %u", registers[PC]);//how access registers
-      exit_program();//Not sure to exit program here
+      fprintf(stderr, "Incorrect cond flag, PC: %u", registers[PC]); // How access registers
+      exit_program(); // Not sure to exit program here
       return 0;
   }
 }
@@ -55,10 +51,10 @@ void decode_instruction(unsigned long instruction) {
   } else if (!(instruction >> 22) && (((instruction >> 4) & 0xF) == 0x9)) {
     //Multiply
     multiply(instruction);
-  } else if (!(instruction >> 26) {//Dataprocessing
+  } else if (!(instruction >> 26) { // Dataprocessing
     data_processing(instruction);
   } else {
-    fprintf(stderr, "Unknown instruction, PC: %u", registers[PC]);//how access registers
+    fprintf(stderr, "Unknown instruction, PC: %u", registers[PC]); // How access registers
     exit_program();
   }
 }
@@ -72,9 +68,7 @@ int main(int argc, char **argv) {
   char *filename = argv[1];
   printf("%s\n", filename);
 
-  print_array(test_memory, 16);
-  load_file(filename, test_memory);
-  print_array(test_memory, 16);
+  system_state machine;
 
   return EXIT_SUCCESS;
 }
