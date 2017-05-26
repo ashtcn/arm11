@@ -12,3 +12,11 @@ void print_array(void *p, unsigned int bytes_to_print) {
   }
   printf("\n");
 }
+
+unsigned long get_word(unsigned char *memory, unsigned int address) {
+  unsigned long word = 0;
+  for (size_t i = 3; i >= 0; i--) {
+    word = ((unsigned long) memory[address + i * 4]) | (word << 4);
+  }
+  return word;
+}
