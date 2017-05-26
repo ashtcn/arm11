@@ -35,7 +35,8 @@ enum shift {
 };
 
 enum instruction_code {
-  MUL = 0,
-  SDT = 1,
-  BRA = 2,
+  DPI = 0,
+  MUL = 1,
+  SDT = 2,
+  BRA = 3,
 };
