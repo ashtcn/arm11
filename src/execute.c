@@ -4,19 +4,54 @@
 #include "system_state.c"
 #include "toolbox.c"
 
+void execute(system_state machine, instruction operation);
+void execute_dpi(system_state machine, instruction operation);
+void execute_mul(system_state machine, instruction operation);
+
+unsigned long negate(unsigned long value);
+unsigned long absolute(unsigned long value);
+bool is_negative(unsigned long value);
+
+int condition(system_state machine, enum cond condition) {
+  char flags = machine.registers[CPSR] >> 28; // How access registers
+  const unsigned char V = 0x1;
+  const unsigned char Z = 0x4;
+  const unsigned char N = 0x8;
+  switch(condition) {
+    case eq:
+      return (flags & Z);
+    case ne:
+      return !(flags & Z);
+    case ge:
+      return (flags & V) == ((flags & N) >> 3);
+    case lt:
+      return (flags & V) != ((flags & N) >> 3);
+    case gt:
+      return !(flags & Z) && ((flags & V) == ((flags & N) >> 3));
+    case le:
+      return (flags & Z) || ((flags & V) != ((flags & N) >> 3));
+    case al:
+      return 1;
+    default:
+      fprintf(stderr, "Incorrect cond flag, PC: %u", machine.registers[PC]); // How access registers
+      exit_program(); // Not sure to exit program here
+      return 0;
+  }
+}
+
 void execute(system_state machine, instruction operation) {
-  if (condition(operation.cond)) {
+  if (condition(machine, operation.condition)) {
     switch (operation.code) {
       case DPI:
         execute_dpi(machine, operation);
         break;
       case MUL:
+        execute_mul(machine, operation);
         break;
       case SDT:
         break;
       case BRA:
         break;
-
     }
   }
 }
@@ -90,6 +125,22 @@ void execute_dpi(system_state machine, instruction operation) {
   }
   if (operation.flag_1) {//If set flags
     machine.registers[CPSR] = flags << 28;
+  }
+}
+
+void execute_mul(system_state machine, instruction operation) {
+  unsigned long result;
+  unsigned char N = 0x8;
+  unsigned char Z = 0x4;
+  result = machine.registers[operation.rm] * machine.registers[operation.rs];
+  if (operation.flag_0) {
+    result += machine.registers[operation.rn];
+  }
+  machine.registers[operation.rd] = result;
+  if (operation.flag_1) {
+    machine.registers[CPSR] =
+      (machine.registers[CPSR] & 0x3FFFFFFF)
+      | (((N * is_negative(result)) | (Z * (result == 0))) << 28);
   }
 }
 

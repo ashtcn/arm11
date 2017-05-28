@@ -1,3 +1,6 @@
+#ifndef CONSTANTS_H_INCLUDED
+#define CONSTANTS_H_INCLUDED
+
 #define NUM_REGISTERS 17
 #define NUM_ADDRESSES 65536
 #define WORD_SIZE 32
@@ -40,3 +43,5 @@ enum instruction_code {
   SDT = 2,
   BRA = 3,
 };
+
+#endif

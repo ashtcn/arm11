@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include "system_state.c"
+
+void exit_program();
 
 void print_array(void *p, unsigned int bytes_to_print) {
   unsigned char *memory = (unsigned char *) p;
@@ -19,4 +22,8 @@ unsigned long get_word(unsigned char *memory, unsigned int address) {
     word = ((unsigned long) memory[address + i * 4]) | (word << 4);
   }
   return word;
+}
+
+void print_system_state(system_state machine) {
+  print_array(machine.registers, sizeof(int)*17);
 }

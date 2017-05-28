@@ -4,41 +4,10 @@
 #include "toolbox.c"
 #include "system_state.c"
 
-void exit_program(); // Not made yet
-
 void load_file(char *fname, unsigned char *memory) {
   FILE *file;
   file = fopen(fname,"rb");
   fread(memory, NUM_ADDRESSES, 1, file);
-}
-
-
-int condition(unsigned long instruction) {
-  instruction >>= 28;
-  char flags = registers[CPSR] >>= 28; // How access registers
-  const unsigned char V = 0x1;
-  const unsigned char Z = 0x4;
-  const unsigned char N = 0x8;
-  switch(instruction) {
-    case eq:
-      return (flags & Z);
-    case ne:
-      return !(flags & Z);
-    case ge:
-      return (flags & V) == ((flags & N) >> 3);
-    case lt:
-      return (flags & V) != ((flags & N) >> 3);
-    case gt:
-      return !(flags & Z) && ((flags & V) == ((flags & N) >> 3));
-    case le:
-      return (flags & Z) || (flags & V) != ((flags & N) >> 3);
-    case al:
-      return 1;
-    default:
-      fprintf(stderr, "Incorrect cond flag, PC: %u", registers[PC]); // How access registers
-      exit_program(); // Not sure to exit program here
-      return 0;
-  }
 }
 
 void decode_instruction(unsigned long instruction) {
