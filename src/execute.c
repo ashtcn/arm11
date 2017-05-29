@@ -8,9 +8,7 @@ void execute(system_state machine, instruction operation);
 void execute_dpi(system_state machine, instruction operation);
 void execute_mul(system_state machine, instruction operation);
 
-unsigned long negate(unsigned long value);
-unsigned long absolute(unsigned long value);
-bool is_negative(unsigned long value);
+
 
 int condition(system_state machine, enum cond condition) {
   char flags = machine.registers[CPSR] >> 28; // How access registers
@@ -142,19 +140,4 @@ void execute_mul(system_state machine, instruction operation) {
       (machine.registers[CPSR] & 0x3FFFFFFF)
       | (((N * is_negative(result)) | (Z * (result == 0))) << 28);
   }
-}
-
-unsigned long negate(unsigned long value) {
-  return (~value) + 1;
-}
-
-unsigned long absolute(unsigned long value) {
-  if (is_negative(value)) {
-    return negate(value);
-  }
-  return value;
-}
-
-bool is_negative(unsigned long value) {
-  return value >> 31;
 }
