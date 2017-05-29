@@ -70,9 +70,8 @@ long convert_twos_complement(unsigned long value) {
 }
 
 void print_decimal_value(unsigned long value) {
-  unsigned long flag = 0x7FFFFFFF;
   for (int i = 0; i < WORD_SIZE; ++i) {
-    printf("%u", (flag & value) >> (WORD_SIZE - 1));
+    printf("%u", value >> WORD_SIZE - 1);
     value <<= 1;
   }
 }
