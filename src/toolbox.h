@@ -15,5 +15,6 @@ void print_registers(system_state *machine);
 void print_memory(system_state *machine);
 long twos_complement_to_long(word value);
 void print_binary_value(word value);
+word shifter(shift type, word shift_amount, word value);
 
 #endif
