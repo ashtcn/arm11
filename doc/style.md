@@ -1,26 +1,26 @@
 # ARM11 Project Style Guide and C Reference
 
-When writing C code for this project, you should follow these guidelines in 
+When writing C code for this project, you should follow these guidelines in
 order to ensure consistent formatting.
 
 ## Aims
 
 The aims of this style guide are threefold:
 
-- Ensure *consistent* styling. This allows for easy reading of the source 
+- Ensure *consistent* styling. This allows for easy reading of the source
 code and makes finding things easier.
-- Allow for easier *documentation*. This style guide is written with the 
-documentation generation tool, Doxygen in mind. Following this style guide 
+- Allow for easier *documentation*. This style guide is written with the
+documentation generation tool, Doxygen in mind. Following this style guide
 will ensure documentation for the source code can be generated quickly.
-- Require concise, well-thought out and correct code. Following these 
-guidelines for formatting and documentation makes it easier to spot mistakes 
+- Require concise, well-thought out and correct code. Following these
+guidelines for formatting and documentation makes it easier to spot mistakes
 and layout code in a way which makes the most sense to readers.
 
-This guide also discusses most of the C language required for the 120.3 course, 
+This guide also discusses most of the C language required for the 120.3 course,
 so can act as a quick reference for C.
 
-Numbered points are enforceable guidelines that must be followed. These can 
-be checked by a script if required. Notes are other general points that 
+Numbered points are enforceable guidelines that must be followed. These can
+be checked by a script if required. Notes are other general points that
 should be followed to improve code style.
 
 ## General Guidelines
@@ -35,21 +35,21 @@ should be followed to improve code style.
   * After precompiler declarations,
   * After each function,
   * After variable declarations,
-  * (Optional) In any other case where further seperation of code would aid 
+  * (Optional) In any other case where further seperation of code would aid
   readability.
 
 #### Indentation
 
 4. Use spaces instead of tabs. Indent 2 spaces at a time.
-5. Indent each block of code (surrounded by braces) should be indented by 2 
+5. Indent each block of code (surrounded by braces) should be indented by 2
 more spaces than the last.
 
 ### Commenting
 
 6. Every file should be preceeded by a brief description (max 75 characters)
 and most files should also have a detailed description.
-7. Every top-level definition (e.g. global variables, functions) should be 
-preceeded by a brief description (max 75 characters) and most functions should 
+7. Every top-level definition (e.g. global variables, functions) should be
+preceeded by a brief description (max 75 characters) and most functions should
 also have a detailed description.
   * The brief description should explain what the function does in general.
   * The detailed description should explain any edge cases, and should
@@ -59,7 +59,7 @@ Note: standard single line comments should also be used in code to help
 explain more complex functions.
 
 Note: comments should be formatted using markdown.
-  
+
 Example: Comments before functions should be formatted as follows:
 ```
 /**
@@ -68,10 +68,10 @@ Example: Comments before functions should be formatted as follows:
  * (Optional) A detailed description which may span multiple lines.
  * @param p1 Description of first parameter.
  * ...
- * @see anotherFunction()
+ * @see another_function()
  * @return What the function does to the parameters.
  */
-returnType functionName(type1 p1, ...) {
+returnType function_name(type1 p1, ...) {
 ```
 
 ### Language Features
@@ -83,9 +83,9 @@ the style guidelines.
 
 8. Don't use the `char`, `short`, `int` and `long` types.
 
-In order to increase portability and readability, use stdint.h.
+In order to increase portability and readability, use `stdint.h`.
 
-Included types are: `uint_8t`, `uint_16t`, `uint_32t`, `uint_64t`, `int_8t`, 
+Included types are: `uint_8t`, `uint_16t`, `uint_32t`, `uint_64t`, `int_8t`,
 `int_16t`, `int_32t`, `int_64t`.
 
 #### Enumerated Types
@@ -94,7 +94,7 @@ Example:
 ```
 /**
  * @brief An enum type that represents flags for rendering.
- * 
+ *
  * Each bit represents a different flag. Use bitwise and to check if a flag is
  * set.
  */
@@ -113,13 +113,13 @@ enum render_flag {
 9. Use underscore\_seperation for function names.
 10. Don't put a space between the function name and parameter list.
 11. Never leve the parameter list for a function empty.
-12. Leave a single space between the closing parenthesis of the parameter list 
+12. Leave a single space between the closing parenthesis of the parameter list
 and the opening brace of the function body.
 
 Note: Try to keep functions under 40 lines long.
 
-Remember to include `void` in your parameter list for functions without 
-parameters. 
+Remember to include `void` in your parameter list for functions without
+parameters.
 
 #### Variables
 
@@ -223,7 +223,7 @@ fgets(buffer, size, stdin);
 
 #### Pointers
 
-16. When declaring a pointer, place the `*` adjacent to the variable name, not 
+16. When declaring a pointer, place the `*` adjacent to the variable name, not
 the type.
 17. When passing by reference, pointers must be declared as `const`.
 
@@ -242,7 +242,7 @@ int const *ptr2 = &val;
 const int const *ptr3 = &val;
 ```
 
-Think of `*` as an operator that takes an address and returns the value which 
+Think of `*` as an operator that takes an address and returns the value which
 it points to. `&` is an operator that takes a value and returns its address.
 
 We can also use function pointers to pass functions be reference.
@@ -268,7 +268,7 @@ int main(void) {
 
 #### Command Line Arguments
 
-`main` can have a type signature where it receives arguments from the command 
+`main` can have a type signature where it receives arguments from the command
 line:
 
 - `argc`, the number of passed parameters.
@@ -297,9 +297,9 @@ int main(int argc, char **argv) {
 `size` bytes and returns a pointer to the allocated memory.
 - `void free(void *ptr)` frees a previously allocated memory region.
 - You need to check that these don't fail (not NULL).
-- `string.h`'s `void *memset (void *s, int c, size_t n)` sets teh `n`-byte 
+- `string.h`'s `void *memset (void *s, int c, size_t n)` sets teh `n`-byte
 region starting at `s` to `c`.
-- `void *memcpy(void *dest, const void *src, size_t n)` copies `n` bytes from 
+- `void *memcpy(void *dest, const void *src, size_t n)` copies `n` bytes from
 `src` to `dst`, returning `dst`.
 - You can use the `memcheck` tool provided by `valgrind` to check for memory
 leaks.
@@ -310,7 +310,7 @@ leaks.
 
 #### Headers
 
-19. All headers should be surrounded by include guards, `#ifndef THIS_H`, 
+19. All headers should be surrounded by include guards, `#ifndef THIS_H`,
 `#define THIS_H`.
 
 Note: In general, every `.c` file should have an associated `.h` file.
