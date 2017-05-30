@@ -8,8 +8,10 @@ CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_BSD_SOURCE -std=c99 -Werror -pedantic
 all: assemble emulate
 
 assemble: assemble.o
+emulate: emulate.o toolbox.o
 
-emulate: emulate.o
+emulate.o: global.h system_state.h instruction.h toolbox.h
+toolbox.o: toolbox.h global.h system_state.h
 
 clean:
 	rm -f $(wildcard *.o)
