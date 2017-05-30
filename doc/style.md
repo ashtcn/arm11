@@ -162,17 +162,14 @@ for (initialiser; condition; increment / decrement) {
 ```
 ```
 switch (expression) {
-  case constant1: {
+  case constant1:
     ...
     break;
-  }
-  case constant2: {
+  case constant2:
     ...
     break;
-  }
-  default: {
+  default:
     assert(false);
-  }
 }
 ```
 
