@@ -1,5 +1,30 @@
 #include "toolbox.h"
 
+/**
+ * @brief Loads a binary file into the memory.
+ *
+ * Writes the contents of the provided binary object code file to the memory,
+ * starting at the provided location. Returns an error message and exits if the
+ * file cannot be opened or cannot be read.
+ * @param fname The filename conataining object code to be loaded.
+ * @param memory A pointer to the first byte of memory to be written to.
+ */
+ void load_file(char *fname, byte_t *memory) {
+   // Try to open the file
+   FILE *file = fopen(fname, "rb");
+   if (file == NULL) {
+     perror("Error in opening object code file.");
+     exit(EXIT_FAILURE);
+   }
+   // Try to read all lines into the memory
+   fread(memory, NUM_ADDRESSES, 1, file);
+   if(ferror(file)) {
+     perror("Error in reading from object code file.");
+     exit(EXIT_FAILURE);
+   }
+   // Close the file
+   fclose(file);
+ }
 void exit_program(system_state_t *machine) {
   print_system_state(machine);
   exit(EXIT_FAILURE);
@@ -49,26 +74,28 @@ void print_system_state(system_state_t *machine) {
 
 void print_registers(system_state_t *machine) {
   printf("Register State:\n");
-  for (int i = 0; i < NUM_REGISTERS; ++i) {
-    printf("Register no: %d, has decimal value: %ld\n", i, twos_complement_to_long(machine->registers[i]));
-    printf("Register no: %d, has binary value: ", i);
-    print_binary_value(machine->registers[i]);
-    printf("\n");
+  for (uint8_t i = 0; i < NUM_REGISTERS; ++i) {
+    word_t value = machine->registers[i];
+    printf("Register no: %d, ", i);
+    print_value(value);
   }
 }
 
 void print_memory(system_state_t *machine) {
   printf("Memory state:\n");
-  for (int i = 0; i < (NUM_ADDRESSES/4); i += 4) {
-    word_t word_to_print = get_word(machine, i);
-    if (word_to_print) {
-      printf("Memory adress: %d, has hex value: %x\n", i, word_to_print);
-      printf("Memory adress: %d, has decimal value: %ld\n", i, twos_complement_to_long(word_to_print));
-      printf("Memory adress: %d, has binary value: ", i);
-      print_binary_value(word_to_print);
-      printf("\n");
+  for (uint32_t i = 0; i < NUM_ADDRESSES; i += 4) {
+    word_t value = get_word(machine, i);
+    if (value) {
+      printf("Memory address: %d, ", i);
+      print_value(value);
     }
   }
+}
+
+void print_value(word_t value) {
+  printf("Value: ");
+  print_binary_value(value);
+  printf(" (0x%x) (%ld)\n", value, twos_complement_to_long(value));
 }
 
 long twos_complement_to_long(word_t value) {
@@ -111,32 +138,6 @@ value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
   }
   return result;
 }
-
-/**
- * @brief Loads a binary file into the memory.
- *
- * Writes the contents of the provided binary object code file to the memory,
- * starting at the provided location. Returns an error message and exits if the
- * file cannot be opened or cannot be read.
- * @param fname The filename conataining object code to be loaded.
- * @param memory A pointer to the first byte of memory to be written to.
- */
- void load_file(char *fname, byte_t *memory) {
-   // Try to open the file
-   FILE *file = fopen(fname, "rb");
-   if (file == NULL) {
-     perror("Error in opening object code file.");
-     exit(EXIT_FAILURE);
-   }
-   // Try to read all lines into the memory
-   fread(memory, NUM_ADDRESSES, 1, file);
-   if(ferror(file)) {
-     perror("Error in reading from object code file.");
-     exit(EXIT_FAILURE);
-   }
-   // Close the file
-   fclose(file);
- }
 
 // void decode_instruction(system_state_t *machine) {
 //   // PRE: Instruction is not all 0

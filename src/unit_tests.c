@@ -39,8 +39,36 @@ void test_load_file(void) {
   }
 }
 
+void test_print_system_state() {
+  instruction_t pss_instruction = {
+    .type = DPI,
+    .cond = 3,
+    .operation = ORR,
+    .immediate_value = 0xabc,
+    .rn = 5,
+    .rd = 6,
+    .flag_0 = true,
+    .flag_1 = true,
+  };
+  system_state_t pss_state = {
+    .registers = {0},
+    .memory = {0},
+    .fetched_instruction = 0,
+    .decoded_instruction = &pss_instruction,
+    .has_fetched_instruction = false,
+  };
+  pss_state.registers[3] = 0xabcd0123;
+  pss_state.registers[16] = 0x0123abcd;
+  pss_state.memory[0] = 0xab;
+  pss_state.memory[3] = 0x12;
+  pss_state.memory[4] = 0x12;
+  pss_state.memory[65535] = 0xab;
+  print_system_state(&pss_state);
+}
+
 int main(void) {
   run_test(test_load_file);
+  run_test(test_print_system_state);
   printf("\nNo errors\n");
   return 0;
 }

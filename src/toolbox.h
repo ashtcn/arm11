@@ -15,6 +15,7 @@ word_t absolute(word_t value);
 void print_system_state(system_state_t *machine);
 void print_registers(system_state_t *machine);
 void print_memory(system_state_t *machine);
+void print_value(word_t value);
 long twos_complement_to_long(word_t value);
 void print_binary_value(word_t value);
 value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value);
