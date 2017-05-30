@@ -22,7 +22,7 @@ void decode_instruction(word fetched_instr, instruction *operation) {
   } else if (!(fetched_instr >> 22) && (((fetched_instr >> 4) & 0xF) == 0x9)) {
     //Multiply
     multiply(fetched_instr, operation);
-  } else if (!(fetched_instr >> (WORD_SIZE - 6)) { // Dataprocessing
+  } else if (!(fetched_instr >> (WORD_SIZE - 6))) { // Dataprocessing
     data_processing(fetched_instr, operation);
   } else {
     fprintf(stderr, "Unknown instruction, PC: %u", registers[PC]); // How access registers
@@ -39,7 +39,16 @@ int main(int argc, char **argv) {
   char *filename = argv[1];
   printf("%s\n", filename);
 
-  system_state machine;
+  system_state *machine = malloc(sizeof(system_state));
+
+  // Check if we cannot allocate memory
+  if (!machine) {
+    fprintf(stderr, "Cannot allocate memory to store system_state.\n");
+    return EXIT_FAILURE;
+  }
+
+  // init_system_state(machine);
+  load_file(filename, machine->memory);
 
   return EXIT_SUCCESS;
 }
