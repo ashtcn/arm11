@@ -79,3 +79,19 @@ void print_binary_value(word value) {
     value <<= 1;
   }
 }
+
+word shifter(shift type, word shift_amount, word value) {
+  switch(type) {
+    case lsl:
+      return value << shift_amount;
+    case lsr:
+      return value >> shift_amount;
+    case asr:
+      return (value >> shift_amount) | ((value >> 31) ? ~((1L << (3L - shift_amount)) - 1L) : 0L);
+    case ror:
+      return value; //TODO
+    default:
+      fprintf(stderr, "Unknown shift type: %u", type);
+      exit_program();
+  }
+}
