@@ -87,18 +87,28 @@ void print_binary_value(word_t value) {
   }
 }
 
-value_carry_t shifter(shift_t type, word_t shift_amount, word_t value) {
+value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
+  value_carry_t *result = malloc(sizeof(value_carry_t));
   switch(type) {
     case lsl:
-      return value << shift_amount;
+      result->value = value << shift_amount;
+      result->carry = (value >> (WORD_SIZE - shift_amount)) & 0x1;
+      break;
     case lsr:
-      return value >> shift_amount;
+      result->value = value >> shift_amount;
+      result->carry = value << (WORD_SIZE - shift_amount) & 0x1;
+      break;
     case asr:
-      return (value >> shift_amount) | ((value >> 31) ? ~((1L << (3L - shift_amount)) - 1L) : 0L);
+      result->value = (value >> shift_amount) | ((value >> 31) ? ~((1L << (3L - shift_amount)) - 1L) : 0L);
+      result->carry = value << (WORD_SIZE - shift_amount) & 0x1;
+      break;
     case ror:
-      return (value << (WORD_SIZE - shift_amount)) | (value >> shift_amount);
+      result->value = (value << (WORD_SIZE - shift_amount)) | (value >> shift_amount);
+      result->carry = value << (WORD_SIZE - shift_amount) & 0x1;
+      break;
     default:
       fprintf(stderr, "Unknown shift type: %u", type);
       exit(EXIT_FAILURE);
   }
+  return result;
 }

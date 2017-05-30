@@ -3,6 +3,7 @@
 #include "global.h"
 #include "system_state.h"
 #include "toolbox.h"
+#include "value_carry.h"
 
 void execute(system_state_t *machine);
 void execute_dpi(system_state_t *machine);
@@ -28,7 +29,7 @@ int condition(system_state_t *machine) {
       return 1;
     default:
       fprintf(stderr, "Incorrect cond flag, PC: %u", machine->registers[PC]); // How access registers
-      exit_program(); // Not sure to exit program here
+      exit_program(machine); // Not sure to exit program here
       return 0;
   }
 }
@@ -72,9 +73,9 @@ void execute_dpi(system_state_t *machine) {
     shift_ammount = machine->decoded_instruction->shift_amount;
   }
 
-  value_carry_t shifter_out = shifter(op2, machine->decoded_instruction->shift_type, shift_ammount);
-  op2 = shifter_out.value;
-  shifter_carry = shifter_out.carry;
+  value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, op2, shift_ammount);
+  op2 = shifter_out->value;
+  shifter_carry = shifter_out->carry;
 
   word_t flags = 0;
   word_t result;
@@ -112,7 +113,7 @@ void execute_dpi(system_state_t *machine) {
       break;
     default:
       fprintf(stderr, "Unknown opcode at PC: %u", machine->registers[PC] - 0x40); // Is this our error message?
-      exit_program();
+      exit_program(machine);
       break;
   }
 
