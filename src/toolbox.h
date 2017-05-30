@@ -1,5 +1,6 @@
 #ifndef TOOLBOX_H
 #define TOOLBOX_H
+#include <stdlib.h>
 #include <stdio.h>
 #include "global.h"
 #include "system_state.h"
@@ -17,5 +18,7 @@ void print_memory(system_state_t *machine);
 long twos_complement_to_long(word_t value);
 void print_binary_value(word_t value);
 value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value);
+void load_file(char *fname, byte_t *memory);
+// void decode_instruction(word_t fetched_instr, instruction_t *operation);
 
 #endif

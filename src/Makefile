@@ -5,15 +5,25 @@ CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_BSD_SOURCE -std=c99 -Werror -pedantic
 
 .PHONY: all clean
 
-all: assemble emulate
+all: emulate assemble unit_tests
 
-assemble: assemble.o
 emulate: emulate.o toolbox.o
+assemble: assemble.o
+unit_tests: unit_tests.o toolbox.o
 
-emulate.o: global.h system_state.h instruction.h toolbox.h
-toolbox.o: toolbox.h global.h system_state.h
+# emulate
+emulate.o: instruction.h toolbox.h
+toolbox.o: toolbox.h global.h system_state.h value_carry.h
+
+# assemble
+assemble.o:
+
+# unit_tests
+unit_tests.o: toolbox.h
 
 clean:
 	rm -f $(wildcard *.o)
-	rm -f assemble
+	rm -f $(wildcard *.gch)
 	rm -f emulate
+	rm -f assemble
+	rm -f unit_tests

@@ -28,18 +28,4 @@ typedef struct {
   byte_t shift_amount;
 } instruction_t;
 
-const instruction_t NULL_INSTRUCTION = {
-  .type = NUL,
-  .immediate_value = 0,
-  .rn = -1,
-  .rd = -1,
-  .rs = -1,
-  .rm = -1,
-  .flag_0 = false,
-  .flag_1 = false,
-  .flag_2 = false,
-  .flag_3 = false,
-  .shift_amount = 0,
-};
-
 #endif

@@ -12,11 +12,4 @@ typedef struct {
   bool has_fetched_instruction;
 } system_state_t;
 
-const system_state_t DEFAULT_SYSTEM_STATE = {
-  .registers = {0},
-  .memory = {0},
-  .fetched_instruction = 0,
-  .has_fetched_instruction = false,
-};
-
 #endif

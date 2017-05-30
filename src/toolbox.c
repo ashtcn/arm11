@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "toolbox.h"
 
 void exit_program(system_state_t *machine) {
@@ -112,3 +111,49 @@ value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
   }
   return result;
 }
+
+/**
+ * @brief Loads a binary file into the memory.
+ *
+ * Writes the contents of the provided binary object code file to the memory,
+ * starting at the provided location. Returns an error message and exits if the
+ * file cannot be opened or cannot be read.
+ * @param fname The filename conataining object code to be loaded.
+ * @param memory A pointer to the first byte of memory to be written to.
+ */
+ void load_file(char *fname, byte_t *memory) {
+   // Try to open the file
+   FILE *file = fopen(fname, "rb");
+   if (file == NULL) {
+     perror("Error in opening object code file.");
+     exit(EXIT_FAILURE);
+   }
+   // Try to read all lines into the memory
+   fread(memory, NUM_ADDRESSES, 1, file);
+   if(ferror(file)) {
+     perror("Error in reading from object code file.");
+     exit(EXIT_FAILURE);
+   }
+   // Close the file
+   fclose(file);
+ }
+
+// void decode_instruction(system_state_t *machine) {
+//   // PRE: Instruction is not all 0
+//   word_t instruction = machine->fetched_instruction;
+//   machine->decoded_instruction->cond = (instruction & ~(MASK_FIRST_4)) >> (WORD_SIZE - 4);
+//   instruction &= MASK_FIRST_4; // Remove cond
+//   if ((instruction >> (WORD_SIZE - 8)) == 0xA) { // 0xA = 1010
+//     branch(machine);
+//   } else if ((instruction >> (WORD_SIZE - 6)) == 0x1) { // Single Data Transfer
+//     single_data_transfer(instruction & MASK_FIRST_6, operation);
+//   } else if (!(instruction >> 22) && (((instruction >> 4) & 0xF) == 0x9)) {
+//     //Multiply
+//     multiply(instruction, operation);
+//   } else if (!(instruction >> (WORD_SIZE - 6))) { // Dataprocessing
+//     data_processing(instruction, operation);
+//   } else {
+//     fprintf(stderr, "Unknown instruction, PC: %u", machine->registers[PC]);
+//     exit_program(machine);
+//   }
+// }

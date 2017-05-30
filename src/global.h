@@ -1,5 +1,5 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 #include <stdint.h>
 
 #define NUM_REGISTERS 17
