@@ -35,7 +35,7 @@ should be followed to improve code style.
   * After precompiler declarations,
   * After each function,
   * After variable declarations,
-  * (Optional) In any other case where further seperation of code would aid
+  * (Optional) In any other case where further separation of code would aid
   readability.
 
 #### Indentation
@@ -71,7 +71,7 @@ Example: Comments before functions should be formatted as follows:
  * @see another_function()
  * @return What the function does to the parameters.
  */
-returnType function_name(type1 p1, ...) {
+return_type function_name(type1 p1, ...) {
 ```
 
 ### Language Features
@@ -85,8 +85,8 @@ the style guidelines.
 
 In order to increase portability and readability, use `stdint.h`.
 
-Included types are: `uint_8t`, `uint_16t`, `uint_32t`, `uint_64t`, `int_8t`,
-`int_16t`, `int_32t`, `int_64t`.
+Included types are: `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`, `int8_t`,
+`int16_t`, `int32_t`, `int64_t`.
 
 #### Enumerated Types
 
@@ -104,15 +104,15 @@ enum render_flag {
   /** The diffuse flag (bit 1). */
   DIFFUSE = 2,
   /** The specular flag (bit 2). */
-  SPECULAR = 4
+  SPECULAR = 4,
 };
 ```
 
 #### Functions
 
-9. Use underscore\_seperation for function names.
+9. Use underscore\_separation for function names.
 10. Don't put a space between the function name and parameter list.
-11. Never leve the parameter list for a function empty.
+11. Never leave the parameter list for a function empty.
 12. Leave a single space between the closing parenthesis of the parameter list
 and the opening brace of the function body.
 
@@ -129,7 +129,7 @@ Example: `double numbers[2][3] = {{1.0, 2.0, 3.0}, {2.0, 3.0, 4.0}}`.
 
 A string can be represented as an array of type `char`, ending with `'\0'`.
 
-Example: `char hello[] = "Hello!"`.
+Example: `uint8_t hello[] = "Hello!"`.
 
 #### Flow of Control
 
@@ -250,7 +250,7 @@ Example:
  * @brief A function which sums its two inputs.
  */
 int sum(int a, int b) {
-  return a + b
+  return a + b;
 }
 
 /**
