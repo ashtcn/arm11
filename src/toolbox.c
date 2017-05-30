@@ -13,10 +13,10 @@ void print_array(void *p, size_t bytes_to_print) {
   printf("\n");
 }
 
-word get_word(byte *memory, address mem_address) {
+word get_word(system_state *machine, address mem_address) {
   word value = 0;
   for (size_t i = 3; i >= 0; i--) {
-    value = ((word) memory[mem_address + i * 4]) | (value << 4);
+    value = ((word) machine->memory[mem_address + i * 4]) | (value << 4);
   }
   return value;
 }
@@ -37,17 +37,31 @@ word absolute(word value) {
 }
 
 
-void print_system_state(system_state machine) {
+void print_system_state(system_state *machine) {
   print_registers(machine);
+  print_memory(machine);
 }
 
-void print_registers(system_state machine) {
+void print_registers(system_state *machine) {
   printf("Register State:\n");
   for (int i = 0; i < NUM_REGISTERS; ++i) {
-    printf("Register no: %d, has decimal value: %ld\n", i, twos_complement_to_long(machine.registers[i]));
+    printf("Register no: %d, has decimal value: %ld\n", i, twos_complement_to_long(machine->registers[i]));
     printf("Register no: %d, has binary value: ", i);
-    print_binary_value(machine.registers[i]);
+    print_binary_value(machine->registers[i]);
     printf("\n");
+  }
+}
+
+void print_memory(system_state *machine) {
+  printf("Memory state:\n");
+  for (int i = 0; i < (NUM_ADDRESSES/4); i *= 4) {
+    word word_to_print = get_word(machine, i);
+    if (word_to_print) {
+      printf("Memory adress: %d, has decimal value: %ld\n", i, twos_complement_to_long(word_to_print));
+      printf("Memory adress: %d, has binary value: ", i);
+      print_binary_value(word_to_print);
+      printf("\n");
+    }
   }
 }
 
