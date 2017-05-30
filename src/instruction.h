@@ -5,7 +5,7 @@
 #include "global.h"
 
 typedef struct {
-  instruction_type type;
+  instruction_type type = NUL;
   byte cond;
   opcode operation;
 

@@ -6,6 +6,9 @@
 typedef struct {
   word registers[NUM_REGISTERS] = {0};
   byte memory[NUM_ADDRESSES] = {0};
+  word fetched_instruction;
+  struct instruction *decoded_instruction;
+  bool has_fetched_instruction = false;
 } system_state;
 
 #endif
