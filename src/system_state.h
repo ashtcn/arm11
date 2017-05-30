@@ -5,11 +5,18 @@
 #include "instruction.h"
 
 typedef struct {
-  word registers[NUM_REGISTERS] = {0};
-  byte memory[NUM_ADDRESSES] = {0};
-  word fetched_instruction;
-  instruction *decoded_instruction;
-  bool has_fetched_instruction = false;
-} system_state;
+  word_t registers[NUM_REGISTERS];
+  byte_t memory[NUM_ADDRESSES];
+  word_t fetched_instruction;
+  instruction_t *decoded_instruction;
+  bool has_fetched_instruction;
+} system_state_t;
+
+const system_state_t DEFAULT_SYSTEM_STATE = {
+  .registers = {0},
+  .memory = {0},
+  .fetched_instruction = 0,
+  .has_fetched_instruction = false,
+};
 
 #endif

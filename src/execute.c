@@ -4,12 +4,12 @@
 #include "system_state.h"
 #include "toolbox.h"
 
-void execute(system_state *machine);
-void execute_dpi(system_state *machine);
-void execute_mul(system_state *machine);
-void execute_branch(system_state *machine);
+void execute(system_state_t *machine);
+void execute_dpi(system_state_t *machine);
+void execute_mul(system_state_t *machine);
+void execute_branch(system_state_t *machine);
 
-int condition(system_state *machine) {
+int condition(system_state_t *machine) {
   char flags = machine->registers[CPSR] >> (WORD_SIZE - 4); // Want first 4 bits
   switch(machine->decoded_instruction->cond) {
     case eq:
@@ -33,7 +33,7 @@ int condition(system_state *machine) {
   }
 }
 
-void execute(system_state *machine) {
+void execute(system_state_t *machine) {
   if (condition(machine)) {
     switch (machine->decoded_instruction->type) {
       case DPI:
@@ -47,13 +47,17 @@ void execute(system_state *machine) {
       case BRA:
         execute_branch(machine);
         break;
+      case ZER:
+        break;
+      case NUL:
+        break;
     }
   }
 }
 
-void execute_dpi(system_state *machine) {
-  word op2;
-  word shift_ammount;
+void execute_dpi(system_state_t *machine) {
+  word_t op2;
+  word_t shift_ammount;
   bool shifter_carry = 0;
 
   if (machine->decoded_instruction->flag_0) {
@@ -68,12 +72,12 @@ void execute_dpi(system_state *machine) {
     shift_ammount = machine->decoded_instruction->shift_amount;
   }
 
-  shift shifter_out = shifter(op2, machine->decoded_instruction->shift_type, shift_ammount);
+  value_carry_t shifter_out = shifter(op2, machine->decoded_instruction->shift_type, shift_ammount);
   op2 = shifter_out.value;
   shifter_carry = shifter_out.carry;
 
-  word flags = 0;
-  word result;
+  word_t flags = 0;
+  word_t result;
   switch (machine->decoded_instruction->operation) {
     case AND:
     case TST:
@@ -126,8 +130,8 @@ void execute_dpi(system_state *machine) {
   }
 }
 
-void execute_mul(system_state *machine) {
-  word result;
+void execute_mul(system_state_t *machine) {
+  word_t result;
   result = machine->registers[machine->decoded_instruction->rm] * machine->registers[machine->decoded_instruction->rs];
 
   if (machine->decoded_instruction->flag_0) {
@@ -142,8 +146,8 @@ void execute_mul(system_state *machine) {
   }
 }
 
-void execute_branch(system_state *machine) {
-  word offset = machine->decoded_instruction->immediate_value
+void execute_branch(system_state_t *machine) {
+  word_t offset = machine->decoded_instruction->immediate_value;
   machine->decoded_instruction->type = NUL;
   machine->has_fetched_instruction = 0;
   machine->registers[PC] += twos_complement_to_long(offset);

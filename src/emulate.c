@@ -14,7 +14,7 @@
  * @param fname The filename conataining object code to be loaded.
  * @param memory A pointer to the first byte of memory to be written to.
  */
-void load_file(char *fname, byte *memory) {
+void load_file(char *fname, byte_t *memory) {
   FILE *file;
   file = fopen(fname, "rb");
   if (file == NULL) {
@@ -30,19 +30,19 @@ void load_file(char *fname, byte *memory) {
   fclose(file);
 }
 
-void decode_instruction(word fetched_instr, instruction *operation) {
+void decode_instruction(word_t instruction, instruction_t *operation) {
   // PRE: Instruction is not all 0
-  operation->cond = (fetched_instr & ~(MASK_FIRST_4)) >> (WORD_SIZE - 4);
-  fetched_instr &= MASK_FIRST_4; // Remove cond
-  if ((fetched_instr >> (WORD_SIZE - 8)) == 0xA) { // 0xA = 1010
-    branch(fetched_instr & MASK_FIRST_8, operation);
-  } else if ((fetched_instr >> (WORD_SIZE - 6)) == 0x1) {//Single Data Transfer
-    single_data_transfer(fetched_instr & MASK_FIRST_6, operation);
-  } else if (!(fetched_instr >> 22) && (((fetched_instr >> 4) & 0xF) == 0x9)) {
+  operation->cond = (instruction & ~(MASK_FIRST_4)) >> (WORD_SIZE - 4);
+  instruction &= MASK_FIRST_4; // Remove cond
+  if ((instruction >> (WORD_SIZE - 8)) == 0xA) { // 0xA = 1010
+    branch(instruction & MASK_FIRST_8, operation);
+  } else if ((instruction >> (WORD_SIZE - 6)) == 0x1) {//Single Data Transfer
+    single_data_transfer(instruction & MASK_FIRST_6, operation);
+  } else if (!(instruction >> 22) && (((instruction >> 4) & 0xF) == 0x9)) {
     //Multiply
-    multiply(fetched_instr, operation);
-  } else if (!(fetched_instr >> (WORD_SIZE - 6))) { // Dataprocessing
-    data_processing(fetched_instr, operation);
+    multiply(instruction, operation);
+  } else if (!(instruction >> (WORD_SIZE - 6))) { // Dataprocessing
+    data_processing(instruction, operation);
   } else {
     fprintf(stderr, "Unknown instruction, PC: %u", registers[PC]); // How access registers
     exit_program();
@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
   char *filename = argv[1];
   printf("%s\n", filename);
 
-  system_state *machine = malloc(sizeof(system_state));
+  system_state_t *machine = malloc(sizeof(system_state_t));
 
   // Check if we cannot allocate memory
   if (!machine) {
@@ -66,7 +66,6 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
-  init_system_state(machine);
   load_file(filename, machine->memory);
 
   return EXIT_SUCCESS;
