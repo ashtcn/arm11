@@ -1,18 +1,21 @@
+#ifndef INSTRUCTION_H
+#define INSTRUCTION_H
 #include <stdbool.h>
-#include "constants.h"
+#include <stdint.h>
+#include "global.h"
 
-struct instruction {
-  instruction_code code;
-  cond condition;
+typedef struct {
+  instruction_type type;
+  byte cond;
   opcode operation;
 
-  unsigned long immediate_value = 0;
+  uint32_t immediate_value = 0;
 
   // Registers
-  char rn = -1;
-  char rd = -1;
-  char rs = -1;
-  char rm = -1;
+  reg_address rn = -1;
+  reg_address rd = -1;
+  reg_address rs = -1;
+  reg_address rm = -1;
 
   // Flags
   bool flag_0 = false; // I or A
@@ -22,5 +25,7 @@ struct instruction {
 
   // Shifts and rotations
   shift shift_type;
-  unsigned char shift_amount = 0;
-};
+  byte shift_amount = 0;
+} instruction;
+
+#endif

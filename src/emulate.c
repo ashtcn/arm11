@@ -1,27 +1,29 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "constants.h"
-#include "toolbox.c"
-#include "system_state.c"
+#include "global.h"
+#include "instruction.h"
+#include "system_state.h"
+#include "toolbox.h"
 
-void load_file(char *fname, unsigned char *memory) {
+void load_file(char *fname, byte *memory) {
   FILE *file;
   file = fopen(fname,"rb");
   fread(memory, NUM_ADDRESSES, 1, file);
 }
 
-void decode_instruction(unsigned long instruction) {
+void decode_instruction(word fetched_instr, instruction *operation) {
   // PRE: Instruction is not all 0
-  instruction = instruction & 0xFFFFFFF; //Remove cond
-  if ((instruction >> 24) == 0xA) {//Branch
-    branch(instruction & 0xFFFFFF);
-  } else if ((instruction >> 26) == 0x1) {//Single Data Transfer
-    single_data_transfer(instruction & 0x3FFFFF);
-  } else if (!(instruction >> 22) && (((instruction >> 4) & 0xF) == 0x9)) {
+  operation->cond = (fetched_instr & ~(MASK_FIRST_4)) >> (WORD_SIZE - 4);
+  fetched_instr &= MASK_FIRST_4; // Remove cond
+  if ((fetched_instr >> (WORD_SIZE - 8)) == 0xA) { // 0xA = 1010
+    branch(fetched_instr & MASK_FIRST_8, operation);
+  } else if ((fetched_instr >> (WORD_SIZE - 6)) == 0x1) {//Single Data Transfer
+    single_data_transfer(fetched_instr & MASK_FIRST_6, operation);
+  } else if (!(fetched_instr >> 22) && (((fetched_instr >> 4) & 0xF) == 0x9)) {
     //Multiply
-    multiply(instruction);
-  } else if (!(instruction >> 26) { // Dataprocessing
-    data_processing(instruction);
+    multiply(fetched_instr, operation);
+  } else if (!(fetched_instr >> (WORD_SIZE - 6)) { // Dataprocessing
+    data_processing(fetched_instr, operation);
   } else {
     fprintf(stderr, "Unknown instruction, PC: %u", registers[PC]); // How access registers
     exit_program();

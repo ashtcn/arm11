@@ -2,6 +2,7 @@
 
 #ignore temp files
 *~
+*.gch
 
 #ignore pdf files (just keep source files)
 *.pdf
@@ -32,4 +33,3 @@ assemble
 *.vrb
 *.nav
 *.toc
-

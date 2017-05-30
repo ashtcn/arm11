@@ -1,21 +1,16 @@
 #include <stdbool.h>
 #include "instruction.h"
-#include "constants.h"
-#include "system_state.c"
-#include "toolbox.c"
+#include "global.h"
+#include "system_state.h"
+#include "toolbox.h"
 
 void execute(system_state machine, instruction operation);
 void execute_dpi(system_state machine, instruction operation);
 void execute_mul(system_state machine, instruction operation);
 
-
-
-int condition(system_state machine, enum cond condition) {
-  char flags = machine.registers[CPSR] >> 28; // How access registers
-  const unsigned char V = 0x1;
-  const unsigned char Z = 0x4;
-  const unsigned char N = 0x8;
-  switch(condition) {
+int condition(system_state machine, byte cond) {
+  char flags = machine.registers[CPSR] >> (WORD_SIZE - 4); // Want first 4 bits
+  switch(cond) {
     case eq:
       return (flags & Z);
     case ne:
@@ -38,8 +33,8 @@ int condition(system_state machine, enum cond condition) {
 }
 
 void execute(system_state machine, instruction operation) {
-  if (condition(machine, operation.condition)) {
-    switch (operation.code) {
+  if (condition(machine, operation.cond)) {
+    switch (operation.type) {
       case DPI:
         execute_dpi(machine, operation);
         break;
@@ -55,9 +50,9 @@ void execute(system_state machine, instruction operation) {
 }
 
 void execute_dpi(system_state machine, instruction operation) {
-  unsigned long op2;
-  unsigned char shifter_carry = 0;
-  unsigned long shift_ammount;
+  word op2;
+  word shift_ammount;
+  bool shifter_carry = 0;
 
   if (operation.flag_0) {
     op2 = machine.registers[operation.rm];
@@ -70,15 +65,13 @@ void execute_dpi(system_state machine, instruction operation) {
     op2 = operation.immediate_value;
     shift_ammount = operation.shift_amount;
   }
+
   shift shifter_out = shifter(op2, operation.shift_type, shift_ammount);
   op2 = shifter_out.value;
   shifter_carry = shifter_out.carry;
 
-  unsigned long flags = 0;
-  unsigned char N = 0x8;
-  unsigned char Z = 0x4;
-  unsigned char C = 0x2;
-  unsigned long result;
+  word flags = 0;
+  word result;
   switch (operation.operation) {
     case AND:
     case TST:
@@ -116,28 +109,33 @@ void execute_dpi(system_state machine, instruction operation) {
       exit_program();
       break;
   }
-  flags = flags | (N * is_negative(result));
-  flags = flags | (Z * (result == 0));
+
+  flags |= (N * is_negative(result));
+  flags |= (Z * (result == 0));
+
   if (!(operation.operation == TST || operation.operation == TEQ || operation.operation == CMP)) {
     machine.registers[operation.rd] = result;
   }
-  if (operation.flag_1) {//If set flags
-    machine.registers[CPSR] = flags << 28;
+
+  // If set flags
+  if (operation.flag_1) {
+    machine.registers[CPSR] &= MASK_FIRST_4;
+    machine.registers[CPSR] |= (flags << (WORD_SIZE - 4)); // Want first 4 bits
   }
 }
 
 void execute_mul(system_state machine, instruction operation) {
-  unsigned long result;
-  unsigned char N = 0x8;
-  unsigned char Z = 0x4;
+  word result;
   result = machine.registers[operation.rm] * machine.registers[operation.rs];
+
   if (operation.flag_0) {
     result += machine.registers[operation.rn];
   }
+
   machine.registers[operation.rd] = result;
   if (operation.flag_1) {
-    machine.registers[CPSR] =
-      (machine.registers[CPSR] & 0x3FFFFFFF)
-      | (((N * is_negative(result)) | (Z * (result == 0))) << 28);
+    machine.registers[CPSR] &= MASK_FIRST_4;
+    machine.registers[CPSR] |= (N * is_negative(result)) << (WORD_SIZE - 4);
+    machine.registers[CPSR] |= (Z * (result == 0)) << (WORD_SIZE - 4);
   }
 }
