@@ -3,10 +3,10 @@
 void print_array(void *p, size_t bytes_to_print) {
   byte *memory = (byte *) p;
   for (size_t i = 0; i < bytes_to_print; i++) {
-    printf("%i", memory[i]);
+    printf("%x", memory[i]);
 
     // New line at every 4 bytes
-    if (i % 16 == 15) {
+    if (i % 4 == 3) {
       printf("\n");
     }
   }
@@ -15,8 +15,8 @@ void print_array(void *p, size_t bytes_to_print) {
 
 word get_word(system_state *machine, address mem_address) {
   word value = 0;
-  for (size_t i = 3; i >= 0; i--) {
-    value = ((word) machine->memory[mem_address + i * 4]) | (value << 4);
+  for (int i = 0; i < 4; i++) {
+    value |= ((word) machine->memory[mem_address + i]) << i*8;
   }
   return value;
 }
@@ -54,9 +54,10 @@ void print_registers(system_state *machine) {
 
 void print_memory(system_state *machine) {
   printf("Memory state:\n");
-  for (int i = 0; i < (NUM_ADDRESSES/4); i *= 4) {
+  for (int i = 0; i < (NUM_ADDRESSES/4); i += 4) {
     word word_to_print = get_word(machine, i);
     if (word_to_print) {
+      printf("Memory adress: %d, has hex value: %x\n", i, word_to_print);
       printf("Memory adress: %d, has decimal value: %ld\n", i, twos_complement_to_long(word_to_print));
       printf("Memory adress: %d, has binary value: ", i);
       print_binary_value(word_to_print);
