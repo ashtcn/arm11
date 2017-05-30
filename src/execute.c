@@ -4,13 +4,14 @@
 #include "system_state.h"
 #include "toolbox.h"
 
-void execute(system_state machine, instruction operation);
-void execute_dpi(system_state machine, instruction operation);
-void execute_mul(system_state machine, instruction operation);
+void execute(system_state *machine);
+void execute_dpi(system_state *machine);
+void execute_mul(system_state *machine);
+void execute_branch(system_state *machine);
 
-int condition(system_state machine, byte cond) {
-  char flags = machine.registers[CPSR] >> (WORD_SIZE - 4); // Want first 4 bits
-  switch(cond) {
+int condition(system_state *machine) {
+  char flags = machine->registers[CPSR] >> (WORD_SIZE - 4); // Want first 4 bits
+  switch(machine->decoded_instruction->cond) {
     case eq:
       return (flags & Z);
     case ne:
@@ -26,78 +27,79 @@ int condition(system_state machine, byte cond) {
     case al:
       return 1;
     default:
-      fprintf(stderr, "Incorrect cond flag, PC: %u", machine.registers[PC]); // How access registers
+      fprintf(stderr, "Incorrect cond flag, PC: %u", machine->registers[PC]); // How access registers
       exit_program(); // Not sure to exit program here
       return 0;
   }
 }
 
-void execute(system_state machine, instruction operation) {
-  if (condition(machine, operation.cond)) {
-    switch (operation.type) {
+void execute(system_state *machine) {
+  if (condition(machine)) {
+    switch (machine->decoded_instruction->type) {
       case DPI:
-        execute_dpi(machine, operation);
+        execute_dpi(machine);
         break;
       case MUL:
-        execute_mul(machine, operation);
+        execute_mul(machine);
         break;
       case SDT:
         break;
       case BRA:
+        execute_branch(machine);
         break;
     }
   }
 }
 
-void execute_dpi(system_state machine, instruction operation) {
+void execute_dpi(system_state *machine) {
   word op2;
   word shift_ammount;
   bool shifter_carry = 0;
 
-  if (operation.flag_0) {
-    op2 = machine.registers[operation.rm];
-    if (operation.rs == -1) {
-      shift_ammount = operation.immediate_value;
+  if (machine->decoded_instruction->flag_0) {
+    op2 = machine->registers[machine->decoded_instruction->rm];
+    if (machine->decoded_instruction->rs == -1) {
+      shift_ammount = machine->decoded_instruction->immediate_value;
     } else {
-      shift_ammount = machine.registers[operation.rs];
+      shift_ammount = machine->registers[machine->decoded_instruction->rs];
     }
   } else {
-    op2 = operation.immediate_value;
-    shift_ammount = operation.shift_amount;
+    op2 = machine->decoded_instruction->immediate_value;
+    shift_ammount = machine->decoded_instruction->shift_amount;
   }
 
-  shift shifter_out = shifter(op2, operation.shift_type, shift_ammount);
+  shift shifter_out = shifter(op2, machine->decoded_instruction->shift_type, shift_ammount);
   op2 = shifter_out.value;
   shifter_carry = shifter_out.carry;
 
   word flags = 0;
   word result;
-  switch (operation.operation) {
+  switch (machine->decoded_instruction->operation) {
     case AND:
     case TST:
-      result = machine.registers[operation.rn] & op2;
+      result = machine->registers[machine->decoded_instruction->rn] & op2;
       flags = C * shifter_carry;
       break;
     case EOR:
     case TEQ:
-      result = machine.registers[operation.rn] ^ op2;
+      result = machine->registers[machine->decoded_instruction->rn] ^ op2;
       flags = C * shifter_carry;
       break;
     case SUB:
     case CMP:
-      result = machine.registers[operation.rn] + negate(op2);
+      result = machine->registers[machine->decoded_instruction->rn] + negate(op2);
       flags = C * !is_negative(result);
       break;
     case RSB:
-      result = op2 + negate(machine.registers[operation.rn]);
+      result = op2 + negate(machine->registers[machine->decoded_instruction->rn]);
       flags = C * !is_negative(result);
       break;
     case ADD:
-      result = machine.registers[operation.rn] + op2;
+      result = machine->registers[machine->decoded_instruction->rn] + op2;
       flags = C * (result < op2);
       break;
     case ORR:
-      result = machine.registers[operation.rn] | op2;
+      result = machine->registers[machine->decoded_instruction->rn] | op2;
       flags = C * shifter_carry;
       break;
     case MOV:
@@ -105,7 +107,7 @@ void execute_dpi(system_state machine, instruction operation) {
       flags = C * shifter_carry;
       break;
     default:
-      fprintf(stderr, "Unknown opcode at PC: %u", machine.registers[PC] - 0x40); // Is this our error message?
+      fprintf(stderr, "Unknown opcode at PC: %u", machine->registers[PC] - 0x40); // Is this our error message?
       exit_program();
       break;
   }
@@ -113,29 +115,36 @@ void execute_dpi(system_state machine, instruction operation) {
   flags |= (N * is_negative(result));
   flags |= (Z * (result == 0));
 
-  if (!(operation.operation == TST || operation.operation == TEQ || operation.operation == CMP)) {
-    machine.registers[operation.rd] = result;
+  if (!(machine->decoded_instruction->operation == TST || machine->decoded_instruction->operation == TEQ || machine->decoded_instruction->operation == CMP)) {
+    machine->registers[machine->decoded_instruction->rd] = result;
   }
 
   // If set flags
-  if (operation.flag_1) {
-    machine.registers[CPSR] &= MASK_FIRST_4;
-    machine.registers[CPSR] |= (flags << (WORD_SIZE - 4)); // Want first 4 bits
+  if (machine->decoded_instruction->flag_1) {
+    machine->registers[CPSR] &= MASK_FIRST_4;
+    machine->registers[CPSR] |= (flags << (WORD_SIZE - 4)); // Want first 4 bits
   }
 }
 
-void execute_mul(system_state machine, instruction operation) {
+void execute_mul(system_state *machine) {
   word result;
-  result = machine.registers[operation.rm] * machine.registers[operation.rs];
+  result = machine->registers[machine->decoded_instruction->rm] * machine->registers[machine->decoded_instruction->rs];
 
-  if (operation.flag_0) {
-    result += machine.registers[operation.rn];
+  if (machine->decoded_instruction->flag_0) {
+    result += machine->registers[machine->decoded_instruction->rn];
   }
 
-  machine.registers[operation.rd] = result;
-  if (operation.flag_1) {
-    machine.registers[CPSR] &= MASK_FIRST_4;
-    machine.registers[CPSR] |= (N * is_negative(result)) << (WORD_SIZE - 4);
-    machine.registers[CPSR] |= (Z * (result == 0)) << (WORD_SIZE - 4);
+  machine->registers[machine->decoded_instruction->rd] = result;
+  if (machine->decoded_instruction->flag_1) {
+    machine->registers[CPSR] &= MASK_FIRST_4;
+    machine->registers[CPSR] |= (N * is_negative(result)) << (WORD_SIZE - 4);
+    machine->registers[CPSR] |= (Z * (result == 0)) << (WORD_SIZE - 4);
   }
+}
+
+void execute_branch(system_state *machine) {
+  word offset = machine->decoded_instruction->immediate_value
+  machine->decoded_instruction->type = NUL;
+  machine->has_fetched_instruction = 0;
+  machine->registers[PC] += twos_complement_to_long(offset);
 }
