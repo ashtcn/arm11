@@ -5,10 +5,29 @@
 #include "system_state.h"
 #include "toolbox.h"
 
+/**
+ * @brief Loads a binary file into the memory.
+ *
+ * Writes the contents of the provided binary object code file to the memory,
+ * starting at the provided location. Returns an error message and exits if the
+ * file cannot be opened or cannot be read.
+ * @param fname The filename conataining object code to be loaded.
+ * @param memory A pointer to the first byte of memory to be written to.
+ */
 void load_file(char *fname, byte *memory) {
   FILE *file;
-  file = fopen(fname,"rb");
+  file = fopen(fname, "rb");
+  if (file == NULL) {
+    perror("Error in opening object code file.");
+    exit(EXIT_FAILURE);
+  }
   fread(memory, NUM_ADDRESSES, 1, file);
+  if(ferror(file)) {
+    perror("Error in reading from object code file.");
+    exit(EXIT_FAILURE);
+  }
+  memory++;
+  fclose(file);
 }
 
 void decode_instruction(word fetched_instr, instruction *operation) {
@@ -47,7 +66,7 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
-  // init_system_state(machine);
+  init_system_state(machine);
   load_file(filename, machine->memory);
 
   return EXIT_SUCCESS;
