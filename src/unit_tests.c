@@ -42,7 +42,7 @@ void test_load_file(void) {
 void test_print_system_state() {
   instruction_t pss_instruction = {
     .type = DPI,
-    .cond = ge,
+    .cond = GE,
     .operation = ORR,
     .immediate_value = 0xabc,
     .rn = 5,
@@ -72,26 +72,26 @@ void test_shifter_values(word_t correct_value, bool correct_carry, value_carry_t
 }
 
 void test_shifter (void) {
-  test_shifter_values(0x0F000000, false, shifter(lsl, 4, 0x00F00000));
-  test_shifter_values(0xE1E00000, true, shifter(lsl, 1, 0xF0F00000));
-  test_shifter_values(0x00000000, false, shifter(lsl, 32, 0x00100000));
-  test_shifter_values(0x00000000, false, shifter(lsl, 33, 0x00000001));
+  test_shifter_values(0x0F000000, false, shifter(LSL, 4, 0x00F00000));
+  test_shifter_values(0xE1E00000, true, shifter(LSL, 1, 0xF0F00000));
+  test_shifter_values(0x00000000, false, shifter(LSL, 32, 0x00100000));
+  test_shifter_values(0x00000000, false, shifter(LSL, 33, 0x00000001));
 
-  test_shifter_values(0x00F00000, false, shifter(lsr, 4, 0x0F000000));
-  test_shifter_values(0x07800001, true, shifter(lsr, 1, 0x0F000003));
-  test_shifter_values(0x00000000, true, shifter(lsr, 32, 0x80000000));
+  test_shifter_values(0x00F00000, false, shifter(LSR, 4, 0x0F000000));
+  test_shifter_values(0x07800001, true, shifter(LSR, 1, 0x0F000003));
+  test_shifter_values(0x00000000, true, shifter(LSR, 32, 0x80000000));
 
-  test_shifter_values(0xFFF00000, false, shifter(asr, 4, 0xFF000000));
-  test_shifter_values(0xC7800001, true, shifter(asr, 1, 0x8F000003));
-  test_shifter_values(0xFFFFFFFF, true, shifter(asr, 32, 0x8F000003));
+  test_shifter_values(0xFFF00000, false, shifter(ASR, 4, 0xFF000000));
+  test_shifter_values(0xC7800001, true, shifter(ASR, 1, 0x8F000003));
+  test_shifter_values(0xFFFFFFFF, true, shifter(ASR, 32, 0x8F000003));
 
-  test_shifter_values(0x80000000, true, shifter(ror, 1, 0x00000001));
-  test_shifter_values(0x0F000000, false, shifter(ror, 4, 0xF0000000));
-  test_shifter_values(0x11111111, false, shifter(ror, 4, 0x11111111));
-  test_shifter_values(0xF0F00001, true, shifter(ror, 4, 0x0F00001F));
-  test_shifter_values(0x0F00001F, false, shifter(ror, 32, 0x0F00001F));
-  test_shifter_values(0xF0F00001, true, shifter(ror, 36, 0x0F00001F));
-  test_shifter_values(0x80000000, true, shifter(ror, 64, 0x80000000));
+  test_shifter_values(0x80000000, true, shifter(ROR, 1, 0x00000001));
+  test_shifter_values(0x0F000000, false, shifter(ROR, 4, 0xF0000000));
+  test_shifter_values(0x11111111, false, shifter(ROR, 4, 0x11111111));
+  test_shifter_values(0xF0F00001, true, shifter(ROR, 4, 0x0F00001F));
+  test_shifter_values(0x0F00001F, false, shifter(ROR, 32, 0x0F00001F));
+  test_shifter_values(0xF0F00001, true, shifter(ROR, 36, 0x0F00001F));
+  test_shifter_values(0x80000000, true, shifter(ROR, 64, 0x80000000));
 }
 
 

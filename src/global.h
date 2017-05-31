@@ -12,13 +12,13 @@
 #define MASK_FIRST_8 0xFFFFFF
 
 typedef enum {
-  eq = 0,
-  ne = 1,
-  ge = 0xA,
-  lt = 0xB,
-  gt = 0xC,
-  le = 0xD,
-  al = 0xE,
+  EQ = 0,
+  NE = 1,
+  GE = 0xA,
+  LT = 0xB,
+  GT = 0xC,
+  LE = 0xD,
+  AL = 0xE,
 } condition_t;
 
 /**
@@ -57,14 +57,14 @@ typedef enum {
  * @brief An enum used for defining the the type of shift for the shifter to use
  */
 typedef enum {
-  /** lsl = logical shift left */
-  lsl = 0,
-  /** lsr = logical shift right */
-  lsr = 1,
-  /** lsl = arithmetic shift shift */
-  asr = 2,
-  /** lsl = rotate right */
-  ror = 3,
+  /** LSL = logical shift left */
+  LSL = 0,
+  /** LSR = logical shift right */
+  LSR = 1,
+  /** ASR = arithmetic shift right */
+  ASR = 2,
+  /** ROR = rotate right */
+  ROR = 3,
 } shift_t;
 
 /**

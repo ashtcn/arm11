@@ -168,7 +168,7 @@ void data_processing(system_state_t *machine) {
 
   if (instruction->flag_0) {
     instruction->immediate_value = fetched & 0xFF;
-    instruction->shift_type = ror;
+    instruction->shift_type = ROR;
     instruction->shift_amount = ((fetched >> 8) & 0xF) << 1;
   } else {
     instruction->rm = fetched & 0xF;

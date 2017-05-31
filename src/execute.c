@@ -3,19 +3,19 @@
 int condition(system_state_t *machine) {
   char flags = machine->registers[CPSR] >> (WORD_SIZE - 4); // Want first 4 bits
   switch(machine->decoded_instruction->cond) {
-    case eq:
+    case EQ:
       return (flags & Z);
-    case ne:
+    case NE:
       return !(flags & Z);
-    case ge:
+    case GE:
       return (flags & V) == ((flags & N) >> 3);
-    case lt:
+    case LT:
       return (flags & V) != ((flags & N) >> 3);
-    case gt:
+    case GT:
       return !(flags & Z) && ((flags & V) == ((flags & N) >> 3));
-    case le:
+    case LE:
       return (flags & Z) || ((flags & V) != ((flags & N) >> 3));
-    case al:
+    case AL:
       return 1;
     default:
       fprintf(stderr, "Incorrect cond flag, PC: %u", machine->registers[PC]);

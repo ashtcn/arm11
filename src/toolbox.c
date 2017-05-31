@@ -6,7 +6,7 @@
  * Writes the contents of the provided binary object code file to the memory,
  * starting at the provided location. Returns an error message and exits if the
  * file cannot be opened or cannot be read.
- * @param fname The filename conataining object code to be loaded.
+ * @param fname The filename containing object code to be loaded.
  * @param memory A pointer to the first byte of memory to be written to.
  */
  void load_file(char *fname, byte_t *memory) {
@@ -127,7 +127,7 @@ bool is_negative(word_t value) {
 /**
  * @brief Returns absolute two's complement value.
  *
- * @param value A two's complemnt word.
+ * @param value A two's complement word.
  * @returns The absolute value of the provided word in two's complement.
  */
 word_t absolute(word_t value) {
@@ -385,19 +385,19 @@ void print_binary_value(word_t value) {
  */
 char *get_cond(condition_t cond) {
   switch (cond) {
-    case eq:
+    case EQ:
       return "EQ";
-    case ne:
+    case NE:
       return "NE";
-    case ge:
+    case GE:
       return "GE";
-    case lt:
+    case LT:
       return "LT";
-    case gt:
+    case GT:
       return "GT";
-    case le:
+    case LE:
       return "LE";
-    case al:
+    case AL:
       return "AL";
     default:
       assert(false);
@@ -479,21 +479,21 @@ char *get_opcode(opcode_t operation) {
    }
 
    switch(type) {
-     case lsl:
+     case LSL:
        result->value = (shift_amount >= WORD_SIZE) ? 0 : value << shift_amount;
        result->carry = (value >> (WORD_SIZE - shift_amount)) & 0x1;
        break;
-     case lsr:
+     case LSR:
        result->value = (shift_amount >= WORD_SIZE) ? 0 : value >> shift_amount;
        result->carry = (value << (WORD_SIZE - shift_amount)) & 0x80000000;
        break;
-     case asr:
+     case ASR:
        result->value = (value >> shift_amount)
                        | ((value & 0x80000000) ?
                          ~((1L << (WORD_SIZE - shift_amount)) - 1L) : 0L);
        result->carry = (value << (WORD_SIZE - shift_amount)) & 0x80000000;
        break;
-     case ror:
+     case ROR:
        result->value = (value << (WORD_SIZE - shift_amount))
                        | (value >> shift_amount);
        result->carry = (value << (WORD_SIZE - shift_amount)) & 0x80000000;
