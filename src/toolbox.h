@@ -6,6 +6,7 @@
 #include "system_state.h"
 #include "value_carry.h"
 
+void load_file(char *fname, byte_t *memory);
 void exit_program(system_state_t *machine);
 void print_array(void *p, size_t bytes_to_print);
 word_t get_word(system_state_t *machine, address_t mem_address);
@@ -20,16 +21,5 @@ void print_value(word_t value);
 long twos_complement_to_long(word_t value);
 void print_binary_value(word_t value);
 value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value);
-void load_file(char *fname, byte_t *memory);
-void decode_instruction(system_state_t *machine);
-void branch(system_state_t *machine);
-void single_data_transfer(system_state_t *machine);
-void multiply(system_state_t *machine);
-void data_processing(system_state_t *machine);
-void execute(system_state_t *machine);
-void execute_dpi(system_state_t *machine);
-void execute_mul(system_state_t *machine);
-void execute_branch(system_state_t *machine);
-void execute_sdt(system_state_t *machine);
 
 #endif

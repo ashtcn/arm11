@@ -1,9 +1,4 @@
-#include <stdbool.h>
-#include "instruction.h"
-#include "global.h"
-#include "system_state.h"
-#include "toolbox.h"
-#include "value_carry.h"
+#include "execute.h"
 
 void execute(system_state_t *machine);
 void execute_dpi(system_state_t *machine);
@@ -188,7 +183,6 @@ void execute_sdt(system_state_t *machine) {
 
 void execute_branch(system_state_t *machine) {
   word_t offset = machine->decoded_instruction->immediate_value;
-  machine->decoded_instruction->type = NUL;
-  machine->has_fetched_instruction = 0;
+  machine->has_fetched_instruction = false;
   machine->registers[PC] += twos_complement_to_long(offset);
 }

@@ -1,5 +1,6 @@
 #include "instruction.h"
-#include "toolbox.h"
+#include "decode.h"
+#include "execute.h"
 
 static const system_state_t DEFAULT_SYSTEM_STATE = {
   .registers = {0},
@@ -47,13 +48,13 @@ int main(int argc, char **argv) {
   while (machine->decoded_instruction->type != ZER) {
     // Execute
     if (machine->decoded_instruction->type != NUL) {
-      // execute(machine);
+      execute(machine);
     }
 
     // Decode
     *(machine->decoded_instruction) = NULL_INSTRUCTION;
     if (machine->has_fetched_instruction) {
-      // decode_instruction(machine);
+      decode_instruction(machine);
     }
 
     // Fetch
