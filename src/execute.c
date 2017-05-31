@@ -169,7 +169,7 @@ void execute_sdt(system_state_t *machine) {
     offset = negate(offset);
   }
 
-  if (machine->decoded_instruction->flag_1) {//Post or pre indexing
+  if (!machine->decoded_instruction->flag_1) {//Post or pre indexing
     address = machine->registers[machine->decoded_instruction->rn];
     machine->registers[machine->decoded_instruction->rn] = address + offset;
   } else {
@@ -179,6 +179,7 @@ void execute_sdt(system_state_t *machine) {
   if (machine->decoded_instruction->flag_3) {//Load or save
     machine->registers[machine->decoded_instruction->rd] = get_word(machine, address);
   } else {
+    printf("Adress: %x, Source: %i, Value: %u", address, machine->decoded_instruction->rd, machine->registers[machine->decoded_instruction->rd]);
     set_word(machine, address, machine->registers[machine->decoded_instruction->rd]);
   }
 }

@@ -37,13 +37,13 @@ void halt(system_state_t *machine) {
 
 void branch(system_state_t *machine) {
   machine->decoded_instruction->type = BRA;
-  uint32_t offset = machine->fetched_instruction & 0xFFFFFF; // First 24 bits
+  uint32_t offset = machine->fetched_instruction & 0xFFFFFF; // Last 24 bits
   offset <<= 2;
 
   // Two's complement sign extention
-  if (offset >> 25) {
+  if ((machine->fetched_instruction >> 23) & 0x1) {
     // Number is negative
-    offset |= 0xF3000000; // Pad left with 6 one's
+    offset |= 0xFC000000; // Pad left with 6 one's
   }
   machine->decoded_instruction->immediate_value = offset;
 }
@@ -62,7 +62,32 @@ void multiply(system_state_t *machine) {
 }
 
 void single_data_transfer(system_state_t *machine) {
+  instruction_t *instruction = machine->decoded_instruction;
+  word_t fetched = machine->fetched_instruction;
 
+  instruction->type = SDT;
+  instruction->flag_0 = (fetched >> 25) & 0x1;
+  instruction->flag_1 = (fetched >> 24) & 0x1;
+  instruction->flag_2 = (fetched >> 23) & 0x1;
+  instruction->flag_3 = (fetched >> 20) & 0x1;
+  instruction->rn = (fetched >> 16) & 0xF;
+  instruction->rd = (fetched >> 12) & 0xF;
+
+  if (instruction->flag_0) {
+    instruction->rm = fetched & 0xF;
+
+    if ((fetched >> 4) & 0x1) {
+      // Shift by a register
+      instruction->shift_type = (fetched >> 5) & 0x3;
+      instruction->rs = (fetched >> 8) & 0xF;
+    } else {
+      // Shift by a constant amount
+      instruction->shift_type = (fetched >> 5) & 0x3;
+      instruction->shift_amount = (fetched >> 7) & 0x1F;
+    }
+  } else {
+    instruction->immediate_value = fetched & 0xFFF;
+  }
 }
 
 void data_processing(system_state_t *machine) {

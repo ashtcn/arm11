@@ -64,8 +64,8 @@ word_t get_word(system_state_t *machine, address_t mem_address) {
  */
 void set_word(system_state_t *machine, address_t mem_address, word_t word) {
   for (size_t i = 0; i < 4; i++) {
-    machine->memory[mem_address + i] = (byte_t) (word & 0xF);
-    word >>= 4;
+    machine->memory[mem_address + i] = (byte_t) (word & 0xFF);
+    word >>= 8;
   }
 }
 
