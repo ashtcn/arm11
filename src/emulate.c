@@ -44,7 +44,10 @@ int main(int argc, char **argv) {
   load_file(filename, machine->memory);
 
   while (machine->decoded_instruction->type != ZER) {
-    //print_system_state(machine);
+    if (!COMPLIANT_MODE) {
+      print_system_state(machine);
+    }
+
     // Execute
     if (machine->decoded_instruction->type != NUL) {
       execute(machine);
@@ -67,7 +70,12 @@ int main(int argc, char **argv) {
     machine->registers[PC] += 4;
   }
 
-  print_system_state_compliant(machine);
+  if(COMPLIANT_MODE) {
+    print_system_state_compliant(machine);
+  } else {
+    printf("\nProgram executed successfully\n");
+    print_system_state(machine);
+  }
 
   free(machine->decoded_instruction);
   free(machine);

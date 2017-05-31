@@ -1,11 +1,5 @@
 #include "execute.h"
 
-void execute(system_state_t *machine);
-void execute_dpi(system_state_t *machine);
-void execute_mul(system_state_t *machine);
-void execute_branch(system_state_t *machine);
-void execute_sdt(system_state_t *machine);
-
 int condition(system_state_t *machine) {
   char flags = machine->registers[CPSR] >> (WORD_SIZE - 4); // Want first 4 bits
   switch(machine->decoded_instruction->cond) {
@@ -154,7 +148,7 @@ void execute_mul(system_state_t *machine) {
 }
 
 void execute_sdt(system_state_t *machine) {
-  address_t address;
+  uint32_t address;
   word_t offset;
   word_t shift_amount;
   instruction_t *instruction = machine->decoded_instruction;

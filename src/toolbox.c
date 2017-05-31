@@ -47,7 +47,17 @@ void exit_program(system_state_t *machine) {
  * @param mem_address The memory address to be read from.
  * @returns The word at the given memory address in the current system state.
  */
-word_t get_word(system_state_t *machine, address_t mem_address) {
+word_t get_word(system_state_t *machine, uint32_t mem_address) {
+  if (mem_address > NUM_ADDRESSES - 4) {
+    if (COMPLIANT_MODE) {
+      printf("Error: Out of bounds memory access at address 0x%x\n",
+             mem_address);
+      return 0;
+    } else {
+      fprintf(stderr, "Address: %u was out of bounds in get_word", mem_address);
+      exit_program(machine);
+    }
+  }
   word_t value = 0;
   for (size_t i = 0; i < 4; i++) {
     value |= ((word_t) machine->memory[mem_address + i]) << (i * 8);
@@ -77,7 +87,17 @@ word_t get_word_compliant(system_state_t *machine, address_t mem_address) {
  * @param mem_address The memory address to write to.
  * @param word The word to write to memory.
  */
-void set_word(system_state_t *machine, address_t mem_address, word_t word) {
+void set_word(system_state_t *machine, uint32_t mem_address, word_t word) {
+  if (mem_address > NUM_ADDRESSES - 4) {
+    if (COMPLIANT_MODE) {
+      printf("Error: Out of bounds memory access at address 0x%x\n",
+             mem_address);
+      return;
+    } else {
+      fprintf(stderr, "Address: %u was out of bounds in set_word", mem_address);
+      exit_program(machine);
+    }
+  }
   for (size_t i = 0; i < 4; i++) {
     machine->memory[mem_address + i] = (byte_t) (word & 0xFF);
     word >>= 8;
@@ -185,9 +205,10 @@ void print_registers_compliant(system_state_t *machine) {
 }
 
 /**
- * @brief Prints the values of the registers of the machine.
+ * @brief Prints the values of registers.
  *
- * @param machine The arm machine that has the registers to print.
+ * Prints the values held in each of the NUM_REGISTERS registers.
+ * @param machine The current system state.
  */
 void print_registers(system_state_t *machine) {
   printf("Register State:\n");
@@ -213,9 +234,10 @@ void print_memory_compliant(system_state_t *machine) {
 }
 
 /**
- * @brief Prints the memory of the machine that holds a value.
+ * @brief Prints any non-zero words from memory.
  *
- * @param machine The arm machine that has the memory to print.
+ * Prints any non-zero words from memory and their addresses.
+ * @param machine The current system state.
  */
 void print_memory(system_state_t *machine) {
   printf("Memory State:\n");
@@ -230,14 +252,15 @@ void print_memory(system_state_t *machine) {
 
 
 /**
- * @brief Prints the decoded instruction of the machine and any flags,
- * values or registers.
+ * @brief Prints details for the decoded instruction.
  *
- * @param machine The arm machine that has the instruction to print.
+ * Prints the type of the instruction, and any details required:
+ * * For branch instructions, prints the condition and the offset.
+ * *
+ * @param machine The current system state.
  */
 void print_decoded_instruction(system_state_t *machine) {
-  instruction_type_t type = machine->decoded_instruction->type;
-  switch (type) {
+  switch (machine->decoded_instruction->type) {
     case NUL:
       printf("Decoded Instruction: None\n");
       break;
@@ -248,12 +271,11 @@ void print_decoded_instruction(system_state_t *machine) {
       printf("Decoded Instruction: BRA\n");
       printf("  Condition Flag: %s\n",
              get_cond(machine->decoded_instruction->cond));
-      printf("  Immediate Value: 0x%x\n",
+      printf("  Offset: 0x%x\n",
              machine->decoded_instruction->immediate_value);
       break;
-    default:
-      printf("Decoded Instruction: %s\n",
-             get_type(machine->decoded_instruction->type));
+    case MUL:
+      printf("Decoded Instruction: MUL\n");
       printf("  Condition Flag: %s\n",
              get_cond(machine->decoded_instruction->cond));
       if (machine->decoded_instruction->type == DPI) {
@@ -263,13 +285,40 @@ void print_decoded_instruction(system_state_t *machine) {
       printf("  Immediate Value: 0x%x\n",
              machine->decoded_instruction->immediate_value);
       printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
+      break;
+    case DPI:
+      printf("Decoded Instruction: DPI\n");
+      printf("  Condition Flag: %s\n",
+             get_cond(machine->decoded_instruction->cond));
+      if (machine->decoded_instruction->type == DPI) {
+        printf("  Opcode: %s\n",
+               get_opcode(machine->decoded_instruction->operation));
+      }
+      printf("  Immediate Value: 0x%x\n",
+             machine->decoded_instruction->immediate_value);
+      printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
+      break;
+    case SDT:
+      printf("Decoded Instruction: SDT\n");
+      printf("  Condition Flag: %s\n",
+             get_cond(machine->decoded_instruction->cond));
+      if (machine->decoded_instruction->type == DPI) {
+        printf("  Opcode: %s\n",
+               get_opcode(machine->decoded_instruction->operation));
+      }
+      printf("  Immediate Value: 0x%x\n",
+             machine->decoded_instruction->immediate_value);
+      printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
+      break;
+    default:
+      assert(false);
   }
 }
 
 /**
- * @brief Prints the fetched instruction of the machine, or None if not present
+ * @brief Prints the fetched instruction, if present.
  *
- * @param machine The arm machine that has the instruction to print.
+ * @param machine The current system state.
  */
 void print_fetched_instruction(system_state_t *machine) {
   if (machine->has_fetched_instruction) {
@@ -282,7 +331,7 @@ void print_fetched_instruction(system_state_t *machine) {
 
 
 /**
- * @brief Prints a value for debugging, in binary, hex and 2's complement
+ * @brief Prints a value for debugging, in binary, hex and 2's complement.
  *
  * @param value The word to print.
  */
@@ -293,7 +342,7 @@ void print_value(word_t value) {
 }
 
 /**
- * @brief Prints a value for test cases, hex and 2's complement
+ * @brief Prints a value for test cases, hex and 2's complement.
  *
  * @param value The word to print.
  */
@@ -315,10 +364,10 @@ long twos_complement_to_long(word_t value) {
   return result;
 }
 
-
 /**
- * @brief Prints the padded binary representation of value
+ * @brief Prints the padded binary representation of value.
  *
+ * Prints WORD_SIZE bits.
  * @param value The word for printing.
  */
 void print_binary_value(word_t value) {
@@ -413,10 +462,8 @@ char *get_opcode(opcode_t operation) {
   }
 }
 
-
-
 /**
- * @brief Returns a pointer to the shifted value of the value.
+ * @brief Shifts a value and returns a pointer.
  *
  * @param type The type of shift to use.
  * @param shift_amount The amount to shift by.
@@ -427,7 +474,7 @@ char *get_opcode(opcode_t operation) {
    value_carry_t *result = malloc(sizeof(value_carry_t));
 
    if (!result) {
-     fprintf(stderr, "Unable to allocate memory for result of shifter");
+     perror("Unable to allocate memory for result of shifter");
      exit(EXIT_FAILURE);
    }
 

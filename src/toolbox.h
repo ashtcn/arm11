@@ -1,5 +1,6 @@
 #ifndef TOOLBOX_H
 #define TOOLBOX_H
+#define COMPLIANT_MODE true
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -10,9 +11,9 @@
 void load_file(char *fname, byte_t *memory);
 void exit_program(system_state_t *machine);
 
-word_t get_word(system_state_t *machine, address_t mem_address);
+word_t get_word(system_state_t *machine, uint32_t mem_address);
 word_t get_word_compliant(system_state_t *machine, address_t mem_address);
-void set_word(system_state_t *machine, address_t mem_address, word_t word);
+void set_word(system_state_t *machine, uint32_t mem_address, word_t word);
 
 word_t negate(word_t value);
 bool is_negative(word_t value);
