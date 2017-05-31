@@ -64,6 +64,8 @@ int main(int argc, char **argv) {
     machine->registers[PC] += 4;
   }
 
+  free(machine->decoded_instruction);
+  free(machine);
   print_system_state(machine);
   return EXIT_SUCCESS;
 }

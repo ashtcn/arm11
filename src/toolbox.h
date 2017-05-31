@@ -26,5 +26,10 @@ void branch(system_state_t *machine);
 void single_data_transfer(system_state_t *machine);
 void multiply(system_state_t *machine);
 void data_processing(system_state_t *machine);
+void execute(system_state_t *machine);
+void execute_dpi(system_state_t *machine);
+void execute_mul(system_state_t *machine);
+void execute_branch(system_state_t *machine);
+void execute_sdt(system_state_t *machine);
 
 #endif
