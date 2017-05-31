@@ -158,21 +158,31 @@ void print_memory(system_state_t *machine) {
 }
 
 void print_decoded_instruction(system_state_t *machine) {
-  if (machine->decoded_instruction->type == ZER) {
-    printf("Decoded Instruction: None\n");
-  } else {
-    printf("Decoded Instruction:\n");
-    printf("  Condition Flag: %s\n",
-           get_cond(machine->decoded_instruction->cond));
-    printf("  Instruction Type: %s\n",
-           get_type(machine->decoded_instruction->type));
-    if (machine->decoded_instruction->type == DPI) {
-      printf("  Opcode: %s\n",
-             get_opcode(machine->decoded_instruction->operation));
-    }
-    printf("  Immediate Value: 0x%x\n",
-           machine->decoded_instruction->immediate_value);
-    printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
+  instruction_type_t type = machine->decoded_instruction->type;
+  switch (type) {
+    case NUL:
+      printf("Decoded Instruction: None\n");
+      break;
+    case ZER:
+      printf("Decoded Instruction: ZER\n");
+      break;
+    case BRA:
+      printf("Decoded Instruction: BRA");
+      printf("  Condition Flag: %s\n",
+             get_cond(machine->decoded_instruction->cond));
+    default:
+      printf("Decoded Instruction:\n");
+      printf("  Instruction Type: %s\n",
+            get_type(machine->decoded_instruction->type));
+      printf("  Condition Flag: %s\n",
+             get_cond(machine->decoded_instruction->cond));
+      if (machine->decoded_instruction->type == DPI) {
+        printf("  Opcode: %s\n",
+               get_opcode(machine->decoded_instruction->operation));
+      }
+      printf("  Immediate Value: 0x%x\n",
+             machine->decoded_instruction->immediate_value);
+      printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
   }
 }
 
