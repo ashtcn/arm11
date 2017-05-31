@@ -17,10 +17,10 @@ void decode_instruction(system_state_t *machine) {
     branch(machine);
   } else if ((fetched >> (WORD_SIZE - 6)) == 0x1) {
     // Single Data Transfer
-    multiply(machine);
+    single_data_transfer(machine);
   } else if (!(fetched >> 22) && (((fetched >> 4) & 0xF) == 0x9)) {
     //Multiply
-    single_data_transfer(machine);
+    multiply(machine);
   } else if (!(fetched >> (WORD_SIZE - 6))) {
     // Data Processing
     data_processing(machine);
@@ -41,7 +41,7 @@ void branch(system_state_t *machine) {
   offset <<= 2;
 
   // Two's complement sign extention
-  if ((machine->fetched_instruction >> 23) & 0x1) {
+  if (offset >> 25) {
     // Number is negative
     offset |= 0xF3000000; // Pad left with 6 one's
   }
@@ -79,7 +79,7 @@ void data_processing(system_state_t *machine) {
   if (instruction->flag_0) {
     instruction->immediate_value = fetched & 0xFF;
     instruction->shift_type = ror;
-    instruction->shift_amount = (fetched >> 8) & 0xF;
+    instruction->shift_amount = ((fetched >> 8) & 0xF) << 1;
   } else {
     instruction->rm = fetched & 0xF;
 

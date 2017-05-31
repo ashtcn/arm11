@@ -67,6 +67,8 @@ int main(int argc, char **argv) {
     machine->registers[PC] += 4;
   }
 
+  printf("Program executed successfully\n");
+
   print_system_state(machine);
 
   free(machine->decoded_instruction);

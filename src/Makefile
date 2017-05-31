@@ -2,7 +2,7 @@ CC      = gcc
 CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_BSD_SOURCE -std=c99 -Werror -pedantic
 
 # GCC sometimes complains about -D_BSD_SOURCE being deprecated
-# CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_DEFAULT_SOURCE -std=c99 -Werror -pedantic
+# CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_DEFAULT_SOURCE -std=c99 -Werror -pedantic -O3
 
 .SUFFIXES: .c .o
 
