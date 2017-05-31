@@ -28,8 +28,8 @@ int condition(system_state_t *machine) {
     case al:
       return 1;
     default:
-      fprintf(stderr, "Incorrect cond flag, PC: %u", machine->registers[PC]); // How access registers
-      exit_program(machine); // Not sure to exit program here
+      fprintf(stderr, "Incorrect cond flag, PC: %u", machine->registers[PC]);
+      exit_program(machine);
       return 0;
   }
 }

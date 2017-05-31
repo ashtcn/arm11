@@ -20,6 +20,10 @@ long twos_complement_to_long(word_t value);
 void print_binary_value(word_t value);
 value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value);
 void load_file(char *fname, byte_t *memory);
-// void decode_instruction(word_t fetched_instr, instruction_t *operation);
+void decode_instruction(system_state_t *machine);
+void branch(system_state_t *machine);
+void single_data_transfer(system_state_t *machine);
+void multiply(system_state_t *machine);
+void data_processing(system_state_t *machine);
 
 #endif
