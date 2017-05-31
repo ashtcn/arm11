@@ -9,6 +9,7 @@ void execute(system_state_t *machine);
 void execute_dpi(system_state_t *machine);
 void execute_mul(system_state_t *machine);
 void execute_branch(system_state_t *machine);
+void execute_sdt(system_state_t *machine);
 
 int condition(system_state_t *machine) {
   char flags = machine->registers[CPSR] >> (WORD_SIZE - 4); // Want first 4 bits
@@ -44,6 +45,7 @@ void execute(system_state_t *machine) {
         execute_mul(machine);
         break;
       case SDT:
+        execute_sdt(machine);
         break;
       case BRA:
         execute_branch(machine);
@@ -59,10 +61,11 @@ void execute(system_state_t *machine) {
 void execute_dpi(system_state_t *machine) {
   word_t op2;
   word_t shift_ammount;
+  shift_t shift_type;
   bool shifter_carry = 0;
-
-  if (machine->decoded_instruction->flag_0) {
+  if (!machine->decoded_instruction->flag_0) {
     op2 = machine->registers[machine->decoded_instruction->rm];
+    shift_type = machine->decoded_instruction->shift_type;
     if (machine->decoded_instruction->rs == -1) {
       shift_ammount = machine->decoded_instruction->immediate_value;
     } else {
@@ -71,11 +74,13 @@ void execute_dpi(system_state_t *machine) {
   } else {
     op2 = machine->decoded_instruction->immediate_value;
     shift_ammount = machine->decoded_instruction->shift_amount;
+    shift_type = ror;
   }
 
-  value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, op2, shift_ammount);
+  value_carry_t *shifter_out = shifter(shift_type, op2, shift_ammount);
   op2 = shifter_out->value;
   shifter_carry = shifter_out->carry;
+  free (shifter_out);
 
   word_t flags = 0;
   word_t result;
@@ -93,15 +98,15 @@ void execute_dpi(system_state_t *machine) {
     case SUB:
     case CMP:
       result = machine->registers[machine->decoded_instruction->rn] + negate(op2);
-      flags = C * !is_negative(result);
+      flags = C * (((uint64_t) (machine->registers[machine->decoded_instruction->rn] + negate(op2))) > result);
       break;
     case RSB:
       result = op2 + negate(machine->registers[machine->decoded_instruction->rn]);
-      flags = C * !is_negative(result);
+      flags = C * (((uint64_t) (negate(machine->registers[machine->decoded_instruction->rn]) + op2)) > result);
       break;
     case ADD:
       result = machine->registers[machine->decoded_instruction->rn] + op2;
-      flags = C * (result < op2);
+      flags = C * (((uint64_t) (machine->registers[machine->decoded_instruction->rn] + op2)) > result);
       break;
     case ORR:
       result = machine->registers[machine->decoded_instruction->rn] | op2;
@@ -144,6 +149,40 @@ void execute_mul(system_state_t *machine) {
     machine->registers[CPSR] &= MASK_FIRST_4;
     machine->registers[CPSR] |= (N * is_negative(result)) << (WORD_SIZE - 4);
     machine->registers[CPSR] |= (Z * (result == 0)) << (WORD_SIZE - 4);
+  }
+}
+
+void execute_sdt(system_state_t *machine) {
+  address_t address;
+  word_t offset;
+  word_t shift_ammount;
+  if (machine->decoded_instruction->flag_0) {//Immediate or not
+    if (machine->decoded_instruction->rs == -1) {
+      shift_ammount = machine->decoded_instruction->immediate_value;
+    } else {
+      shift_ammount = machine->registers[machine->decoded_instruction->rs];
+    }
+    value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, shift_ammount, machine->registers[machine->decoded_instruction->rm]);//How do you like my long line Jordan????????
+    offset = shifter_out->value;
+  } else {
+    offset = machine->decoded_instruction->immediate_value;
+  }
+
+  if (!machine->decoded_instruction->flag_2) {//Negative or positive
+    offset = negate(offset);
+  }
+
+  if (machine->decoded_instruction->flag_1) {//Post or pre indexing
+    address = machine->registers[machine->decoded_instruction->rn];
+    machine->registers[machine->decoded_instruction->rn] = address + offset;
+  } else {
+    address = machine->registers[machine->decoded_instruction->rn] + offset;
+  }
+
+  if (machine->decoded_instruction->flag_3) {//Load or save
+    machine->registers[machine->decoded_instruction->rd] = get_word(machine, address);
+  } else {
+    set_word(machine, address, machine->registers[machine->decoded_instruction->rd]);
   }
 }
 

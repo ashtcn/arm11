@@ -52,6 +52,13 @@ word_t get_word(system_state_t *machine, address_t mem_address) {
   return value;
 }
 
+void set_word(system_state_t *machine, address_t mem_address, word_t word) {
+  for (size_t i = 0; i < 4; i++) {
+    machine->memory[mem_address + i] = (byte_t) (word & 0xF);
+    word >>= 4;
+  }
+}
+
 word_t negate(word_t value) {
   return (~value) + 1;
 }
@@ -116,6 +123,10 @@ void print_binary_value(word_t value) {
 
 value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
   value_carry_t *result = malloc(sizeof(value_carry_t));
+  if (!result) {
+    fprintf(stderr, "Unable to allocate memory for result of shifter");
+    exit(EXIT_FAILURE);
+  }
   switch(type) {
     case lsl:
       result->value = value << shift_amount;

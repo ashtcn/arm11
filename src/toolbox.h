@@ -9,6 +9,7 @@
 void exit_program(system_state_t *machine);
 void print_array(void *p, size_t bytes_to_print);
 word_t get_word(system_state_t *machine, address_t mem_address);
+void set_word(system_state_t *machine, address_t mem_address, word_t word);
 word_t negate(word_t value);
 bool is_negative(word_t value);
 word_t absolute(word_t value);
