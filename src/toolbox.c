@@ -456,5 +456,9 @@ char *get_opcode(opcode_t operation) {
        exit(EXIT_FAILURE);
    }
 
+   if(shift_amount == 0) {
+     result->carry = false;
+   }
+
    return result;
  }
