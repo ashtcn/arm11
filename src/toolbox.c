@@ -47,7 +47,7 @@ void print_array(void *p, size_t bytes_to_print) {
 word_t get_word(system_state_t *machine, address_t mem_address) {
   word_t value = 0;
   for (size_t i = 0; i < 4; i++) {
-    value |= ((word_t) machine->memory[mem_address + i]) << i*8;
+    value |= ((word_t) machine->memory[mem_address + i]) << (i * 8);
   }
   return value;
 }
