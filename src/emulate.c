@@ -30,8 +30,6 @@ int main(int argc, char **argv) {
   }
 
   char *filename = argv[1];
-  printf("%s\n", filename);
-
   system_state_t *machine = malloc(sizeof(system_state_t));
 
   // Check if we cannot allocate memory
@@ -46,7 +44,7 @@ int main(int argc, char **argv) {
   load_file(filename, machine->memory);
 
   while (machine->decoded_instruction->type != ZER) {
-    print_system_state(machine);
+    //print_system_state(machine);
     // Execute
     if (machine->decoded_instruction->type != NUL) {
       execute(machine);
@@ -69,9 +67,7 @@ int main(int argc, char **argv) {
     machine->registers[PC] += 4;
   }
 
-  printf("\nProgram executed successfully\n");
-
-  print_system_state(machine);
+  print_system_state_compliant(machine);
 
   free(machine->decoded_instruction);
   free(machine);

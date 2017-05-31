@@ -189,7 +189,6 @@ void execute_sdt(system_state_t *machine) {
   if (instruction->flag_3) {//Load or save
     machine->registers[instruction->rd] = get_word(machine, address);
   } else {
-    printf("Adress: %x, Source: %i, Value: %u", address, instruction->rd, machine->registers[instruction->rd]);
     set_word(machine, address, machine->registers[instruction->rd]);
   }
 }
