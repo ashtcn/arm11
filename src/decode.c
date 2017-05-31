@@ -1,5 +1,13 @@
 #include "decode.h"
 
+/**
+ * @brief Decodes the fetched instruction in current system state.
+ *
+ * Given the pointer to the current system state, it moves the
+ * fetched instruction information into the decoded_instruction struct
+ * (for use when executing the decoded instruction).
+ * @param machine The current system state.
+ */
 void decode_instruction(system_state_t *machine) {
   // PRE: Instruction is not all 0
   word_t fetched = machine->fetched_instruction;
@@ -12,7 +20,7 @@ void decode_instruction(system_state_t *machine) {
   if (!machine->fetched_instruction) {
     // Halt instruction
     halt(machine);
-  } else if ((fetched >> (WORD_SIZE - 8)) == 0xA) { // Branch iff 1010 (0xA)
+  } else if ((fetched >> (WORD_SIZE - 8)) == 0xA) {
     // Branch
     branch(machine);
   } else if ((fetched >> (WORD_SIZE - 6)) == 0x1) {
@@ -31,10 +39,23 @@ void decode_instruction(system_state_t *machine) {
   }
 }
 
+/**
+ * @brief Sets decoded_instruction type to a stop (ZER) instruction.
+ *
+ * @param machine The current system state.
+ */
 void halt(system_state_t *machine) {
   machine->decoded_instruction->type = ZER;
 }
 
+/**
+ * @brief Set branch instruction data in decoded_instruction.
+ *
+ * The offset (24 bits) is bit 0 to 23 of the branch instruction.
+ * It is then bit shifted to the left by 2 and then sign extended to 32 bits.
+ * The offset is stored in the immediate_value of the decoded_instruction.
+ * @param machine The current system state.
+ */
 void branch(system_state_t *machine) {
   machine->decoded_instruction->type = BRA;
   uint32_t offset = machine->fetched_instruction & 0xFFFFFF; // Last 24 bits
@@ -48,6 +69,16 @@ void branch(system_state_t *machine) {
   machine->decoded_instruction->immediate_value = offset;
 }
 
+/**
+ * @brief Set multiply instruction data in decoded_instruction.
+ *
+ * The fields in decoded_instruction are used as follows:
+ * * flag_0 stores the A bit (if set, perform multiply and accumulate).
+ * * flag_1 stores the S bit (if set, CPSR flags are set when executed).
+ * * rd is the destination register address.
+ * * rn, rs and rm are the addresses of the operand registers.
+ * @param machine The current system state.
+ */
 void multiply(system_state_t *machine) {
   instruction_t *instruction = machine->decoded_instruction;
   word_t fetched = machine->fetched_instruction;
@@ -61,6 +92,26 @@ void multiply(system_state_t *machine) {
   instruction->rm = fetched & 0xF;
 }
 
+/**
+ * @brief Set single_data_transfer instruction data in decoded_instruction.
+ *
+ * The fields in decoded_instruction are used as follows:
+ * * flag_0 stores the I bit:
+ *   * If set, Offset is used as a shifted register.
+ *   * Otherwise, Offset is used as an unsigned 12 bit immediate offset).
+ * * flag_1 stores the P bit:
+ *   * If set, pre-indexing is used.
+ *   * Otherwise, post-indexing is used.
+ * * flag_2 stores the U bit:
+ *   * If set, Offset is added to the base register.
+ *   * Otherwise, Offset is subtracted from the base register.
+ * * flag_3 stores the L bit:
+ *   * If set, the word is loaded from memory.
+ *   * Otherwise, the word is stored into memory.
+ * * rd is the source/destination register address.
+ * * rn is the base register.
+ * @param machine The current system state.
+ */
 void single_data_transfer(system_state_t *machine) {
   instruction_t *instruction = machine->decoded_instruction;
   word_t fetched = machine->fetched_instruction;
@@ -90,6 +141,20 @@ void single_data_transfer(system_state_t *machine) {
   }
 }
 
+/**
+ * @brief Set data_processing instruction data in decoded_instruction.
+ *
+ * The fields in decoded_instruction are used as follows:
+ * * flag_0 stores the I bit:
+ *   * If set, the Operand2 is used as an immediate constant.
+ *   * Otherwise, Operand2 is used as a shifted register.
+ * * flag_1 stores the S bit (if set, CPSR flags are set when executed).
+ * * operation is used to store the corresponding opcode_t enum to the opcode.
+ *   provided in the fetched_instruction.
+ * * rd is the source/destination register address.
+ * * rn is the first operand register.
+ * @param machine The current system state.
+ */
 void data_processing(system_state_t *machine) {
   instruction_t *instruction = machine->decoded_instruction;
   word_t fetched = machine->fetched_instruction;
