@@ -170,10 +170,11 @@ void print_decoded_instruction(system_state_t *machine) {
       printf("Decoded Instruction: BRA");
       printf("  Condition Flag: %s\n",
              get_cond(machine->decoded_instruction->cond));
+      printf("  Immediate Value: 0x%x\n",
+             machine->decoded_instruction->immediate_value);
     default:
-      printf("Decoded Instruction:\n");
-      printf("  Instruction Type: %s\n",
-            get_type(machine->decoded_instruction->type));
+      printf("Decoded Instruction: %s\n",
+             get_type(machine->decoded_instruction->type));
       printf("  Condition Flag: %s\n",
              get_cond(machine->decoded_instruction->cond));
       if (machine->decoded_instruction->type == DPI) {
