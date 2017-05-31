@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 
   // Check if we cannot allocate memory
   if (!machine) {
-    fprintf(stderr, "Cannot allocate memory to store system_state.\n");
+    perror("Cannot allocate memory to store system_state.\n");
     return EXIT_FAILURE;
   }
 
