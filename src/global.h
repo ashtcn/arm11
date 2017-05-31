@@ -12,19 +12,6 @@
 #define MASK_FIRST_8 0xFFFFFF
 
 typedef enum {
-  AND = 0,
-  EOR = 1,
-  SUB = 2,
-  RSB = 3,
-  ADD = 4,
-  TST = 0x8,
-  TEQ = 0x9,
-  CMP = 0xA,
-  ORR = 0xC,
-  MOV = 0xD,
-} opcode_t;
-
-typedef enum {
   eq = 0,
   ne = 1,
   ge = 0xA,
@@ -33,13 +20,6 @@ typedef enum {
   le = 0xD,
   al = 0xE,
 } condition_t;
-
-typedef enum {
-  lsl = 0,
-  lsr = 1,
-  asr = 2,
-  ror = 3,
-} shift_t;
 
 /**
  * @brief An enum that identifies the format of the instruction
@@ -58,6 +38,26 @@ typedef enum {
   /** NULL (not present) instruction */
   NUL,
 } instruction_type_t;
+
+typedef enum {
+  AND = 0,
+  EOR = 1,
+  SUB = 2,
+  RSB = 3,
+  ADD = 4,
+  TST = 0x8,
+  TEQ = 0x9,
+  CMP = 0xA,
+  ORR = 0xC,
+  MOV = 0xD,
+} opcode_t;
+
+typedef enum {
+  lsl = 0,
+  lsr = 1,
+  asr = 2,
+  ror = 3,
+} shift_t;
 
 /**
  * @brief An enum used for retrieving individual flag bits from CPSR register

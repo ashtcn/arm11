@@ -1,5 +1,5 @@
-#include <assert.h>
-#include "toolbox.h"
+#include "decode.h"
+#include "execute.h"
 
 #define run_test(fn_name) \
   printf("%s\n", #fn_name); \
@@ -42,7 +42,7 @@ void test_load_file(void) {
 void test_print_system_state() {
   instruction_t pss_instruction = {
     .type = DPI,
-    .cond = 3,
+    .cond = ge,
     .operation = ORR,
     .immediate_value = 0xabc,
     .rn = 5,
@@ -68,7 +68,7 @@ void test_print_system_state() {
 
 int main(void) {
   run_test(test_load_file);
-  run_test(test_print_system_state);
+  run_test(test_print_system_state); // Requires manual check
   printf("\nNo errors\n");
   return 0;
 }
