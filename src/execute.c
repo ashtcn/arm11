@@ -59,21 +59,22 @@ void execute_dpi(system_state_t *machine) {
   word_t op2;
   word_t shift_amount;
   bool shifter_carry = 0;
+  instruction_t *instruction = machine->decoded_instruction;
 
-  if (!machine->decoded_instruction->flag_0) {
-    op2 = machine->registers[machine->decoded_instruction->rm];
+  if (!instruction->flag_0) {
+    op2 = machine->registers[instruction->rm];
 
-    if (machine->decoded_instruction->rs == -1) {
-      shift_amount = machine->decoded_instruction->shift_amount;
+    if (instruction->rs == -1) {
+      shift_amount = instruction->shift_amount;
     } else {
-      shift_amount = machine->registers[machine->decoded_instruction->rs];
+      shift_amount = machine->registers[instruction->rs];
     }
   } else {
-    op2 = machine->decoded_instruction->immediate_value;
-    shift_amount = machine->decoded_instruction->shift_amount;
+    op2 = instruction->immediate_value;
+    shift_amount = instruction->shift_amount;
   }
 
-  value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, shift_amount, op2);
+  value_carry_t *shifter_out = shifter(instruction->shift_type, shift_amount, op2);
   op2 = shifter_out->value;
   shifter_carry = shifter_out->carry;
   free(shifter_out);
@@ -81,32 +82,32 @@ void execute_dpi(system_state_t *machine) {
   word_t flags = 0;
   word_t result;
 
-  switch (machine->decoded_instruction->operation) {
+  switch (instruction->operation) {
     case AND:
     case TST:
-      result = machine->registers[machine->decoded_instruction->rn] & op2;
+      result = machine->registers[instruction->rn] & op2;
       flags = C * shifter_carry;
       break;
     case EOR:
     case TEQ:
-      result = machine->registers[machine->decoded_instruction->rn] ^ op2;
+      result = machine->registers[instruction->rn] ^ op2;
       flags = C * shifter_carry;
       break;
     case SUB:
     case CMP:
-      result = machine->registers[machine->decoded_instruction->rn] + negate(op2);
-      flags = C * (((uint64_t) (machine->registers[machine->decoded_instruction->rn] + negate(op2))) > result);
+      result = machine->registers[instruction->rn] + negate(op2);
+      flags = C * (((uint64_t) (machine->registers[instruction->rn] + negate(op2))) > result);
       break;
     case RSB:
-      result = op2 + negate(machine->registers[machine->decoded_instruction->rn]);
-      flags = C * (((uint64_t) (negate(machine->registers[machine->decoded_instruction->rn]) + op2)) > result);
+      result = op2 + negate(machine->registers[instruction->rn]);
+      flags = C * (((uint64_t) (negate(machine->registers[instruction->rn]) + op2)) > result);
       break;
     case ADD:
-      result = machine->registers[machine->decoded_instruction->rn] + op2;
-      flags = C * (((uint64_t) (machine->registers[machine->decoded_instruction->rn] + op2)) > result);
+      result = machine->registers[instruction->rn] + op2;
+      flags = C * (((uint64_t) (machine->registers[instruction->rn] + op2)) > result);
       break;
     case ORR:
-      result = machine->registers[machine->decoded_instruction->rn] | op2;
+      result = machine->registers[instruction->rn] | op2;
       flags = C * shifter_carry;
       break;
     case MOV:
@@ -122,12 +123,14 @@ void execute_dpi(system_state_t *machine) {
   flags |= (N * is_negative(result));
   flags |= (Z * (result == 0));
 
-  if (!(machine->decoded_instruction->operation == TST || machine->decoded_instruction->operation == TEQ || machine->decoded_instruction->operation == CMP)) {
-    machine->registers[machine->decoded_instruction->rd] = result;
+  if (!(instruction->operation == TST
+    || instruction->operation == TEQ
+    || instruction->operation == CMP)) {
+    machine->registers[instruction->rd] = result;
   }
 
   // If set flags
-  if (machine->decoded_instruction->flag_1) {
+  if (instruction->flag_1) {
     machine->registers[CPSR] &= MASK_FIRST_4;
     machine->registers[CPSR] |= (flags << (WORD_SIZE - 4)); // Want first 4 bits
   }
@@ -135,14 +138,15 @@ void execute_dpi(system_state_t *machine) {
 
 void execute_mul(system_state_t *machine) {
   word_t result;
-  result = machine->registers[machine->decoded_instruction->rm] * machine->registers[machine->decoded_instruction->rs];
+  instruction_t *instruction = machine->decoded_instruction;
+  result = machine->registers[instruction->rm] * machine->registers[instruction->rs];
 
-  if (machine->decoded_instruction->flag_0) {
-    result += machine->registers[machine->decoded_instruction->rn];
+  if (instruction->flag_0) {
+    result += machine->registers[instruction->rn];
   }
 
-  machine->registers[machine->decoded_instruction->rd] = result;
-  if (machine->decoded_instruction->flag_1) {
+  machine->registers[instruction->rd] = result;
+  if (instruction->flag_1) {
     machine->registers[CPSR] &= MASK_FIRST_4;
     machine->registers[CPSR] |= (N * is_negative(result)) << (WORD_SIZE - 4);
     machine->registers[CPSR] |= (Z * (result == 0)) << (WORD_SIZE - 4);
@@ -153,39 +157,40 @@ void execute_sdt(system_state_t *machine) {
   address_t address;
   word_t offset;
   word_t shift_amount;
+  instruction_t *instruction = machine->decoded_instruction;
 
   // Immediate operand or not
-  if (machine->decoded_instruction->flag_0) {
-    if (machine->decoded_instruction->rs == -1) {
-      shift_amount = machine->decoded_instruction->shift_amount;
+  if (instruction->flag_0) {
+    if (instruction->rs == -1) {
+      shift_amount = instruction->shift_amount;
     } else {
-      shift_amount = machine->registers[machine->decoded_instruction->rs];
+      shift_amount = machine->registers[instruction->rs];
     }
-    value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, shift_amount, machine->registers[machine->decoded_instruction->rm]);//How do you like my long line Jordan????????
+    value_carry_t *shifter_out = shifter(instruction->shift_type, shift_amount, machine->registers[instruction->rm]);//How do you like my long line Jordan????????
     offset = shifter_out->value;
     free(shifter_out);
   } else {
-    offset = machine->decoded_instruction->immediate_value;
+    offset = instruction->immediate_value;
   }
 
   // Negative or positive
-  if (!machine->decoded_instruction->flag_2) {
+  if (!instruction->flag_2) {
     offset = negate(offset);
   }
 
   // Post or pre indexing
-  if (!machine->decoded_instruction->flag_1) {
-    address = machine->registers[machine->decoded_instruction->rn];
-    machine->registers[machine->decoded_instruction->rn] = address + offset;
+  if (!instruction->flag_1) {
+    address = machine->registers[instruction->rn];
+    machine->registers[instruction->rn] = address + offset;
   } else {
-    address = machine->registers[machine->decoded_instruction->rn] + offset;
+    address = machine->registers[instruction->rn] + offset;
   }
 
-  if (machine->decoded_instruction->flag_3) {//Load or save
-    machine->registers[machine->decoded_instruction->rd] = get_word(machine, address);
+  if (instruction->flag_3) {//Load or save
+    machine->registers[instruction->rd] = get_word(machine, address);
   } else {
-    printf("Adress: %x, Source: %i, Value: %u", address, machine->decoded_instruction->rd, machine->registers[machine->decoded_instruction->rd]);
-    set_word(machine, address, machine->registers[machine->decoded_instruction->rd]);
+    printf("Adress: %x, Source: %i, Value: %u", address, instruction->rd, machine->registers[instruction->rd]);
+    set_word(machine, address, machine->registers[instruction->rd]);
   }
 }
 
