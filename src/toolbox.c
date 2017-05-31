@@ -167,7 +167,7 @@ void print_decoded_instruction(system_state_t *machine) {
       printf("Decoded Instruction: ZER\n");
       break;
     case BRA:
-      printf("Decoded Instruction: BRA");
+      printf("Decoded Instruction: BRA\n");
       printf("  Condition Flag: %s\n",
              get_cond(machine->decoded_instruction->cond));
       printf("  Immediate Value: 0x%x\n",
