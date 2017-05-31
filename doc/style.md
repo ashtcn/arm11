@@ -372,6 +372,11 @@ Error checking:
 
 You can also use `int ferror(FILE *stream)`.
 
+Printing errors:
+
+- Use `perror(char *msg)` when printing non user defined errors.
+- Otherwise, use `fprintf(stderr, char *msg)`.
+
 #### Structs
 
 Example:
@@ -410,3 +415,5 @@ Use `string.h` to get:
 - `char *strncat(char *dest, const char *src, size_t n)`.
 - `int strncmp(const char *s1, const char *s2, size_t n)`.
 - `char *strncpy(char *dest, const char *src, size_t n)`.
+
+###
