@@ -54,10 +54,10 @@ void multiply(system_state_t *machine) {
   instruction->type = MUL;
   instruction->flag_0 = (fetched >> 21) & 0x1;
   instruction->flag_1 = (fetched >> 20) & 0x1;
-  instruction->rn = (fetched >> 12) & 0x4;
-  instruction->rd = (fetched >> 16) & 0x4;
-  instruction->rs = (fetched >> 8) & 0x4;
-  instruction->rm = fetched & 0x4;
+  instruction->rn = (fetched >> 12) & 0xF;
+  instruction->rd = (fetched >> 16) & 0xF;
+  instruction->rs = (fetched >> 8) & 0xF;
+  instruction->rm = fetched & 0xF;
 }
 
 void single_data_transfer(system_state_t *machine) {
