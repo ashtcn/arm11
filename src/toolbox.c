@@ -113,7 +113,6 @@ word_t absolute(word_t value) {
 void print_array(byte_t *memory, size_t bytes_to_print) {
   for (size_t i = 0; i < bytes_to_print; i++) {
     printf("%x", memory[i]);
-
     // New line at each word
     if (i % 4 == 3) {
       printf("\n");
@@ -127,6 +126,7 @@ void print_array(byte_t *memory, size_t bytes_to_print) {
  *
  * Prints the current system state. Prints all register values, any memory
  * values which are not 0, the decoded instruction and the fetched instruction.
+ * @param machine The current system state.
  */
 void print_system_state(system_state_t *machine) {
   printf("\n--------------------------------------------------\n\n");
@@ -158,19 +158,22 @@ void print_memory(system_state_t *machine) {
 }
 
 void print_decoded_instruction(system_state_t *machine) {
-  printf("Decoded Instruction:\n");
-  printf("Condition Flag: %s\n",
-         get_cond(machine->decoded_instruction->cond));
-  printf("Instruction Type: %s\n",
-         get_type(machine->decoded_instruction->type));
-
-  if (machine->decoded_instruction->type == DPI) {
-    printf("Opcode: %s\n",
-           get_opcode(machine->decoded_instruction->operation));
+  if (machine->decoded_instruction->type == ZER) {
+    printf("Decoded Instruction: None\n");
+  } else {
+    printf("Decoded Instruction:\n");
+    printf("  Condition Flag: %s\n",
+           get_cond(machine->decoded_instruction->cond));
+    printf("  Instruction Type: %s\n",
+           get_type(machine->decoded_instruction->type));
+    if (machine->decoded_instruction->type == DPI) {
+      printf("  Opcode: %s\n",
+             get_opcode(machine->decoded_instruction->operation));
+    }
+    printf("  Immediate Value: 0x%x\n",
+           machine->decoded_instruction->immediate_value);
+    printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
   }
-
-  printf("Immediate Value: 0x%x\n", machine->decoded_instruction->immediate_value);
-  printf("Destination Register: %d\n", machine->decoded_instruction->rd);
 }
 
 void print_fetched_instruction(system_state_t *machine) {
@@ -288,11 +291,14 @@ value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
       result->carry = (value << (WORD_SIZE - shift_amount)) & 0x1;
       break;
     case asr:
-      result->value = (value >> shift_amount) | ((value >> 31) ? ~((1L << (3L - shift_amount)) - 1L) : 0L);
+      result->value = (value >> shift_amount)
+                      | ((value >> 31) ?
+                        ~((1L << (3L - shift_amount)) - 1L) : 0L);
       result->carry = (value << (WORD_SIZE - shift_amount)) & 0x1;
       break;
     case ror:
-      result->value = (value << (WORD_SIZE - shift_amount)) | (value >> shift_amount);
+      result->value = (value << (WORD_SIZE - shift_amount))
+                      | (value >> shift_amount);
       result->carry = (value << (WORD_SIZE - shift_amount)) & 0x1;
       break;
     default:
