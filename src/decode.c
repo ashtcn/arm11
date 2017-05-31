@@ -21,11 +21,18 @@ void decode_instruction(system_state_t *machine) {
   } else if (!(fetched >> (WORD_SIZE - 6))) {
     // Data Processing
     data_processing(machine);
+  } else if (!machine->fetched_instruction) {
+    // Halt instruction
+    halt(machine);
   } else {
     // Unknown instruction
     fprintf(stderr, "Unknown instruction, PC: %u", machine->registers[PC]);
     exit_program(machine);
   }
+}
+
+void halt(system_state_t *machine) {
+  machine->decoded_instruction->type = ZER;
 }
 
 void branch(system_state_t *machine) {
