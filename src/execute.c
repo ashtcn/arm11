@@ -96,15 +96,15 @@ void execute_dpi(system_state_t *machine) {
     case SUB:
     case CMP:
       result = machine->registers[instruction->rn] + negate(op2);
-      flags = C * (((uint64_t) (machine->registers[instruction->rn] + negate(op2))) > result);
+      flags = C * ((((uint64_t) machine->registers[instruction->rn] + (uint64_t) negate(op2))) > result);
       break;
     case RSB:
       result = op2 + negate(machine->registers[instruction->rn]);
-      flags = C * (((uint64_t) (negate(machine->registers[instruction->rn]) + op2)) > result);
+      flags = C * ((((uint64_t) negate(machine->registers[instruction->rn]) + (uint64_t) op2)) > result);
       break;
     case ADD:
       result = machine->registers[instruction->rn] + op2;
-      flags = C * (((uint64_t) (machine->registers[instruction->rn] + op2)) > result);
+      flags = C * ((((uint64_t) machine->registers[instruction->rn] + (uint64_t) op2)) > result);
       break;
     case ORR:
       result = machine->registers[instruction->rn] | op2;
