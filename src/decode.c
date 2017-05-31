@@ -36,6 +36,7 @@ void halt(system_state_t *machine) {
 }
 
 void branch(system_state_t *machine) {
+  machine->decoded_instruction->type = BRA;
   uint32_t offset = machine->fetched_instruction & 0xFFFFFF; // First 24 bits
   offset <<= 2;
 

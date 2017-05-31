@@ -61,7 +61,6 @@ int main(int argc, char **argv) {
     // Fetch
     if (machine->decoded_instruction->type != ZER) {
       machine->fetched_instruction = get_word(machine, machine->registers[PC]);
-      machine->registers[5] = get_word(machine, machine->registers[PC]);
       machine->has_fetched_instruction = true;
     }
 
