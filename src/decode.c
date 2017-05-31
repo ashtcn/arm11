@@ -9,7 +9,10 @@ void decode_instruction(system_state_t *machine) {
   // No longer consider Cond, so remove it
   fetched &= MASK_FIRST_4;
 
-  if ((fetched >> (WORD_SIZE - 8)) == 0xA) { // Branch iff 1010 (0xA)
+  if (!machine->fetched_instruction) {
+    // Halt instruction
+    halt(machine);
+  } else if ((fetched >> (WORD_SIZE - 8)) == 0xA) { // Branch iff 1010 (0xA)
     // Branch
     branch(machine);
   } else if ((fetched >> (WORD_SIZE - 6)) == 0x1) {
@@ -21,9 +24,6 @@ void decode_instruction(system_state_t *machine) {
   } else if (!(fetched >> (WORD_SIZE - 6))) {
     // Data Processing
     data_processing(machine);
-  } else if (!machine->fetched_instruction) {
-    // Halt instruction
-    halt(machine);
   } else {
     // Unknown instruction
     fprintf(stderr, "Unknown instruction, PC: %u", machine->registers[PC]);
@@ -71,24 +71,24 @@ void data_processing(system_state_t *machine) {
   instruction->type = DPI;
   instruction->flag_0 = (fetched >> 25) & 0x1;
   instruction->flag_1 = (fetched >> 20) & 0x1;
-  instruction->operation = (fetched >> 21) & 0x4;
-  instruction->rn = (fetched >> 16) & 0x4;
-  instruction->rd = (fetched >> 12) & 0x4;
+  instruction->operation = (fetched >> 21) & 0xF;
+  instruction->rn = (fetched >> 16) & 0xF;
+  instruction->rd = (fetched >> 12) & 0xF;
 
   if (instruction->flag_0) {
     instruction->immediate_value = fetched & 0xFF;
     instruction->shift_type = ror;
-    instruction->shift_amount = (fetched >> 8) & 0x4;
+    instruction->shift_amount = (fetched >> 8) & 0xF;
   } else {
-    instruction->rm = fetched & 0x4;
+    instruction->rm = fetched & 0xF;
 
     if ((fetched >> 4) & 0x1) {
       // Shift by a register
-      instruction->shift_type = (fetched >> 5) & 0x2;
-      instruction->rs = (fetched >> 8) & 0x4;
+      instruction->shift_type = (fetched >> 5) & 0x3;
+      instruction->rs = (fetched >> 8) & 0xF;
     } else {
       // Shift by a constant amount
-      instruction->shift_type = (fetched >> 5) & 0x2;
+      instruction->shift_type = (fetched >> 5) & 0x3;
       instruction->shift_amount = (fetched >> 7) & 0x1F;
     }
   }

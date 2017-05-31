@@ -78,8 +78,25 @@ word_t absolute(word_t value) {
 
 
 void print_system_state(system_state_t *machine) {
+  printf("\n--------------------------------------------------\n\n");
+  printf("System State:\n");
   print_registers(machine);
   print_memory(machine);
+  print_decoded_instruction(machine);
+  printf("Has fetched instruction: %i\n", machine->has_fetched_instruction);
+}
+
+void print_decoded_instruction(system_state_t *machine) {
+  printf("Decoded Instruction:\n");
+  printf("Condition flag: %x\n", machine->decoded_instruction->cond);
+  printf("Instruction type: %x\n", machine->decoded_instruction->type);
+  
+  if (machine->decoded_instruction->type == DPI) {
+    printf("Opcode: %x\n", machine->decoded_instruction->operation);
+  }
+
+  printf("Immediate Value: %x\n", machine->decoded_instruction->immediate_value);
+  printf("Destination Register: %x\n", machine->decoded_instruction->rd);
 }
 
 void print_registers(system_state_t *machine) {
@@ -125,10 +142,12 @@ void print_binary_value(word_t value) {
 
 value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
   value_carry_t *result = malloc(sizeof(value_carry_t));
+
   if (!result) {
     fprintf(stderr, "Unable to allocate memory for result of shifter");
     exit(EXIT_FAILURE);
   }
+
   switch(type) {
     case lsl:
       result->value = value << shift_amount;
@@ -136,19 +155,20 @@ value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
       break;
     case lsr:
       result->value = value >> shift_amount;
-      result->carry = value << (WORD_SIZE - shift_amount) & 0x1;
+      result->carry = (value << (WORD_SIZE - shift_amount)) & 0x1;
       break;
     case asr:
       result->value = (value >> shift_amount) | ((value >> 31) ? ~((1L << (3L - shift_amount)) - 1L) : 0L);
-      result->carry = value << (WORD_SIZE - shift_amount) & 0x1;
+      result->carry = (value << (WORD_SIZE - shift_amount)) & 0x1;
       break;
     case ror:
       result->value = (value << (WORD_SIZE - shift_amount)) | (value >> shift_amount);
-      result->carry = value << (WORD_SIZE - shift_amount) & 0x1;
+      result->carry = (value << (WORD_SIZE - shift_amount)) & 0x1;
       break;
     default:
       fprintf(stderr, "Unknown shift type: %u", type);
       exit(EXIT_FAILURE);
   }
+
   return result;
 }

@@ -46,6 +46,7 @@ int main(int argc, char **argv) {
   load_file(filename, machine->memory);
 
   while (machine->decoded_instruction->type != ZER) {
+    print_system_state(machine);
     // Execute
     if (machine->decoded_instruction->type != NUL) {
       execute(machine);
@@ -60,13 +61,17 @@ int main(int argc, char **argv) {
     // Fetch
     if (machine->decoded_instruction->type != ZER) {
       machine->fetched_instruction = get_word(machine, machine->registers[PC]);
+      machine->registers[5] = get_word(machine, machine->registers[PC]);
+      machine->has_fetched_instruction = true;
     }
 
     machine->registers[PC] += 4;
   }
 
+  print_system_state(machine);
+
   free(machine->decoded_instruction);
   free(machine);
-  print_system_state(machine);
+
   return EXIT_SUCCESS;
 }

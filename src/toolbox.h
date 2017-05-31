@@ -15,6 +15,7 @@ word_t negate(word_t value);
 bool is_negative(word_t value);
 word_t absolute(word_t value);
 void print_system_state(system_state_t *machine);
+void print_decoded_instruction(system_state_t *machine);
 void print_registers(system_state_t *machine);
 void print_memory(system_state_t *machine);
 void print_value(word_t value);

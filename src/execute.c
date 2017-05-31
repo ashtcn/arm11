@@ -46,8 +46,10 @@ void execute(system_state_t *machine) {
         execute_branch(machine);
         break;
       case ZER:
-        break;
       case NUL:
+      default:
+        fprintf(stderr, "Incorrect instruction type at PC: %x\n", machine->registers[PC] - 8);
+        exit_program(machine);
         break;
     }
   }
@@ -55,30 +57,33 @@ void execute(system_state_t *machine) {
 
 void execute_dpi(system_state_t *machine) {
   word_t op2;
-  word_t shift_ammount;
+  word_t shift_amount;
   shift_t shift_type;
   bool shifter_carry = 0;
+
   if (!machine->decoded_instruction->flag_0) {
     op2 = machine->registers[machine->decoded_instruction->rm];
     shift_type = machine->decoded_instruction->shift_type;
+
     if (machine->decoded_instruction->rs == -1) {
-      shift_ammount = machine->decoded_instruction->immediate_value;
+      shift_amount = machine->decoded_instruction->immediate_value;
     } else {
-      shift_ammount = machine->registers[machine->decoded_instruction->rs];
+      shift_amount = machine->registers[machine->decoded_instruction->rs];
     }
   } else {
     op2 = machine->decoded_instruction->immediate_value;
-    shift_ammount = machine->decoded_instruction->shift_amount;
+    shift_amount = machine->decoded_instruction->shift_amount;
     shift_type = ror;
   }
 
-  value_carry_t *shifter_out = shifter(shift_type, op2, shift_ammount);
+  value_carry_t *shifter_out = shifter(shift_type, shift_amount, op2);
   op2 = shifter_out->value;
   shifter_carry = shifter_out->carry;
-  free (shifter_out);
+  free(shifter_out);
 
   word_t flags = 0;
   word_t result;
+
   switch (machine->decoded_instruction->operation) {
     case AND:
     case TST:

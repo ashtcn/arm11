@@ -7,9 +7,9 @@
 #define WORD_SIZE 32
 #define PC 15
 #define CPSR 16
-#define MASK_FIRST_4 ((~0) >> 4)
-#define MASK_FIRST_6 ((~0) >> 6)
-#define MASK_FIRST_8 ((~0) >> 8)
+#define MASK_FIRST_4 0xFFFFFFF
+#define MASK_FIRST_6 0x3FFFFFF
+#define MASK_FIRST_8 0xFFFFFF
 
 typedef enum {
   AND = 0,
