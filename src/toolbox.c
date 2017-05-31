@@ -108,7 +108,7 @@ word_t absolute(word_t value) {
  * Prints a given number bytes from memory, starting from address 0. Lines are
  * broken every word (4 bytes). Useful for debugging.
  * @param memory An array of bytes to print.
- * @bytes_to_print The number of bytes to print (from 0).
+ * @param bytes_to_print The number of bytes to print (from 0).
  */
 void print_array(byte_t *memory, size_t bytes_to_print) {
   for (size_t i = 0; i < bytes_to_print; i++) {
@@ -137,6 +137,11 @@ void print_system_state(system_state_t *machine) {
   print_fetched_instruction(machine);
 }
 
+/**
+ * @brief Prints the values of the registers of the machine.
+ *
+ * @param machine The arm machine that has the registers to print.
+ */
 void print_registers(system_state_t *machine) {
   printf("Register State:\n");
   for (uint8_t i = 0; i < NUM_REGISTERS; ++i) {
@@ -146,6 +151,12 @@ void print_registers(system_state_t *machine) {
   }
 }
 
+
+/**
+ * @brief Prints the memory of the machine that holds a value.
+ *
+ * @param machine The arm machine that has the memory to print.
+ */
 void print_memory(system_state_t *machine) {
   printf("Memory State:\n");
   for (uint32_t i = 0; i < NUM_ADDRESSES; i += 4) {
@@ -157,6 +168,13 @@ void print_memory(system_state_t *machine) {
   }
 }
 
+
+/**
+ * @brief Prints the decoded instruction of the machine and any flags,
+ * values or registers.
+ *
+ * @param machine The arm machine that has the instruction to print.
+ */
 void print_decoded_instruction(system_state_t *machine) {
   instruction_type_t type = machine->decoded_instruction->type;
   switch (type) {
@@ -188,6 +206,11 @@ void print_decoded_instruction(system_state_t *machine) {
   }
 }
 
+/**
+ * @brief Prints the fetched instruction of the machine, or None if not present
+ *
+ * @param machine The arm machine that has the instruction to print.
+ */
 void print_fetched_instruction(system_state_t *machine) {
   if (machine->has_fetched_instruction) {
     printf("Fetched Instruction, ");
@@ -197,12 +220,24 @@ void print_fetched_instruction(system_state_t *machine) {
   }
 }
 
+
+/**
+ * @brief Prints a value for debugging, in binary, hex and 2's complement
+ *
+ * @param value The word to print.
+ */
 void print_value(word_t value) {
   printf("Value: ");
   print_binary_value(value);
   printf(" (0x%08x) (%ld)\n", value, twos_complement_to_long(value));
 }
 
+/**
+ * @brief Converts a signed 2's complement word to a sign long.
+ *
+ * @param value The signed 2's complement word to convert.
+ * @returns The signed long representation of the word.
+ */
 long twos_complement_to_long(word_t value) {
   long result = absolute(value);
   if (is_negative(value)) {
@@ -211,6 +246,12 @@ long twos_complement_to_long(word_t value) {
   return result;
 }
 
+
+/**
+ * @brief Prints the padded binary representation of value
+ *
+ * @param value The word for printing.
+ */
 void print_binary_value(word_t value) {
   for (int i = 0; i < WORD_SIZE; ++i) {
     printf("%u", value >> (WORD_SIZE - 1));
@@ -218,6 +259,12 @@ void print_binary_value(word_t value) {
   }
 }
 
+/**
+ * @brief Returns the string representing the condition type.
+ *
+ * @param type The condition type.
+ * @returns The string of the condition type for printing.
+ */
 char *get_cond(condition_t cond) {
   switch (cond) {
     case eq:
@@ -239,6 +286,12 @@ char *get_cond(condition_t cond) {
   }
 }
 
+/**
+ * @brief Returns the string representing the instruction type.
+ *
+ * @param type The instruction type.
+ * @returns The string of the instruction type for printing.
+ */
 char *get_type(instruction_type_t type) {
   switch (type) {
     case DPI:
@@ -258,6 +311,12 @@ char *get_type(instruction_type_t type) {
   }
 }
 
+/**
+ * @brief Returns the string representing the opcode.
+ *
+ * @param operation The opcode.
+ * @returns The string of the opcode for printing.
+ */
 char *get_opcode(opcode_t operation) {
   switch (operation) {
     case AND:
@@ -285,6 +344,16 @@ char *get_opcode(opcode_t operation) {
   }
 }
 
+
+
+/**
+ * @brief Returns a pointer to the shifted value of the value.
+ *
+ * @param type The type of shift to use.
+ * @param shift_amount The amount to shift by.
+ * @param value The value to shift.
+ * @returns The pointer to the shifted value.
+ */
 value_carry_t *shifter(shift_t type, word_t shift_amount, word_t value) {
   value_carry_t *result = malloc(sizeof(value_carry_t));
 
