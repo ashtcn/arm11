@@ -173,14 +173,14 @@ void print_system_state(system_state_t *machine) {
 void print_registers_compliant(system_state_t *machine) {
   for (uint8_t i = 0; i <= 12; ++i) {
     word_t value = machine->registers[i];
-    printf("$%-2d :", i);
+    printf("$%-2d : ", i);
     print_value_compliant(value);
   }
 
-  printf("PC  :");
+  printf("PC  : ");
   print_value_compliant(machine->registers[15]);
 
-  printf("CPSR:");
+  printf("CPSR: ");
   print_value_compliant(machine->registers[16]);
 }
 
@@ -298,7 +298,7 @@ void print_value(word_t value) {
  * @param value The word to print.
  */
 void print_value_compliant(word_t value) {
-  printf("%11ld (0x%08x)\n", twos_complement_to_long(value), value);
+  printf("%10ld (0x%08x)\n", twos_complement_to_long(value), value);
 }
 
 /**
