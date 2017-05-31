@@ -172,6 +172,7 @@ void print_decoded_instruction(system_state_t *machine) {
              get_cond(machine->decoded_instruction->cond));
       printf("  Immediate Value: 0x%x\n",
              machine->decoded_instruction->immediate_value);
+      break;
     default:
       printf("Decoded Instruction: %s\n",
              get_type(machine->decoded_instruction->type));
