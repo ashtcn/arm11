@@ -58,25 +58,22 @@ void execute(system_state_t *machine) {
 void execute_dpi(system_state_t *machine) {
   word_t op2;
   word_t shift_amount;
-  shift_t shift_type;
   bool shifter_carry = 0;
 
   if (!machine->decoded_instruction->flag_0) {
     op2 = machine->registers[machine->decoded_instruction->rm];
-    shift_type = machine->decoded_instruction->shift_type;
 
     if (machine->decoded_instruction->rs == -1) {
-      shift_amount = machine->decoded_instruction->immediate_value;
+      shift_amount = machine->decoded_instruction->shift_amount;
     } else {
       shift_amount = machine->registers[machine->decoded_instruction->rs];
     }
   } else {
     op2 = machine->decoded_instruction->immediate_value;
     shift_amount = machine->decoded_instruction->shift_amount;
-    shift_type = ror;
   }
 
-  value_carry_t *shifter_out = shifter(shift_type, shift_amount, op2);
+  value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, shift_amount, op2);
   op2 = shifter_out->value;
   shifter_carry = shifter_out->carry;
   free(shifter_out);
@@ -158,7 +155,7 @@ void execute_sdt(system_state_t *machine) {
   word_t shift_ammount;
   if (machine->decoded_instruction->flag_0) {//Immediate or not
     if (machine->decoded_instruction->rs == -1) {
-      shift_ammount = machine->decoded_instruction->immediate_value;
+      shift_ammount = machine->decoded_instruction->shift_amount;
     } else {
       shift_ammount = machine->registers[machine->decoded_instruction->rs];
     }

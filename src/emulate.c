@@ -62,12 +62,14 @@ int main(int argc, char **argv) {
     if (machine->decoded_instruction->type != ZER) {
       machine->fetched_instruction = get_word(machine, machine->registers[PC]);
       machine->has_fetched_instruction = true;
+    } else {
+      machine->has_fetched_instruction = false;
     }
 
     machine->registers[PC] += 4;
   }
 
-  printf("Program executed successfully\n");
+  printf("\nProgram executed successfully\n");
 
   print_system_state(machine);
 
