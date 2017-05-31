@@ -50,7 +50,7 @@ void exit_program(system_state_t *machine) {
 word_t get_word(system_state_t *machine, uint32_t mem_address) {
   if (mem_address > NUM_ADDRESSES - 4) {
     if (COMPLIANT_MODE) {
-      printf("Error: Out of bounds memory access at address 0x%x\n",
+      printf("Error: Out of bounds memory access at address 0x%08x\n",
              mem_address);
       return 0;
     } else {
