@@ -152,24 +152,29 @@ void execute_mul(system_state_t *machine) {
 void execute_sdt(system_state_t *machine) {
   address_t address;
   word_t offset;
-  word_t shift_ammount;
-  if (machine->decoded_instruction->flag_0) {//Immediate or not
+  word_t shift_amount;
+
+  // Immediate operand or not
+  if (machine->decoded_instruction->flag_0) {
     if (machine->decoded_instruction->rs == -1) {
-      shift_ammount = machine->decoded_instruction->shift_amount;
+      shift_amount = machine->decoded_instruction->shift_amount;
     } else {
-      shift_ammount = machine->registers[machine->decoded_instruction->rs];
+      shift_amount = machine->registers[machine->decoded_instruction->rs];
     }
-    value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, shift_ammount, machine->registers[machine->decoded_instruction->rm]);//How do you like my long line Jordan????????
+    value_carry_t *shifter_out = shifter(machine->decoded_instruction->shift_type, shift_amount, machine->registers[machine->decoded_instruction->rm]);//How do you like my long line Jordan????????
     offset = shifter_out->value;
+    free(shifter_out);
   } else {
     offset = machine->decoded_instruction->immediate_value;
   }
 
-  if (!machine->decoded_instruction->flag_2) {//Negative or positive
+  // Negative or positive
+  if (!machine->decoded_instruction->flag_2) {
     offset = negate(offset);
   }
 
-  if (!machine->decoded_instruction->flag_1) {//Post or pre indexing
+  // Post or pre indexing
+  if (!machine->decoded_instruction->flag_1) {
     address = machine->registers[machine->decoded_instruction->rn];
     machine->registers[machine->decoded_instruction->rn] = address + offset;
   } else {
