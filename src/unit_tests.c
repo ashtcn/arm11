@@ -66,9 +66,41 @@ void test_print_system_state() {
   print_system_state(&pss_state);
 }
 
+void test_shifter_values(word_t correct_value, bool correct_carry, value_carry_t *shifter_out) {
+  assert(shifter_out->value == correct_value);
+  assert(shifter_out->carry == correct_carry);
+}
+
+void test_shifter (void) {
+  test_shifter_values(0x0F000000, false, shifter(lsl, 4, 0x00F00000));
+  test_shifter_values(0xE1E00000, true, shifter(lsl, 1, 0xF0F00000));
+  test_shifter_values(0x00000000, false, shifter(lsl, 32, 0x00100000));
+  test_shifter_values(0x00000000, false, shifter(lsl, 33, 0x00000001));
+
+  test_shifter_values(0x00F00000, false, shifter(lsr, 4, 0x0F000000));
+  test_shifter_values(0x07800001, true, shifter(lsr, 1, 0x0F000003));
+  test_shifter_values(0x00000000, true, shifter(lsr, 32, 0x80000000));
+
+  test_shifter_values(0xFFF00000, false, shifter(asr, 4, 0xFF000000));
+  test_shifter_values(0xC7800001, true, shifter(asr, 1, 0x8F000003));
+  test_shifter_values(0xFFFFFFFF, true, shifter(asr, 32, 0x8F000003));
+
+  test_shifter_values(0x80000000, true, shifter(ror, 1, 0x00000001));
+  test_shifter_values(0x0F000000, false, shifter(ror, 4, 0xF0000000));
+  test_shifter_values(0x11111111, false, shifter(ror, 4, 0x11111111));
+  test_shifter_values(0xF0F00001, true, shifter(ror, 4, 0x0F00001F));
+  test_shifter_values(0x0F00001F, false, shifter(ror, 32, 0x0F00001F));
+  test_shifter_values(0xF0F00001, true, shifter(ror, 36, 0x0F00001F));
+  test_shifter_values(0x80000000, true, shifter(ror, 64, 0x80000000));
+}
+
+
+
+
 int main(void) {
   run_test(test_load_file);
   run_test(test_print_system_state); // Requires manual check
+  run_test(test_shifter);
   printf("\nNo errors\n");
   return 0;
 }
