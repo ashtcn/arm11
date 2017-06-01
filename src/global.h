@@ -81,6 +81,31 @@ typedef enum {
   V = 0x1,
 } cpsr_flags_t;
 
+typedef enum {
+  ADD_M,
+  SUB_M,
+  RSB_M,
+  AND_M,
+  EOR_M,
+  ORR_M,
+  MOV_M,
+  TST_M,
+  TEQ_M,
+  CMP_M,
+  MUL_M,
+  MLA_M,
+  LDR_M,
+  STR_M,
+  BEQ_M,
+  BNE_M,
+  BGE_M,
+  BLT_M,
+  BGT_M,
+  BLE_M,
+  B_M,
+  ANDEQ_M,
+} mnemonic_t;
+
 typedef uint8_t byte_t;
 typedef int8_t reg_address_t;
 typedef uint16_t address_t;
