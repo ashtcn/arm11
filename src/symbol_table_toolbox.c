@@ -1,7 +1,7 @@
-#include "symbol_table.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include "symbol_table.h"
 
 bool is_label_in_table(symbol_table_t *table, char *label);
 address_t get_address(symbol_table_t *table, char *label);
