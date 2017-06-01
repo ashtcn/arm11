@@ -142,6 +142,7 @@ void execute_dpi(system_state_t *machine) {
       flags = C * shifter_carry;
       break;
     default:
+      result = 0;
       fprintf(stderr, "Unknown opcode at PC: %u",
               machine->registers[PC] - 0x40);
       exit_program(machine);
