@@ -3,6 +3,7 @@
 #include "assemble_toolbox.h"
 #include "string_array_array.h"
 #include "symbol_table.h"
+#include "assembler.h"
 
   string_array_array_t *tokenize_input(char **input, int input_lines) {
   string_array_array_t *result = make_string_array_array();
@@ -51,19 +52,26 @@ int main(int argc, char **argv) {
 
   for (int i = 0; i < tokenized_input->size; i++) {
     for (int i2 = 0; i2 < tokenized_input->string_arrays[i]->size; i2++) {
-    printf ("[%i][%i] %s\n", i, i2, tokenized_input->string_arrays[i]->array[i2]);
+      printf ("[%i][%i] %s\n", i, i2, tokenized_input->string_arrays[i]->array[i2]);
     }
+    printf ("[%i] %08x\n", i, assemble_dpi(tokenized_input->string_arrays[i]));
   }
 
-  symbol_table_t* s = generate_symbol_table(tokenized_input);
+  symbol_table_t *s = generate_symbol_table(tokenized_input);
   for (int i = 0; i < s->size; i++) {
-  printf ("[%i] address:%u  label:%s\n", i, s->rows[i].address, s->rows[i].label);
+    printf ("[%i] address:%u  label:%s\n", i, s->rows[i].address, s->rows[i].label);
   }
 
-  word_t* output = {0};
-  int output_file_size = 1;
-  save_file(output, save_filename, output_file_size);
 
+  /*int output_file_size = tokenized_input->size;
+  word_t output_data[output_file_size];
+  for (int i = 0; i < tokenized_input->size; i++) {
+    output_data[i] = assemble_dpi(tokenized_input->string_arrays[i]);
+  }
+
+
+  save_file(output_data, save_filename, output_file_size);
+  */
   for (int i = 0; i < tokenized_input->size; i++) {
     free(tokenized_input->string_arrays[i]->array);
     free(tokenized_input->string_arrays[i]);

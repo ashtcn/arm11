@@ -7,6 +7,7 @@
 #include "string_array.h"
 #include "symbol_table.h"
 #include "encode.h"
+#include "print.h"
 
 mnemonic_t string_to_mnemonic(char *str);
 opcode_t mnemonic_to_opcode(mnemonic_t mnemonic);

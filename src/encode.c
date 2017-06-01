@@ -44,8 +44,7 @@ word_t encode_dpi(instruction_t *instruction) {
   } else {
     binary |= instruction->rm;
     binary |= ((word_t) instruction->shift_type) << 5;
-
-    if (instruction->rs == -1) {
+    if (instruction->rs != -1) {
       binary |= 1L << 4;
       // Shift by a register
       binary |= ((word_t) instruction->rs) << 8;

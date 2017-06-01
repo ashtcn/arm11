@@ -158,7 +158,7 @@ void parse_shift(string_array_t *tokens, instruction_t *instruction) {
     // In the form <#expression>
     char *number = &tokens->array[0][1];
     instruction->shift_amount = strtol(number, (char **)NULL, 16);
-  } else {
+  } else if (!tokens->array[0][0]) {
     // Is a register
     instruction->rs = string_to_reg_address(tokens->array[0]);
   }
@@ -168,14 +168,13 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
   char **sections = tokens->array;
   if ('#' == sections[0][0]) {
     // In the form <#expression>
-
-    char *number = &sections[0][1];
-    if (strstr(number, "0x")) {
+    instruction->flag_0 = 1;
+    if (strstr(sections[0], "0x")) {
       // Is in hex
-      instruction->immediate_value = strtol(number, (char **)NULL, 16);
+      instruction->immediate_value = strtol(&sections[0][1], (char **)NULL, 16);
     } else {
       // Is in decimal
-      instruction->immediate_value = strtol(number, (char **)NULL, 10);
+      instruction->immediate_value = strtol(&sections[0][1], (char **)NULL, 10);
     }
   } else if ('r' == sections[0][0]) {
     // In the form Rm{,<shift>}
@@ -247,6 +246,6 @@ word_t assemble_dpi(string_array_t *tokens) {
   }
 
   free(operand_tokens);
-
+  print_instruction(instruction);
   return encode(instruction);
 }
