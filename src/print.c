@@ -161,10 +161,6 @@ void print_instruction(instruction_t *instruction) {
       printf("  Load (1) or Store (0): %u\n", instruction->flag_3);
       printf("  Base Register Rn: %u\n", instruction->rn);
       if(instruction->flag_0) {
-        // Offset is immediate
-        printf("  Offset Immediate Value: %x\n",
-               instruction->immediate_value);
-      } else {
         // Offset is register
         printf("  Offset Register Rm: %u\n", instruction->rm);
         printf("  Offset Shift Type: %s\n",
@@ -176,6 +172,10 @@ void print_instruction(instruction_t *instruction) {
           // Shift is register
           printf("  Offset Shift Register Rs: %u\n", instruction->rs);
         }
+      } else {
+        // Offset is immediate
+        printf("  Offset Immediate Value: 0x%x\n",
+               instruction->immediate_value);
       }
       printf("  Source / Destination Register Rd: %u\n", instruction->rd);
       break;

@@ -3,8 +3,9 @@
 #include "print_compliant.h"
 
 #define run_test(fn_name) \
-  printf("%s\n", #fn_name); \
-  fn_name()
+  printf("Running tests: %s ", #fn_name); \
+  fn_name(); \
+  printf("\tPassed!\n");
 
 void test_load_file(void) {
   byte_t load_file_memory[NUM_ADDRESSES] = {0};
@@ -295,12 +296,116 @@ void test_decode_mul(void) {
   free(fetch5);
 }
 
+void test_decode_sdt(void) {
+  system_state_t *fetch6 = malloc(sizeof(system_state_t));
+  system_state_t fetch6_struct = {
+    .registers = {0},
+    .memory = {0},
+    // AL      I P U     L Rn0  Rd1  Rs3    ASR  Rm6
+    // 1110 01 1 1 1 0 0 1 0000 0001 0011 0 10 1 0110
+    .fetched_instruction = 0xE7901356,
+    .has_fetched_instruction = true,
+  };
+  *fetch6 = fetch6_struct;
+  fetch6->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch6->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode6 = {
+    .type = SDT,
+    .cond = AL,
+    .operation = AND,
+    .immediate_value = 0,
+    .rn = 0,
+    .rd = 1,
+    .rs = 3,
+    .rm = 6,
+    .flag_0 = true,
+    .flag_1 = true,
+    .flag_2 = true,
+    .flag_3 = true,
+    .shift_type = ASR,
+    .shift_amount = 0,
+  };
+  system_state_t *fetch7 = malloc(sizeof(system_state_t));
+  system_state_t fetch7_struct = {
+    .registers = {0},
+    .memory = {0},
+    // AL      I P U     L Rn4  Rd5  Offset 0x555
+    // 1110 01 0 0 0 0 0 0 0100 0101 010101010101
+    .fetched_instruction = 0xE4045555,
+    .has_fetched_instruction = true,
+  };
+  *fetch7 = fetch7_struct;
+  fetch7->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch7->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode7 = {
+    .type = SDT,
+    .cond = AL,
+    .operation = AND,
+    .immediate_value = 0x555,
+    .rn = 4,
+    .rd = 5,
+    .rs = -1,
+    .rm = -1,
+    .flag_0 = false,
+    .flag_1 = false,
+    .flag_2 = false,
+    .flag_3 = false,
+    .shift_type = ROR,
+    .shift_amount = 0,
+  };
+  decode_instruction(fetch6);
+  decode_instruction(fetch7);
+  assert (equal_instruction(*fetch6->decoded_instruction, decode6));
+  assert (equal_instruction(*fetch7->decoded_instruction, decode7));
+  free(fetch6->decoded_instruction);
+  free(fetch7->decoded_instruction);
+  free(fetch6);
+  free(fetch7);
+}
+
+void test_decode_bra(void) {
+  system_state_t *fetch8 = malloc(sizeof(system_state_t));
+  system_state_t fetch8_struct = {
+    .registers = {0},
+    .memory = {0},
+    // GE        Offset 0x155554 (01 0101 0101 0101 0101 0101 0100)
+    // 1010 1010 010101010101010101010101
+    .fetched_instruction = 0xAA555555,
+    .has_fetched_instruction = true,
+  };
+  *fetch8 = fetch8_struct;
+  fetch8->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch8->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode8 = {
+    .type = BRA,
+    .cond = GE,
+    .operation = AND,
+    .immediate_value = 0x1555554,
+    .rn = -1,
+    .rd = -1,
+    .rs = -1,
+    .rm = -1,
+    .flag_0 = false,
+    .flag_1 = false,
+    .flag_2 = false,
+    .flag_3 = false,
+    .shift_type = ROR,
+    .shift_amount = 0,
+  };
+  decode_instruction(fetch8);
+  assert (equal_instruction(*fetch8->decoded_instruction, decode8));
+  free(fetch8->decoded_instruction);
+  free(fetch8);
+}
+
 int main(void) {
   run_test(test_load_file);
-  // run_test(test_print_system_state); // Requires manual check
+  // run_test(test_print_system_state); // Requires manual checks
   run_test(test_shifter);
   run_test(test_decode_dpi);
   run_test(test_decode_mul);
+  run_test(test_decode_sdt);
+  run_test(test_decode_bra);
   printf("\nNo errors\n");
   return 0;
 }

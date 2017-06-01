@@ -127,6 +127,7 @@ void single_data_transfer(system_state_t *machine) {
   instruction->rd = (fetched >> 12) & 0xF;
 
   if (instruction->flag_0) {
+    // Register offset
     instruction->rm = fetched & 0xF;
 
     if ((fetched >> 4) & 0x1) {
@@ -139,6 +140,7 @@ void single_data_transfer(system_state_t *machine) {
       instruction->shift_amount = (fetched >> 7) & 0x1F;
     }
   } else {
+    // Immediate offset
     instruction->immediate_value = fetched & 0xFFF;
   }
 }
@@ -169,10 +171,12 @@ void data_processing(system_state_t *machine) {
   instruction->rd = (fetched >> 12) & 0xF;
 
   if (instruction->flag_0) {
+    // Immediate operand
     instruction->immediate_value = fetched & 0xFF;
     instruction->shift_type = ROR;
     instruction->shift_amount = ((fetched >> 8) & 0xF) << 1;
   } else {
+    // Register operand
     instruction->rm = fetched & 0xF;
 
     if ((fetched >> 4) & 0x1) {
