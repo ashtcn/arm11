@@ -40,7 +40,7 @@ void test_load_file(void) {
   }
 }
 
-void test_print_system_state() {
+void test_print_system_state(void) {
   instruction_t pss_instruction = {
     .type = DPI,
     .cond = GE,
@@ -95,13 +95,212 @@ void test_shifter (void) {
   test_shifter_values(0x80000000, true, shifter(ROR, 64, 0x80000000));
 }
 
+static const instruction_t NULL_INSTRUCTION = {
+  .type = NUL,
+  .cond = AL,
+  .operation = AND,
+  .immediate_value = 0,
+  .rn = -1,
+  .rd = -1,
+  .rs = -1,
+  .rm = -1,
+  .flag_0 = false,
+  .flag_1 = false,
+  .flag_2 = false,
+  .flag_3 = false,
+  .shift_type = ROR,
+  .shift_amount = 0,
+};
 
+int equal_instruction(instruction_t i1, instruction_t i2) {
+  return i1.type == i2.type
+         && i1.cond == i2.cond
+         && i1.operation == i2.operation
+         && i1.immediate_value == i2.immediate_value
+         && i1.rn == i2.rn
+         && i1.rd == i2.rd
+         && i1.rs == i2.rs
+         && i1.rm == i2.rm
+         && i1.flag_0 == i2.flag_0
+         && i1.flag_1 == i2.flag_1
+         && i1.flag_2 == i2.flag_2
+         && i1.flag_3 == i2.flag_3
+         && i1.shift_type == i2.shift_type
+         && i1.shift_amount == i2.shift_amount;
+}
 
+void test_decode_dpi(void) {
+  system_state_t *fetch1 = malloc(sizeof(system_state_t));
+  system_state_t fetch1_struct = {
+    .registers = {0},
+    .memory = {0},
+    // AL      I TST  S Rn1  Rd2  ROR2 Imm
+    // 1110 00 1 1000 1 0001 0010 0010 01010101
+    .fetched_instruction = 0xE3112255,
+    .has_fetched_instruction = true,
+  };
+  *fetch1 = fetch1_struct;
+  fetch1->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch1->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode1 = {
+    .type = DPI,
+    .cond = AL,
+    .operation = TST,
+    .immediate_value = 0x55,
+    .rn = 1,
+    .rd = 2,
+    .rs = -1,
+    .rm = -1,
+    .flag_0 = true,
+    .flag_1 = true,
+    .flag_2 = false,
+    .flag_3 = false,
+    .shift_type = ROR,
+    .shift_amount = 4,
+  };
+  system_state_t *fetch2 = malloc(sizeof(system_state_t));
+  system_state_t fetch2_struct = {
+    .registers = {0},
+    .memory = {0},
+    // EQ      I AND  S Rn0  Rd4  LSL4  LSL  Rm7
+    // 0000 00 0 0000 1 0000 0100 00100 00 0 0111
+    .fetched_instruction = 0x104207,
+    .has_fetched_instruction = true,
+  };
+  *fetch2 = fetch2_struct;
+  fetch2->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch2->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode2 = {
+    .type = DPI,
+    .cond = EQ,
+    .operation = AND,
+    .immediate_value = 0,
+    .rn = 0,
+    .rd = 4,
+    .rs = -1,
+    .rm = 7,
+    .flag_0 = false,
+    .flag_1 = true,
+    .flag_2 = false,
+    .flag_3 = false,
+    .shift_type = LSL,
+    .shift_amount = 4,
+  };
+  system_state_t *fetch3 = malloc(sizeof(system_state_t));
+  system_state_t fetch3_struct = {
+    .registers = {0},
+    .memory = {0},
+    // GE      I MOV  S Rn10 Rd8  Rs3    ASR  Rm5
+    // 1010 00 0 1101 0 1010 1000 0011 0 10 1 0101
+    .fetched_instruction = 0xA1AA8355,
+    .has_fetched_instruction = true,
+  };
+  *fetch3 = fetch3_struct;
+  fetch3->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch3->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode3 = {
+    .type = DPI,
+    .cond = GE,
+    .operation = MOV,
+    .immediate_value = 0,
+    .rn = 10,
+    .rd = 8,
+    .rs = 3,
+    .rm = 5,
+    .flag_0 = false,
+    .flag_1 = false,
+    .flag_2 = false,
+    .flag_3 = false,
+    .shift_type = ASR,
+    .shift_amount = 0,
+  };
+  decode_instruction(fetch1);
+  decode_instruction(fetch2);
+  decode_instruction(fetch3);
+  assert (equal_instruction(*fetch1->decoded_instruction, decode1));
+  assert (equal_instruction(*fetch2->decoded_instruction, decode2));
+  assert (equal_instruction(*fetch3->decoded_instruction, decode3));
+  free(fetch1->decoded_instruction);
+  free(fetch2->decoded_instruction);
+  free(fetch3->decoded_instruction);
+  free(fetch1);
+  free(fetch2);
+  free(fetch3);
+}
+
+void test_decode_mul(void) {
+  system_state_t *fetch4 = malloc(sizeof(system_state_t));
+  system_state_t fetch4_struct = {
+    .registers = {0},
+    .memory = {0},
+    // AL          A S Rd0  Rn1  Rs2       Rm3
+    // 1110 000000 1 1 0000 0001 0010 1001 0011
+    .fetched_instruction = 0xE0301293,
+    .has_fetched_instruction = true,
+  };
+  *fetch4 = fetch4_struct;
+  fetch4->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch4->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode4 = {
+    .type = MUL,
+    .cond = AL,
+    .operation = AND,
+    .immediate_value = 0,
+    .rn = 1,
+    .rd = 0,
+    .rs = 2,
+    .rm = 3,
+    .flag_0 = true,
+    .flag_1 = true,
+    .flag_2 = false,
+    .flag_3 = false,
+    .shift_type = ROR,
+    .shift_amount = 0,
+  };
+  system_state_t *fetch5 = malloc(sizeof(system_state_t));
+  system_state_t fetch5_struct = {
+    .registers = {0},
+    .memory = {0},
+    // AL          A S Rd12 Rn7  Rs6       Rm5
+    // 1110 000000 0 0 1100 0111 0110 1001 0101
+    .fetched_instruction = 0xE00C7695,
+    .has_fetched_instruction = true,
+  };
+  *fetch5 = fetch5_struct;
+  fetch5->decoded_instruction = malloc(sizeof(instruction_t));
+  *fetch5->decoded_instruction = NULL_INSTRUCTION;
+  instruction_t decode5 = {
+    .type = MUL,
+    .cond = AL,
+    .operation = AND,
+    .immediate_value = 0,
+    .rn = 7,
+    .rd = 12,
+    .rs = 6,
+    .rm = 5,
+    .flag_0 = false,
+    .flag_1 = false,
+    .flag_2 = false,
+    .flag_3 = false,
+    .shift_type = ROR,
+    .shift_amount = 0,
+  };
+  decode_instruction(fetch4);
+  decode_instruction(fetch5);
+  assert (equal_instruction(*fetch4->decoded_instruction, decode4));
+  assert (equal_instruction(*fetch5->decoded_instruction, decode5));
+  free(fetch4->decoded_instruction);
+  free(fetch5->decoded_instruction);
+  free(fetch4);
+  free(fetch5);
+}
 
 int main(void) {
   run_test(test_load_file);
-  run_test(test_print_system_state); // Requires manual check
+  // run_test(test_print_system_state); // Requires manual check
   run_test(test_shifter);
+  run_test(test_decode_dpi);
+  run_test(test_decode_mul);
   printf("\nNo errors\n");
   return 0;
 }
