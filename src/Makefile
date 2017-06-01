@@ -8,7 +8,7 @@ CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_DEFAULT_SOURCE -std=c99 -Werror -pedantic 
 all: emulate assemble unit_tests
 
 emulate: emulate.o decode.o execute.o print_compliant.o print.o toolbox.o
-assemble: assemble.o assemble_toolbox.o string_array_array.o
+assemble: assemble.o assemble_toolbox.o string_array_array.o symbol_table.o
 unit_tests: unit_tests.o decode.o execute.o print_compliant.o print.o toolbox.o
 
 # emulate

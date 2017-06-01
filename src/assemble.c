@@ -2,6 +2,7 @@
 #include "global.h"
 #include "assemble_toolbox.h"
 #include "string_array_array.h"
+#include "symbol_table.h"
 
   string_array_array_t *tokenize_input(char **input, int input_lines) {
   string_array_array_t *result = make_string_array_array();
@@ -12,6 +13,28 @@
 
   return result;
 }
+
+symbol_table_t *generate_symbol_table(string_array_array_t *tokens) {
+  symbol_table_t *table = create_table(100);
+  address_t address = 0;
+
+  for (int i = 0; i < tokens->size; i++) {
+    if (tokens->string_arrays[i]->size != 1) {
+      address += 4;
+    } else {
+      for (int j = 0; tokens->string_arrays[i]->array[0][j]; j++) {
+        if (tokens->string_arrays[i]->array[0][j] == ':') {
+          tokens->string_arrays[i]->array[0][j] = '\0';
+        }
+      }
+      add_row(table, tokens->string_arrays[i]->array[0], address);
+      tokens->string_arrays[i]->array[0] = '\0';
+    }
+  }
+
+  return table;
+}
+
 
 int main(int argc, char **argv) {
   if (argc != 3) {
@@ -32,11 +55,20 @@ int main(int argc, char **argv) {
     }
   }
 
+  symbol_table_t* s = generate_symbol_table(tokenized_input);
+  for (int i = 0; i < s->size; i++) {
+  printf ("[%i] address:%u  label:%s\n", i, s->rows[i].address, s->rows[i].label);
+  }
 
   word_t* output = {0};
   int output_file_size = 1;
   save_file(output, save_filename, output_file_size);
 
+  for (int i = 0; i < tokenized_input->size; i++) {
+    free(tokenized_input->string_arrays[i]->array);
+    free(tokenized_input->string_arrays[i]);
+  }
+  free(tokenized_input);
   free_2d_array(loaded_file);
   return EXIT_SUCCESS;
 }

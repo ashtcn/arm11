@@ -83,8 +83,22 @@ void print_memory(system_state_t *machine) {
  * * For single data transfer instructions, prints flags, registers and offset.
  * @param machine The current system state.
  */
-void print_decoded_instruction(system_state_t *machine) {
-  instruction_t *instruction = machine->decoded_instruction;
+ void print_decoded_instruction(system_state_t *machine) {
+   print_instruction(machine->decoded_instruction);
+ }
+
+ /**
+  * @brief Prints details for the instruction.
+  *
+  * Prints the type of the instruction, and any details required:
+  * * For branch instructions, prints the condition and the offset.
+  * * For multiply instructions, prints the condition, flags and registers.
+  * * For data processing instructions, prints the condition, flags, opcodes,
+  * operands, and shift information.
+  * * For single data transfer instructions, prints flags, registers and offset.
+  * @param instruction The instruction.
+  */
+void print_instruction(instruction_t *instruction) {
   switch (instruction->type) {
     case NUL:
       printf("Decoded Instruction: None\n");
