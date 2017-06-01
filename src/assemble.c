@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
     for (int i2 = 0; i2 < tokenized_input->string_arrays[i]->size; i2++) {
       printf ("[%i][%i] %s\n", i, i2, tokenized_input->string_arrays[i]->array[i2]);
     }
-    printf ("[%i] %08x\n", i, assemble_dpi(tokenized_input->string_arrays[i]));
+    //printf ("[%i] %08x\n", i, assemble_dpi(tokenized_input->string_arrays[i]));
   }
 
   symbol_table_t *s = generate_symbol_table(tokenized_input);

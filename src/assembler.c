@@ -143,7 +143,7 @@ shift_t string_to_shift(char *str) {
   if (!strcmp(str, "asr")) {
     return ASR;
   }
-  if (!strcmp(str, "ROR")) {
+  if (!strcmp(str, "ror")) {
     return ROR;
   }
 
@@ -153,14 +153,13 @@ shift_t string_to_shift(char *str) {
 
 void parse_shift(string_array_t *tokens, instruction_t *instruction) {
   instruction->shift_type = string_to_shift(tokens->array[0]);
-
-  if ('#' == tokens->array[0][0]) {
+  if ('#' == tokens->array[1][0]) {
     // In the form <#expression>
-    char *number = &tokens->array[0][1];
+    char *number = &tokens->array[1][1];
     instruction->shift_amount = strtol(number, (char **)NULL, 16);
-  } else if (!tokens->array[0][0]) {
+  } else {
     // Is a register
-    instruction->rs = string_to_reg_address(tokens->array[0]);
+    instruction->rs = string_to_reg_address(tokens->array[1]);
   }
 }
 
@@ -180,7 +179,7 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
     // In the form Rm{,<shift>}
     instruction->rm = string_to_reg_address(sections[0]);
 
-    if (tokens->size == 2) {
+    if (tokens->size >= 2) {
       // Has shift
       string_array_t *shift_tokens = malloc(sizeof(string_array_t));
 
