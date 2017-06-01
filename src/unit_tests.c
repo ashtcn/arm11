@@ -3,9 +3,9 @@
 #include "print_compliant.h"
 
 #define run_test(fn_name) \
-  printf("Running tests: %s ", #fn_name); \
+  printf("Running tests: %-20s ", #fn_name); \
   fn_name(); \
-  printf("\tPassed!\n");
+  printf("Passed!\n");
 
 void test_load_file(void) {
   byte_t load_file_memory[NUM_ADDRESSES] = {0};
