@@ -107,8 +107,6 @@ string_array_t *tokenize_instruction(char* instruction) {
 }
 
 string_array_t *tokenize_operand_instruction(string_array_t *result, char* instruction_op, char* operands) {
-  //char *cur_token;
-  //char *rest = strdup(operands);
   int split_count = 0;
   int i;
   for (i=0; operands[i]; i++) {
@@ -155,34 +153,5 @@ string_array_t *tokenize_operand_instruction(string_array_t *result, char* instr
   }
   strncpy(result->array[cur_section], &operands[start_split], i - start_split + 1);
 
-  return result;
-}
-
-
-string_array_t *tokenize_operand_instruction2(string_array_t *result, char* instruction_op, char* operands) {
-  char *cur_token;
-  char *rest = strdup(operands);
-  int comma_count = 0;
-  int i;
-  bool inside_brackets = false;
-  for (i=0; operands[i]; i++) {
-    if(operands[i] == '[') {
-      inside_brackets = true;
-    } else if(operands[i] == ']') {
-      inside_brackets = false;
-    } else if(!inside_brackets && operands[i] == ',') {
-      comma_count++;
-    }
-  }
-  result->size = comma_count + 2;
-  result->array = create_2d_array(comma_count + 2, 32);
-
-  (result->array)[0] = instruction_op;
-  i = 0;
-  while(i < comma_count && (cur_token = strtok_r(rest, ",", &rest))) {
-      (result->array)[i+1] = cur_token;
-      i++;
-  }
-  (result->array)[i+1] = rest;
   return result;
 }
