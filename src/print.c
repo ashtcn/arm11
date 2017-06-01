@@ -73,11 +73,15 @@ void print_memory(system_state_t *machine) {
  *
  * Prints the type of the instruction, and any details required:
  * * For branch instructions, prints the condition and the offset.
- * *
+ * * For multiply instructions, prints the condition, flags and registers.
+ * * For data processing instructions, prints the condition, flags, opcodes,
+ * operands, and shift information.
+ * * For single data transfer instructions, prints flags, registers and offset.
  * @param machine The current system state.
  */
 void print_decoded_instruction(system_state_t *machine) {
-  switch (machine->decoded_instruction->type) {
+  instruction_t *instruction = machine->decoded_instruction;
+  switch (instruction->type) {
     case NUL:
       printf("Decoded Instruction: None\n");
       break;
@@ -87,45 +91,94 @@ void print_decoded_instruction(system_state_t *machine) {
     case BRA:
       printf("Decoded Instruction: BRA\n");
       printf("  Condition Flag: %s\n",
-             get_cond(machine->decoded_instruction->cond));
+             get_cond(instruction->cond));
       printf("  Offset: 0x%x\n",
-             machine->decoded_instruction->immediate_value);
+             instruction->immediate_value);
       break;
     case MUL:
       printf("Decoded Instruction: MUL\n");
       printf("  Condition Flag: %s\n",
-             get_cond(machine->decoded_instruction->cond));
-      if (machine->decoded_instruction->type == DPI) {
-        printf("  Opcode: %s\n",
-               get_opcode(machine->decoded_instruction->operation));
+             get_cond(instruction->cond));
+      printf("  Accumulate: %u\n",
+             instruction->flag_0);
+      printf("  Set Flags: %u\n",
+             instruction->flag_1);
+      printf("  Operand1 Register Rm: %u\n",
+             instruction->rm);
+      printf("  Operand2 Register Rs: %u\n",
+             instruction->rs);
+      if(instruction->flag_0) {
+        printf("  Accumulate Register Rn: %u\n",
+               instruction->rn);
       }
-      printf("  Immediate Value: 0x%x\n",
-             machine->decoded_instruction->immediate_value);
-      printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
+      printf("  Destination Register Rd: %u\n",
+             instruction->rd);
       break;
     case DPI:
       printf("Decoded Instruction: DPI\n");
       printf("  Condition Flag: %s\n",
-             get_cond(machine->decoded_instruction->cond));
-      if (machine->decoded_instruction->type == DPI) {
-        printf("  Opcode: %s\n",
-               get_opcode(machine->decoded_instruction->operation));
+             get_cond(instruction->cond));
+      printf("  Opcode: %s\n",
+             get_opcode(instruction->operation));
+      printf("  Immediate Operand: %u\n",
+             instruction->flag_0);
+      printf("  Set Flags: %u\n",
+             instruction->flag_1);
+      printf("  Operand1 Register Rn: %u\n",
+             instruction->rn);
+      if(instruction->flag_0) {
+        printf("  Operand2 Immediate Value: 0x%x\n",
+               instruction->immediate_value);
+        printf("  Operand2 Rotate Right Amount: %u\n",
+               instruction->shift_amount);
+      } else {
+        printf("  Operand2 Register Rm: %u\n",
+               instruction->rm);
+        printf("  Operand2 Shift Type: %s\n",
+               get_shift(instruction->shift_type));
+        if (instruction->rs == -1) {
+          printf("  Operand2 Shift Amount: %u\n",
+                 instruction->shift_amount);
+        } else {
+          printf("  Operand2 Shift Register Rs: %u\n",
+                 instruction->rs);
+        }
       }
-      printf("  Immediate Value: 0x%x\n",
-             machine->decoded_instruction->immediate_value);
-      printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
+      printf("  Destination Register Rd: %d\n",
+             instruction->rd);
       break;
     case SDT:
       printf("Decoded Instruction: SDT\n");
       printf("  Condition Flag: %s\n",
-             get_cond(machine->decoded_instruction->cond));
-      if (machine->decoded_instruction->type == DPI) {
-        printf("  Opcode: %s\n",
-               get_opcode(machine->decoded_instruction->operation));
+             get_cond(instruction->cond));
+      printf("  Immediate Offset: %u\n",
+             instruction->flag_0);
+      printf("  Pre Indexing (1) or Post Indexing (0): %u\n",
+             instruction->flag_1);
+      printf("  Offset Add (1) or Subtract (0): %u\n",
+             instruction->flag_2);
+      printf("  Load (1) or Store (0): %u\n",
+             instruction->flag_3);
+      printf("  Base Register Rn: %u\n",
+             instruction->rn);
+      if(instruction->flag_0) {
+        printf("  Operand2 Immediate Value: %x\n",
+               instruction->immediate_value);
+      } else {
+        printf("  Operand2 Register Rm: %u\n",
+               instruction->rm);
+        printf("  Operand2 Shift Type: %s\n",
+               get_shift(instruction->shift_type));
+        if (instruction->rs == -1) {
+          printf("  Operand2 Shift Amount: %u\n",
+                 instruction->shift_amount);
+        } else {
+          printf("  Operand2 Shift Register Rs: %u\n",
+                 instruction->rs);
+        }
       }
-      printf("  Immediate Value: 0x%x\n",
-             machine->decoded_instruction->immediate_value);
-      printf("  Destination Register: %d\n", machine->decoded_instruction->rd);
+      printf("  Source / Destination Register Rd: %d\n",
+             instruction->rd);
       break;
     default:
       assert(false);
@@ -213,31 +266,6 @@ char *get_cond(condition_t cond) {
 }
 
 /**
- * @brief Returns the string representing the instruction type.
- *
- * @param type The instruction type.
- * @returns The string of the instruction type for printing.
- */
-char *get_type(instruction_type_t type) {
-  switch (type) {
-    case DPI:
-      return "DPI";
-    case MUL:
-      return "MUL";
-    case SDT:
-      return "SDT";
-    case BRA:
-      return "BRA";
-    case ZER:
-      return "ZER";
-    case NUL:
-      return "NUL";
-    default:
-      assert(false);
-  }
-}
-
-/**
  * @brief Returns the string representing the opcode.
  *
  * @param operation The opcode.
@@ -265,6 +293,21 @@ char *get_opcode(opcode_t operation) {
       return "ORR";
     case MOV:
       return "MOV";
+    default:
+      assert(false);
+  }
+}
+
+char *get_shift(shift_t shift) {
+  switch (shift) {
+    case LSL:
+      return "LSL";
+    case LSR:
+      return "LSR";
+    case ASR:
+      return "ASR";
+    case ROR:
+      return "ROR";
     default:
       assert(false);
   }

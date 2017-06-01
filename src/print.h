@@ -10,8 +10,8 @@ void print_decoded_instruction(system_state_t *machine);
 void print_fetched_instruction(system_state_t *machine);
 void print_value(word_t value);
 char *get_cond(condition_t cond);
-char *get_type(instruction_type_t type);
 char *get_opcode(opcode_t operation);
+char *get_shift(shift_t shift);
 long twos_complement_to_long(word_t value);
 void print_binary_value(word_t value);
 
