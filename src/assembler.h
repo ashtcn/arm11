@@ -9,6 +9,7 @@
 
 mnemonic_t string_to_mnemonic(char *str);
 opcode_t mnemonic_to_opcode(mnemonic_t mnemonic);
+reg_address_t string_to_reg_address(char *str);
 
 word_t assemble_dpi(string_array_t *tokens, symbol_table_t *symbol_table);
 word_t assemble_spl(string_array_t *tokens, symbol_table_t *symbol_table);

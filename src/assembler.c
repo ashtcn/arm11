@@ -127,3 +127,7 @@ opcode_t mnemonic_to_opcode(mnemonic_t mnemonic) {
       break;
   }
 }
+
+reg_address_t string_to_reg_address(char *str) {
+  return strtol(&str[1], (char **) NULL, 10);
+}
