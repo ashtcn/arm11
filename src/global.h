@@ -32,9 +32,7 @@ typedef enum {
   MUL,
   /** Single data transfer instruction */
   SDT,
-  /** Branch instruction */if (strcmp(string, "b")) {
-    return B_M;
-  }
+  /** Branch instruction */
   BRA,
   /** All zero (STOP) instruction */
   ZER,
