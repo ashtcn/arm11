@@ -1,3 +1,5 @@
+/** Header file for print.c. */
+
 #ifndef PRINT_H
 #define PRINT_H
 #include "toolbox.h"

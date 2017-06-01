@@ -1,3 +1,5 @@
+/** Miscellaneous functions that are widely used throughout the code. */
+
 #include "toolbox.h"
 
 /**
@@ -43,18 +45,29 @@ void exit_program(system_state_t *machine) {
 /**
  * @brief Gets a memory word from a given address.
  *
+ * * If GPIO access adddress is read, prints a message to stdout.
+ * * If another out of bounds address is read, prints an error.
  * @param machine The current system state.
  * @param mem_address The memory address to be read from.
  * @returns The word at the given memory address in the current system state.
  */
 word_t get_word(system_state_t *machine, uint32_t mem_address) {
-  if (mem_address > NUM_ADDRESSES - 4) {
+  if (mem_address >= GPIO_ACCESS_START
+    && mem_address < GPIO_ACCESS_START + GPIO_ACCESS_SIZE) {
+    // GPIO pin accessed
+    printf("One GPIO pin from %u to %u has been accessed\n",
+           (mem_address - GPIO_ACCESS_START) / 4 * 10,
+           (mem_address - GPIO_ACCESS_START) / 4 * 10 + 9);
+    return mem_address;
+  } else if (mem_address > NUM_ADDRESSES - 4) {
+    // Out of bounds memory access
     if (COMPLIANT_MODE) {
       printf("Error: Out of bounds memory access at address 0x%08x\n",
              mem_address);
       return 0;
     } else {
-      fprintf(stderr, "Address: %u was out of bounds in get_word", mem_address);
+      fprintf(stderr, "Address: 0x%x was out of bounds in get_word",
+              mem_address);
       exit_program(machine);
     }
   }
@@ -66,8 +79,9 @@ word_t get_word(system_state_t *machine, uint32_t mem_address) {
 }
 
 /**
- * @brief Gets a memory word from a given address (for test cases).
+ * @brief Gets a memory word from a given address (for printing only).
  *
+ * For use in compliant printing. Gets the word in little endian order.
  * @param machine The current system state.
  * @param mem_address The memory address to be read from.
  * @returns The word at the given memory address in the current system state.
@@ -83,18 +97,40 @@ word_t get_word_compliant(system_state_t *machine, address_t mem_address) {
 /**
  * @brief Writes a word to memory at a given address.
  *
+ * * If GPIO access adddress is written to, prints a message to stdout.
+ * * If GPIO clear or set adddress is written to, prints a message to stdout.
+ * * If another out of bounds address is read, prints an error.
  * @param machine The current system state.
  * @param mem_address The memory address to write to.
  * @param word The word to write to memory.
  */
 void set_word(system_state_t *machine, uint32_t mem_address, word_t word) {
-  if (mem_address > NUM_ADDRESSES - 4) {
+  if (mem_address >= GPIO_ACCESS_START
+    && mem_address < GPIO_ACCESS_START + GPIO_ACCESS_SIZE) {
+    // GPIO pin accessed
+    printf("One GPIO pin from %u to %u has been accessed\n",
+           (mem_address - GPIO_ACCESS_START) / 4 * 10,
+           (mem_address - GPIO_ACCESS_START) / 4 * 10 + 9);
+    return;
+  } else if (mem_address >= GPIO_CLEAR_START
+    && mem_address < GPIO_CLEAR_START + GPIO_CLEAR_SIZE) {
+    // GPIO pin cleared
+    printf("PIN OFF\n");
+    return;
+  } else if (mem_address >= GPIO_SET_START
+    && mem_address < GPIO_SET_START + GPIO_SET_SIZE) {
+    // GPIO pin set
+    printf("PIN ON\n");
+    return;
+  } else if (mem_address > NUM_ADDRESSES - 4) {
+    // Out of bounds memory access
     if (COMPLIANT_MODE) {
       printf("Error: Out of bounds memory access at address 0x%x\n",
              mem_address);
       return;
     } else {
-      fprintf(stderr, "Address: %u was out of bounds in set_word", mem_address);
+      fprintf(stderr, "Address: 0x%x was out of bounds in set_word",
+              mem_address);
       exit_program(machine);
     }
   }

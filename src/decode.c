@@ -1,3 +1,5 @@
+/** Functions for the decode cycle. */
+
 #include "decode.h"
 
 /**
@@ -6,10 +8,10 @@
  * Given the pointer to the current system state, it moves the
  * fetched instruction information into the decoded_instruction struct
  * (for use when executing the decoded instruction).
+ * A pre-condition is that the instruction must not be all zero (type ZER).
  * @param machine The current system state.
  */
 void decode_instruction(system_state_t *machine) {
-  // PRE: Instruction is not all 0
   word_t fetched = machine->fetched_instruction;
   instruction_t *instruction = machine->decoded_instruction;
   instruction->cond = fetched >> (WORD_SIZE - 4);

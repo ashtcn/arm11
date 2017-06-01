@@ -1,3 +1,5 @@
+/** Header file for decode.c. */
+
 #ifndef DECODE_H
 #define DECODE_H
 #include "instruction.h"

@@ -1,10 +1,13 @@
+/** Functions for printing system details to match test cases. */
+
 #include "print_compliant.h"
 
 /**
- * @brief Prints system state details. (for test cases)
+ * @brief Prints system state details for test cases.
  *
  * Prints the current system state. Prints all register values, any memory
- * values which are not 0.
+ * values which are not 0. Prints in test case format.
+ * @param machine The current system state.
  */
 void print_system_state_compliant(system_state_t *machine) {
   printf("Registers:\n");
@@ -14,9 +17,9 @@ void print_system_state_compliant(system_state_t *machine) {
 }
 
 /**
- * @brief Prints the values of the registers of the machine.
+ * @brief Prints the values of the registers of the machine for test cases.
  *
- * @param machine The arm machine that has the registers to print.
+ * @param machine The current system state.
  */
 void print_registers_compliant(system_state_t *machine) {
   for (uint8_t i = 0; i <= 12; ++i) {
@@ -33,9 +36,9 @@ void print_registers_compliant(system_state_t *machine) {
 }
 
 /**
- * @brief Prints the memory of the machine that holds a value for test cases.
+ * @brief Prints non-zero memory entries for test cases.
  *
- * @param machine The arm machine that has the memory to print.
+ * @param machine The current system state.
  */
 void print_memory_compliant(system_state_t *machine) {
   for (uint32_t i = 0; i < NUM_ADDRESSES; i += 4) {
@@ -47,7 +50,7 @@ void print_memory_compliant(system_state_t *machine) {
 }
 
 /**
- * @brief Prints a value for test cases, hex and 2's complement.
+ * @brief Prints a value for test cases, in hex and two's complement.
  *
  * @param value The word to print.
  */

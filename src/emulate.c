@@ -1,8 +1,11 @@
+/** The main functionality for the ARM11 emulator. */
+
 #include "instruction.h"
 #include "decode.h"
 #include "execute.h"
 #include "print_compliant.h"
 
+/** A 0-initialised system state. */
 static const system_state_t DEFAULT_SYSTEM_STATE = {
   .registers = {0},
   .memory = {0},
@@ -10,6 +13,7 @@ static const system_state_t DEFAULT_SYSTEM_STATE = {
   .has_fetched_instruction = false,
 };
 
+/** A null (non-existant) instruction. */
 static const instruction_t NULL_INSTRUCTION = {
   .type = NUL,
   .immediate_value = 0,
@@ -24,7 +28,16 @@ static const instruction_t NULL_INSTRUCTION = {
   .shift_amount = 0,
 };
 
+/**
+ * @brief Emulates an ARM11 machine operating on a given binary file.
+ *
+ * The user must provide a single argument, which is a valid file name for an
+ * ARM11 binary object code file. This function emulates the ARM architecture,
+ * returning details of the registers and non-zero memory at the end of
+ * execution.
+ */
 int main(int argc, char **argv) {
+  // Check for correct program arguments
   if (argc != 2) {
     fprintf(stderr, "Incorrect number of arguments provided.\n");
     return EXIT_FAILURE;
@@ -39,12 +52,15 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
+  // Set up a 0-initialised system state and load the program
   *machine = DEFAULT_SYSTEM_STATE;
   machine->decoded_instruction = malloc(sizeof(instruction_t));
   *(machine->decoded_instruction) = NULL_INSTRUCTION;
   load_file(filename, machine->memory);
 
+  // The main execution loop of the emulator
   while (machine->decoded_instruction->type != ZER) {
+    // Print details for current cycle if not in COMPLIANT_MODE
     if (!COMPLIANT_MODE) {
       print_system_state(machine);
     }
@@ -68,9 +84,11 @@ int main(int argc, char **argv) {
       machine->has_fetched_instruction = false;
     }
 
+    // Next instruction
     machine->registers[PC] += 4;
   }
 
+  // Print out final details
   if(COMPLIANT_MODE) {
     print_system_state_compliant(machine);
   } else {

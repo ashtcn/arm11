@@ -1,3 +1,5 @@
+/** Header file for print_compliant.c. */
+
 #ifndef PRINT_COMPLIANT_H
 #define PRINT_COMPLIANT_H
 #include "print.h"
