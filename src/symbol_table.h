@@ -24,5 +24,6 @@ typedef struct {
 bool is_label_in_table(symbol_table_t *table, char *label);
 address_t get_address(symbol_table_t *table, char *label);
 symbol_table_t *create_table(uint16_t row_number);
+void add_row(symbol_table_t *table, char *label, address_t address);
 
 #endif
