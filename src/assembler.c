@@ -249,3 +249,21 @@ word_t assemble_dpi(string_array_t *tokens) {
   print_instruction(instruction);
   return encode(instruction);
 }
+
+word_t assemble_mul(string_array_t *tokens) {
+  instruction_t *instruction = malloc(sizeof(instruction_t));
+  *instruction = NULL_INSTRUCTION;
+
+  instruction->type = MUL;
+  instruction->cond = AL;
+  instruction->rd = string_to_reg_address(tokens->array[1]);
+  instruction->rm = string_to_reg_address(tokens->array[2]);
+  instruction->rs = string_to_reg_address(tokens->array[3]);
+
+  if (4 == tokens->size) {
+    // Is an MLA instruction
+    instruction->flag_0 = 1;
+  }
+
+  return encode(instruction);
+}
