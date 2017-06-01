@@ -8,4 +8,7 @@ typedef struct {
   string_array_t *string_arrays[100];
 } string_array_array_t;
 
+string_array_array_t *make_string_array_array(void);
+void add_string_array_array(string_array_array_t *arrays, string_array_t *array);
+
 #endif

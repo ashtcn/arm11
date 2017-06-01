@@ -19,8 +19,9 @@
      exit(EXIT_FAILURE);
    }
    // Try to read all lines into the memory
-   fread(memory, NUM_ADDRESSES, 1, file);
+   size_t size = fread(memory, NUM_ADDRESSES, 1, file);
    if(ferror(file)) {
+     printf("File size: %lu", size);
      perror("Error in reading from object code file.");
      exit(EXIT_FAILURE);
    }

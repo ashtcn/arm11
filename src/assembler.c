@@ -15,73 +15,74 @@ static const instruction_t NULL_INSTRUCTION = {
 };
 
 mnemonic_t string_to_mnemonic(char *str) {
-  if (strcmp(str, "add")) {
+  // TODO: Maybe use hash? - Nikolai Smirnov
+  if (!strcmp(str, "add")) {
     return ADD_M;
   }
-  if (strcmp(str, "sub")) {
+  if (!strcmp(str, "sub")) {
     return SUB_M;
   }
-  if (strcmp(str, "rsb")) {
+  if (!strcmp(str, "rsb")) {
     return RSB_M;
   }
-  if (strcmp(str, "and")) {
+  if (!strcmp(str, "and")) {
     return AND_M;
   }
-  if (strcmp(str, "eor")) {
+  if (!strcmp(str, "eor")) {
     return EOR_M;
   }
-  if (strcmp(str, "orr")) {
+  if (!strcmp(str, "orr")) {
     return ORR_M;
   }
-  if (strcmp(str, "mov")) {
+  if (!strcmp(str, "mov")) {
     return MOV_M;
   }
-  if (strcmp(str, "tst")) {
+  if (!strcmp(str, "tst")) {
     return TST_M;
   }
-  if (strcmp(str, "teq")) {
+  if (!strcmp(str, "teq")) {
     return TEQ_M;
   }
-  if (strcmp(str, "cmp")) {
+  if (!strcmp(str, "cmp")) {
     return CMP_M;
   }
-  if (strcmp(str, "mul")) {
+  if (!strcmp(str, "mul")) {
     return MUL_M;
   }
-  if (strcmp(str, "mla")) {
+  if (!strcmp(str, "mla")) {
     return MLA_M;
   }
-  if (strcmp(str, "ldr")) {
+  if (!strcmp(str, "ldr")) {
     return LDR_M;
   }
-  if (strcmp(str, "str")) {
+  if (!strcmp(str, "str")) {
     return STR_M;
   }
-  if (strcmp(str, "beq")) {
+  if (!strcmp(str, "beq")) {
     return BEQ_M;
   }
-  if (strcmp(str, "bne")) {
+  if (!strcmp(str, "bne")) {
     return BNE_M;
   }
-  if (strcmp(str, "bge")) {
+  if (!strcmp(str, "bge")) {
     return BGE_M;
   }
-  if (strcmp(str, "blt")) {
+  if (!strcmp(str, "blt")) {
     return BLT_M;
   }
-  if (strcmp(str, "bgt")) {
+  if (!strcmp(str, "bgt")) {
     return BGT_M;
   }
-  if (strcmp(str, "ble")) {
+  if (!strcmp(str, "ble")) {
     return BLE_M;
   }
-  if (strcmp(str, "b")) {
+  if (!strcmp(str, "b")) {
     return B_M;
   }
-  if (strcmp(str, "lsl")) {
+  if (!strcmp(str, "lsl")) {
     return LSL_M;
   }
-  if (strcmp(str, "andeq")) {
+  if (!strcmp(str, "andeq")) {
     return ANDEQ_M;
   }
 
@@ -130,4 +131,122 @@ opcode_t mnemonic_to_opcode(mnemonic_t mnemonic) {
 
 reg_address_t string_to_reg_address(char *str) {
   return strtol(&str[1], (char **) NULL, 10);
+}
+
+shift_t string_to_shift(char *str) {
+  if (!strcmp(str, "lsl")) {
+    return LSL;
+  }
+  if (!strcmp(str, "lsr")) {
+    return LSR;
+  }
+  if (!strcmp(str, "asr")) {
+    return ASR;
+  }
+  if (!strcmp(str, "ROR")) {
+    return ROR;
+  }
+
+  fprintf(stderr, "No such shift found.\n");
+  exit(EXIT_FAILURE);
+}
+
+void parse_shift(string_array_t *tokens, instruction_t *instruction) {
+  instruction->shift_type = string_to_shift(tokens->array[0]);
+
+  if ('#' == tokens->array[0][0]) {
+    // In the form <#expression>
+    char *number = &tokens->array[0][1];
+    instruction->shift_amount = strtol(number, (char **)NULL, 16);
+  } else {
+    // Is a register
+    instruction->rs = string_to_reg_address(tokens->array[0]);
+  }
+}
+
+void parse_operand(string_array_t *tokens, instruction_t *instruction) {
+  char **sections = tokens->array;
+  if ('#' == sections[0][0]) {
+    // In the form <#expression>
+
+    char *number = &sections[0][1];
+    if (strstr(number, "0x")) {
+      // Is in hex
+      instruction->immediate_value = strtol(number, (char **)NULL, 16);
+    } else {
+      // Is in decimal
+      instruction->immediate_value = strtol(number, (char **)NULL, 10);
+    }
+  } else if ('r' == sections[0][0]) {
+    // In the form Rm{,<shift>}
+    instruction->rm = string_to_reg_address(sections[0]);
+
+    if (tokens->size == 2) {
+      // Has shift
+      string_array_t *shift_tokens = malloc(sizeof(string_array_t));
+
+      if (!shift_tokens) {
+        perror("Unable to allocate memory for shift_tokens.\n");
+        exit(EXIT_FAILURE);
+      }
+
+      // Pass the <shift> section into parse_shift
+      shift_tokens->array = &sections[1];
+      shift_tokens->size = tokens->size - 1;
+      parse_shift(shift_tokens, instruction);
+      free(shift_tokens);
+    }
+  }
+}
+
+word_t assemble_dpi(string_array_t *tokens) {
+  instruction_t *instruction = malloc(sizeof(instruction_t));
+  *instruction = NULL_INSTRUCTION;
+  char **sections = tokens->array;
+
+  instruction->type = DPI;
+  instruction->cond = AL;
+  instruction->operation = mnemonic_to_opcode(string_to_mnemonic(sections[0]));
+
+  string_array_t *operand_tokens = malloc(sizeof(string_array_t));
+  if (!operand_tokens) {
+    perror("Unable to allocate memory for operand_tokens.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  switch (instruction->operation) {
+    case AND:
+    case EOR:
+    case SUB:
+    case RSB:
+    case ADD:
+    case ORR:
+      instruction->rd = string_to_reg_address(sections[1]);
+      instruction->rn = string_to_reg_address(sections[2]);
+
+      operand_tokens->array = &sections[3];
+      operand_tokens->size = tokens->size - 3;
+      parse_operand(operand_tokens, instruction);
+      break;
+    case MOV:
+      instruction->rd = string_to_reg_address(sections[1]);
+
+      operand_tokens->array = &sections[2];
+      operand_tokens->size = tokens->size - 2;
+      parse_operand(operand_tokens, instruction);
+      break;
+    case TST:
+    case TEQ:
+    case CMP:
+      instruction->rn = string_to_reg_address(sections[1]);
+      instruction->flag_1 = true;
+      operand_tokens->array = &sections[2];
+      operand_tokens->size = tokens->size - 2;
+      parse_operand(operand_tokens, instruction);
+      break;
+  }
+
+  free(operand_tokens);
+
+  return encode(instruction);
 }

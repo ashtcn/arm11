@@ -1,8 +1,5 @@
 CC      = gcc
-CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_BSD_SOURCE -std=c99 -Werror -pedantic
-
-# GCC sometimes complains about -D_BSD_SOURCE being deprecated
-# CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_DEFAULT_SOURCE -std=c99 -Werror -pedantic -O3
+CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_DEFAULT_SOURCE -std=c99 -Werror -pedantic -O3
 
 .SUFFIXES: .c .o
 
@@ -11,7 +8,7 @@ CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_BSD_SOURCE -std=c99 -Werror -pedantic
 all: emulate assemble unit_tests
 
 emulate: emulate.o decode.o execute.o print_compliant.o print.o toolbox.o
-assemble: assemble.o assemble_toolbox.o 
+assemble: assemble.o assemble_toolbox.o string_array_array.o
 unit_tests: unit_tests.o decode.o execute.o print_compliant.o print.o toolbox.o
 
 # emulate

@@ -6,15 +6,20 @@
 #include "instruction.h"
 #include "string_array.h"
 #include "symbol_table.h"
+#include "encode.h"
 
 mnemonic_t string_to_mnemonic(char *str);
 opcode_t mnemonic_to_opcode(mnemonic_t mnemonic);
 reg_address_t string_to_reg_address(char *str);
+shift_t string_to_shift(char *str);
 
-word_t assemble_dpi(string_array_t *tokens, symbol_table_t *symbol_table);
-word_t assemble_spl(string_array_t *tokens, symbol_table_t *symbol_table);
-word_t assemble_mul(string_array_t *tokens, symbol_table_t *symbol_table);
-word_t assemble_sdt(string_array_t *tokens, symbol_table_t *symbol_table);
+void parse_shift(string_array_t *tokens, instruction_t *instruction);
+void parse_operand(string_array_t *tokens, instruction_t *instruction);
+
+word_t assemble_dpi(string_array_t *tokens);
+word_t assemble_spl(string_array_t *tokens);
+word_t assemble_mul(string_array_t *tokens);
+word_t assemble_sdt(string_array_t *tokens);
 word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table);
 
 #endif
