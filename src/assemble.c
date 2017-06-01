@@ -63,15 +63,14 @@ int main(int argc, char **argv) {
   }
 
 
-  /*int output_file_size = tokenized_input->size;
+  int output_file_size = tokenized_input->size;
   word_t output_data[output_file_size];
   for (int i = 0; i < tokenized_input->size; i++) {
     output_data[i] = assemble_dpi(tokenized_input->string_arrays[i]);
   }
 
-
   save_file(output_data, save_filename, output_file_size);
-  */
+
   for (int i = 0; i < tokenized_input->size; i++) {
     free(tokenized_input->string_arrays[i]->array);
     free(tokenized_input->string_arrays[i]);

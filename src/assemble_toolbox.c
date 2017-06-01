@@ -1,7 +1,17 @@
 #include "assemble_toolbox.h"
 
-void save_file(word_t *data, char *file_name, int ile_size) {
-//TODO
+void save_file(word_t *data, char *file_name, int file_size) {
+  FILE *file = fopen(file_name, "wb");
+  if (file == NULL) {
+    perror("Error in opening save file.");
+    exit(EXIT_FAILURE);
+  }
+
+  for (int i = 0; i < file_size; i++) {
+    fwrite(&data[i], sizeof(word_t), 1, file);
+  }
+
+  fclose(file);
 }
 
 int lines_in_file(char *file_name) {
