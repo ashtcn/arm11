@@ -30,7 +30,7 @@ typedef struct {
   reg_address_t rm;
 
   /** Holds the I or A bit (depending on instruction type). */
-  bool flag_0; // I or A
+  bool flag_0;
   /** Holds the S or P bit (depending on instruction type). */
   bool flag_1;
   /** Holds the U bit (SDT instructions only). */
