@@ -10,12 +10,12 @@ symbol_table_t *create_table(uint16_t row_number);
 symbol_table_t *create_table(uint16_t row_number) {
   symbol_table_t *table = malloc(sizeof(symbol_table_t));
   if (!table) {
-    fprintf(stderr, "Unable to allocate memory for symbol table");
+    perror("Unable to allocate memory for symbol table");
     exit(EXIT_FAILURE);
   }
   table->rows = malloc(sizeof(symbol_table_row_t) * row_number);
   if (!table->rows) {
-    fprintf(stderr, "Unable to allocate memory for symbol table");
+    perror("Unable to allocate memory for symbol table");
     exit(EXIT_FAILURE);
   }
   table->max_size = row_number;
