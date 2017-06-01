@@ -10,6 +10,7 @@
 #define MASK_FIRST_4 0xFFFFFFF
 #define MASK_FIRST_6 0x3FFFFFF
 #define MASK_FIRST_8 0xFFFFFF
+#define COMPLIANT_MODE true
 
 typedef enum {
   EQ = 0,
@@ -39,20 +40,6 @@ typedef enum {
   NUL,
 } instruction_type_t;
 
-typedef enum {
-  AND = 0x0,
-  EOR = 0x1,
-  SUB = 0x2,
-  RSB = 0x3,
-  ADD = 0x4,
-  TST = 0x8,
-  TEQ = 0x9,
-  CMP = 0xA,
-  ORR = 0xC,
-  MOV = 0xD,
-} opcode_t;
-
-
 /**
  * @brief An enum used for defining the the type of shift for the shifter to use
  */
@@ -66,6 +53,19 @@ typedef enum {
   /** ROR = rotate right */
   ROR = 3,
 } shift_t;
+
+typedef enum {
+  AND = 0x0,
+  EOR = 0x1,
+  SUB = 0x2,
+  RSB = 0x3,
+  ADD = 0x4,
+  TST = 0x8,
+  TEQ = 0x9,
+  CMP = 0xA,
+  ORR = 0xC,
+  MOV = 0xD,
+} opcode_t;
 
 /**
  * @brief An enum used for retrieving individual flag bits from CPSR register

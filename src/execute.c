@@ -180,7 +180,8 @@ void execute_sdt(system_state_t *machine) {
     address = machine->registers[instruction->rn] + offset;
   }
 
-  if (instruction->flag_3) {//Load or save
+  // Load or save
+  if (instruction->flag_3) {
     machine->registers[instruction->rd] = get_word(machine, address);
   } else {
     set_word(machine, address, machine->registers[instruction->rd]);

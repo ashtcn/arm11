@@ -1,5 +1,6 @@
 #include "decode.h"
 #include "execute.h"
+#include "print_compliant.h"
 
 #define run_test(fn_name) \
   printf("%s\n", #fn_name); \

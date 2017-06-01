@@ -1,6 +1,7 @@
 #include "instruction.h"
 #include "decode.h"
 #include "execute.h"
+#include "print_compliant.h"
 
 static const system_state_t DEFAULT_SYSTEM_STATE = {
   .registers = {0},
