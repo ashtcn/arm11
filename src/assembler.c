@@ -205,7 +205,7 @@ word_t assemble_dpi(string_array_t *tokens) {
   char **sections = tokens->array;
 
   instruction->type = DPI;
-  instruction->cond = AL; // TODO: Set the condition correctly
+  instruction->cond = AL;
   instruction->operation = mnemonic_to_opcode(string_to_mnemonic(sections[0]));
 
   string_array_t *operand_tokens = malloc(sizeof(string_array_t));
