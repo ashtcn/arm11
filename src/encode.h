@@ -4,6 +4,7 @@
 #include "instruction.h"
 #include "global.h"
 
+word_t encode(instruction_t *instruction);
 word_t add_cond(instruction_t *instruction);
 word_t encode_dpi(instruction_t *instruction);
 word_t encode_mul(instruction_t *instruction);
