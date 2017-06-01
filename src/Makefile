@@ -11,7 +11,7 @@ CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_BSD_SOURCE -std=c99 -Werror -pedantic
 all: emulate assemble unit_tests
 
 emulate: emulate.o decode.o execute.o print_compliant.o print.o toolbox.o
-assemble: assemble.o
+assemble: assemble.o assemble_toolbox.o 
 unit_tests: unit_tests.o decode.o execute.o print_compliant.o print.o toolbox.o
 
 # emulate
@@ -23,7 +23,7 @@ print.o: print.h toolbox.h
 toolbox.o: toolbox.h global.h system_state.h value_carry.h
 
 # assemble
-assemble.o:
+assemble.o: global.h assemble_toolbox.h
 
 # unit_tests
 unit_tests.o: decode.h execute.h print_compliant.h
