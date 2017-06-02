@@ -322,15 +322,12 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
           fprintf(stderr, "No such opcode found.\n");
           exit(EXIT_FAILURE);
           break;
-
+      }
       add_word_array(words, machine_instruction);
     }
   }
-
   //Add extra words from LDR
   for (int i = 0; i < extra_words->size; i++) {
     add_word_array(words, extra_words->array[i]);
   }
-}
-
 }
