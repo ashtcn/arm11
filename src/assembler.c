@@ -175,6 +175,17 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
       // Is in decimal
       instruction->immediate_value = strtol(&sections[0][1], (char **)NULL, 10);
     }
+
+    uint16_t shift = WORD_SIZE;
+    if (instruction->immediate_value > 0xFF) {
+      while (!(instruction->immediate_value & 0x3)) {
+          instruction->immediate_value >>= 2;
+          shift--;
+      }
+    }
+    
+    instruction->shift_amount = shift;
+
   } else if ('r' == sections[0][0]) {
     // In the form Rm{,<shift>}
     instruction->rm = string_to_reg_address(sections[0]);
