@@ -11,7 +11,9 @@ string_array_array_t *tokenize_input(char **input, int input_lines) {
 
   for (int i = 0; i < input_lines; i++) {
     if(input[i][0] != '\n') {
-    add_string_array_array(result, tokenize_instruction(input[i]));
+    string_array_t *tokened = tokenize_instruction(input[i]);
+    add_string_array_array(result, tokened);
+    free(tokened->array);
     }
   }
 
@@ -60,6 +62,7 @@ int main(int argc, char **argv) {
 
   save_file(output_data->array, save_filename, output_data->size);
 
+  free(output_data);
   for (int i = 0; i < tokenized_input->size; i++) {
     free(tokenized_input->string_arrays[i]->array);
     free(tokenized_input->string_arrays[i]);

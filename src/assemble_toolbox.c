@@ -125,6 +125,7 @@ string_array_t *tokenize_instruction(char* instruction) {
       char *operands = strdup(instruction);
       instruction_op = strtok_r(operands, " ", &operands);
       result = tokenize_operand_instruction(result, trim(instruction_op), trim(operands));
+      free(operands);
     }
 
   }
