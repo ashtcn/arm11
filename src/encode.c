@@ -77,22 +77,26 @@ word_t encode_sdt(instruction_t *instruction) {
   binary |= ((word_t) instruction->flag_1) << 24;
   binary |= ((word_t) instruction->flag_2) << 23;
   binary |= ((word_t) instruction->flag_3) << 20;
-  binary |= ((word_t) instruction->rn) << 16;
+  if (-1 != instruction->rn) {
+    binary |= ((word_t) instruction->rn) << 16;
+  }
   binary |= ((word_t) instruction->rd) << 12;
   if (instruction->flag_0) {
-    binary |= instruction->rm;
+    if (-1 != instruction->rm) {
+      binary |= instruction->rm;
+    }
     binary |= ((word_t) instruction->shift_type) << 5;
 
-    if (instruction->rs == -1) {
+    if (instruction->rs != -1) {
       binary |= 1L << 4;
       // Shift by a register
       binary |= ((word_t) instruction->rs) << 8;
     } else {
       // Shift by a constant amount
-      binary |= instruction->shift_amount << 7;
+      binary |= ((0x1F) & instruction->shift_amount) << 7;
     }
   } else {
-    binary |= ((word_t) instruction->immediate_value);
+    binary |= ((word_t) instruction->immediate_value) & 0xFFF;
   }
   return binary | add_cond(instruction);
 }

@@ -190,13 +190,7 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
   if ('#' == sections[0][0]) {
     // In the form <#expression>
     instruction->flag_0 = 1;
-    if (strstr(sections[0], "0x")) {
-      // Is in hex
-      instruction->immediate_value = strtol(&sections[0][1], (char **)NULL, 16);
-    } else {
-      // Is in decimal
-      instruction->immediate_value = strtol(&sections[0][1], (char **)NULL, 10);
-    }
+    instruction->immediate_value = parse_immediate_value(&sections[0][1]);
 
     uint16_t shift = WORD_SIZE;
     if (instruction->immediate_value > 0xFF) {
@@ -227,6 +221,16 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
       parse_shift(shift_tokens, instruction);
       free(shift_tokens);
     }
+  }
+}
+
+word_t parse_immediate_value(char *str) {
+  if (strstr(str, "0x")) {
+    // Is in hex
+    return strtol(str, (char **)NULL, 16);
+  } else {
+    // Is in decimal
+    return strtol(str, (char **)NULL, 10);
   }
 }
 
@@ -344,9 +348,148 @@ word_t assemble_mul(string_array_t *tokens) {
   return encode(instruction);
 }
 
+word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int current_line, int max_lines) {
+  instruction_t *instruction = malloc(sizeof(instruction_t));
+  *instruction = NULL_INSTRUCTION;
+  char **sections = tokens->array;
+
+  instruction->type = SDT;
+  instruction->cond = AL;
+  instruction->rd = string_to_reg_address(sections[1]);
+  instruction->flag_2 = 1;
+  if (string_to_mnemonic(sections[0]) == LDR_M) {
+    instruction->flag_3 = 1;
+  }
+
+  if ('=' == sections[2][0]) {
+    // In form <=expression>
+
+    // Get the value of the expression
+    word_t expression_value = parse_immediate_value(&sections[2][1]);
+
+    if (expression_value <= 0xFF) {
+      // Build the tokens for assemble_dpi to make into a MOV instruction
+      string_array_t *mov_tokens = malloc(sizeof(string_array_t));
+      if (!mov_tokens) {
+        perror("Unable to allocate memory for mov_tokens.\n");
+        exit(EXIT_FAILURE);
+      }
+
+      mov_tokens->size = 3;
+      mov_tokens->array = malloc(sizeof(char *) * 3);
+      if (!mov_tokens->array) {
+        perror("Unable to allocate memory for mov_tokens array.\n");
+        exit(EXIT_FAILURE);
+      }
+      mov_tokens->array[0] = "mov";
+      // Rn
+      mov_tokens->array[1] = sections[1];
+      // <#expression>
+      mov_tokens->array[2] = sections[2];
+      mov_tokens->array[2][0] = '#';
+
+      word_t mov_instruction = assemble_dpi(mov_tokens);
+      free(mov_tokens->array);
+      free(mov_tokens);
+
+      return mov_instruction;
+    } else {
+      // Store expression value at end of memory
+      instruction->flag_1 = 1;
+      instruction->rn = PC;
+      instruction->immediate_value = (((max_lines + extra_words->size) - current_line) << 2) - 8;
+      add_word_array(extra_words, expression_value);
+    }
+  } else {
+    if (5 == tokens->size) {
+      printf("Works\n");
+      // [Rn]
+      instruction->rn = string_to_reg_address(sections[3]);
+      instruction->flag_1 = 1;
+    } else {
+      if (']' == sections[4][0]) {
+        // Post indexing address specification
+        if ('#' == sections[5][0]) {
+          // [Rn], <#expression>
+          instruction->rn = string_to_reg_address(sections[3]);
+          instruction->immediate_value = parse_immediate_value(&sections[5][1]);
+        } else {
+          // [Rn],{+/-}Rm{,<shift>}
+          instruction->rn = string_to_reg_address(sections[3]);
+          instruction->flag_0 = 1;
+
+          if ('-' == sections[5][0]) {
+            instruction->flag_2 = 0;
+            instruction->rm = string_to_reg_address(&sections[5][1]);
+          } else {
+            instruction->rm = string_to_reg_address(sections[5]);
+          }
+
+          if (tokens->size > 6) {
+            // Has shift
+            string_array_t *shift_tokens = malloc(sizeof(string_array_t));
+
+            if (!shift_tokens) {
+              perror("Unable to allocate memory for shift_tokens.\n");
+              exit(EXIT_FAILURE);
+            }
+
+            // Pass the <shift> section into parse_shift
+            shift_tokens->array = &sections[6];
+            shift_tokens->size = tokens->size - 6;
+            parse_shift(shift_tokens, instruction);
+            free(shift_tokens);
+          }
+        }
+      } else {
+        // Pre indexing address specification
+        instruction->flag_1 = 1;
+        instruction->rn = string_to_reg_address(sections[3]);
+
+        if ('#' == sections[4][0]) {
+          // [Rn, <#expression>]
+          // Set flags if the immediate expression is negative
+          word_t value = parse_immediate_value(&sections[4][1]);
+          instruction->immediate_value = absolute(value);
+          instruction->flag_2 = !is_negative(value);
+        } else {
+          // [Rn, {+/-}Rm{,<shift>}]
+          instruction->flag_0 = 1;
+
+          if ('-' == sections[4][0]) {
+            instruction->flag_2 = 0;
+            instruction->rm = string_to_reg_address(&sections[4][1]);
+          } else {
+            instruction->rm = string_to_reg_address(sections[4]);
+          }
+
+          if (tokens->size > 6) {
+            // Has shift
+            string_array_t *shift_tokens = malloc(sizeof(string_array_t));
+
+            if (!shift_tokens) {
+              perror("Unable to allocate memory for shift_tokens.\n");
+              exit(EXIT_FAILURE);
+            }
+
+            // Pass the <shift> section into parse_shift
+            shift_tokens->array = &sections[5];
+            shift_tokens->size = tokens->size - 5;
+            parse_shift(shift_tokens, instruction);
+            free(shift_tokens);
+          }
+        }
+      }
+    }
+  }
+
+  print_instruction(instruction);
+  return encode(instruction);
+}
+
 void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
   word_array_t *extra_words = make_word_array();
-  //int max_lines = instructions->size - symbol_table->size;
+  int max_lines = instructions->size - symbol_table->size;
   word_t machine_instruction;
   for (int i = 0; i < instructions->size; i++) {
     if(instructions->string_arrays[i]->size != 1) {
@@ -371,7 +514,7 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case LDR_M:
         case STR_M:
           //SDT (use extra_words)
-          machine_instruction = 0;
+          machine_instruction = assemble_sdt(instructions->string_arrays[i], extra_words, words->size, max_lines);
           break;
         case BEQ_M:
         case BNE_M:

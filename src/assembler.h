@@ -10,6 +10,7 @@
 #include "encode.h"
 #include "print.h"
 #include "global.h"
+#include "toolbox.h"
 #include "string_array_array.h"
 
 mnemonic_t string_to_mnemonic(char *str);
@@ -19,11 +20,12 @@ shift_t string_to_shift(char *str);
 
 void parse_shift(string_array_t *tokens, instruction_t *instruction);
 void parse_operand(string_array_t *tokens, instruction_t *instruction);
+word_t parse_immediate_value(char *str);
 
 word_t assemble_dpi(string_array_t *tokens);
 word_t assemble_spl(string_array_t *tokens);
 word_t assemble_mul(string_array_t *tokens);
-word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int *max_lines);
+word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int current_line, int max_lines);
 word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table, address_t current_line);
 
 void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words);
