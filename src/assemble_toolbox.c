@@ -22,10 +22,15 @@ int lines_in_file(char *file_name) {
     perror("Error in opening source file.");
     exit(EXIT_FAILURE);
   }
-
+  bool on_new_line = true;
   while((ch=getc(file)) != EOF) {
     if(ch == '\n') {
-      lines++;
+      if(!on_new_line) {
+        lines++;
+      }
+      on_new_line = true;
+    } else {
+      on_new_line = false;
     }
   }
   fclose(file);
@@ -67,8 +72,10 @@ char **load_source_file(char *load_filename, int lines) {
   int size = 0;
   while(fgets(loaded_file[size], sizeof(char[max_line_length]), file)) {
     // Strips any trailing newlinesword_size
-    loaded_file[size][strcspn(loaded_file[size], "\n")] = 0;
-    size++;
+    if(loaded_file[size][0] != '\n' && loaded_file[size][0] != '\r') {
+      loaded_file[size][strcspn(loaded_file[size], "\n")] = 0;
+      size++;
+    }
 	}
   fclose(file);
   return loaded_file;

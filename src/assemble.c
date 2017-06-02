@@ -9,7 +9,9 @@
   string_array_array_t *result = make_string_array_array();
 
   for (int i = 0; i < input_lines; i++) {
+    if(input[i][0] != '\n') {
     add_string_array_array(result, tokenize_instruction(input[i]));
+    }
   }
 
   return result;
@@ -63,11 +65,9 @@ int main(int argc, char **argv) {
   }
 
 
-  int output_file_size = tokenized_input->size;
+  int output_file_size = tokenized_input->size - s->size;
   word_t output_data[output_file_size];
-  for (int i = 0; i < tokenized_input->size; i++) {
-    output_data[i] = assemble_dpi(tokenized_input->string_arrays[i]);
-  }
+  assemble_all_instructions(tokenized_input, s, output_data);
 
   save_file(output_data, save_filename, output_file_size);
 

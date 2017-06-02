@@ -263,6 +263,57 @@ word_t assemble_mul(string_array_t *tokens) {
     // Is an MLA instruction
     instruction->flag_0 = 1;
   }
-
+  print_instruction(instruction);
   return encode(instruction);
+}
+
+void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_t *words) {
+  int cur = 0;
+  for (int i = 0; i < instructions->size; i++) {
+    if(instructions->string_arrays[i]->size != 1) {
+      words[cur] = assemble_instruction(instructions->string_arrays[i], symbol_table);
+      cur++;
+    }
+  }
+}
+
+word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table) {
+  mnemonic_t ins_code = string_to_mnemonic(tokens->array[0]);
+  switch(ins_code) {
+    case ADD_M:
+    case SUB_M:
+    case RSB_M:
+    case AND_M:
+    case EOR_M:
+    case ORR_M:
+    case MOV_M:
+    case TST_M:
+    case TEQ_M:
+    case CMP_M:
+      return assemble_dpi(tokens);
+    case MUL_M:
+    case MLA_M:
+      return assemble_mul(tokens);
+    case LDR_M:
+    case STR_M:
+      //SDT
+    case BEQ_M:
+    case BNE_M:
+    case BGE_M:
+    case BLT_M:
+    case BGT_M:
+    case BLE_M:
+    case B_M:
+      //BRANCH
+    case LSL_M:
+    case ANDEQ_M:
+      //SPECIAL
+      return 0;
+    default:
+      fprintf(stderr, "No such opcode found.\n");
+      exit(EXIT_FAILURE);
+      break;
+
+  }
+
 }
