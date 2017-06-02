@@ -305,6 +305,8 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case LDR_M:
         case STR_M:
           //SDT (use extra_words)
+          machine_instruction = 0;
+          break;
         case BEQ_M:
         case BNE_M:
         case BGE_M:
@@ -313,6 +315,8 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case BLE_M:
         case B_M:
           //BRANCH
+          machine_instruction = 0;
+          break;
         case LSL_M:
         case ANDEQ_M:
           //SPECIAL
