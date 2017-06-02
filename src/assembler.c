@@ -281,9 +281,46 @@ word_t assemble_mul(string_array_t *tokens) {
 void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
   word_array_t *extra_words = make_word_array();
   int max_lines = instructions->size - symbol_table->size;
+  word_t machine_instruction;
   for (int i = 0; i < instructions->size; i++) {
     if(instructions->string_arrays[i]->size != 1) {
-      add_word_array(words, assemble_instruction(instructions->string_arrays[i], symbol_table, extra_words, words->size, max_lines));
+      mnemonic_t ins_code = string_to_mnemonic(instructions->string_arrays[i]->array[0]);
+      switch(ins_code) {
+        case ADD_M:
+        case SUB_M:
+        case RSB_M:
+        case AND_M:
+        case EOR_M:
+        case ORR_M:
+        case MOV_M:
+        case TST_M:
+        case TEQ_M:
+        case CMP_M:
+          machine_instruction = assemble_dpi(instructions->string_arrays[i]);
+        case MUL_M:
+        case MLA_M:
+          machine_instruction = assemble_mul(instructions->string_arrays[i]);
+        case LDR_M:
+        case STR_M:
+          //SDT (use extra_words)
+        case BEQ_M:
+        case BNE_M:
+        case BGE_M:
+        case BLT_M:
+        case BGT_M:
+        case BLE_M:
+        case B_M:
+          //BRANCH
+        case LSL_M:
+        case ANDEQ_M:
+          //SPECIAL
+          machine_instruction = 0;
+        default:
+          fprintf(stderr, "No such opcode found.\n");
+          exit(EXIT_FAILURE);
+          break;
+
+      add_word_array(words, machine_instruction);
     }
   }
 
@@ -292,44 +329,5 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
     add_word_array(words, extra_words->array[i]);
   }
 }
-
-word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table, word_array_t *extra_words, int current_line_number, int max_lines) {
-  mnemonic_t ins_code = string_to_mnemonic(tokens->array[0]);
-  switch(ins_code) {
-    case ADD_M:
-    case SUB_M:
-    case RSB_M:
-    case AND_M:
-    case EOR_M:
-    case ORR_M:
-    case MOV_M:
-    case TST_M:
-    case TEQ_M:
-    case CMP_M:
-      return assemble_dpi(tokens);
-    case MUL_M:
-    case MLA_M:
-      return assemble_mul(tokens);
-    case LDR_M:
-    case STR_M:
-      //SDT (use extra_words)
-    case BEQ_M:
-    case BNE_M:
-    case BGE_M:
-    case BLT_M:
-    case BGT_M:
-    case BLE_M:
-    case B_M:
-      //BRANCH
-    case LSL_M:
-    case ANDEQ_M:
-      //SPECIAL
-      return 0;
-    default:
-      fprintf(stderr, "No such opcode found.\n");
-      exit(EXIT_FAILURE);
-      break;
-
-  }
 
 }
