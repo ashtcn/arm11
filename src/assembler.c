@@ -282,7 +282,6 @@ word_t assemble_dpi(string_array_t *tokens) {
   }
 
   free(operand_tokens);
-  print_instruction(instruction);
   return encode(instruction);
 }
 
@@ -324,7 +323,6 @@ word_t assemble_spl(string_array_t *tokens) {
     return mov_instruction;
   }
 
-  print_instruction(instruction);
   return encode(instruction);
 }
 
@@ -343,7 +341,7 @@ word_t assemble_mul(string_array_t *tokens) {
     instruction->flag_0 = 1;
     instruction->rn = string_to_reg_address(tokens->array[4]);
   }
-  print_instruction(instruction);
+
   return encode(instruction);
 }
 
@@ -401,7 +399,6 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
     }
   } else {
     if (5 == tokens->size) {
-      printf("Works\n");
       // [Rn]
       instruction->rn = string_to_reg_address(sections[3]);
       instruction->flag_1 = 1;
@@ -482,7 +479,6 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
     }
   }
 
-  print_instruction(instruction);
   return encode(instruction);
 }
 
@@ -566,6 +562,5 @@ word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table, addres
   address_t label_address = get_address(symbol_table, tokens->array[1]);
 
   instruction->immediate_value = (signed_to_twos_complement((int32_t) label_address - ((int32_t) instruction_no * 4) - 8) >> 2);
-  print_instruction(instruction);
   return encode(instruction);
 }

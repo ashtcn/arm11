@@ -6,7 +6,7 @@
 #include "symbol_table.h"
 #include "assembler.h"
 
-  string_array_array_t *tokenize_input(char **input, int input_lines) {
+string_array_array_t *tokenize_input(char **input, int input_lines) {
   string_array_array_t *result = make_string_array_array();
 
   for (int i = 0; i < input_lines; i++) {
@@ -53,17 +53,7 @@ int main(int argc, char **argv) {
   char **loaded_file = load_source_file(load_filename, input_lines);
   string_array_array_t *tokenized_input = tokenize_input(loaded_file, input_lines);
 
-  for (int i = 0; i < tokenized_input->size; i++) {
-    for (int i2 = 0; i2 < tokenized_input->string_arrays[i]->size; i2++) {
-      printf ("[%i][%i] %s\n", i, i2, tokenized_input->string_arrays[i]->array[i2]);
-    }
-    //printf ("[%i] %08x\n", i, assemble_dpi(tokenized_input->string_arrays[i]));
-  }
-
   symbol_table_t *s = generate_symbol_table(tokenized_input);
-  for (int i = 0; i < s->size; i++) {
-    printf ("[%i] address:%u  label:%s\n", i, s->rows[i].address, s->rows[i].label);
-  }
 
   word_array_t *output_data = make_word_array();
   assemble_all_instructions(tokenized_input, s, output_data);
