@@ -57,7 +57,7 @@ word_t encode_dpi(instruction_t *instruction) {
 }
 
 word_t encode_mul(instruction_t *instruction) {
-  word_t binary = 0xA0;
+  word_t binary = 0x90;
   binary |= ((word_t) instruction->rd) << 16;
   binary |= ((word_t) instruction->rs) << 8;
   binary |= ((word_t) instruction->rm);

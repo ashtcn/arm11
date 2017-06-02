@@ -183,7 +183,7 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
           shift--;
       }
     }
-    
+
     instruction->shift_amount = shift;
 
   } else if ('r' == sections[0][0]) {
@@ -270,7 +270,7 @@ word_t assemble_mul(string_array_t *tokens) {
   instruction->rm = string_to_reg_address(tokens->array[2]);
   instruction->rs = string_to_reg_address(tokens->array[3]);
 
-  if (4 == tokens->size) {
+  if (5 == tokens->size) {
     // Is an MLA instruction
     instruction->flag_0 = 1;
   }
