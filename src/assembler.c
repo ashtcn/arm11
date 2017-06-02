@@ -260,6 +260,49 @@ word_t assemble_dpi(string_array_t *tokens) {
   return encode(instruction);
 }
 
+word_t assemble_spl(string_array_t *tokens) {
+  instruction_t *instruction = malloc(sizeof(instruction_t));
+  *instruction = NULL_INSTRUCTION;
+
+  if (4 == tokens->size) {
+    // Is an ANDEQ instruction
+    instruction->type = ZER;
+  } else {
+    // Build the tokens for assemble_dpi to make into a MOV instruction
+    string_array_t *mov_tokens = malloc(sizeof(string_array_t));
+    if (!mov_tokens) {
+      perror("Unable to allocate memory for mov_tokens.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    mov_tokens->size = 5;
+    mov_tokens->array = malloc(sizeof(char *) * 5);
+    if (!mov_tokens->array) {
+      perror("Unable to allocate memory for mov_tokens array.\n");
+      exit(EXIT_FAILURE);
+    }
+    mov_tokens->array[0] = "mov";
+    // Rn
+    mov_tokens->array[1] = tokens->array[1];
+    // Rn
+    mov_tokens->array[2] = tokens->array[1];
+    // lsl
+    mov_tokens->array[3] = tokens->array[0];
+    // <#expression>
+    mov_tokens->array[4] = tokens->array[2];
+
+    word_t mov_instruction = assemble_dpi(mov_tokens);
+    free(mov_tokens->array);
+    free(mov_tokens);
+
+    print_instruction(instruction);
+    return mov_instruction;
+  }
+
+  print_instruction(instruction);
+  return encode(instruction);
+}
+
 word_t assemble_mul(string_array_t *tokens) {
   instruction_t *instruction = malloc(sizeof(instruction_t));
   *instruction = NULL_INSTRUCTION;
@@ -320,7 +363,7 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case LSL_M:
         case ANDEQ_M:
           //SPECIAL
-          machine_instruction = 0;
+          machine_instruction = assemble_spl(instructions->string_arrays[i]);
           break;
         default:
           fprintf(stderr, "No such opcode found.\n");
@@ -330,7 +373,8 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
       add_word_array(words, machine_instruction);
     }
   }
-  //Add extra words from LDR
+
+  // Add extra words from LDR
   for (int i = 0; i < extra_words->size; i++) {
     add_word_array(words, extra_words->array[i]);
   }
