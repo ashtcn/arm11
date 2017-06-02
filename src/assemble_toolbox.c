@@ -85,6 +85,14 @@ bool is_label(char* instruction) {
   return instruction[strlen(instruction) - 1] == ':';
 }
 
+char *trim(char *string) {
+  // Remove leading whitespace
+  while(' ' == *string) {
+    string++;
+  }
+  return string;
+}
+
 string_array_t *tokenize_instruction(char* instruction) {
   string_array_t *result = (string_array_t *) malloc(sizeof(string_array_t));
   if(!result) {
@@ -116,7 +124,7 @@ string_array_t *tokenize_instruction(char* instruction) {
       char *instruction_op = NULL;
       char *operands = strdup(instruction);
       instruction_op = strtok_r(operands, " ", &operands);
-      result = tokenize_operand_instruction(result, instruction_op, operands);
+      result = tokenize_operand_instruction(result, trim(instruction_op), trim(operands));
     }
 
   }
