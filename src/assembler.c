@@ -178,7 +178,7 @@ void parse_shift(string_array_t *tokens, instruction_t *instruction) {
   if ('#' == tokens->array[1][0]) {
     // In the form <#expression>
     char *number = &tokens->array[1][1];
-    instruction->shift_amount = strtol(number, (char **)NULL, 16);
+    instruction->shift_amount = parse_immediate_value(number);
   } else {
     // Is a register
     instruction->rs = string_to_reg_address(tokens->array[1]);
@@ -321,7 +321,6 @@ word_t assemble_spl(string_array_t *tokens) {
     free(mov_tokens->array);
     free(mov_tokens);
 
-    print_instruction(instruction);
     return mov_instruction;
   }
 
@@ -513,7 +512,6 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
           break;
         case LDR_M:
         case STR_M:
-          //SDT (use extra_words)
           machine_instruction = assemble_sdt(instructions->string_arrays[i], extra_words, words->size, max_lines);
           break;
         case BEQ_M:
@@ -523,12 +521,10 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case BGT_M:
         case BLE_M:
         case B_M:
-          //BRANCH
           machine_instruction = assemble_bra(instructions->string_arrays[i], symbol_table, words->size);
           break;
         case LSL_M:
         case ANDEQ_M:
-          //SPECIAL
           machine_instruction = assemble_spl(instructions->string_arrays[i]);
           break;
         default:
