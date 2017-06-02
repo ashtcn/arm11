@@ -280,7 +280,7 @@ word_t assemble_mul(string_array_t *tokens) {
 
 void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
   word_array_t *extra_words = make_word_array();
-  int max_lines = instructions->size - symbol_table->size;
+  //int max_lines = instructions->size - symbol_table->size;
   word_t machine_instruction;
   for (int i = 0; i < instructions->size; i++) {
     if(instructions->string_arrays[i]->size != 1) {
@@ -297,9 +297,11 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case TEQ_M:
         case CMP_M:
           machine_instruction = assemble_dpi(instructions->string_arrays[i]);
+          break;
         case MUL_M:
         case MLA_M:
           machine_instruction = assemble_mul(instructions->string_arrays[i]);
+          break;
         case LDR_M:
         case STR_M:
           //SDT (use extra_words)
@@ -315,6 +317,7 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case ANDEQ_M:
           //SPECIAL
           machine_instruction = 0;
+          break;
         default:
           fprintf(stderr, "No such opcode found.\n");
           exit(EXIT_FAILURE);

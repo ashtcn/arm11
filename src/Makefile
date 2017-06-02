@@ -21,7 +21,7 @@ toolbox.o: toolbox.h global.h system_state.h value_carry.h
 
 # assemble
 assemble.o: global.h assemble_toolbox.h word_array.h
-assembler.o: instruction.h string_array.h symbol_table.h encode.h print.h word_array.h
+assembler.o: instruction.h string_array.h symbol_table.h encode.h print.h word_array.h global.h
 word_array.o: global.h
 
 # unit_tests
