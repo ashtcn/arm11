@@ -143,7 +143,7 @@ shift_t string_to_shift(char *str) {
   if (!strcmp(str, "asr")) {
     return ASR;
   }
-  if (!strcmp(str, "ROR")) {
+  if (!strcmp(str, "ror")) {
     return ROR;
   }
 
@@ -153,14 +153,13 @@ shift_t string_to_shift(char *str) {
 
 void parse_shift(string_array_t *tokens, instruction_t *instruction) {
   instruction->shift_type = string_to_shift(tokens->array[0]);
-
-  if ('#' == tokens->array[0][0]) {
+  if ('#' == tokens->array[1][0]) {
     // In the form <#expression>
-    char *number = &tokens->array[0][1];
+    char *number = &tokens->array[1][1];
     instruction->shift_amount = strtol(number, (char **)NULL, 16);
-  } else if (!tokens->array[0][0]) {
+  } else {
     // Is a register
-    instruction->rs = string_to_reg_address(tokens->array[0]);
+    instruction->rs = string_to_reg_address(tokens->array[1]);
   }
 }
 
@@ -176,11 +175,22 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
       // Is in decimal
       instruction->immediate_value = strtol(&sections[0][1], (char **)NULL, 10);
     }
+
+    uint16_t shift = WORD_SIZE;
+    if (instruction->immediate_value > 0xFF) {
+      while (!(instruction->immediate_value & 0x3)) {
+          instruction->immediate_value >>= 2;
+          shift--;
+      }
+    }
+
+    instruction->shift_amount = shift;
+
   } else if ('r' == sections[0][0]) {
     // In the form Rm{,<shift>}
     instruction->rm = string_to_reg_address(sections[0]);
 
-    if (tokens->size == 2) {
+    if (tokens->size >= 2) {
       // Has shift
       string_array_t *shift_tokens = malloc(sizeof(string_array_t));
 
@@ -260,10 +270,61 @@ word_t assemble_mul(string_array_t *tokens) {
   instruction->rm = string_to_reg_address(tokens->array[2]);
   instruction->rs = string_to_reg_address(tokens->array[3]);
 
-  if (4 == tokens->size) {
+  if (5 == tokens->size) {
     // Is an MLA instruction
     instruction->flag_0 = 1;
   }
-
+  print_instruction(instruction);
   return encode(instruction);
+}
+
+void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_t *words) {
+  int cur = 0;
+  for (int i = 0; i < instructions->size; i++) {
+    if(instructions->string_arrays[i]->size != 1) {
+      words[cur] = assemble_instruction(instructions->string_arrays[i], symbol_table);
+      cur++;
+    }
+  }
+}
+
+word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table) {
+  mnemonic_t ins_code = string_to_mnemonic(tokens->array[0]);
+  switch(ins_code) {
+    case ADD_M:
+    case SUB_M:
+    case RSB_M:
+    case AND_M:
+    case EOR_M:
+    case ORR_M:
+    case MOV_M:
+    case TST_M:
+    case TEQ_M:
+    case CMP_M:
+      return assemble_dpi(tokens);
+    case MUL_M:
+    case MLA_M:
+      return assemble_mul(tokens);
+    case LDR_M:
+    case STR_M:
+      //SDT
+    case BEQ_M:
+    case BNE_M:
+    case BGE_M:
+    case BLT_M:
+    case BGT_M:
+    case BLE_M:
+    case B_M:
+      //BRANCH
+    case LSL_M:
+    case ANDEQ_M:
+      //SPECIAL
+      return 0;
+    default:
+      fprintf(stderr, "No such opcode found.\n");
+      exit(EXIT_FAILURE);
+      break;
+
+  }
+
 }

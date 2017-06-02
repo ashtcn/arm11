@@ -40,7 +40,7 @@ word_t encode_dpi(instruction_t *instruction) {
   }
   if (instruction->flag_0) {
     binary |= instruction->immediate_value;
-    binary |= instruction->shift_amount << 8;
+    binary |= (0xF & instruction->shift_amount) << 8;
   } else {
     binary |= instruction->rm;
     binary |= ((word_t) instruction->shift_type) << 5;
@@ -57,7 +57,7 @@ word_t encode_dpi(instruction_t *instruction) {
 }
 
 word_t encode_mul(instruction_t *instruction) {
-  word_t binary = 0xA0;
+  word_t binary = 0x90;
   binary |= ((word_t) instruction->rd) << 16;
   binary |= ((word_t) instruction->rs) << 8;
   binary |= ((word_t) instruction->rm);
