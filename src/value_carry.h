@@ -1,4 +1,7 @@
-/** A header to define the value_carry_t type. */
+/**
+ * @file value_carry.h
+ * @brief A header to define the value_carry_t type.
+ */
 
 #ifndef VALUE_CARRY_H
 #define VALUE_CARRY_H

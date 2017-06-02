@@ -1,4 +1,7 @@
-/** Functions for printing system details to standard output. */
+/**
+ * @file print.c
+ * @brief Functions for printing system details to standard output.
+ */
 
 #include "print.h"
 
@@ -240,7 +243,7 @@ void print_binary_value(word_t value) {
 /**
  * @brief Returns the string representing the condition type.
  *
- * @param type The condition type.
+ * @param cond The condition type.
  * @returns The string of the condition type for printing.
  */
 char *get_cond(condition_t cond) {

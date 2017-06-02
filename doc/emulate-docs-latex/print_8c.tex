@@ -1,0 +1,288 @@
+\hypertarget{print_8c}{}\section{print.\+c File Reference}
+\label{print_8c}\index{print.\+c@{print.\+c}}
+
+
+Functions for printing system details to standard output.  
+
+
+{\ttfamily \#include \char`\"{}print.\+h\char`\"{}}\\*
+Include dependency graph for print.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{print_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{print_8c_aa6201dccc033aad617c0d854e18f0915}{print\+\_\+array} (\hyperlink{global_8h_a0661d7d1353e0bca70c64563f635b034}{byte\+\_\+t} $\ast$memory, size\+\_\+t bytes\+\_\+to\+\_\+print)
+\begin{DoxyCompactList}\small\item\em Prints a given number of bytes, from an array of bytes. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_ae3374a188808236ad908ca5300516ae6}{print\+\_\+system\+\_\+state} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints system state details. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_aa0d2fa15c6ec7ec862fb74640427e510}{print\+\_\+registers} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints the values of registers. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_a19bd450ad0dc7d7d873f9add3989c0b5}{print\+\_\+memory} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints any non-\/zero words from memory. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_a48a0096457ff1ab2d250b08778a5c4a2}{print\+\_\+decoded\+\_\+instruction} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints details for the decoded instruction. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_a09f4c8695471e9d40ec8b728462e0bfa}{print\+\_\+instruction} (\hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
+\begin{DoxyCompactList}\small\item\em Prints details for the instruction. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_add0d5aaad07992e7c0b0f956255e07ac}{print\+\_\+fetched\+\_\+instruction} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints the fetched instruction, if present. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_aa2768353c6d59470774fc648d3e7496f}{print\+\_\+value} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Prints a value for debugging, in binary, hex and 2\textquotesingle{}s complement. \end{DoxyCompactList}\item 
+long \hyperlink{print_8c_afbd28bd80e4e07eb01e9ea6f6102f637}{twos\+\_\+complement\+\_\+to\+\_\+long} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Converts a signed 2\textquotesingle{}s complement word to a sign long. \end{DoxyCompactList}\item 
+void \hyperlink{print_8c_a111c6b9bb0e71ed6dcb2841b43821224}{print\+\_\+binary\+\_\+value} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Prints the padded binary representation of value. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{print_8c_afc0249cb12aa211e3118266c4ad1741a}{get\+\_\+cond} (\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2}{condition\+\_\+t} cond)
+\begin{DoxyCompactList}\small\item\em Returns the string representing the condition type. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{print_8c_abf595da7fda4726194ee1cc915cfd317}{get\+\_\+opcode} (\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7d}{opcode\+\_\+t} operation)
+\begin{DoxyCompactList}\small\item\em Returns the string representing the opcode. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{print_8c_a7e0f497b13f42696447d87ab77800073}{get\+\_\+shift} (\hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37f}{shift\+\_\+t} shift)
+\begin{DoxyCompactList}\small\item\em Returns the string representing the shift type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for printing system details to standard output. 
+
+
+
+\subsection{Function Documentation}
+\index{print.\+c@{print.\+c}!get\+\_\+cond@{get\+\_\+cond}}
+\index{get\+\_\+cond@{get\+\_\+cond}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{get\+\_\+cond(condition\+\_\+t cond)}{get_cond(condition_t cond)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ get\+\_\+cond (
+\begin{DoxyParamCaption}
+\item[{{\bf condition\+\_\+t}}]{cond}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_afc0249cb12aa211e3118266c4ad1741a}{}\label{print_8c_afc0249cb12aa211e3118266c4ad1741a}
+
+
+Returns the string representing the condition type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cond} & The condition type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string of the condition type for printing. 
+\end{DoxyReturn}
+\index{print.\+c@{print.\+c}!get\+\_\+opcode@{get\+\_\+opcode}}
+\index{get\+\_\+opcode@{get\+\_\+opcode}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{get\+\_\+opcode(opcode\+\_\+t operation)}{get_opcode(opcode_t operation)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ get\+\_\+opcode (
+\begin{DoxyParamCaption}
+\item[{{\bf opcode\+\_\+t}}]{operation}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_abf595da7fda4726194ee1cc915cfd317}{}\label{print_8c_abf595da7fda4726194ee1cc915cfd317}
+
+
+Returns the string representing the opcode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em operation} & The opcode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string of the opcode for printing. 
+\end{DoxyReturn}
+\index{print.\+c@{print.\+c}!get\+\_\+shift@{get\+\_\+shift}}
+\index{get\+\_\+shift@{get\+\_\+shift}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{get\+\_\+shift(shift\+\_\+t shift)}{get_shift(shift_t shift)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ get\+\_\+shift (
+\begin{DoxyParamCaption}
+\item[{{\bf shift\+\_\+t}}]{shift}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_a7e0f497b13f42696447d87ab77800073}{}\label{print_8c_a7e0f497b13f42696447d87ab77800073}
+
+
+Returns the string representing the shift type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em operation} & The type of shift. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string of the type of shift for printing. 
+\end{DoxyReturn}
+\index{print.\+c@{print.\+c}!print\+\_\+array@{print\+\_\+array}}
+\index{print\+\_\+array@{print\+\_\+array}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+array(byte\+\_\+t $\ast$memory, size\+\_\+t bytes\+\_\+to\+\_\+print)}{print_array(byte_t *memory, size_t bytes_to_print)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+array (
+\begin{DoxyParamCaption}
+\item[{{\bf byte\+\_\+t} $\ast$}]{memory, }
+\item[{size\+\_\+t}]{bytes\+\_\+to\+\_\+print}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_aa6201dccc033aad617c0d854e18f0915}{}\label{print_8c_aa6201dccc033aad617c0d854e18f0915}
+
+
+Prints a given number of bytes, from an array of bytes. 
+
+Prints a given number bytes from memory, starting from address 0. Lines are broken every word (4 bytes). Useful for debugging. 
+\begin{DoxyParams}{Parameters}
+{\em memory} & An array of bytes to print. \\
+\hline
+{\em bytes\+\_\+to\+\_\+print} & The number of bytes to print (from 0). \\
+\hline
+\end{DoxyParams}
+\index{print.\+c@{print.\+c}!print\+\_\+binary\+\_\+value@{print\+\_\+binary\+\_\+value}}
+\index{print\+\_\+binary\+\_\+value@{print\+\_\+binary\+\_\+value}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+binary\+\_\+value(word\+\_\+t value)}{print_binary_value(word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+binary\+\_\+value (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_a111c6b9bb0e71ed6dcb2841b43821224}{}\label{print_8c_a111c6b9bb0e71ed6dcb2841b43821224}
+
+
+Prints the padded binary representation of value. 
+
+Prints W\+O\+R\+D\+\_\+\+S\+I\+ZE bits. 
+\begin{DoxyParams}{Parameters}
+{\em value} & The word for printing. \\
+\hline
+\end{DoxyParams}
+\index{print.\+c@{print.\+c}!print\+\_\+decoded\+\_\+instruction@{print\+\_\+decoded\+\_\+instruction}}
+\index{print\+\_\+decoded\+\_\+instruction@{print\+\_\+decoded\+\_\+instruction}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+decoded\+\_\+instruction(system\+\_\+state\+\_\+t $\ast$machine)}{print_decoded_instruction(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+decoded\+\_\+instruction (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_a48a0096457ff1ab2d250b08778a5c4a2}{}\label{print_8c_a48a0096457ff1ab2d250b08778a5c4a2}
+
+
+Prints details for the decoded instruction. 
+
+Prints the type of the instruction, and any details required\+:
+\begin{DoxyItemize}
+\item For branch instructions, prints the condition and the offset.
+\item For multiply instructions, prints the condition, flags and registers.
+\item For data processing instructions, prints the condition, flags, opcodes, operands, and shift information.
+\item For single data transfer instructions, prints flags, registers and offset. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\index{print.\+c@{print.\+c}!print\+\_\+fetched\+\_\+instruction@{print\+\_\+fetched\+\_\+instruction}}
+\index{print\+\_\+fetched\+\_\+instruction@{print\+\_\+fetched\+\_\+instruction}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+fetched\+\_\+instruction(system\+\_\+state\+\_\+t $\ast$machine)}{print_fetched_instruction(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+fetched\+\_\+instruction (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_add0d5aaad07992e7c0b0f956255e07ac}{}\label{print_8c_add0d5aaad07992e7c0b0f956255e07ac}
+
+
+Prints the fetched instruction, if present. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{print.\+c@{print.\+c}!print\+\_\+instruction@{print\+\_\+instruction}}
+\index{print\+\_\+instruction@{print\+\_\+instruction}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+instruction(instruction\+\_\+t $\ast$instruction)}{print_instruction(instruction_t *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+instruction (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction\+\_\+t} $\ast$}]{instruction}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_a09f4c8695471e9d40ec8b728462e0bfa}{}\label{print_8c_a09f4c8695471e9d40ec8b728462e0bfa}
+
+
+Prints details for the instruction. 
+
+Prints the type of the instruction, and any details required\+:
+\begin{DoxyItemize}
+\item For branch instructions, prints the condition and the offset.
+\item For multiply instructions, prints the condition, flags and registers.
+\item For data processing instructions, prints the condition, flags, opcodes, operands, and shift information.
+\item For single data transfer instructions, prints flags, registers and offset. 
+\begin{DoxyParams}{Parameters}
+{\em instruction} & The instruction. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\index{print.\+c@{print.\+c}!print\+\_\+memory@{print\+\_\+memory}}
+\index{print\+\_\+memory@{print\+\_\+memory}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+memory(system\+\_\+state\+\_\+t $\ast$machine)}{print_memory(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+memory (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_a19bd450ad0dc7d7d873f9add3989c0b5}{}\label{print_8c_a19bd450ad0dc7d7d873f9add3989c0b5}
+
+
+Prints any non-\/zero words from memory. 
+
+Prints any non-\/zero words from memory and their addresses. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{print.\+c@{print.\+c}!print\+\_\+registers@{print\+\_\+registers}}
+\index{print\+\_\+registers@{print\+\_\+registers}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+registers(system\+\_\+state\+\_\+t $\ast$machine)}{print_registers(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+registers (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_aa0d2fa15c6ec7ec862fb74640427e510}{}\label{print_8c_aa0d2fa15c6ec7ec862fb74640427e510}
+
+
+Prints the values of registers. 
+
+Prints the values held in each of the N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS registers. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{print.\+c@{print.\+c}!print\+\_\+system\+\_\+state@{print\+\_\+system\+\_\+state}}
+\index{print\+\_\+system\+\_\+state@{print\+\_\+system\+\_\+state}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+system\+\_\+state(system\+\_\+state\+\_\+t $\ast$machine)}{print_system_state(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+system\+\_\+state (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_ae3374a188808236ad908ca5300516ae6}{}\label{print_8c_ae3374a188808236ad908ca5300516ae6}
+
+
+Prints system state details. 
+
+Prints the current system state. Prints all register values, any memory values which are not 0, the decoded instruction and the fetched instruction. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{print.\+c@{print.\+c}!print\+\_\+value@{print\+\_\+value}}
+\index{print\+\_\+value@{print\+\_\+value}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+value(word\+\_\+t value)}{print_value(word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+value (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_aa2768353c6d59470774fc648d3e7496f}{}\label{print_8c_aa2768353c6d59470774fc648d3e7496f}
+
+
+Prints a value for debugging, in binary, hex and 2\textquotesingle{}s complement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The word to print. \\
+\hline
+\end{DoxyParams}
+\index{print.\+c@{print.\+c}!twos\+\_\+complement\+\_\+to\+\_\+long@{twos\+\_\+complement\+\_\+to\+\_\+long}}
+\index{twos\+\_\+complement\+\_\+to\+\_\+long@{twos\+\_\+complement\+\_\+to\+\_\+long}!print.\+c@{print.\+c}}
+\subsubsection[{\texorpdfstring{twos\+\_\+complement\+\_\+to\+\_\+long(word\+\_\+t value)}{twos_complement_to_long(word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}long twos\+\_\+complement\+\_\+to\+\_\+long (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{print_8c_afbd28bd80e4e07eb01e9ea6f6102f637}{}\label{print_8c_afbd28bd80e4e07eb01e9ea6f6102f637}
+
+
+Converts a signed 2\textquotesingle{}s complement word to a sign long. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The signed 2\textquotesingle{}s complement word to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signed long representation of the word. 
+\end{DoxyReturn}

@@ -1,4 +1,7 @@
-/** Header file for print_compliant.c. */
+/**
+ * @file print_compliant.h
+ * @brief Header file for print_compliant.c.
+ */
 
 #ifndef PRINT_COMPLIANT_H
 #define PRINT_COMPLIANT_H

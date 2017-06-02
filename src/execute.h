@@ -1,9 +1,10 @@
-/** Header file for execute.c. */
+/**
+ * @file execute.h
+ * @brief Header file for execute.c.
+ */
 
 #ifndef EXECUTE_H
 #define EXECUTE_H
-#include <stdbool.h>
-#include "instruction.h"
 #include "toolbox.h"
 
 void execute(system_state_t *machine);

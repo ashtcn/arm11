@@ -1,11 +1,13 @@
-/** Header file for toolbox.c. */
+/**
+ * @file toolbox.h
+ * @brief Header file for toolbox.c.
+ */
 
 #ifndef TOOLBOX_H
 #define TOOLBOX_H
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include "global.h"
 #include "system_state.h"
 #include "value_carry.h"
 #include "print.h"

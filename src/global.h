@@ -1,4 +1,7 @@
-/** Definition of useful constants and type aliases. */
+/**
+ * @file global.h
+ * @brief Definition of useful constants and type aliases.
+ */
 
 #ifndef GLOBAL_H
 #define GLOBAL_H
@@ -21,9 +24,9 @@
 /** A mask which removes the first 8 bits when used with bitwise and. */
 #define MASK_FIRST_8 0xFFFFFF
 
-/** The first memory address for clearing GPIO pins. */
+/** The first memory address for accessing GPIO pins. */
 #define GPIO_ACCESS_START 0x20200000
-/** The number of bytes allocated for clearing GPIO pins. */
+/** The number of bytes allocated for accessing GPIO pins. */
 #define GPIO_ACCESS_SIZE 12
 /** The first memory address for clearing GPIO pins. */
 #define GPIO_CLEAR_START 0x20200028
@@ -102,25 +105,25 @@ typedef enum {
  * @brief An enum used for defining the opcode.
  */
 typedef enum {
-  /* And. */
+  /** And. */
   AND = 0x0,
-  /* Exclusive or. */
+  /** Exclusive or. */
   EOR = 0x1,
-  /* Subtract. */
+  /** Subtract. */
   SUB = 0x2,
-  /* Reverse subtract. */
+  /** Reverse subtract. */
   RSB = 0x3,
-  /* Add. */
+  /** Add. */
   ADD = 0x4,
-  /* And, set flags only. */
+  /** And, set flags only. */
   TST = 0x8,
-  /* Exclusive or, set flags only. */
+  /** Exclusive or, set flags only. */
   TEQ = 0x9,
-  /* Subtract, set flags only. */
+  /** Subtract, set flags only. */
   CMP = 0xA,
-  /* Or. */
+  /** Or. */
   ORR = 0xC,
-  /* Move. */
+  /** Move. */
   MOV = 0xD,
 } opcode_t;
 
@@ -138,31 +141,31 @@ typedef enum {
   V = 0x1,
 } cpsr_flags_t;
 
-typedef enum {
-  ADD_M,
-  SUB_M,
-  RSB_M,
-  AND_M,
-  EOR_M,
-  ORR_M,
-  MOV_M,
-  TST_M,
-  TEQ_M,
-  CMP_M,
-  MUL_M,
-  MLA_M,
-  LDR_M,
-  STR_M,
-  BEQ_M,
-  BNE_M,
-  BGE_M,
-  BLT_M,
-  BGT_M,
-  BLE_M,
-  B_M,
-  LSL_M,
-  ANDEQ_M,
-} mnemonic_t;
+// typedef enum {
+//   ADD_M,
+//   SUB_M,
+//   RSB_M,
+//   AND_M,
+//   EOR_M,
+//   ORR_M,
+//   MOV_M,
+//   TST_M,
+//   TEQ_M,
+//   CMP_M,
+//   MUL_M,
+//   MLA_M,
+//   LDR_M,
+//   STR_M,
+//   BEQ_M,
+//   BNE_M,
+//   BGE_M,
+//   BLT_M,
+//   BGT_M,
+//   BLE_M,
+//   B_M,
+//   LSL_M,
+//   ANDEQ_M,
+// } mnemonic_t;
 
 /** A type alias for a byte (8 bits). */
 typedef uint8_t byte_t;

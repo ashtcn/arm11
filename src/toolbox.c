@@ -1,4 +1,7 @@
-/** Miscellaneous functions that are widely used throughout the code. */
+/**
+ * @file toolbox.c
+ * @brief Miscellaneous functions that are widely used throughout the code.
+ */
 
 #include "toolbox.h"
 

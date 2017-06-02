@@ -1,4 +1,7 @@
-/** Functions for the decode cycle. */
+/**
+ * @file decode.c
+ * @brief Functions for the decode cycle.
+ */
 
 #include "decode.h"
 

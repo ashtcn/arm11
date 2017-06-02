@@ -1,9 +1,10 @@
-/** A header to define the system_state_t type. */
+/**
+ * @file system_state.h
+ * @brief A header to define the system_state_t type.
+ */
 
 #ifndef SYSTEM_STATE_H
 #define SYSTEM_STATE_H
-#include <stdint.h>
-#include "global.h"
 #include "instruction.h"
 
 /**

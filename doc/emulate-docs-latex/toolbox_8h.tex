@@ -1,0 +1,250 @@
+\hypertarget{toolbox_8h}{}\section{toolbox.\+h File Reference}
+\label{toolbox_8h}\index{toolbox.\+h@{toolbox.\+h}}
+
+
+Header file for \hyperlink{toolbox_8c}{toolbox.\+c}.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}system\+\_\+state.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}value\+\_\+carry.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}print.\+h\char`\"{}}\\*
+Include dependency graph for toolbox.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{toolbox_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{toolbox_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{toolbox_8h_a6d650fb79ff7ee7fe331286272a0f794}{load\+\_\+file} (char $\ast$fname, \hyperlink{global_8h_a0661d7d1353e0bca70c64563f635b034}{byte\+\_\+t} $\ast$memory)
+\begin{DoxyCompactList}\small\item\em Loads a binary file into the memory. \end{DoxyCompactList}\item 
+void \hyperlink{toolbox_8h_a7309491724696785ff2df97b88dbc69d}{exit\+\_\+program} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Exits gracefully. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{toolbox_8h_ae00c97fb61caa5c5a327f53743671ea7}{get\+\_\+word} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine, uint32\+\_\+t mem\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Gets a memory word from a given address. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{toolbox_8h_a6418bf675c48b3820635a6010b83a159}{get\+\_\+word\+\_\+compliant} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine, \hyperlink{global_8h_a8f4b132f56a25431714862229639be12}{address\+\_\+t} mem\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Gets a memory word from a given address (for printing only). \end{DoxyCompactList}\item 
+void \hyperlink{toolbox_8h_a17194b5825208d2a4d7c9e266b5fdbc2}{set\+\_\+word} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine, uint32\+\_\+t mem\+\_\+address, \hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} word)
+\begin{DoxyCompactList}\small\item\em Writes a word to memory at a given address. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{toolbox_8h_a686137c6e030fbf3387fda07e8eeb085}{negate} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Negates a two\textquotesingle{}s complement value. \end{DoxyCompactList}\item 
+bool \hyperlink{toolbox_8h_a0d865a08414b59081c1cbb7787816445}{is\+\_\+negative} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Returns true iff two\textquotesingle{}s complement value is negative. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{toolbox_8h_a8c2b56d7b4c74bd125678cf3a1b1f418}{absolute} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Returns absolute two\textquotesingle{}s complement value. \end{DoxyCompactList}\item 
+\hyperlink{structvalue__carry__t}{value\+\_\+carry\+\_\+t} $\ast$ \hyperlink{toolbox_8h_a519bda814c2b3d1f57613e56de5214b8}{shifter} (\hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37f}{shift\+\_\+t} type, \hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} shift\+\_\+amount, \hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Shifts a value and returns a pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{toolbox_8c}{toolbox.\+c}. 
+
+
+
+\subsection{Function Documentation}
+\index{toolbox.\+h@{toolbox.\+h}!absolute@{absolute}}
+\index{absolute@{absolute}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{absolute(word\+\_\+t value)}{absolute(word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} absolute (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a8c2b56d7b4c74bd125678cf3a1b1f418}{}\label{toolbox_8h_a8c2b56d7b4c74bd125678cf3a1b1f418}
+
+
+Returns absolute two\textquotesingle{}s complement value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A two\textquotesingle{}s complement word. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The absolute value of the provided word in two\textquotesingle{}s complement. 
+\end{DoxyReturn}
+\index{toolbox.\+h@{toolbox.\+h}!exit\+\_\+program@{exit\+\_\+program}}
+\index{exit\+\_\+program@{exit\+\_\+program}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{exit\+\_\+program(system\+\_\+state\+\_\+t $\ast$machine)}{exit_program(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void exit\+\_\+program (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a7309491724696785ff2df97b88dbc69d}{}\label{toolbox_8h_a7309491724696785ff2df97b88dbc69d}
+
+
+Exits gracefully. 
+
+Prints the current system state, frees allocated memory and exits with a failure. To be used in the case of an error which cannot be recovered from. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{toolbox.\+h@{toolbox.\+h}!get\+\_\+word@{get\+\_\+word}}
+\index{get\+\_\+word@{get\+\_\+word}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{get\+\_\+word(system\+\_\+state\+\_\+t $\ast$machine, uint32\+\_\+t mem\+\_\+address)}{get_word(system_state_t *machine, uint32_t mem_address)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} get\+\_\+word (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine, }
+\item[{uint32\+\_\+t}]{mem\+\_\+address}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_ae00c97fb61caa5c5a327f53743671ea7}{}\label{toolbox_8h_ae00c97fb61caa5c5a327f53743671ea7}
+
+
+Gets a memory word from a given address. 
+
+
+\begin{DoxyItemize}
+\item If G\+P\+IO access adddress is read, prints a message to stdout.
+\item If another out of bounds address is read, prints an error. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+{\em mem\+\_\+address} & The memory address to be read from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The word at the given memory address in the current system state. 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\index{toolbox.\+h@{toolbox.\+h}!get\+\_\+word\+\_\+compliant@{get\+\_\+word\+\_\+compliant}}
+\index{get\+\_\+word\+\_\+compliant@{get\+\_\+word\+\_\+compliant}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{get\+\_\+word\+\_\+compliant(system\+\_\+state\+\_\+t $\ast$machine, address\+\_\+t mem\+\_\+address)}{get_word_compliant(system_state_t *machine, address_t mem_address)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} get\+\_\+word\+\_\+compliant (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine, }
+\item[{{\bf address\+\_\+t}}]{mem\+\_\+address}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a6418bf675c48b3820635a6010b83a159}{}\label{toolbox_8h_a6418bf675c48b3820635a6010b83a159}
+
+
+Gets a memory word from a given address (for printing only). 
+
+For use in compliant printing. Gets the word in little endian order. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+{\em mem\+\_\+address} & The memory address to be read from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The word at the given memory address in the current system state. 
+\end{DoxyReturn}
+\index{toolbox.\+h@{toolbox.\+h}!is\+\_\+negative@{is\+\_\+negative}}
+\index{is\+\_\+negative@{is\+\_\+negative}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{is\+\_\+negative(word\+\_\+t value)}{is_negative(word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+\_\+negative (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a0d865a08414b59081c1cbb7787816445}{}\label{toolbox_8h_a0d865a08414b59081c1cbb7787816445}
+
+
+Returns true iff two\textquotesingle{}s complement value is negative. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A two\textquotesingle{}s complement word to check sign of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True iff provided value is negative in two\textquotesingle{}s complement. 
+\end{DoxyReturn}
+\index{toolbox.\+h@{toolbox.\+h}!load\+\_\+file@{load\+\_\+file}}
+\index{load\+\_\+file@{load\+\_\+file}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{load\+\_\+file(char $\ast$fname, byte\+\_\+t $\ast$memory)}{load_file(char *fname, byte_t *memory)}}]{\setlength{\rightskip}{0pt plus 5cm}void load\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname, }
+\item[{{\bf byte\+\_\+t} $\ast$}]{memory}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a6d650fb79ff7ee7fe331286272a0f794}{}\label{toolbox_8h_a6d650fb79ff7ee7fe331286272a0f794}
+
+
+Loads a binary file into the memory. 
+
+Writes the contents of the provided binary object code file to the memory, starting at the provided location. Returns an error message and exits if the file cannot be opened or cannot be read. 
+\begin{DoxyParams}{Parameters}
+{\em fname} & The filename containing object code to be loaded. \\
+\hline
+{\em memory} & A pointer to the first byte of memory to be written to. \\
+\hline
+\end{DoxyParams}
+\index{toolbox.\+h@{toolbox.\+h}!negate@{negate}}
+\index{negate@{negate}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{negate(word\+\_\+t value)}{negate(word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} negate (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a686137c6e030fbf3387fda07e8eeb085}{}\label{toolbox_8h_a686137c6e030fbf3387fda07e8eeb085}
+
+
+Negates a two\textquotesingle{}s complement value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The word to be negated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The negated word. 
+\end{DoxyReturn}
+\index{toolbox.\+h@{toolbox.\+h}!set\+\_\+word@{set\+\_\+word}}
+\index{set\+\_\+word@{set\+\_\+word}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{set\+\_\+word(system\+\_\+state\+\_\+t $\ast$machine, uint32\+\_\+t mem\+\_\+address, word\+\_\+t word)}{set_word(system_state_t *machine, uint32_t mem_address, word_t word)}}]{\setlength{\rightskip}{0pt plus 5cm}void set\+\_\+word (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine, }
+\item[{uint32\+\_\+t}]{mem\+\_\+address, }
+\item[{{\bf word\+\_\+t}}]{word}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a17194b5825208d2a4d7c9e266b5fdbc2}{}\label{toolbox_8h_a17194b5825208d2a4d7c9e266b5fdbc2}
+
+
+Writes a word to memory at a given address. 
+
+
+\begin{DoxyItemize}
+\item If G\+P\+IO access adddress is written to, prints a message to stdout.
+\item If G\+P\+IO clear or set adddress is written to, prints a message to stdout.
+\item If another out of bounds address is read, prints an error. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+{\em mem\+\_\+address} & The memory address to write to. \\
+\hline
+{\em word} & The word to write to memory. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\index{toolbox.\+h@{toolbox.\+h}!shifter@{shifter}}
+\index{shifter@{shifter}!toolbox.\+h@{toolbox.\+h}}
+\subsubsection[{\texorpdfstring{shifter(shift\+\_\+t type, word\+\_\+t shift\+\_\+amount, word\+\_\+t value)}{shifter(shift_t type, word_t shift_amount, word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf value\+\_\+carry\+\_\+t}$\ast$ shifter (
+\begin{DoxyParamCaption}
+\item[{{\bf shift\+\_\+t}}]{type, }
+\item[{{\bf word\+\_\+t}}]{shift\+\_\+amount, }
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{toolbox_8h_a519bda814c2b3d1f57613e56de5214b8}{}\label{toolbox_8h_a519bda814c2b3d1f57613e56de5214b8}
+
+
+Shifts a value and returns a pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of shift to use. \\
+\hline
+{\em shift\+\_\+amount} & The amount to shift by. \\
+\hline
+{\em value} & The value to shift. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer to the shifted value. 
+\end{DoxyReturn}

@@ -1,0 +1,44 @@
+\hypertarget{emulate_8c}{}\section{emulate.\+c File Reference}
+\label{emulate_8c}\index{emulate.\+c@{emulate.\+c}}
+
+
+The main functionality for the A\+R\+M11 emulator.  
+
+
+{\ttfamily \#include \char`\"{}decode.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}execute.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}print\+\_\+compliant.\+h\char`\"{}}\\*
+Include dependency graph for emulate.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{emulate_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{emulate_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Emulates an A\+R\+M11 machine operating on a given binary file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The main functionality for the A\+R\+M11 emulator. 
+
+
+
+\subsection{Function Documentation}
+\index{emulate.\+c@{emulate.\+c}!main@{main}}
+\index{main@{main}!emulate.\+c@{emulate.\+c}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{emulate_8c_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{emulate_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+Emulates an A\+R\+M11 machine operating on a given binary file. 
+
+The user must provide a single argument, which is a valid file name for an A\+R\+M11 binary object code file. This function emulates the A\+RM architecture, returning details of the registers and non-\/zero memory at the end of execution. 

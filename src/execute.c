@@ -1,4 +1,7 @@
-/** Functions for the execute cycle. */
+/**
+ * @file execute.c
+ * @brief Functions for the execute cycle.
+ */
 
 #include "execute.h"
 

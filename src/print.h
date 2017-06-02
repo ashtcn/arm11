@@ -1,4 +1,7 @@
-/** Header file for print.c. */
+/**
+ * @file print.h
+ * @brief Header file for print.c.
+ */
 
 #ifndef PRINT_H
 #define PRINT_H

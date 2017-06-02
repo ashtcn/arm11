@@ -1,4 +1,7 @@
-/** Functions for printing system details to match test cases. */
+/**
+ * @file print_compliant.c
+ * @brief Functions for printing system details to match test cases.
+ */
 
 #include "print_compliant.h"
 

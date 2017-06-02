@@ -1,8 +1,10 @@
-/** Header file for decode.c. */
+/**
+ * @file decode.h
+ * @brief Header file for decode.c.
+ */
 
 #ifndef DECODE_H
 #define DECODE_H
-#include "instruction.h"
 #include "toolbox.h"
 
 void decode_instruction(system_state_t *machine);

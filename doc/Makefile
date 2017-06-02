@@ -13,4 +13,4 @@ all: Report.pdf Checkpoint.pdf
 clean:
 	rm -f *.aux
 	rm -f *.log
-	rm -f *.pdf
+	rm -f *.synctex.gz

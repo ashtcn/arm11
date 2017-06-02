@@ -1,6 +1,8 @@
-/** The main functionality for the ARM11 emulator. */
+/**
+ * @file emulate.c
+ * @brief The main functionality for the ARM11 emulator.
+ */
 
-#include "instruction.h"
 #include "decode.h"
 #include "execute.h"
 #include "print_compliant.h"
