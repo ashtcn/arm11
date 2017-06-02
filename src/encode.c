@@ -34,7 +34,9 @@ word_t encode_dpi(instruction_t *instruction) {
   binary |= ((word_t) instruction->operation) << 21;
   binary |= ((word_t) instruction->flag_0) << 25;
   binary |= ((word_t) instruction->flag_1) << 20;
-  binary |= ((word_t) instruction->rd) << 12;
+  if (instruction->rd != -1) {
+    binary |= ((word_t) instruction->rd) << 12;
+  }
   if (instruction->operation != MOV) {
     binary |= ((word_t) instruction->rn) << 16;
   }
@@ -97,6 +99,6 @@ word_t encode_sdt(instruction_t *instruction) {
 
 word_t encode_branch(instruction_t *instruction) {
   word_t binary = 0x0A000000;
-  binary |= instruction->immediate_value;
+  binary |= 0xFFFFFF & instruction->immediate_value;
   return binary | add_cond(instruction);
 }

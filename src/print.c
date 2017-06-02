@@ -119,13 +119,13 @@ void print_instruction(instruction_t *instruction) {
       printf("  Condition Flag: %s\n", get_cond(instruction->cond));
       printf("  Accumulate: %u\n", instruction->flag_0);
       printf("  Set Flags: %u\n", instruction->flag_1);
-      printf("  Operand1 Register Rm: %u\n", instruction->rm);
-      printf("  Operand2 Register Rs: %u\n", instruction->rs);
+      printf("  Operand1 Register Rm: %d\n", instruction->rm);
+      printf("  Operand2 Register Rs: %d\n", instruction->rs);
       if(instruction->flag_0) {
         // Accumulate is set
-        printf("  Accumulate Register Rn: %u\n", instruction->rn);
+        printf("  Accumulate Register Rn: %d\n", instruction->rn);
       }
-      printf("  Destination Register Rd: %u\n", instruction->rd);
+      printf("  Destination Register Rd: %d\n", instruction->rd);
       break;
     case DPI:
       printf("Decoded Instruction: DPI\n");
@@ -133,7 +133,7 @@ void print_instruction(instruction_t *instruction) {
       printf("  Opcode: %s\n", get_opcode(instruction->operation));
       printf("  Immediate Operand: %u\n", instruction->flag_0);
       printf("  Set Flags: %u\n", instruction->flag_1);
-      printf("  Operand1 Register Rn: %u\n", instruction->rn);
+      printf("  Operand1 Register Rn: %d\n", instruction->rn);
       if(instruction->flag_0) {
         // Operand2 is immediate
         printf("  Operand2 Immediate Value: 0x%x\n",
@@ -142,7 +142,7 @@ void print_instruction(instruction_t *instruction) {
                instruction->shift_amount);
       } else {
         // Operand2 is register
-        printf("  Operand2 Register Rm: %u\n", instruction->rm);
+        printf("  Operand2 Register Rm: %d\n", instruction->rm);
         printf("  Operand2 Shift Type: %s\n",
                get_shift(instruction->shift_type));
         if (instruction->rs == -1) {
@@ -150,10 +150,10 @@ void print_instruction(instruction_t *instruction) {
           printf("  Operand2 Shift Amount: %u\n", instruction->shift_amount);
         } else {
           // Shift is register
-          printf("  Operand2 Shift Register Rs: %u\n", instruction->rs);
+          printf("  Operand2 Shift Register Rs: %d\n", instruction->rs);
         }
       }
-      printf("  Destination Register Rd: %u\n", instruction->rd);
+      printf("  Destination Register Rd: %d\n", instruction->rd);
       break;
     case SDT:
       printf("Decoded Instruction: SDT\n");
@@ -162,10 +162,10 @@ void print_instruction(instruction_t *instruction) {
       printf("  Pre (1) or Post Indexing (0): %u\n", instruction->flag_1);
       printf("  Offset Add (1) or Subtract (0): %u\n", instruction->flag_2);
       printf("  Load (1) or Store (0): %u\n", instruction->flag_3);
-      printf("  Base Register Rn: %u\n", instruction->rn);
+      printf("  Base Register Rn: %d\n", instruction->rn);
       if(instruction->flag_0) {
         // Offset is register
-        printf("  Offset Register Rm: %u\n", instruction->rm);
+        printf("  Offset Register Rm: %d\n", instruction->rm);
         printf("  Offset Shift Type: %s\n",
                get_shift(instruction->shift_type));
         if (instruction->rs == -1) {
@@ -173,14 +173,14 @@ void print_instruction(instruction_t *instruction) {
           printf("  Offset Shift Amount: %u\n", instruction->shift_amount);
         } else {
           // Shift is register
-          printf("  Offset Shift Register Rs: %u\n", instruction->rs);
+          printf("  Offset Shift Register Rs: %d\n", instruction->rs);
         }
       } else {
         // Offset is immediate
         printf("  Offset Immediate Value: 0x%x\n",
                instruction->immediate_value);
       }
-      printf("  Source / Destination Register Rd: %u\n", instruction->rd);
+      printf("  Source / Destination Register Rd: %d\n", instruction->rd);
       break;
     default:
       assert(false);

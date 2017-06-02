@@ -90,6 +90,28 @@ mnemonic_t string_to_mnemonic(char *str) {
   exit(EXIT_FAILURE);
 }
 
+condition_t string_to_condition(char *str) {
+  if (!strcmp(str, "eq")) {
+    return EQ;
+  }
+  if (!strcmp(str, "ne")) {
+    return NE;
+  }
+  if (!strcmp(str, "ge")) {
+    return GE;
+  }
+  if (!strcmp(str, "lt")) {
+    return LT;
+  }
+  if (!strcmp(str, "gt")) {
+    return GT;
+  }
+  if (!strcmp(str, "le")) {
+    return LE;
+  }
+  return AL;
+}
+
 opcode_t mnemonic_to_opcode(mnemonic_t mnemonic) {
   switch (mnemonic) {
     case ADD_M:
@@ -316,6 +338,7 @@ word_t assemble_mul(string_array_t *tokens) {
   if (5 == tokens->size) {
     // Is an MLA instruction
     instruction->flag_0 = 1;
+    instruction->rn = string_to_reg_address(tokens->array[4]);
   }
   print_instruction(instruction);
   return encode(instruction);
@@ -358,7 +381,7 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case BLE_M:
         case B_M:
           //BRANCH
-          machine_instruction = 0;
+          machine_instruction = assemble_bra(instructions->string_arrays[i], symbol_table, words->size);
           break;
         case LSL_M:
         case ANDEQ_M:
@@ -378,4 +401,32 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
   for (int i = 0; i < extra_words->size; i++) {
     add_word_array(words, extra_words->array[i]);
   }
+}
+
+uint32_t signed_to_twos_complement(int32_t value) {
+  uint32_t result = abs(value);
+  if (value < 0) {
+    result = negate(result);
+  }
+  return result;
+}
+
+word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table, address_t instruction_no) {
+  instruction_t instruction1;
+  instruction_t* instruction = &instruction1;
+  *instruction = NULL_INSTRUCTION;
+
+  instruction->type = BRA;
+
+  if (!tokens->array[0][1]) {
+    instruction->cond = AL;
+  } else {
+    instruction->cond = string_to_condition(&(tokens->array[0][1]));
+  }
+
+  address_t label_address = get_address(symbol_table, tokens->array[1]);
+
+  instruction->immediate_value = (signed_to_twos_complement((int32_t) label_address - ((int32_t) instruction_no * 4) - 8) >> 2);
+  print_instruction(instruction);
+  return encode(instruction);
 }
