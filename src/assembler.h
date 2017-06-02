@@ -23,8 +23,8 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction);
 word_t assemble_dpi(string_array_t *tokens);
 word_t assemble_spl(string_array_t *tokens);
 word_t assemble_mul(string_array_t *tokens);
-word_t assemble_sdt(string_array_t *tokens);
-word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table);
+word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int *max_lines);
+word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table, int current_line);
 
 void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words);
 
