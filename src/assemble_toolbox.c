@@ -125,7 +125,6 @@ string_array_t *tokenize_instruction(char* instruction) {
       char *operands = strdup(instruction);
       instruction_op = strtok_r(operands, " ", &operands);
       result = tokenize_operand_instruction(result, trim(instruction_op), trim(operands));
-      free(operands);
     }
 
   }
@@ -148,8 +147,7 @@ string_array_t *tokenize_operand_instruction(string_array_t *result, char* instr
   }
   result->size = split_count + 2;
   result->array = create_2d_array(split_count + 2, 32);
-
-  (result->array)[0] = instruction_op;
+  result->array[0] = instruction_op;
   i = 0;
   int cur_section = 1;
   int start_split = 0;

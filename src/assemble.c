@@ -13,7 +13,6 @@ string_array_array_t *tokenize_input(char **input, int input_lines) {
     if(input[i][0] != '\n') {
     string_array_t *tokened = tokenize_instruction(input[i]);
     add_string_array_array(result, tokened);
-    free(tokened->array);
     }
   }
 
