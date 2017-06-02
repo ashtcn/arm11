@@ -70,7 +70,7 @@ char **load_source_file(char *load_filename, int lines) {
 
   // Try to read the file line by line
   int size = 0;
-  while(fgets(loaded_file[size], sizeof(char[max_line_length]), file)) {
+  while(size < lines && fgets(loaded_file[size], sizeof(char[max_line_length]), file)) {
     // Strips any trailing newlinesword_size
     if(loaded_file[size][0] != '\n' && loaded_file[size][0] != '\r') {
       loaded_file[size][strcspn(loaded_file[size], "\n")] = 0;
