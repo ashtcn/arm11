@@ -536,6 +536,8 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
   for (int i = 0; i < extra_words->size; i++) {
     add_word_array(words, extra_words->array[i]);
   }
+
+  free(extra_words);
 }
 
 uint32_t signed_to_twos_complement(int32_t value) {

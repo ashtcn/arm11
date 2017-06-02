@@ -122,11 +122,10 @@ string_array_t *tokenize_instruction(char* instruction) {
       result->array[0] = instruction;
     } else {
       char *instruction_op = NULL;
-      char *operands = strdup(instruction);
+      char *operands = instruction;
       instruction_op = strtok_r(operands, " ", &operands);
       result = tokenize_operand_instruction(result, trim(instruction_op), trim(operands));
     }
-
   }
   return result;
 }
