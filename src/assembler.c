@@ -278,17 +278,22 @@ word_t assemble_mul(string_array_t *tokens) {
   return encode(instruction);
 }
 
-void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_t *words) {
-  int cur = 0;
+void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
+  word_array_t *extra_words = make_word_array();
+  int max_lines = instructions->size - symbol_table->size;
   for (int i = 0; i < instructions->size; i++) {
     if(instructions->string_arrays[i]->size != 1) {
-      words[cur] = assemble_instruction(instructions->string_arrays[i], symbol_table);
-      cur++;
+      add_word_array(words, assemble_instruction(instructions->string_arrays[i], symbol_table, extra_words, words->size, max_lines));
     }
+  }
+
+  //Add extra words from LDR
+  for (int i = 0; i < extra_words->size; i++) {
+    add_word_array(words, extra_words->array[i]);
   }
 }
 
-word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table) {
+word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table, word_array_t *extra_words, int current_line_number, int max_lines) {
   mnemonic_t ins_code = string_to_mnemonic(tokens->array[0]);
   switch(ins_code) {
     case ADD_M:
@@ -307,7 +312,7 @@ word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table
       return assemble_mul(tokens);
     case LDR_M:
     case STR_M:
-      //SDT
+      //SDT (use extra_words)
     case BEQ_M:
     case BNE_M:
     case BGE_M:

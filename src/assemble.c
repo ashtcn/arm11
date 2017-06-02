@@ -2,6 +2,7 @@
 #include "global.h"
 #include "assemble_toolbox.h"
 #include "string_array_array.h"
+#include "word_array.h"
 #include "symbol_table.h"
 #include "assembler.h"
 
@@ -64,12 +65,10 @@ int main(int argc, char **argv) {
     printf ("[%i] address:%u  label:%s\n", i, s->rows[i].address, s->rows[i].label);
   }
 
-
-  int output_file_size = tokenized_input->size - s->size;
-  word_t output_data[output_file_size];
+  word_array_t *output_data = make_word_array();
   assemble_all_instructions(tokenized_input, s, output_data);
 
-  save_file(output_data, save_filename, output_file_size);
+  save_file(output_data->array, save_filename, output_data->size);
 
   for (int i = 0; i < tokenized_input->size; i++) {
     free(tokenized_input->string_arrays[i]->array);

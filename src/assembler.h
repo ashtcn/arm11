@@ -5,6 +5,7 @@
 #include <string.h>
 #include "instruction.h"
 #include "string_array.h"
+#include "word_array.h"
 #include "symbol_table.h"
 #include "encode.h"
 #include "print.h"
@@ -24,7 +25,7 @@ word_t assemble_mul(string_array_t *tokens);
 word_t assemble_sdt(string_array_t *tokens);
 word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table);
 
-void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_t *words);
-word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table);
+void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words);
+word_t assemble_instruction(string_array_t *tokens, symbol_table_t *symbol_table, word_array_t *extra_words, int current_line_number, int max_lines);
 
 #endif
