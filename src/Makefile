@@ -30,6 +30,8 @@ unit_tests.o: emulate_utils/decode.h emulate_utils/execute.h emulate_utils/print
 clean:
 	rm -rf $(wildcard *.o)
 	rm -rf $(wildcard *.gch)
+	rm -rf $(wildcard */*.o)
+	rm -rf $(wildcard */*.gch)
 	rm -f emulate
 	rm -f assemble
 	rm -f unit_tests
