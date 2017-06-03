@@ -5,7 +5,7 @@
 
 #ifndef SYSTEM_STATE_H
 #define SYSTEM_STATE_H
-#include "instruction.h"
+#include "../instruction.h"
 
 /**
  * @brief A struct that holds information about the current system state.

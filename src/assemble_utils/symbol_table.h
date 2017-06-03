@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "global.h"
+#include "../global.h"
 
 typedef struct {
   char label[15];

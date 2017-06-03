@@ -5,7 +5,7 @@
 
 #ifndef DECODE_H
 #define DECODE_H
-#include "toolbox.h"
+#include "../toolbox.h"
 
 void decode_instruction(system_state_t *machine);
 void halt(system_state_t *machine);

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "global.h"
+#include "../global.h"
 #include "string_array.h"
 #include <stdbool.h>
 

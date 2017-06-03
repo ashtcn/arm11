@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include "system_state.h"
-#include "value_carry.h"
-#include "print.h"
+#include "emulate_utils/system_state.h"
+#include "emulate_utils/value_carry.h"
+#include "emulate_utils/print.h"
 
 void load_file(char *fname, byte_t *memory);
 void exit_program(system_state_t *machine);

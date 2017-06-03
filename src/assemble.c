@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include "global.h"
-#include "assemble_toolbox.h"
-#include "string_array_array.h"
-#include "word_array.h"
-#include "symbol_table.h"
-#include "assembler.h"
+#include "assemble_utils/assemble_toolbox.h"
+#include "assemble_utils/string_array_array.h"
+#include "assemble_utils/word_array.h"
+#include "assemble_utils/symbol_table.h"
+#include "assemble_utils/assembler.h"
 
 string_array_array_t *tokenize_input(char **input, int input_lines) {
   string_array_array_t *result = make_string_array_array();

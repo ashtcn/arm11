@@ -6,7 +6,7 @@
 #ifndef VALUE_CARRY_H
 #define VALUE_CARRY_H
 #include <stdbool.h>
-#include "global.h"
+#include "../global.h"
 
 /**
  * @brief A struct that has a value and a carry.

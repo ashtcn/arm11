@@ -2,7 +2,7 @@
 #define WORD_ARRAY_H
 #include <stdint.h>
 #include <stdlib.h>
-#include "global.h"
+#include "../global.h"
 
 typedef struct {
   word_t array[100];

@@ -3,14 +3,14 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include "instruction.h"
+#include "../instruction.h"
 #include "string_array.h"
 #include "word_array.h"
 #include "symbol_table.h"
 #include "encode.h"
-#include "print.h"
-#include "global.h"
-#include "toolbox.h"
+#include "../emulate_utils/print.h"
+#include "../global.h"
+#include "../toolbox.h"
 #include "string_array_array.h"
 
 mnemonic_t string_to_mnemonic(char *str);

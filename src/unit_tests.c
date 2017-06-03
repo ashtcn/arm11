@@ -1,6 +1,6 @@
-#include "decode.h"
-#include "execute.h"
-#include "print_compliant.h"
+#include "emulate_utils/decode.h"
+#include "emulate_utils/execute.h"
+#include "emulate_utils/print_compliant.h"
 
 #define run_test(fn_name) \
   printf("Running tests: %-20s ", #fn_name); \

@@ -3,9 +3,9 @@
  * @brief The main functionality for the ARM11 emulator.
  */
 
-#include "decode.h"
-#include "execute.h"
-#include "print_compliant.h"
+#include "emulate_utils/decode.h"
+#include "emulate_utils/execute.h"
+#include "emulate_utils/print_compliant.h"
 
 /** A 0-initialised system state. */
 static const system_state_t DEFAULT_SYSTEM_STATE = {
