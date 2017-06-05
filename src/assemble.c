@@ -12,8 +12,8 @@ string_array_array_t *tokenize_input(char **input, int input_lines) {
 
   for (int i = 0; i < input_lines; i++) {
     if(input[i][0] != '\n') {
-    string_array_t *tokened = tokenize_instruction(input[i]);
-    add_string_array_array(result, tokened);
+      string_array_t *tokened = tokenize_instruction(input[i]);
+      add_string_array_array(result, tokened);
     }
   }
 

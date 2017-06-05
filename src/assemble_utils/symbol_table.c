@@ -69,9 +69,6 @@ symbol_table_t *generate_symbol_table(string_array_array_t *tokens) {
 }
 
 void free_table(symbol_table_t *table) {
-  for (int i = 0; i < table->size; i++) {
-    free(table->rows + i);
-  }
   free(table->rows);
   free(table);
 }
