@@ -45,11 +45,14 @@ int main(int argc, char **argv) {
 
   free(output_data);
   for (int i = 0; i < tokenized_input->size; i++) {
+    for (int i2 = 1; i2 < tokenized_input->string_arrays[i]->size; i2++) {
+      free(tokenized_input->string_arrays[i]->array[i2]);
+    }
     free(tokenized_input->string_arrays[i]->array);
     free(tokenized_input->string_arrays[i]);
   }
   free(tokenized_input);
-  free_2d_array(loaded_file);
+  free_2d_array(loaded_file, input_lines);
   free_table(s);
   return EXIT_SUCCESS;
 }

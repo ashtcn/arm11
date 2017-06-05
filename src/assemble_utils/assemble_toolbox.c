@@ -44,16 +44,25 @@ char **create_2d_array(unsigned int rows, unsigned int cols) {
     perror("Error allocating memory for source file.");
     exit(EXIT_FAILURE);
   }
-  loaded_file[0] = (char *) malloc (cols * rows * sizeof(char));
 
-  for(i = 1; i < rows; i++) {
-    loaded_file[i] = loaded_file[i-1] + cols;
+  for(i = 0; i < rows; i++) {
+    loaded_file[i] = (char *) malloc (cols * sizeof(char));
   }
   return loaded_file;
 }
 
-void free_2d_array(char** arr) {
-  free(arr[0]);
+void free_string_array(string_array_t *arr) {
+  for(int i = 0; i < arr->size; i++) {
+    free(arr->array[i]);
+  }
+  free(arr->array);
+  free(arr);
+}
+
+void free_2d_array(char **arr, int rows) {
+  for(int i = 0; i < rows; i++) {
+    free(arr[i]);
+  }
   free(arr);
 }
 
@@ -70,7 +79,7 @@ char **load_source_file(char *load_filename, int lines) {
 
   // Try to read the file line by line
   int size = 0;
-  while(size < lines && fgets(loaded_file[size], sizeof(char[max_line_length]), file)) {
+  while(size < lines && fgets(loaded_file[size], max_line_length, file)) {
     // Strips any trailing newlinesword_size
     if(loaded_file[size][0] != '\n' && loaded_file[size][0] != '\r') {
       loaded_file[size][strcspn(loaded_file[size], "\n")] = 0;
@@ -103,9 +112,9 @@ string_array_t *tokenize_instruction(char* instruction) {
   if(is_label(instruction)) {
     result->size = 1;
     result->array = create_2d_array(1, 32);
-    int label_length = strlen(instruction);
-    strncpy(result->array[0], instruction, label_length - 1);
-    result->array[0][label_length - 1] = '\0';
+    free(result->array[0]);
+    result->array[0] = instruction;
+    result->array[0][strlen(instruction) - 1] = '\0';
   } else {
 
     int space_count = 0;
@@ -119,6 +128,7 @@ string_array_t *tokenize_instruction(char* instruction) {
     if(space_count == 0) {
       result->size = 1;
       result->array = create_2d_array(1, 32);
+      free(result->array[0]);
       result->array[0] = instruction;
     } else {
       char *instruction_op = NULL;
@@ -146,6 +156,7 @@ string_array_t *tokenize_operand_instruction(string_array_t *result, char* instr
   }
   result->size = split_count + 2;
   result->array = create_2d_array(split_count + 2, 32);
+  free(result->array[0]);
   result->array[0] = instruction_op;
   i = 0;
   int cur_section = 1;
@@ -153,23 +164,28 @@ string_array_t *tokenize_operand_instruction(string_array_t *result, char* instr
   for (i=0; operands[i]; i++) {
     if(operands[i] == ',' && operands[i+1] && operands[i+1] == ' ') {
       strncpy(result->array[cur_section], &operands[start_split], i - start_split);
+      result->array[cur_section][i-start_split] = '\0';
       cur_section++;
       start_split = i + 2;
       i++;
     } else if((operands[i] == ',' && !(operands[i+1] && operands[i+1] == ' '))) {
       strncpy(result->array[cur_section], &operands[start_split], i - start_split);
+      result->array[cur_section][i-start_split] = '\0';
       cur_section++;
       start_split = i + 1;
     } else if(operands[i] == ' ') {
       strncpy(result->array[cur_section], &operands[start_split], i - start_split);
+      result->array[cur_section][i-start_split] = '\0';
       cur_section++;
       start_split = i + 1;
     } else if(operands[i] == ']') {
       strncpy(result->array[cur_section], &operands[start_split], i - start_split);
+      result->array[cur_section][i-start_split] = '\0';
       cur_section++;
       start_split = i;
     } else if(operands[i] == '[') {
       strncpy(result->array[cur_section], &operands[start_split], i - start_split + 1);
+      result->array[cur_section][i-start_split + 1] = '\0';
       cur_section++;
       start_split = i + 1;
     }
