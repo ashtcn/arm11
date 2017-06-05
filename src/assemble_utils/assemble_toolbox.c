@@ -51,14 +51,6 @@ char **create_2d_array(unsigned int rows, unsigned int cols) {
   return loaded_file;
 }
 
-void free_string_array(string_array_t *arr) {
-  for(int i = 0; i < arr->size; i++) {
-    free(arr->array[i]);
-  }
-  free(arr->array);
-  free(arr);
-}
-
 void free_2d_array(char **arr, int rows) {
   for(int i = 0; i < rows; i++) {
     free(arr[i]);
@@ -95,10 +87,17 @@ bool is_label(char* instruction) {
 }
 
 char *trim(char *string) {
-  // Remove leading whitespace
+  // Remove leading whitespace.
   while(' ' == *string) {
     string++;
   }
+
+  // Remove trailing whitespace.
+  int new_end = strlen(string);
+  while(string[new_end] == ' ') {
+    new_end--;
+  }
+  string[new_end] = '\0';
   return string;
 }
 
@@ -131,10 +130,8 @@ string_array_t *tokenize_instruction(char* instruction) {
       free(result->array[0]);
       result->array[0] = instruction;
     } else {
-      char *instruction_op = NULL;
-      char *operands = instruction;
-      instruction_op = strtok_r(operands, " ", &operands);
-      result = tokenize_operand_instruction(result, trim(instruction_op), trim(operands));
+      char *instruction_op = strtok_r(instruction, " ", &instruction);
+      result = tokenize_operand_instruction(result, trim(instruction_op), trim(instruction));
     }
   }
   return result;
@@ -168,12 +165,7 @@ string_array_t *tokenize_operand_instruction(string_array_t *result, char* instr
       cur_section++;
       start_split = i + 2;
       i++;
-    } else if((operands[i] == ',' && !(operands[i+1] && operands[i+1] == ' '))) {
-      strncpy(result->array[cur_section], &operands[start_split], i - start_split);
-      result->array[cur_section][i-start_split] = '\0';
-      cur_section++;
-      start_split = i + 1;
-    } else if(operands[i] == ' ') {
+    } else if(operands[i] == ',' || operands[i] == ' ') {
       strncpy(result->array[cur_section], &operands[start_split], i - start_split);
       result->array[cur_section][i-start_split] = '\0';
       cur_section++;
