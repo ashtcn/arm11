@@ -15,7 +15,6 @@ static const instruction_t NULL_INSTRUCTION = {
 };
 
 mnemonic_t string_to_mnemonic(char *str) {
-  // TODO: Maybe use hash? - Nikolai Smirnov
   if (!strcmp(str, "add")) {
     return ADD_M;
   }
