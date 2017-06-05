@@ -235,13 +235,12 @@ word_t parse_immediate_value(char *str) {
 }
 
 word_t assemble_dpi(string_array_t *tokens) {
-  instruction_t *instruction = malloc(sizeof(instruction_t));
-  *instruction = NULL_INSTRUCTION;
+  instruction_t instruction = NULL_INSTRUCTION;
   char **sections = tokens->array;
 
-  instruction->type = DPI;
-  instruction->cond = AL;
-  instruction->operation = mnemonic_to_opcode(string_to_mnemonic(sections[0]));
+  instruction.type = DPI;
+  instruction.cond = AL;
+  instruction.operation = mnemonic_to_opcode(string_to_mnemonic(sections[0]));
 
   string_array_t *operand_tokens = malloc(sizeof(string_array_t));
   if (!operand_tokens) {
@@ -249,49 +248,48 @@ word_t assemble_dpi(string_array_t *tokens) {
     exit(EXIT_FAILURE);
   }
 
-  switch (instruction->operation) {
+  switch (instruction.operation) {
     case AND:
     case EOR:
     case SUB:
     case RSB:
     case ADD:
     case ORR:
-      instruction->rd = string_to_reg_address(sections[1]);
-      instruction->rn = string_to_reg_address(sections[2]);
+      instruction.rd = string_to_reg_address(sections[1]);
+      instruction.rn = string_to_reg_address(sections[2]);
 
       operand_tokens->array = &sections[3];
       operand_tokens->size = tokens->size - 3;
-      parse_operand(operand_tokens, instruction);
+      parse_operand(operand_tokens, &instruction);
       break;
     case MOV:
-      instruction->rd = string_to_reg_address(sections[1]);
+      instruction.rd = string_to_reg_address(sections[1]);
 
       operand_tokens->array = &sections[2];
       operand_tokens->size = tokens->size - 2;
-      parse_operand(operand_tokens, instruction);
+      parse_operand(operand_tokens, &instruction);
       break;
     case TST:
     case TEQ:
     case CMP:
-      instruction->rn = string_to_reg_address(sections[1]);
-      instruction->flag_1 = true;
+      instruction.rn = string_to_reg_address(sections[1]);
+      instruction.flag_1 = true;
       operand_tokens->array = &sections[2];
       operand_tokens->size = tokens->size - 2;
-      parse_operand(operand_tokens, instruction);
+      parse_operand(operand_tokens, &instruction);
       break;
   }
 
   free(operand_tokens);
-  return encode(instruction);
+  return encode(&instruction);
 }
 
 word_t assemble_spl(string_array_t *tokens) {
-  instruction_t *instruction = malloc(sizeof(instruction_t));
-  *instruction = NULL_INSTRUCTION;
+  instruction_t instruction = NULL_INSTRUCTION;
 
   if (4 == tokens->size) {
     // Is an ANDEQ instruction
-    instruction->type = ZER;
+    instruction.type = ZER;
   } else {
     // Build the tokens for assemble_dpi to make into a MOV instruction
     string_array_t *mov_tokens = malloc(sizeof(string_array_t));
@@ -323,39 +321,37 @@ word_t assemble_spl(string_array_t *tokens) {
     return mov_instruction;
   }
 
-  return encode(instruction);
+  return encode(&instruction);
 }
 
 word_t assemble_mul(string_array_t *tokens) {
-  instruction_t *instruction = malloc(sizeof(instruction_t));
-  *instruction = NULL_INSTRUCTION;
+  instruction_t instruction = NULL_INSTRUCTION;
 
-  instruction->type = MUL;
-  instruction->cond = AL;
-  instruction->rd = string_to_reg_address(tokens->array[1]);
-  instruction->rm = string_to_reg_address(tokens->array[2]);
-  instruction->rs = string_to_reg_address(tokens->array[3]);
+  instruction.type = MUL;
+  instruction.cond = AL;
+  instruction.rd = string_to_reg_address(tokens->array[1]);
+  instruction.rm = string_to_reg_address(tokens->array[2]);
+  instruction.rs = string_to_reg_address(tokens->array[3]);
 
   if (5 == tokens->size) {
     // Is an MLA instruction
-    instruction->flag_0 = 1;
-    instruction->rn = string_to_reg_address(tokens->array[4]);
+    instruction.flag_0 = 1;
+    instruction.rn = string_to_reg_address(tokens->array[4]);
   }
 
-  return encode(instruction);
+  return encode(&instruction);
 }
 
 word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int current_line, int max_lines) {
-  instruction_t *instruction = malloc(sizeof(instruction_t));
-  *instruction = NULL_INSTRUCTION;
+  instruction_t instruction = NULL_INSTRUCTION;
   char **sections = tokens->array;
 
-  instruction->type = SDT;
-  instruction->cond = AL;
-  instruction->rd = string_to_reg_address(sections[1]);
-  instruction->flag_2 = 1;
+  instruction.type = SDT;
+  instruction.cond = AL;
+  instruction.rd = string_to_reg_address(sections[1]);
+  instruction.flag_2 = 1;
   if (string_to_mnemonic(sections[0]) == LDR_M) {
-    instruction->flag_3 = 1;
+    instruction.flag_3 = 1;
   }
 
   if ('=' == sections[2][0]) {
@@ -392,33 +388,33 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
       return mov_instruction;
     } else {
       // Store expression value at end of memory
-      instruction->flag_1 = 1;
-      instruction->rn = PC;
-      instruction->immediate_value = (((max_lines + extra_words->size) - current_line) << 2) - 8;
+      instruction.flag_1 = 1;
+      instruction.rn = PC;
+      instruction.immediate_value = (((max_lines + extra_words->size) - current_line) << 2) - 8;
       add_word_array(extra_words, expression_value);
     }
   } else {
     if (5 == tokens->size) {
       // [Rn]
-      instruction->rn = string_to_reg_address(sections[3]);
-      instruction->flag_1 = 1;
+      instruction.rn = string_to_reg_address(sections[3]);
+      instruction.flag_1 = 1;
     } else {
       if (']' == sections[4][0]) {
         // Post indexing address specification
         if ('#' == sections[5][0]) {
           // [Rn], <#expression>
-          instruction->rn = string_to_reg_address(sections[3]);
-          instruction->immediate_value = parse_immediate_value(&sections[5][1]);
+          instruction.rn = string_to_reg_address(sections[3]);
+          instruction.immediate_value = parse_immediate_value(&sections[5][1]);
         } else {
           // [Rn],{+/-}Rm{,<shift>}
-          instruction->rn = string_to_reg_address(sections[3]);
-          instruction->flag_0 = 1;
+          instruction.rn = string_to_reg_address(sections[3]);
+          instruction.flag_0 = 1;
 
           if ('-' == sections[5][0]) {
-            instruction->flag_2 = 0;
-            instruction->rm = string_to_reg_address(&sections[5][1]);
+            instruction.flag_2 = 0;
+            instruction.rm = string_to_reg_address(&sections[5][1]);
           } else {
-            instruction->rm = string_to_reg_address(sections[5]);
+            instruction.rm = string_to_reg_address(sections[5]);
           }
 
           if (tokens->size > 6) {
@@ -433,30 +429,30 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
             // Pass the <shift> section into parse_shift
             shift_tokens->array = &sections[6];
             shift_tokens->size = tokens->size - 6;
-            parse_shift(shift_tokens, instruction);
+            parse_shift(shift_tokens, &instruction);
             free(shift_tokens);
           }
         }
       } else {
         // Pre indexing address specification
-        instruction->flag_1 = 1;
-        instruction->rn = string_to_reg_address(sections[3]);
+        instruction.flag_1 = 1;
+        instruction.rn = string_to_reg_address(sections[3]);
 
         if ('#' == sections[4][0]) {
           // [Rn, <#expression>]
           // Set flags if the immediate expression is negative
           word_t value = parse_immediate_value(&sections[4][1]);
-          instruction->immediate_value = absolute(value);
-          instruction->flag_2 = !is_negative(value);
+          instruction.immediate_value = absolute(value);
+          instruction.flag_2 = !is_negative(value);
         } else {
           // [Rn, {+/-}Rm{,<shift>}]
-          instruction->flag_0 = 1;
+          instruction.flag_0 = 1;
 
           if ('-' == sections[4][0]) {
-            instruction->flag_2 = 0;
-            instruction->rm = string_to_reg_address(&sections[4][1]);
+            instruction.flag_2 = 0;
+            instruction.rm = string_to_reg_address(&sections[4][1]);
           } else {
-            instruction->rm = string_to_reg_address(sections[4]);
+            instruction.rm = string_to_reg_address(sections[4]);
           }
 
           if (tokens->size > 6) {
@@ -471,7 +467,7 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
             // Pass the <shift> section into parse_shift
             shift_tokens->array = &sections[5];
             shift_tokens->size = tokens->size - 5;
-            parse_shift(shift_tokens, instruction);
+            parse_shift(shift_tokens, &instruction);
             free(shift_tokens);
           }
         }
@@ -479,7 +475,7 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
     }
   }
 
-  return encode(instruction);
+  return encode(&instruction);
 }
 
 void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
@@ -549,20 +545,18 @@ uint32_t signed_to_twos_complement(int32_t value) {
 }
 
 word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table, address_t instruction_no) {
-  instruction_t instruction1;
-  instruction_t* instruction = &instruction1;
-  *instruction = NULL_INSTRUCTION;
+  instruction_t instruction = NULL_INSTRUCTION;
 
-  instruction->type = BRA;
+  instruction.type = BRA;
 
   if (!tokens->array[0][1]) {
-    instruction->cond = AL;
+    instruction.cond = AL;
   } else {
-    instruction->cond = string_to_condition(&(tokens->array[0][1]));
+    instruction.cond = string_to_condition(&(tokens->array[0][1]));
   }
 
   address_t label_address = get_address(symbol_table, tokens->array[1]);
 
-  instruction->immediate_value = (signed_to_twos_complement((int32_t) label_address - ((int32_t) instruction_no * 4) - 8) >> 2);
-  return encode(instruction);
+  instruction.immediate_value = (signed_to_twos_complement((int32_t) label_address - ((int32_t) instruction_no * 4) - 8) >> 2);
+  return encode(&instruction);
 }
