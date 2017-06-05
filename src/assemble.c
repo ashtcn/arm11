@@ -1,27 +1,12 @@
 #include <stdlib.h>
 #include "global.h"
 #include "assemble_utils/assemble_toolbox.h"
+#include "assemble_utils/tokenizer.h"
 #include "assemble_utils/string_array_array.h"
 #include "assemble_utils/word_array.h"
 #include "assemble_utils/symbol_table.h"
 #include "assemble_utils/assembler.h"
 #include "assemble_utils/symbol_table.h"
-
-string_array_array_t *tokenize_input(char **input, int input_lines) {
-  string_array_array_t *result = make_string_array_array();
-
-  for (int i = 0; i < input_lines; i++) {
-    if(input[i][0] != '\n') {
-      string_array_t *tokened = tokenize_instruction(input[i]);
-      add_string_array_array(result, tokened);
-    }
-  }
-
-  return result;
-}
-
-
-
 
 int main(int argc, char **argv) {
   if (argc != 3) {
@@ -44,14 +29,7 @@ int main(int argc, char **argv) {
   save_file(output_data->array, save_filename, output_data->size);
 
   free(output_data);
-  for (int i = 0; i < tokenized_input->size; i++) {
-    for (int i2 = 1; i2 < tokenized_input->string_arrays[i]->size; i2++) {
-      free(tokenized_input->string_arrays[i]->array[i2]);
-    }
-    free(tokenized_input->string_arrays[i]->array);
-    free(tokenized_input->string_arrays[i]);
-  }
-  free(tokenized_input);
+  free_tokens(tokenized_input);
   free_2d_array(loaded_file, input_lines);
   free_table(s);
   return EXIT_SUCCESS;
