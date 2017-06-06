@@ -87,14 +87,13 @@ string_array_t *tokenize_operand_instruction(string_array_t *result, char* instr
   int split_count = 0;
   int i;
   for (i=0; operands[i]; i++) {
-    if(operands[i] == ','
-    || operands[i] == ']'
-    || operands[i] == '['
-    || operands[i] == ' ') {
+    // Count number of splits needed, ignoring duplicate or unecessary spaces
+    if((operands[i] == ','
+     || operands[i] == ']'
+     || operands[i] == '['
+     || operands[i] == ' ') &&
+     !(operands[i+1] && operands[i+1] == ' ')) {
       split_count++;
-    }
-    if (operands[i] == ',' && operands[i+1] && operands[i+1] == ' ') {
-      split_count--;
     }
   }
   result->size = split_count + 2;
