@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
   }
 
   // Print out final details
-  if(COMPLIANT_MODE) {
+  if (COMPLIANT_MODE) {
     print_system_state_compliant(machine);
   } else {
     printf("\nProgram executed successfully\n");

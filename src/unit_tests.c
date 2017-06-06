@@ -218,9 +218,9 @@ void test_decode_dpi(void) {
   decode_instruction(fetch1);
   decode_instruction(fetch2);
   decode_instruction(fetch3);
-  assert (equal_instruction(*fetch1->decoded_instruction, decode1));
-  assert (equal_instruction(*fetch2->decoded_instruction, decode2));
-  assert (equal_instruction(*fetch3->decoded_instruction, decode3));
+  assert(equal_instruction(*fetch1->decoded_instruction, decode1));
+  assert(equal_instruction(*fetch2->decoded_instruction, decode2));
+  assert(equal_instruction(*fetch3->decoded_instruction, decode3));
   free(fetch1->decoded_instruction);
   free(fetch2->decoded_instruction);
   free(fetch3->decoded_instruction);
@@ -288,8 +288,8 @@ void test_decode_mul(void) {
   };
   decode_instruction(fetch4);
   decode_instruction(fetch5);
-  assert (equal_instruction(*fetch4->decoded_instruction, decode4));
-  assert (equal_instruction(*fetch5->decoded_instruction, decode5));
+  assert(equal_instruction(*fetch4->decoded_instruction, decode4));
+  assert(equal_instruction(*fetch5->decoded_instruction, decode5));
   free(fetch4->decoded_instruction);
   free(fetch5->decoded_instruction);
   free(fetch4);
@@ -355,8 +355,8 @@ void test_decode_sdt(void) {
   };
   decode_instruction(fetch6);
   decode_instruction(fetch7);
-  assert (equal_instruction(*fetch6->decoded_instruction, decode6));
-  assert (equal_instruction(*fetch7->decoded_instruction, decode7));
+  assert(equal_instruction(*fetch6->decoded_instruction, decode6));
+  assert(equal_instruction(*fetch7->decoded_instruction, decode7));
   free(fetch6->decoded_instruction);
   free(fetch7->decoded_instruction);
   free(fetch6);
@@ -393,7 +393,7 @@ void test_decode_bra(void) {
     .shift_amount = 0,
   };
   decode_instruction(fetch8);
-  assert (equal_instruction(*fetch8->decoded_instruction, decode8));
+  assert(equal_instruction(*fetch8->decoded_instruction, decode8));
   free(fetch8->decoded_instruction);
   free(fetch8);
 }

@@ -23,9 +23,9 @@ int lines_in_file(char *file_name) {
     exit(EXIT_FAILURE);
   }
   bool on_new_line = true;
-  while((ch=getc(file)) != EOF) {
-    if(ch == '\n') {
-      if(!on_new_line) {
+  while ((ch = getc(file)) != EOF) {
+    if (ch == '\n') {
+      if (!on_new_line) {
         lines++;
       }
       on_new_line = true;
@@ -39,20 +39,20 @@ int lines_in_file(char *file_name) {
 
 char **create_2d_array(unsigned int rows, unsigned int cols) {
   unsigned int i;
-  char **loaded_file = (char **) malloc(rows * sizeof(char *));
-  if(!loaded_file) {
+  char **loaded_file = malloc(rows * sizeof(char *));
+  if (!loaded_file) {
     perror("Error allocating memory for source file.");
     exit(EXIT_FAILURE);
   }
 
-  for(i = 0; i < rows; i++) {
-    loaded_file[i] = (char *) malloc (cols * sizeof(char));
+  for (i = 0; i < rows; i++) {
+    loaded_file[i] = malloc(cols * sizeof(char));
   }
   return loaded_file;
 }
 
 void free_2d_array(char **arr, int rows) {
-  for(int i = 0; i < rows; i++) {
+  for (int i = 0; i < rows; i++) {
     free(arr[i]);
   }
   free(arr);
@@ -71,9 +71,9 @@ char **load_source_file(char *load_filename, int lines) {
 
   // Try to read the file line by line
   int size = 0;
-  while(size < lines && fgets(loaded_file[size], max_line_length, file)) {
+  while (size < lines && fgets(loaded_file[size], max_line_length, file)) {
     // Strips any trailing newlinesword_size
-    if(loaded_file[size][0] != '\n' && loaded_file[size][0] != '\r') {
+    if (loaded_file[size][0] != '\n' && loaded_file[size][0] != '\r') {
       loaded_file[size][strcspn(loaded_file[size], "\n")] = 0;
       size++;
     }

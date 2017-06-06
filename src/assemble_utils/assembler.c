@@ -482,7 +482,7 @@ void assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *sy
   int max_lines = instructions->size - symbol_table->size;
   word_t machine_instruction;
   for (int i = 0; i < instructions->size; i++) {
-    if(instructions->arrays[i]->size != 1) {
+    if (instructions->arrays[i]->size != 1) {
       mnemonic_t ins_code = string_to_mnemonic(instructions->arrays[i]->array[0]);
       switch(ins_code) {
         case ADD_M:

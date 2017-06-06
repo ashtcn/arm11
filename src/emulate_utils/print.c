@@ -121,7 +121,7 @@ void print_instruction(instruction_t *instruction) {
       printf("  Set Flags: %u\n", instruction->flag_1);
       printf("  Operand1 Register Rm: %d\n", instruction->rm);
       printf("  Operand2 Register Rs: %d\n", instruction->rs);
-      if(instruction->flag_0) {
+      if (instruction->flag_0) {
         // Accumulate is set
         printf("  Accumulate Register Rn: %d\n", instruction->rn);
       }
@@ -134,7 +134,7 @@ void print_instruction(instruction_t *instruction) {
       printf("  Immediate Operand: %u\n", instruction->flag_0);
       printf("  Set Flags: %u\n", instruction->flag_1);
       printf("  Operand1 Register Rn: %d\n", instruction->rn);
-      if(instruction->flag_0) {
+      if (instruction->flag_0) {
         // Operand2 is immediate
         printf("  Operand2 Immediate Value: 0x%x\n",
                instruction->immediate_value);
@@ -163,7 +163,7 @@ void print_instruction(instruction_t *instruction) {
       printf("  Offset Add (1) or Subtract (0): %u\n", instruction->flag_2);
       printf("  Load (1) or Store (0): %u\n", instruction->flag_3);
       printf("  Base Register Rn: %d\n", instruction->rn);
-      if(instruction->flag_0) {
+      if (instruction->flag_0) {
         // Offset is register
         printf("  Offset Register Rm: %d\n", instruction->rm);
         printf("  Offset Shift Type: %s\n",

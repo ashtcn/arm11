@@ -23,7 +23,7 @@
    }
    // Try to read all lines into the memory
    size_t size = fread(memory, NUM_ADDRESSES, 1, file);
-   if(ferror(file)) {
+   if (ferror(file)) {
      printf("File size: %lu", size);
      perror("Error in reading from object code file.");
      exit(EXIT_FAILURE);
@@ -218,7 +218,7 @@ word_t absolute(word_t value) {
        exit(EXIT_FAILURE);
    }
 
-   if(shift_amount == 0) {
+   if (shift_amount == 0) {
      result->carry = false;
    }
 
