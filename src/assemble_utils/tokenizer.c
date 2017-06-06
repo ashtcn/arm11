@@ -19,6 +19,14 @@ char *trim(char *string) {
   return string;
 }
 
+char *trim_token(char *string) {
+  // Remove leading whitespace and commas.
+  while(' ' == *string || ',' == *string) {
+    string++;
+  }
+  return string;
+}
+
 string_arrays_t *tokenize_input(char **input, int input_lines) {
   string_arrays_t *result = make_string_arrays();
 
@@ -68,6 +76,13 @@ string_array_t *tokenize_instruction(char* instruction) {
   return result;
 }
 
+char *split_token(string_array_t *result, int *cur_section, char* operands, int i) {
+  strncpy(result->array[*cur_section], operands, i);
+  result->array[*cur_section][i] = '\0';
+  (*cur_section)++;
+  return trim_token(operands + i);
+}
+
 string_array_t *tokenize_operand_instruction(string_array_t *result, char* instruction_op, char* operands) {
   int split_count = 0;
   int i;
@@ -88,32 +103,31 @@ string_array_t *tokenize_operand_instruction(string_array_t *result, char* instr
   result->array[0] = instruction_op;
 
   int cur_section = 1;
-  int start_split = 0;
-  for (i=0; operands[i]; i++) {
-    if(operands[i] == ',' && operands[i+1] && operands[i+1] == ' ') {
-      strncpy(result->array[cur_section], &operands[start_split], i - start_split);
-      result->array[cur_section][i-start_split] = '\0';
-      cur_section++;
-      start_split = i + 2;
-      i++;
-    } else if(operands[i] == ',' || operands[i] == ' ') {
-      strncpy(result->array[cur_section], &operands[start_split], i - start_split);
-      result->array[cur_section][i-start_split] = '\0';
-      cur_section++;
-      start_split = i + 1;
+  // Loop through the string, breaking on brackets, commas and spaces.
+  for (i = 0; operands[i];) {
+    if(operands[i] == ',' || operands[i] == ' ') {
+      // Cut out the comma or space and add the token.
+      operands = split_token(result, &cur_section, operands, i);
+      i = 0;
     } else if(operands[i] == ']') {
-      strncpy(result->array[cur_section], &operands[start_split], i - start_split);
-      result->array[cur_section][i-start_split] = '\0';
-      cur_section++;
-      start_split = i;
+      // Add the token and start ahead of the bracket.
+      operands = split_token(result, &cur_section, operands, i);
+      i = 1;
     } else if(operands[i] == '[') {
-      strncpy(result->array[cur_section], &operands[start_split], i - start_split + 1);
-      result->array[cur_section][i-start_split + 1] = '\0';
-      cur_section++;
-      start_split = i + 1;
+      // Add the bracket token.
+      operands = split_token(result, &cur_section, operands, i + 1);
+      i = 0;
+    } else {
+      i++;
     }
   }
-  strncpy(result->array[cur_section], &operands[start_split], i - start_split + 1);
+
+  // If there is a remaining token add it.
+  if(i > 0) {
+    strncpy(result->array[cur_section], operands, i);
+    result->array[cur_section][i] = '\0';
+  }
+
 
   return result;
 }
