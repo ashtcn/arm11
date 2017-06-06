@@ -54,24 +54,15 @@ string_array_t *tokenize_instruction(char* instruction) {
     result->array[0] = instruction;
     result->array[0][strlen(instruction) - 1] = '\0';
   } else {
-
     int space_count = 0;
-    int i;
-    for (i=0; instruction[i]; i++) {
+    for (int i = 0; instruction[i]; i++) {
       if(instruction[i] == ' ') {
         space_count++;
       }
     }
 
-    if(space_count == 0) {
-      result->size = 1;
-      result->array = create_2d_array(1, 32);
-      free(result->array[0]);
-      result->array[0] = instruction;
-    } else {
-      char *instruction_op = strtok_r(instruction, " ", &instruction);
-      result = tokenize_operand_instruction(result, trim(instruction_op), trim(instruction));
-    }
+    char *instruction_op = strtok_r(instruction, " ", &instruction);
+    result = tokenize_operand_instruction(result, trim(instruction_op), trim(instruction));
   }
   return result;
 }
