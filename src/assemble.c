@@ -2,7 +2,7 @@
 #include "global.h"
 #include "assemble_utils/assemble_toolbox.h"
 #include "assemble_utils/tokenizer.h"
-#include "assemble_utils/string_array_array.h"
+#include "assemble_utils/string_arrays.h"
 #include "assemble_utils/word_array.h"
 #include "assemble_utils/symbol_table.h"
 #include "assemble_utils/assembler.h"
@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
   int input_lines = lines_in_file(load_filename);
   char **loaded_file = load_source_file(load_filename, input_lines);
-  string_array_array_t *tokenized_input = tokenize_input(loaded_file, input_lines);
+  string_arrays_t *tokenized_input = tokenize_input(loaded_file, input_lines);
 
   symbol_table_t *s = generate_symbol_table(tokenized_input);
 
@@ -28,8 +28,8 @@ int main(int argc, char **argv) {
 
   save_file(output_data->array, save_filename, output_data->size);
 
-  free(output_data);
-  free_tokens(tokenized_input);
+  free_word_array(output_data);
+  free_string_arrays(tokenized_input);
   free_2d_array(loaded_file, input_lines);
   free_table(s);
   return EXIT_SUCCESS;

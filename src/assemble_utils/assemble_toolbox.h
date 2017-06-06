@@ -5,7 +5,7 @@
 #include <string.h>
 #include "../global.h"
 #include "string_array.h"
-#include "string_array_array.h"
+#include "string_arrays.h"
 #include <stdbool.h>
 
 void save_file(word_t *data, char *file_name, int ile_size);

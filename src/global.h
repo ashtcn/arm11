@@ -37,6 +37,8 @@
 /** The number of bytes allocated for setting GPIO pins. */
 #define GPIO_SET_SIZE 4
 
+#define INITIAL_ARRAY_SIZE 64
+
 /**
  * @brief A setting which determines the format of output.
  *

@@ -19,25 +19,13 @@ char *trim(char *string) {
   return string;
 }
 
-void free_tokens(string_array_array_t *tokenized_input) {
-  for (int i = 0; i < tokenized_input->size; i++) {
-    for (int i2 = 1; i2 < tokenized_input->string_arrays[i]->size; i2++) {
-      free(tokenized_input->string_arrays[i]->array[i2]);
-    }
-    free(tokenized_input->string_arrays[i]->array);
-    free(tokenized_input->string_arrays[i]);
-  }
-  free(tokenized_input);
-}
-
-
-string_array_array_t *tokenize_input(char **input, int input_lines) {
-  string_array_array_t *result = make_string_array_array();
+string_arrays_t *tokenize_input(char **input, int input_lines) {
+  string_arrays_t *result = make_string_arrays();
 
   for (int i = 0; i < input_lines; i++) {
     if(input[i][0] != '\n') {
       string_array_t *tokened = tokenize_instruction(input[i]);
-      add_string_array_array(result, tokened);
+      add_string_arrays(result, tokened);
     }
   }
 

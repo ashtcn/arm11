@@ -1,8 +1,8 @@
 #include "string_array.h"
 #include "symbol_table.h"
-#include "string_array_array.h"
+#include "string_arrays.h"
 
-symbol_table_t *generate_symbol_table(string_array_array_t *tokens) {
+symbol_table_t *generate_symbol_table(string_arrays_t *tokens) {
   symbol_table_t *table = create_table(100);
   address_t address = 0;
 

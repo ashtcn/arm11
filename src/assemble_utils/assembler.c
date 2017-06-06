@@ -477,13 +477,13 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
   return encode(&instruction);
 }
 
-void assemble_all_instructions(string_array_array_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
+void assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
   word_array_t *extra_words = make_word_array();
   int max_lines = instructions->size - symbol_table->size;
   word_t machine_instruction;
   for (int i = 0; i < instructions->size; i++) {
-    if(instructions->string_arrays[i]->size != 1) {
-      mnemonic_t ins_code = string_to_mnemonic(instructions->string_arrays[i]->array[0]);
+    if(instructions->arrays[i]->size != 1) {
+      mnemonic_t ins_code = string_to_mnemonic(instructions->arrays[i]->array[0]);
       switch(ins_code) {
         case ADD_M:
         case SUB_M:
@@ -495,15 +495,15 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case TST_M:
         case TEQ_M:
         case CMP_M:
-          machine_instruction = assemble_dpi(instructions->string_arrays[i]);
+          machine_instruction = assemble_dpi(instructions->arrays[i]);
           break;
         case MUL_M:
         case MLA_M:
-          machine_instruction = assemble_mul(instructions->string_arrays[i]);
+          machine_instruction = assemble_mul(instructions->arrays[i]);
           break;
         case LDR_M:
         case STR_M:
-          machine_instruction = assemble_sdt(instructions->string_arrays[i], extra_words, words->size, max_lines);
+          machine_instruction = assemble_sdt(instructions->arrays[i], extra_words, words->size, max_lines);
           break;
         case BEQ_M:
         case BNE_M:
@@ -512,11 +512,11 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
         case BGT_M:
         case BLE_M:
         case B_M:
-          machine_instruction = assemble_bra(instructions->string_arrays[i], symbol_table, words->size);
+          machine_instruction = assemble_bra(instructions->arrays[i], symbol_table, words->size);
           break;
         case LSL_M:
         case ANDEQ_M:
-          machine_instruction = assemble_spl(instructions->string_arrays[i]);
+          machine_instruction = assemble_spl(instructions->arrays[i]);
           break;
         default:
           fprintf(stderr, "No such opcode found.\n");
@@ -532,7 +532,7 @@ void assemble_all_instructions(string_array_array_t *instructions, symbol_table_
     add_word_array(words, extra_words->array[i]);
   }
 
-  free(extra_words);
+  free_word_array(extra_words);
 }
 
 uint32_t signed_to_twos_complement(int32_t value) {

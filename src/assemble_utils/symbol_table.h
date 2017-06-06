@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "../global.h"
-#include "string_array_array.h"
+#include "string_arrays.h"
 
 typedef struct {
   char label[15];
@@ -27,6 +27,6 @@ address_t get_address(symbol_table_t *table, char *label);
 symbol_table_t *create_table(uint16_t row_number);
 void add_row(symbol_table_t *table, char *label, address_t address);
 void free_table(symbol_table_t *table);
-symbol_table_t *generate_symbol_table(string_array_array_t *tokens);
+symbol_table_t *generate_symbol_table(string_arrays_t *tokens);
 
 #endif
