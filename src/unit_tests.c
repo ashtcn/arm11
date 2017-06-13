@@ -10,7 +10,7 @@
 void test_load_file(void) {
   byte_t load_file_memory[NUM_ADDRESSES] = {0};
 
-  load_file("unit_tests_res/load_file_fname", load_file_memory);
+  load_file("unit_tests_utils/load_file_fname", load_file_memory);
 
   assert(0x01 == load_file_memory[0]);
   assert(0x10 == load_file_memory[1]);
@@ -71,6 +71,7 @@ void test_print_system_state(void) {
 void test_shifter_values(word_t correct_value, bool correct_carry, value_carry_t *shifter_out) {
   assert(shifter_out->value == correct_value);
   assert(shifter_out->carry == correct_carry);
+  free(shifter_out);
 }
 
 void test_shifter (void) {
