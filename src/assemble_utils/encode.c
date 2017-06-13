@@ -1,3 +1,8 @@
+/**
+ * @file encode.c
+ * @brief Functions to encode an instruction_t
+ */
+
 #include "encode.h"
 
 word_t encode(instruction_t *instruction) {
@@ -25,10 +30,25 @@ word_t encode(instruction_t *instruction) {
   }
 }
 
+/**
+ * @brief Returns the condition code in the correct bit position
+ *
+ * @param instruction Given instruction
+ * @returns The condiiton code
+ */
 word_t add_cond(instruction_t *instruction) {
   return ((word_t) instruction->cond) << (WORD_SIZE - 4);
 }
 
+/**
+ * @brief Encodes data processing instructions
+ *
+ * Given a data processing instruction this will return the 32 bit instruction
+ * corresponding with given instruction_t
+ *
+ * @param instruction Given instruction
+ * @returns 32 bit instruction
+ */
 word_t encode_dpi(instruction_t *instruction) {
   word_t binary = 0;
   binary |= ((word_t) instruction->operation) << 21;
@@ -58,6 +78,15 @@ word_t encode_dpi(instruction_t *instruction) {
   return binary | add_cond(instruction);
 }
 
+/**
+ * @brief Encodes multiply instructions
+ *
+ * Given a multiply instruction this will return the 32 bit instruction
+ * corresponding with given instruction_t
+ *
+ * @param instruction Given instruction
+ * @returns 32 bit instruction
+ */
 word_t encode_mul(instruction_t *instruction) {
   word_t binary = 0x90;
   binary |= ((word_t) instruction->rd) << 16;
@@ -71,6 +100,16 @@ word_t encode_mul(instruction_t *instruction) {
   return binary | add_cond(instruction);
 }
 
+
+/**
+ * @brief Encodes single data transfer instructions
+ *
+ * Given a single data transfer instruction this will return the 32 bit
+ * instruction corresponding with given instruction_t
+ *
+ * @param instruction Given instruction
+ * @returns 32 bit instruction
+ */
 word_t encode_sdt(instruction_t *instruction) {
   word_t binary = 0x04000000;
   binary |= ((word_t) instruction->flag_0) << 25;
@@ -101,6 +140,15 @@ word_t encode_sdt(instruction_t *instruction) {
   return binary | add_cond(instruction);
 }
 
+/**
+ * @brief Encodes branch instructions
+ *
+ * Given a branch instruction this will return the 32 bit
+ * instruction corresponding with given instruction_t
+ *
+ * @param instruction Given instruction
+ * @returns 32 bit instruction
+ */
 word_t encode_branch(instruction_t *instruction) {
   word_t binary = 0x0A000000;
   binary |= 0xFFFFFF & instruction->immediate_value;
