@@ -141,6 +141,9 @@ typedef enum {
   V = 0x1,
 } cpsr_flags_t;
 
+/**
+ * @brief An enum used for storing the mmemonic in assembly
+ */
 typedef enum {
   ADD_M,
   SUB_M,

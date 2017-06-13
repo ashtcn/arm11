@@ -1,3 +1,7 @@
+/**
+ * @file symbol_table.c
+ * @brief File for functions for using and making symbol tables
+ */
 #include "symbol_table.h"
 
 symbol_table_t *create_table(uint16_t row_number) {
