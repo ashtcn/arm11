@@ -142,31 +142,54 @@ typedef enum {
 } cpsr_flags_t;
 
 /**
- * @brief An enum used for storing the mmemonic in assembly
+ * @brief An enum used for storing the mnemonic in assembly
  */
 typedef enum {
+  /** Add. */
   ADD_M,
+  /** Subtract. */
   SUB_M,
+  /** Reverse subtract.*/
   RSB_M,
+  /** And.*/
   AND_M,
+  /** Exclusive or.*/
   EOR_M,
+  /** Or.*/
   ORR_M,
+  /** Move.*/
   MOV_M,
+  /** Test.*/
   TST_M,
+  /** Is equal.*/
   TEQ_M,
+  /** Compare.*/
   CMP_M,
+  /** Multiply.*/
   MUL_M,
+  /** Multiply with addition.*/
   MLA_M,
+  /** Load.*/
   LDR_M,
+  /** Store.*/
   STR_M,
+  /** Branch if equal.*/
   BEQ_M,
+  /** Branch if negative.*/
   BNE_M,
+  /** Branch if greater than or equal.*/
   BGE_M,
+  /** Branch if less than.*/
   BLT_M,
+  /** Branch if greater than.*/
   BGT_M,
+  /** Branch if less than or equal.*/
   BLE_M,
+  /** Unconditional branch.*/
   B_M,
+  /** Shift.*/
   SHIFT_M,
+  /** And eq, an all zero command*/
   ANDEQ_M,
 } mnemonic_t;
 
