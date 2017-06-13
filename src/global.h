@@ -163,7 +163,7 @@ typedef enum {
   BGT_M,
   BLE_M,
   B_M,
-  LSL_M,
+  SHIFT_M,
   ANDEQ_M,
 } mnemonic_t;
 

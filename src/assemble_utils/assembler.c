@@ -79,7 +79,16 @@ mnemonic_t string_to_mnemonic(char *str) {
     return B_M;
   }
   if (!strcmp(str, "lsl")) {
-    return LSL_M;
+    return SHIFT_M;
+  }
+  if (!strcmp(str, "lsr")) {
+    return SHIFT_M;
+  }
+  if (!strcmp(str, "asr")) {
+    return SHIFT_M;
+  }
+  if (!strcmp(str, "ror")) {
+    return SHIFT_M;
   }
   if (!strcmp(str, "andeq")) {
     return ANDEQ_M;
@@ -514,7 +523,7 @@ void assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *sy
         case B_M:
           machine_instruction = assemble_bra(instructions->arrays[i], symbol_table, words->size);
           break;
-        case LSL_M:
+        case SHIFT_M:
         case ANDEQ_M:
           machine_instruction = assemble_spl(instructions->arrays[i]);
           break;
