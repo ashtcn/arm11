@@ -19,11 +19,20 @@ symbol_table_t *create_table(uint16_t row_number) {
 void add_row(symbol_table_t *table, char *label, address_t address) {
   if (is_label_in_table(table, label)) {
     fprintf(stderr, "Label already in symbol table");
+    exit(EXIT_FAILURE);
   }
   symbol_table_row_t row = {
     .address = address,
   };
   memcpy(row.label, label, 15);
+  if (table->size >= table->max_size) {
+    table->max_size *= 2;
+    table->rows = realloc(table->rows, table->max_size * sizeof(symbol_table_row_t));
+    if (!table->rows) {
+      perror("Unable to expand size of symbol table");
+      exit(EXIT_FAILURE);
+    }
+  }
   table->rows[table->size] = row;
   ++table->size;
 }
@@ -35,7 +44,7 @@ address_t get_address(symbol_table_t *table, char *label) {
     }
   }
   fprintf(stderr, "Label not in symbol table");
-  return 0;
+  exit(EXIT_FAILURE);
 }
 
 bool is_label_in_table(symbol_table_t *table, char *label) {

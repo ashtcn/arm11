@@ -3,6 +3,7 @@
 #include "string_array.h"
 #include "../global.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct {
   uint16_t max_elements;
