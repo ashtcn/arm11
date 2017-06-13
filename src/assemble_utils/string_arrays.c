@@ -1,16 +1,16 @@
 /**
  * @file string_arrays.c
- * @brief Functions to use string_arrays_t
+ * @brief Functions to use string_arrays_t.
  */
 
 #include "string_arrays.h"
 
 /**
- * @brief Initialises a string_arrays_t
+ * @brief Initialises a string_arrays_t.
  *
  * Mallocs the memory for the array, exits the program if that was not possible.
  * It initialises the array to INITIAL_ARRAY_SIZE, a #define in global.h.
- * @return An initinalised string_arrays
+ * @return An initinalised string_arrays.
  */
 string_arrays_t *make_string_arrays(void) {
   string_arrays_t *string_arrays = malloc(sizeof(string_arrays_t));
@@ -29,11 +29,11 @@ string_arrays_t *make_string_arrays(void) {
 }
 
 /**
- * @brief Adds an array to a string_arrays_t
+ * @brief Adds an array to a string_arrays_t.
  *
  * If more memory is required it doubles the array size.
- * @param string_arrays The string_arrays_t to add the array to
- * @param array The array to add to the string_arrays
+ * @param string_arrays The string_arrays_t to add the array to.
+ * @param array The array to add to the string_arrays.
  */
 void add_string_arrays(string_arrays_t *string_arrays, string_array_t *array) {
   if (string_arrays->size >= string_arrays->max_elements) {
@@ -49,9 +49,9 @@ void add_string_arrays(string_arrays_t *string_arrays, string_array_t *array) {
 }
 
 /**
- * @brief Frees all memory used in a string_arrays_t
+ * @brief Frees all memory used in a string_arrays_t.
  *
- * @param string_arrays The string_arrays to free
+ * @param string_arrays The string_arrays to free.
  */
 void free_string_arrays(string_arrays_t *string_arrays) {
   for (int i = 0; i < string_arrays->size; i++) {
