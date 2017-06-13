@@ -2,6 +2,7 @@
  * @file word_array.c
  * @brief Functions for using word arrays.
  */
+
 #include "word_array.h"
 
 /**

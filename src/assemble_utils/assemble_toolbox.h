@@ -1,3 +1,8 @@
+/**
+ * @file assemble_toolbox.h
+ * @brief Header file for assemble_toolbox.c.
+ */
+
 #ifndef ASSEMBLE_TOOLBOX_H
 #define ASSEMBLE_TOOLBOX_H
 #include <stdlib.h>

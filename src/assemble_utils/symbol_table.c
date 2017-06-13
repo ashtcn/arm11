@@ -2,6 +2,7 @@
  * @file symbol_table.c
  * @brief File for functions for using and making symbol tables.
  */
+
 #include "symbol_table.h"
 
 /**
@@ -45,10 +46,11 @@ void add_row(symbol_table_t *table, char *label, address_t address) {
   symbol_table_row_t row = {
     .address = address,
   };
-  memcpy(row.label, label, 15);
+  memcpy(row.label, label, MAX_LABEL_LENGTH + 1);
   if (table->size >= table->max_size) {
     table->max_size *= 2;
-    table->rows = realloc(table->rows, table->max_size * sizeof(symbol_table_row_t));
+    table->rows = realloc(table->rows, table->max_size
+                                       * sizeof(symbol_table_row_t));
     if (!table->rows) {
       perror("Unable to expand size of symbol table");
       exit(EXIT_FAILURE);

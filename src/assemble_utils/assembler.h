@@ -1,3 +1,8 @@
+/**
+ * @file assembler.h
+ * @brief Header file for assembler.c.
+ */
+
 #ifndef ASSEMBLER_H
 #define ASSEMBLER_H
 #include <stdbool.h>

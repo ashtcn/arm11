@@ -1,3 +1,8 @@
+/**
+ * @file encode.h
+ * @brief Header file for encode.c.
+ */
+
 #ifndef ENCODE_H
 #define ENCODE_H
 #include <stdio.h>

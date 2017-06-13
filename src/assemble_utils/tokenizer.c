@@ -1,9 +1,28 @@
+/**
+ * @file tokenizer.c
+ * @brief File for functions to tokenize assembly input.
+ */
+
 #include "tokenizer.h"
 
+/**
+ * @brief Returns true iff the provided instruction is a label.
+ *
+ * An instruction is a label iff its final character is a colon.
+ * @param instruction The instruction string to check.
+ * @returns True iff the provided instruction is a label.
+ */
 bool is_label(char *instruction) {
   return instruction[strlen(instruction) - 1] == ':';
 }
 
+/**
+ * @brief Removes surrounding whitespace.
+ *
+ * Removes leading and trailing whitespace.
+ * @param string The string to trim.
+ * @returns The string with surrounding whitespace removed.
+ */
 char *trim(char *string) {
   // Remove leading whitespace.
   while (' ' == *string) {
@@ -19,14 +38,27 @@ char *trim(char *string) {
   return string;
 }
 
+/**
+ * @brief Removes leading whitespace and commas.
+ *
+ * @param string The string to trim.
+ * @returns The string with leading whitespace and commas removed.
+ */
 char *trim_token(char *string) {
-  // Remove leading whitespace and commas.
   while (' ' == *string || ',' == *string) {
     string++;
   }
   return string;
 }
 
+/**
+ * @brief Tokenizes input into an array of string arrays.
+ *
+ * Tokenizes all instructions from the input, using tokenize_instruction.
+ * @param input An array of strings for each line of input.
+ * @param input_lines The number of input lines.
+ * @returns String arrays, one for each instruction.
+ */
 string_arrays_t *tokenize_input(char **input, int input_lines) {
   string_arrays_t *result = make_string_arrays();
 
@@ -40,6 +72,14 @@ string_arrays_t *tokenize_input(char **input, int input_lines) {
   return result;
 }
 
+/**
+ * @brief Tokenizes a single instruction into a string array.
+ *
+ * Breaks up an instruction into single pieces of information (seperated by
+ * commas, spaces, brackets).
+ * @param instruction The instructions string.
+ * @returns A string array of the tokenized instruction.
+ */
 string_array_t *tokenize_instruction(char *instruction) {
   string_array_t *result = malloc(sizeof(string_array_t));
   if (!result) {
@@ -62,19 +102,32 @@ string_array_t *tokenize_instruction(char *instruction) {
     }
 
     char *instruction_op = strtok_r(instruction, " ", &instruction);
-    result = tokenize_operand_instruction(result, trim(instruction_op), trim(instruction));
+    result = tokenize_operand_instruction(result, trim(instruction_op),
+                                          trim(instruction));
   }
   return result;
 }
 
-char *split_token(string_array_t *result, int *cur_section, char *operands, int i) {
+char *split_token(string_array_t *result, int *cur_section, char *operands,
+                  int i) {
   strncpy(result->array[*cur_section], operands, i);
   result->array[*cur_section][i] = '\0';
   (*cur_section)++;
   return trim_token(operands + i);
 }
 
-string_array_t *tokenize_operand_instruction(string_array_t *result, char *instruction_op, char *operands) {
+/**
+ * @brief A helper function for tokenize_instruction.
+ *
+ * Tokenizes operands.
+ * @param result A pointer the the string array to write to.
+ * @param instruction_op The operation of the instruction.
+ * @param operands The operands of the instruction.
+ * @returns The updated string array.
+ */
+string_array_t *tokenize_operand_instruction(string_array_t *result,
+                                             char *instruction_op,
+                                             char *operands) {
   int split_count = 0;
   int i;
   for (i=0; operands[i]; i++) {

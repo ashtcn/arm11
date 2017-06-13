@@ -1,3 +1,8 @@
+/**
+ * @file tokenizer.h
+ * @brief Header file for tokenizer.c.
+ */
+
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
 #include <stdlib.h>

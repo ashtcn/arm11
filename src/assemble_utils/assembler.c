@@ -1,5 +1,11 @@
+/**
+ * @file assembler.c
+ * @brief File for functions used to assemble.
+ */
+
 #include "assembler.h"
 
+/** An empty instruction constant. */
 static const instruction_t NULL_INSTRUCTION = {
   .type = NUL,
   .immediate_value = 0,
@@ -14,6 +20,12 @@ static const instruction_t NULL_INSTRUCTION = {
   .shift_amount = 0,
 };
 
+/**
+ * @brief Returns the mnemonic for a given operator string.
+ *
+ * @param str An operator string.
+ * @returns A mnemonic_t representing the given string.
+ */
 mnemonic_t string_to_mnemonic(char *str) {
   if (!strcmp(str, "add")) {
     return ADD_M;
@@ -98,6 +110,12 @@ mnemonic_t string_to_mnemonic(char *str) {
   exit(EXIT_FAILURE);
 }
 
+/**
+ * @brief Returns the condition for a given condition string.
+ *
+ * @param str A condition string.
+ * @returns A condition_t representing the given string.
+ */
 condition_t string_to_condition(char *str) {
   if (!strcmp(str, "eq")) {
     return EQ;
@@ -120,6 +138,12 @@ condition_t string_to_condition(char *str) {
   return AL;
 }
 
+/**
+ * @brief Returns the opcode for a given mnemonic.
+ *
+ * @param str A mnemonic.
+ * @returns The opcode of the given mnemonic.
+ */
 opcode_t mnemonic_to_opcode(mnemonic_t mnemonic) {
   switch (mnemonic) {
     case ADD_M:
@@ -159,10 +183,22 @@ opcode_t mnemonic_to_opcode(mnemonic_t mnemonic) {
   }
 }
 
+/**
+ * @brief Returns the address for a given address string.
+ *
+ * @param str An address string.
+ * @returns The register number given by the string.
+ */
 reg_address_t string_to_reg_address(char *str) {
   return strtol(&str[1], (char **) NULL, 10);
 }
 
+/**
+ * @brief Returns the shift for a given shift string.
+ *
+ * @param str A shift string.
+ * @returns A shift_t representing the given string.
+ */
 shift_t string_to_shift(char *str) {
   if (!strcmp(str, "lsl")) {
     return LSL;
@@ -181,6 +217,12 @@ shift_t string_to_shift(char *str) {
   exit(EXIT_FAILURE);
 }
 
+/**
+ * @brief Parses the shift and adds it to the given instruction.
+ *
+ * @param tokens The string to parse.
+ * @param instruction The instruction to add the shift to.
+ */
 void parse_shift(string_array_t *tokens, instruction_t *instruction) {
   instruction->shift_type = string_to_shift(tokens->array[0]);
   if ('#' == tokens->array[1][0]) {
@@ -193,6 +235,15 @@ void parse_shift(string_array_t *tokens, instruction_t *instruction) {
   }
 }
 
+/**
+ * @brief Parses the operand and adds it to the given instruction.
+ *
+ * There are many different cases for op2 in data processing instructions so
+ * this function is called to parse them.
+ *
+ * @param tokens The string to parse.
+ * @param instruction The instruction to add the operand to.
+ */
 void parse_operand(string_array_t *tokens, instruction_t *instruction) {
   char **sections = tokens->array;
   if ('#' == sections[0][0]) {
@@ -232,6 +283,14 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
   }
 }
 
+/**
+ * @brief Parses an immediate value.
+ *
+ * This immediate value could be in hex or in decimal.
+ *
+ * @param str The string to parse.
+ * @returns The immediate value.
+ */
 word_t parse_immediate_value(char *str) {
   if (strstr(str, "0x")) {
     // Is in hex
@@ -242,6 +301,13 @@ word_t parse_immediate_value(char *str) {
   }
 }
 
+/**
+ * @brief Assembles a data processing instruction.
+ *
+ *
+ * @param tokens The string to parse.
+ * @returns A machine code instruction.
+ */
 word_t assemble_dpi(string_array_t *tokens) {
   instruction_t instruction = NULL_INSTRUCTION;
   char **sections = tokens->array;
