@@ -62,7 +62,7 @@ void halt(system_state_t *machine) {
  */
 void branch(system_state_t *machine) {
   machine->decoded_instruction->type = BRA;
-  uint32_t offset = machine->fetched_instruction & 0xFFFFFF; // Last 24 bits
+  uint32_t offset = machine->fetched_instruction & MASK_FIRST_8; // Last 24 bits
   offset <<= 2;
 
   // Two's complement sign extention

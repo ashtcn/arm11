@@ -19,8 +19,6 @@
 #define CPSR 16
 /** A mask which removes the first 4 bits when used with bitwise and. */
 #define MASK_FIRST_4 0xFFFFFFF
-/** A mask which removes the first 6 bits when used with bitwise and. */
-#define MASK_FIRST_6 0x3FFFFFF
 /** A mask which removes the first 8 bits when used with bitwise and. */
 #define MASK_FIRST_8 0xFFFFFF
 
