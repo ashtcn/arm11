@@ -11,7 +11,6 @@
  * Given the pointer to the current system state, it moves the
  * fetched instruction information into the decoded_instruction struct
  * (for use when executing the decoded instruction).
- * A pre-condition is that the instruction must not be all zero (type ZER).
  * @param machine The current system state.
  */
 void decode_instruction(system_state_t *machine) {
