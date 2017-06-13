@@ -1,0 +1,162 @@
+#!/bin/bash
+echo -e "\033[1;32mMaking the project...\e[m"
+make
+mkdir out
+echo -e "\033[1;32mDone!\e[m"
+echo
+
+echo -e "\033[1;32mRunning valgrind on emulate. Any errors will appear below:\e[m"
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/add01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/add02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/add03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/add04 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/and01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/and02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/b01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/beq01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/beq02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/bne01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/bne02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/eor01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/eor02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/factorial > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/gpio_0 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/gpio_1 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/gpio_2 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr05 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr06 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr07 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr08 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr09 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr14 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr15 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/ldr16 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/loop01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/loop02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/loop03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/lsl01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/lsl02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mla01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mov01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mov02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mov03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mov04 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mov05 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mov06 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mov07 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/mul01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/opt_add05 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/opt_ldr10 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/opt_ldr11 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/opt_ldr12 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/opt_ldr13 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/or01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/or02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/rsb01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/rsb02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/rsb03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/str01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/str02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/str03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/str04 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/sub01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/sub02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/sub03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/tst01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/tst02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/tst03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/tst04 > /dev/null
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mRunning valgrind on assemble. Any errors will appear below:\e[m"
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/add01.s     out/add01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/add02.s     out/add02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/add03.s     out/add03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/add04.s     out/add04 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/and01.s     out/and01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/and02.s     out/and02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/b01.s       out/b01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/beq01.s     out/beq01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/beq02.s     out/beq02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/bne01.s     out/bne01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/bne02.s     out/bne02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/eor01.s     out/eor01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/eor02.s     out/eor02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/factorial.s out/factorial > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/gpio_0.s    out/gpio_0 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/gpio_1.s    out/gpio_1 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/gpio_2.s    out/gpio_2 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr01.s     out/ldr01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr02.s     out/ldr02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr03.s     out/ldr03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr05.s     out/ldr05 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr06.s     out/ldr06 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr07.s     out/ldr07 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr08.s     out/ldr08 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr09.s     out/ldr09 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr14.s     out/ldr14 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr15.s     out/ldr15 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/ldr16.s     out/ldr16 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/loop01.s    out/loop01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/loop02.s    out/loop02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/loop03.s    out/loop03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/lsl01.s     out/lsl01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/lsl02.s     out/lsl02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mla01.s     out/mla01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mov01.s     out/mov01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mov02.s     out/mov02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mov03.s     out/mov03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mov04.s     out/mov04 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mov05.s     out/mov05 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mov06.s     out/mov06 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mov07.s     out/mov07 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/mul01.s     out/mul01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/opt_add05.s out/opt_add05 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/opt_ldr10.s out/opt_ldr10 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/opt_ldr11.s out/opt_ldr11 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/opt_ldr12.s out/opt_ldr12 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/opt_ldr13.s out/opt_ldr13 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/or01.s      out/or01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/or02.s      out/or02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/rsb01.s     out/rsb01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/rsb02.s     out/rsb02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/rsb03.s     out/rsb03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/str01.s     out/str01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/str02.s     out/str02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/str03.s     out/str03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/str04.s     out/str04 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/sub01.s     out/sub01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/sub02.s     out/sub02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/sub03.s     out/sub03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/tst01.s     out/tst01 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/tst02.s     out/tst02 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/tst03.s     out/tst03 > /dev/null
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/tst04.s     out/tst04 > /dev/null
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mRunning unit tests. All results will appear below:\e[m"
+valgrind --tool=memcheck --leak-check=yes -q ./unit_tests
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mRunning Maria's ruby test suite. Press Ctrl-C when done to continue:\e[m"
+git clone git@gitlab.doc.ic.ac.uk:mvalerae/arm11_1617_testsuite.git
+ruby arm11_1617_testsuite/testserver.rb ./
+rm -rf arm11_1617_testsuite
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mRunning our extended ruby test suite. Press Ctrl-C when done to continue:\e[m"
+ruby ../test_suite/testserver.rb ./
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mCleaning source directory...\e[m"
+make clean
+rm -rf out
+echo -e "\033[1;32mDone!\e[m"
