@@ -7,7 +7,6 @@
 #define ENCODE_H
 #include <stdio.h>
 #include "../instruction.h"
-#include "../global.h"
 
 word_t encode(instruction_t *instruction);
 word_t add_cond(instruction_t *instruction);

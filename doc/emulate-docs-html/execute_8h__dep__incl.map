@@ -1,4 +1,0 @@
-<map id="execute.h" name="execute.h">
-<area shape="rect" id="node2" href="$emulate_8c.html" title="The main functionality for the ARM11 emulator. " alt="" coords="5,80,84,107"/>
-<area shape="rect" id="node3" href="$execute_8c.html" title="Functions for the execute cycle. " alt="" coords="108,80,187,107"/>
-</map>

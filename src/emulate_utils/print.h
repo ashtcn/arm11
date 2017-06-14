@@ -18,7 +18,6 @@ void print_value(word_t value);
 char *get_cond(condition_t cond);
 char *get_opcode(opcode_t operation);
 char *get_shift(shift_t shift);
-long twos_complement_to_long(word_t value);
 void print_binary_value(word_t value);
 
 #endif

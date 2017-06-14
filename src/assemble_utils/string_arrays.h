@@ -5,10 +5,10 @@
 
 #ifndef string_arrays_H
 #define string_arrays_H
-#include "string_array.h"
-#include "../global.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "../global.h"
+#include "string_array.h"
 
 /**
  * @brief A struct to hold an array of string arrays, and its size.

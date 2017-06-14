@@ -21,289 +21,7 @@ static const instruction_t NULL_INSTRUCTION = {
 };
 
 /**
- * @brief Returns the mnemonic for a given operator string.
- *
- * @param str An operator string.
- * @returns A mnemonic_t representing the given string.
- */
-mnemonic_t string_to_mnemonic(char *str) {
-  if (!strcmp(str, "add")) {
-    return ADD_M;
-  }
-  if (!strcmp(str, "sub")) {
-    return SUB_M;
-  }
-  if (!strcmp(str, "rsb")) {
-    return RSB_M;
-  }
-  if (!strcmp(str, "and")) {
-    return AND_M;
-  }
-  if (!strcmp(str, "eor")) {
-    return EOR_M;
-  }
-  if (!strcmp(str, "orr")) {
-    return ORR_M;
-  }
-  if (!strcmp(str, "mov")) {
-    return MOV_M;
-  }
-  if (!strcmp(str, "tst")) {
-    return TST_M;
-  }
-  if (!strcmp(str, "teq")) {
-    return TEQ_M;
-  }
-  if (!strcmp(str, "cmp")) {
-    return CMP_M;
-  }
-  if (!strcmp(str, "mul")) {
-    return MUL_M;
-  }
-  if (!strcmp(str, "mla")) {
-    return MLA_M;
-  }
-  if (!strcmp(str, "ldr")) {
-    return LDR_M;
-  }
-  if (!strcmp(str, "str")) {
-    return STR_M;
-  }
-  if (!strcmp(str, "beq")) {
-    return BEQ_M;
-  }
-  if (!strcmp(str, "bne")) {
-    return BNE_M;
-  }
-  if (!strcmp(str, "bge")) {
-    return BGE_M;
-  }
-  if (!strcmp(str, "blt")) {
-    return BLT_M;
-  }
-  if (!strcmp(str, "bgt")) {
-    return BGT_M;
-  }
-  if (!strcmp(str, "ble")) {
-    return BLE_M;
-  }
-  if (!strcmp(str, "b")) {
-    return B_M;
-  }
-  if (!strcmp(str, "lsl")) {
-    return SHIFT_M;
-  }
-  if (!strcmp(str, "lsr")) {
-    return SHIFT_M;
-  }
-  if (!strcmp(str, "asr")) {
-    return SHIFT_M;
-  }
-  if (!strcmp(str, "ror")) {
-    return SHIFT_M;
-  }
-  if (!strcmp(str, "andeq")) {
-    return ANDEQ_M;
-  }
-
-  fprintf(stderr, "No such mnemonic found.\n");
-  exit(EXIT_FAILURE);
-}
-
-/**
- * @brief Returns the condition for a given condition string.
- *
- * @param str A condition string.
- * @returns A condition_t representing the given string.
- */
-condition_t string_to_condition(char *str) {
-  if (!strcmp(str, "eq")) {
-    return EQ;
-  }
-  if (!strcmp(str, "ne")) {
-    return NE;
-  }
-  if (!strcmp(str, "ge")) {
-    return GE;
-  }
-  if (!strcmp(str, "lt")) {
-    return LT;
-  }
-  if (!strcmp(str, "gt")) {
-    return GT;
-  }
-  if (!strcmp(str, "le")) {
-    return LE;
-  }
-  return AL;
-}
-
-/**
- * @brief Returns the opcode for a given mnemonic.
- *
- * @param str A mnemonic.
- * @returns The opcode of the given mnemonic.
- */
-opcode_t mnemonic_to_opcode(mnemonic_t mnemonic) {
-  switch (mnemonic) {
-    case ADD_M:
-      return ADD;
-      break;
-    case SUB_M:
-      return SUB;
-      break;
-    case RSB_M:
-      return RSB;
-      break;
-    case AND_M:
-      return AND;
-      break;
-    case EOR_M:
-      return EOR;
-      break;
-    case ORR_M:
-      return ORR;
-      break;
-    case MOV_M:
-      return MOV;
-      break;
-    case TST_M:
-      return TST;
-      break;
-    case TEQ_M:
-      return TEQ;
-      break;
-    case CMP_M:
-      return CMP;
-      break;
-    default:
-      fprintf(stderr, "No such opcode found.\n");
-      exit(EXIT_FAILURE);
-      break;
-  }
-}
-
-/**
- * @brief Returns the address for a given address string.
- *
- * @param str An address string.
- * @returns The register number given by the string.
- */
-reg_address_t string_to_reg_address(char *str) {
-  return strtol(&str[1], (char **) NULL, 10);
-}
-
-/**
- * @brief Returns the shift for a given shift string.
- *
- * @param str A shift string.
- * @returns A shift_t representing the given string.
- */
-shift_t string_to_shift(char *str) {
-  if (!strcmp(str, "lsl")) {
-    return LSL;
-  }
-  if (!strcmp(str, "lsr")) {
-    return LSR;
-  }
-  if (!strcmp(str, "asr")) {
-    return ASR;
-  }
-  if (!strcmp(str, "ror")) {
-    return ROR;
-  }
-
-  fprintf(stderr, "No such shift found.\n");
-  exit(EXIT_FAILURE);
-}
-
-/**
- * @brief Parses the shift and adds it to the given instruction.
- *
- * @param tokens The string to parse.
- * @param instruction The instruction to add the shift to.
- */
-void parse_shift(string_array_t *tokens, instruction_t *instruction) {
-  instruction->shift_type = string_to_shift(tokens->array[0]);
-  if ('#' == tokens->array[1][0]) {
-    // In the form <#expression>
-    char *number = &tokens->array[1][1];
-    instruction->shift_amount = parse_immediate_value(number);
-  } else {
-    // Is a register
-    instruction->rs = string_to_reg_address(tokens->array[1]);
-  }
-}
-
-/**
- * @brief Parses the operand and adds it to the given instruction.
- *
- * There are many different cases for op2 in data processing instructions so
- * this function is called to parse them.
- *
- * @param tokens The string to parse.
- * @param instruction The instruction to add the operand to.
- */
-void parse_operand(string_array_t *tokens, instruction_t *instruction) {
-  char **sections = tokens->array;
-  if ('#' == sections[0][0]) {
-    // In the form <#expression>
-    instruction->flag_0 = 1;
-    instruction->immediate_value = parse_immediate_value(&sections[0][1]);
-
-    uint16_t shift = WORD_SIZE;
-    if (instruction->immediate_value > 0xFF) {
-      while (!(instruction->immediate_value & 0x3)) {
-          instruction->immediate_value >>= 2;
-          shift--;
-      }
-    }
-
-    instruction->shift_amount = shift;
-
-  } else if ('r' == sections[0][0]) {
-    // In the form Rm{,<shift>}
-    instruction->rm = string_to_reg_address(sections[0]);
-
-    if (tokens->size >= 2) {
-      // Has shift
-      string_array_t *shift_tokens = malloc(sizeof(string_array_t));
-
-      if (!shift_tokens) {
-        perror("Unable to allocate memory for shift_tokens.\n");
-        exit(EXIT_FAILURE);
-      }
-
-      // Pass the <shift> section into parse_shift
-      shift_tokens->array = &sections[1];
-      shift_tokens->size = tokens->size - 1;
-      parse_shift(shift_tokens, instruction);
-      free(shift_tokens);
-    }
-  }
-}
-
-/**
- * @brief Parses an immediate value.
- *
- * This immediate value could be in hex or in decimal.
- *
- * @param str The string to parse.
- * @returns The immediate value.
- */
-word_t parse_immediate_value(char *str) {
-  if (strstr(str, "0x")) {
-    // Is in hex
-    return strtol(str, (char **)NULL, 16);
-  } else {
-    // Is in decimal
-    return strtol(str, (char **)NULL, 10);
-  }
-}
-
-/**
  * @brief Assembles a data processing instruction.
- *
  *
  * @param tokens The string to parse.
  * @returns A machine code instruction.
@@ -358,6 +76,12 @@ word_t assemble_dpi(string_array_t *tokens) {
   return encode(&instruction);
 }
 
+/**
+ * @brief Assembles a special instruction.
+ *
+ * @param tokens The string to parse.
+ * @returns A machine code instruction.
+ */
 word_t assemble_spl(string_array_t *tokens) {
   instruction_t instruction = NULL_INSTRUCTION;
 
@@ -398,6 +122,12 @@ word_t assemble_spl(string_array_t *tokens) {
   return encode(&instruction);
 }
 
+/**
+ * @brief Assembles a multiply instruction.
+ *
+ * @param tokens The string to parse.
+ * @returns A machine code instruction.
+ */
 word_t assemble_mul(string_array_t *tokens) {
   instruction_t instruction = NULL_INSTRUCTION;
 
@@ -416,7 +146,17 @@ word_t assemble_mul(string_array_t *tokens) {
   return encode(&instruction);
 }
 
-word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int current_line, int max_lines) {
+/**
+ * @brief Assembles a single data transfer instruction.
+ *
+ * @param tokens The string to parse.
+ * @param extra_words An array to hold additional words required by ldr.
+ * @param current_line The line number of this instruction.
+ * @param max_lines The maximum number of instructions.
+ * @returns A machine code instruction.
+ */
+word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words,
+                    int current_line, int max_lines) {
   instruction_t instruction = NULL_INSTRUCTION;
   char **sections = tokens->array;
 
@@ -464,7 +204,8 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
       // Store expression value at end of memory
       instruction.flag_1 = 1;
       instruction.rn = PC;
-      instruction.immediate_value = (((max_lines + extra_words->size) - current_line) << 2) - 8;
+      instruction.immediate_value = (((max_lines + extra_words->size)
+                                      - current_line) << 2) - 8;
       add_word_array(extra_words, expression_value);
     }
   } else {
@@ -552,13 +293,51 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int curre
   return encode(&instruction);
 }
 
-void assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *symbol_table, word_array_t *words) {
+/**
+ * @brief Assembles a branch instruction.
+ *
+ * @param tokens The string to parse.
+ * @param symbol_table The table of labels and addresses.
+ * @param instruction_no The line number of this instruction.
+ * @returns A machine code instruction.
+ */
+word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table,
+                    address_t instruction_no) {
+  instruction_t instruction = NULL_INSTRUCTION;
+
+  instruction.type = BRA;
+
+  if (!tokens->array[0][1]) {
+    instruction.cond = AL;
+  } else {
+    instruction.cond = string_to_condition(&(tokens->array[0][1]));
+  }
+
+  address_t label_address = get_address(symbol_table, tokens->array[1]);
+
+  instruction.immediate_value =
+    (signed_to_twos_complement((int32_t) label_address
+                               - ((int32_t) instruction_no * 4) - 8) >> 2);
+  return encode(&instruction);
+}
+
+/**
+ * @brief Assembles word arrays of tokenized instructions.
+ *
+ * @param instructions A pointer to the tokenized instructions.
+ * @param symbol_table A pointer to the table of labels and addresses.
+ * @param words A pointer to the array where assembled words are written.
+ */
+void assemble_all_instructions(string_arrays_t *instructions,
+                               symbol_table_t *symbol_table,
+                               word_array_t *words) {
   word_array_t *extra_words = make_word_array();
   int max_lines = instructions->size - symbol_table->size;
   word_t machine_instruction;
   for (int i = 0; i < instructions->size; i++) {
     if (instructions->arrays[i]->size != 1) {
-      mnemonic_t ins_code = string_to_mnemonic(instructions->arrays[i]->array[0]);
+      mnemonic_t ins_code = string_to_mnemonic(instructions->arrays[i]
+                                               ->array[0]);
       switch(ins_code) {
         case ADD_M:
         case SUB_M:
@@ -578,7 +357,9 @@ void assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *sy
           break;
         case LDR_M:
         case STR_M:
-          machine_instruction = assemble_sdt(instructions->arrays[i], extra_words, words->size, max_lines);
+          machine_instruction = assemble_sdt(instructions->arrays[i],
+                                             extra_words,
+                                             words->size, max_lines);
           break;
         case BEQ_M:
         case BNE_M:
@@ -587,7 +368,8 @@ void assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *sy
         case BGT_M:
         case BLE_M:
         case B_M:
-          machine_instruction = assemble_bra(instructions->arrays[i], symbol_table, words->size);
+          machine_instruction = assemble_bra(instructions->arrays[i],
+                                             symbol_table, words->size);
           break;
         case SHIFT_M:
         case ANDEQ_M:
@@ -608,29 +390,4 @@ void assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *sy
   }
 
   free_word_array(extra_words);
-}
-
-uint32_t signed_to_twos_complement(int32_t value) {
-  uint32_t result = abs(value);
-  if (value < 0) {
-    result = negate(result);
-  }
-  return result;
-}
-
-word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table, address_t instruction_no) {
-  instruction_t instruction = NULL_INSTRUCTION;
-
-  instruction.type = BRA;
-
-  if (!tokens->array[0][1]) {
-    instruction.cond = AL;
-  } else {
-    instruction.cond = string_to_condition(&(tokens->array[0][1]));
-  }
-
-  address_t label_address = get_address(symbol_table, tokens->array[1]);
-
-  instruction.immediate_value = (signed_to_twos_complement((int32_t) label_address - ((int32_t) instruction_no * 4) - 8) >> 2);
-  return encode(&instruction);
 }

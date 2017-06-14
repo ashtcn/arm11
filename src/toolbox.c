@@ -178,6 +178,35 @@ word_t absolute(word_t value) {
 }
 
 /**
+ * @brief Returns a two's complement representation for the given value.
+ *
+ * @param value The value to convert.
+ * @returns A 32-bit two's complement representation.
+ */
+uint32_t signed_to_twos_complement(int32_t value) {
+  uint32_t result = abs(value);
+  if (value < 0) {
+    result = negate(result);
+  }
+  return result;
+}
+
+/**
+ * @brief Converts a signed 2's complement word to a sign long.
+ *
+ * @param value The signed 2's complement word to convert.
+ * @returns The signed long representation of the word.
+ */
+long twos_complement_to_long(word_t value) {
+  long result = absolute(value);
+
+  if (is_negative(value)) {
+    result *= -1;
+  }
+  return result;
+}
+
+/**
  * @brief Shifts a value and returns a pointer.
  *
  * @param type The type of shift to use.

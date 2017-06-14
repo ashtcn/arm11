@@ -5,9 +5,8 @@
 
 #ifndef WORD_ARRAY_H
 #define WORD_ARRAY_H
-#include <stdint.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "../global.h"
 
 /**

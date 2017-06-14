@@ -5,13 +5,7 @@
 
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "string_array.h"
-#include "string_arrays.h"
 #include "assemble_toolbox.h"
-#include <stdbool.h>
 
 bool is_label(char *instruction);
 char *trim(char *string);

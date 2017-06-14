@@ -5,13 +5,9 @@
 
 #ifndef ASSEMBLE_TOOLBOX_H
 #define ASSEMBLE_TOOLBOX_H
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "../global.h"
-#include "string_array.h"
-#include "string_arrays.h"
 #include <stdbool.h>
+#include <string.h>
+#include "string_arrays.h"
 
 void save_file(word_t *data, char *file_name, int ile_size);
 

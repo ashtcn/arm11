@@ -213,21 +213,6 @@ void print_value(word_t value) {
 }
 
 /**
- * @brief Converts a signed 2's complement word to a sign long.
- *
- * @param value The signed 2's complement word to convert.
- * @returns The signed long representation of the word.
- */
-long twos_complement_to_long(word_t value) {
-  long result = absolute(value);
-
-  if (is_negative(value)) {
-    result *= -1;
-  }
-  return result;
-}
-
-/**
  * @brief Prints the padded binary representation of value.
  *
  * Prints WORD_SIZE bits.

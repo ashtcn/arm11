@@ -3,14 +3,8 @@
  * @brief The main functionality for the ARM11 assembler.
  */
 
-#include <stdlib.h>
-#include "global.h"
-#include "assemble_utils/assemble_toolbox.h"
-#include "assemble_utils/tokenizer.h"
-#include "assemble_utils/string_arrays.h"
-#include "assemble_utils/word_array.h"
-#include "assemble_utils/symbol_table.h"
 #include "assemble_utils/assembler.h"
+#include "assemble_utils/tokenizer.h"
 
 /**
  * @brief Assembles ARM assembly into ARM binary object code.
