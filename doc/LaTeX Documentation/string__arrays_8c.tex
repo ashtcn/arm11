@@ -1,0 +1,81 @@
+\hypertarget{string__arrays_8c}{}\section{assemble\+\_\+utils/string\+\_\+arrays.c File Reference}
+\label{string__arrays_8c}\index{assemble\+\_\+utils/string\+\_\+arrays.\+c@{assemble\+\_\+utils/string\+\_\+arrays.\+c}}
+
+
+Functions to use \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}.  
+
+
+{\ttfamily \#include \char`\"{}string\+\_\+arrays.\+h\char`\"{}}\\*
+Include dependency graph for string\+\_\+arrays.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{string__arrays_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} $\ast$ \hyperlink{string__arrays_8c_a1ba3440ead317b52d32b0bf6f1e1a133}{make\+\_\+string\+\_\+arrays} (void)
+\begin{DoxyCompactList}\small\item\em Initialises a \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}. \end{DoxyCompactList}\item 
+void \hyperlink{string__arrays_8c_ab9ad928f6d01c27ea43fd8865ca9f4be}{add\+\_\+string\+\_\+arrays} (\hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} $\ast$string\+\_\+arrays, \hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$array)
+\begin{DoxyCompactList}\small\item\em Adds an array to a \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}. \end{DoxyCompactList}\item 
+void \hyperlink{string__arrays_8c_a17a86ba3c0b2fb76455752b79df11e8a}{free\+\_\+string\+\_\+arrays} (\hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} $\ast$string\+\_\+arrays)
+\begin{DoxyCompactList}\small\item\em Frees all memory used in a \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions to use \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}. 
+
+
+
+\subsection{Function Documentation}
+\index{string\+\_\+arrays.\+c@{string\+\_\+arrays.\+c}!add\+\_\+string\+\_\+arrays@{add\+\_\+string\+\_\+arrays}}
+\index{add\+\_\+string\+\_\+arrays@{add\+\_\+string\+\_\+arrays}!string\+\_\+arrays.\+c@{string\+\_\+arrays.\+c}}
+\subsubsection[{\texorpdfstring{add\+\_\+string\+\_\+arrays(string\+\_\+arrays\+\_\+t $\ast$string\+\_\+arrays, string\+\_\+array\+\_\+t $\ast$array)}{add_string_arrays(string_arrays_t *string_arrays, string_array_t *array)}}]{\setlength{\rightskip}{0pt plus 5cm}void add\+\_\+string\+\_\+arrays (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+arrays\+\_\+t} $\ast$}]{string\+\_\+arrays, }
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{array}
+\end{DoxyParamCaption}
+)}\hypertarget{string__arrays_8c_ab9ad928f6d01c27ea43fd8865ca9f4be}{}\label{string__arrays_8c_ab9ad928f6d01c27ea43fd8865ca9f4be}
+
+
+Adds an array to a \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}. 
+
+If more memory is required it doubles the array size. 
+\begin{DoxyParams}{Parameters}
+{\em string\+\_\+arrays} & The \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} to add the array to. \\
+\hline
+{\em array} & The array to add to the string\+\_\+arrays. \\
+\hline
+\end{DoxyParams}
+\index{string\+\_\+arrays.\+c@{string\+\_\+arrays.\+c}!free\+\_\+string\+\_\+arrays@{free\+\_\+string\+\_\+arrays}}
+\index{free\+\_\+string\+\_\+arrays@{free\+\_\+string\+\_\+arrays}!string\+\_\+arrays.\+c@{string\+\_\+arrays.\+c}}
+\subsubsection[{\texorpdfstring{free\+\_\+string\+\_\+arrays(string\+\_\+arrays\+\_\+t $\ast$string\+\_\+arrays)}{free_string_arrays(string_arrays_t *string_arrays)}}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+string\+\_\+arrays (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+arrays\+\_\+t} $\ast$}]{string\+\_\+arrays}
+\end{DoxyParamCaption}
+)}\hypertarget{string__arrays_8c_a17a86ba3c0b2fb76455752b79df11e8a}{}\label{string__arrays_8c_a17a86ba3c0b2fb76455752b79df11e8a}
+
+
+Frees all memory used in a \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string\+\_\+arrays} & The string\+\_\+arrays to free. \\
+\hline
+\end{DoxyParams}
+\index{string\+\_\+arrays.\+c@{string\+\_\+arrays.\+c}!make\+\_\+string\+\_\+arrays@{make\+\_\+string\+\_\+arrays}}
+\index{make\+\_\+string\+\_\+arrays@{make\+\_\+string\+\_\+arrays}!string\+\_\+arrays.\+c@{string\+\_\+arrays.\+c}}
+\subsubsection[{\texorpdfstring{make\+\_\+string\+\_\+arrays(void)}{make_string_arrays(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string\+\_\+arrays\+\_\+t}$\ast$ make\+\_\+string\+\_\+arrays (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{string__arrays_8c_a1ba3440ead317b52d32b0bf6f1e1a133}{}\label{string__arrays_8c_a1ba3440ead317b52d32b0bf6f1e1a133}
+
+
+Initialises a \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t}. 
+
+Mallocs the memory for the array, exits the program if that was not possible. It initialises the array to I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE, a \#define in \hyperlink{global_8h}{global.\+h}. \begin{DoxyReturn}{Returns}
+An initinalised string\+\_\+arrays. 
+\end{DoxyReturn}

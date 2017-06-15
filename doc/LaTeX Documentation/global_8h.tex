@@ -1,0 +1,413 @@
+\hypertarget{global_8h}{}\section{global.\+h File Reference}
+\label{global_8h}\index{global.\+h@{global.\+h}}
+
+
+Definition of useful constants and type aliases.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+Include dependency graph for global.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=130pt]{global_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{global_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{global_8h_a5efff3a4a48efbf589e3a2320997d9b9}{N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS}~17
+\item 
+\#define \hyperlink{global_8h_ad1d337f69c5203493cb37cb203c33e24}{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}~65536
+\item 
+\#define \hyperlink{global_8h_a92ed8507d1cd2331ad09275c5c4c1c89}{W\+O\+R\+D\+\_\+\+S\+I\+ZE}~32
+\item 
+\#define \hyperlink{global_8h_a600721f0222b857dc8a3ae59e5077347}{PC}~15
+\item 
+\#define \hyperlink{global_8h_a42fdae6e97b3f90e2af0ef1baee0e1ca}{C\+P\+SR}~16
+\item 
+\#define \hyperlink{global_8h_ae35d143ccbd08a6f59f162b3ce9a3141}{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}~0x\+F\+F\+F\+F\+F\+FF
+\item 
+\#define \hyperlink{global_8h_a87629b54aa0d4536f565c1eacbe73c1b}{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8}~0x\+F\+F\+F\+F\+FF
+\item 
+\#define \hyperlink{global_8h_a8e81dc631606df43e027513e611108ca}{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+T\+A\+RT}~0x20200000
+\item 
+\#define \hyperlink{global_8h_a4f31ddcce45b70a39a972d32f4d3214f}{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+I\+ZE}~12
+\item 
+\#define \hyperlink{global_8h_aafecad3506413bdea88cf4203e575121}{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+T\+A\+RT}~0x20200028
+\item 
+\#define \hyperlink{global_8h_a663071c046d4ab6fd8fd0cb68f1834d9}{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+I\+ZE}~4
+\item 
+\#define \hyperlink{global_8h_a453005beda34a89be984293ecfc31f84}{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+T\+A\+RT}~0x2020001C
+\item 
+\#define \hyperlink{global_8h_ac6cd7746692ddb8dfd5dd611950f046c}{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+I\+ZE}~4
+\item 
+\#define \hyperlink{global_8h_a2cf7e08e9f0ea5859e1e746098d798ce}{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}~64
+\item 
+\#define \hyperlink{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}~20
+\item 
+\#define \hyperlink{global_8h_ae8dd6ba4eeb558fa0dda9626d038dd6d}{C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE}~true
+\begin{DoxyCompactList}\small\item\em A setting which determines the format of output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint8\+\_\+t \hyperlink{global_8h_a0661d7d1353e0bca70c64563f635b034}{byte\+\_\+t}
+\item 
+typedef int8\+\_\+t \hyperlink{global_8h_a462493a8f034b6ade38b69c49a39f52a}{reg\+\_\+address\+\_\+t}
+\item 
+typedef uint16\+\_\+t \hyperlink{global_8h_a8f4b132f56a25431714862229639be12}{address\+\_\+t}
+\item 
+typedef uint32\+\_\+t \hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2}{condition\+\_\+t} \{ \\*
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a9efdc855f3c1477957fb50affec07f8f}{EQ} = 0, 
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a4d3f872f5054b256b01ee4f2c8cf51db}{NE} = 1, 
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a558711b4a2a25070b970d85f5926d5ce}{GE} = 0xA, 
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a486aa221ceeeac475326e85d3d37f571}{LT} = 0xB, 
+\\*
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a12f5476fa04803e6cc72f2198730d892}{GT} = 0xC, 
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a662ed4b51721a45f07d645d4ca099a61}{LE} = 0xD, 
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2aa0e75d0447532591740f69308c1e7fcf}{AL} = 0xE
+ \}\begin{DoxyCompactList}\small\item\em An enum that identifies the type of condition. \end{DoxyCompactList}
+\item 
+enum \hyperlink{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40c}{instruction\+\_\+type\+\_\+t} \{ \\*
+\hyperlink{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40caa209bacc9f17fad46996fa40b38c45ae}{D\+PI}, 
+\hyperlink{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca086ab1f2f4dac104b6826ebe0eaba8fd}{M\+UL}, 
+\hyperlink{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca5aca85f088603150345b57705888081a}{S\+DT}, 
+\hyperlink{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40cab516bd8e9126df5463cbfbdd511e303a}{B\+RA}, 
+\\*
+\hyperlink{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40cacb2a8193bc0a747134de34ceb540cdc8}{Z\+ER}, 
+\hyperlink{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca4c175fbb65c723226d182dbfd556136a}{N\+UL}
+ \}\begin{DoxyCompactList}\small\item\em An enum that identifies the format of the instruction. \end{DoxyCompactList}
+\item 
+enum \hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37f}{shift\+\_\+t} \{ \hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37fa0226b11632995cf028f321326046753e}{L\+SL} = 0, 
+\hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37fa298da67ff8599a09829a91ad0ad3069b}{L\+SR} = 1, 
+\hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37faf84b730277d260fd0ff17ce3ec05ed5d}{A\+SR} = 2, 
+\hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37fa7b369e7350ac1a6585413ed60a0d6e10}{R\+OR} = 3
+ \}\begin{DoxyCompactList}\small\item\em An enum used for defining the type of shift for the shifter to use. \end{DoxyCompactList}
+\item 
+enum \hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7d}{opcode\+\_\+t} \{ \\*
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7da865555c9f2e0458a7078486aa1b3254f}{A\+ND} = 0x0, 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7da4730d67b92a52e0e6ef813e8805c1623}{E\+OR} = 0x1, 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7da12b733d4941495e86811fe6ceeeff9da}{S\+UB} = 0x2, 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7da1c03efb20082e397c67e1b95c87af195}{R\+SB} = 0x3, 
+\\*
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7dacfcf145f2788bf340ff3f3098bc54909}{A\+DD} = 0x4, 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7da8a789f931f4c133b3e7b8491e9a9887c}{T\+ST} = 0x8, 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7dac293a3d3f0e7c00325a674d939016c0e}{T\+EQ} = 0x9, 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7da7fd9a97abde63f8c83a4756769aa899e}{C\+MP} = 0xA, 
+\\*
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7da51e6b781fcc0468896f60da150026bd5}{O\+RR} = 0xC, 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7daa1535ce8fd6caf08009dcae925741d9b}{M\+OV} = 0xD
+ \}\begin{DoxyCompactList}\small\item\em An enum used for defining the opcode. \end{DoxyCompactList}
+\item 
+enum \hyperlink{global_8h_a45ed788e3e7382703f62e6c5a7b528bd}{cpsr\+\_\+flags\+\_\+t} \{ \hyperlink{global_8h_a45ed788e3e7382703f62e6c5a7b528bda2c63acbe79d9f41ba6bb7766e9c37702}{N} = 0x8, 
+\hyperlink{global_8h_a45ed788e3e7382703f62e6c5a7b528bdaa70478ce277ffc322f8e1e3418e07355}{Z} = 0x4, 
+\hyperlink{global_8h_a45ed788e3e7382703f62e6c5a7b528bda739ce3f516592d245d16fd8a3893472c}{C} = 0x2, 
+\hyperlink{global_8h_a45ed788e3e7382703f62e6c5a7b528bda28f41f1144eee94834387e9a6a088bc1}{V} = 0x1
+ \}\begin{DoxyCompactList}\small\item\em An enum used for retrieving individual flag bits from C\+P\+SR register. \end{DoxyCompactList}
+\item 
+enum \hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0f}{mnemonic\+\_\+t} \{ \\*
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fab3854815bd3bcd2f20a7c1f8c4b30bcd}{A\+D\+D\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa91b62db49317f0e3f1e26f9c5e1f3fed}{S\+U\+B\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa2947e913c24fbb082dedae28d4758822}{R\+S\+B\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fad039ebe850d73e070a699bd05ff68d97}{A\+N\+D\+\_\+M}, 
+\\*
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fadad5d7437be9ff1b2eadd8346fcff1e9}{E\+O\+R\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fae1ceb9a25525170dc8fdd381e436684a}{O\+R\+R\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac4bc3f3d4c7348e45ccceb4f8a20d2a7}{M\+O\+V\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac3326420e81a392360777f222d7e7852}{T\+S\+T\+\_\+M}, 
+\\*
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faff88eea8d277e8b3539d54ba0380ee74}{T\+E\+Q\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa0ee57ba3c8c5437c5b7b37539256b114}{C\+M\+P\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac44a93c7f93e6c74a0545224f83de879}{M\+U\+L\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac773d984ca53eec2ea683a1b81178b97}{M\+L\+A\+\_\+M}, 
+\\*
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa24a4c20527e1d5b158762346d40b8f30}{L\+D\+R\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa98f5c2db5a230853eab208df56e61e49}{S\+T\+R\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fadbe8fc7744ddb2bb0ea61172e53f14da}{B\+E\+Q\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa88df54ad817bade67f2269b51200cd19}{B\+N\+E\+\_\+M}, 
+\\*
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa944a56e508df5c763b6b04994b039543}{B\+G\+E\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faa2a39cb1e72d364a487431627a51faad}{B\+L\+T\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa0088905c8dac9e7b58794a12c5b71520}{B\+G\+T\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faef3376ee01ff854848e7bc2f4c2869f4}{B\+L\+E\+\_\+M}, 
+\\*
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa258b6ae0cd63d36ca21ac05ddb6629d4}{B\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa85c692640d338703cebfbb3aa070eb67}{S\+H\+I\+F\+T\+\_\+M}, 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fad6523e831da50e0caf43e8124cbf77e8}{A\+N\+D\+E\+Q\+\_\+M}
+ \}\begin{DoxyCompactList}\small\item\em An enum used for storing the mnemonic in assembly. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Definition of useful constants and type aliases. 
+
+
+
+\subsection{Macro Definition Documentation}
+\index{global.\+h@{global.\+h}!C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE@{C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE}}
+\index{C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE@{C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE}{COMPLIANT_MODE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE~true}\hypertarget{global_8h_ae8dd6ba4eeb558fa0dda9626d038dd6d}{}\label{global_8h_ae8dd6ba4eeb558fa0dda9626d038dd6d}
+
+
+A setting which determines the format of output. 
+
+
+\begin{DoxyItemize}
+\item Using C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE will print to stdout in the exact format required by test cases. Only registers and memory are printed. Errors are printed to stdout.
+\item Otherwise, a much more detailed ouput will be printed, including details on instructions. Formatting is improved. Errors are printed to stderr. The recommended setting is false. 
+\end{DoxyItemize}\index{global.\+h@{global.\+h}!C\+P\+SR@{C\+P\+SR}}
+\index{C\+P\+SR@{C\+P\+SR}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{C\+P\+SR}{CPSR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+P\+SR~16}\hypertarget{global_8h_a42fdae6e97b3f90e2af0ef1baee0e1ca}{}\label{global_8h_a42fdae6e97b3f90e2af0ef1baee0e1ca}
+The register number of the current program status register. \index{global.\+h@{global.\+h}!G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+I\+ZE@{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+I\+ZE}}
+\index{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+I\+ZE@{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+I\+ZE}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+I\+ZE}{GPIO_ACCESS_SIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+I\+ZE~12}\hypertarget{global_8h_a4f31ddcce45b70a39a972d32f4d3214f}{}\label{global_8h_a4f31ddcce45b70a39a972d32f4d3214f}
+The number of bytes allocated for accessing G\+P\+IO pins. \index{global.\+h@{global.\+h}!G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+T\+A\+RT@{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+T\+A\+RT}}
+\index{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+T\+A\+RT@{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+T\+A\+RT}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+T\+A\+RT}{GPIO_ACCESS_START}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+P\+I\+O\+\_\+\+A\+C\+C\+E\+S\+S\+\_\+\+S\+T\+A\+RT~0x20200000}\hypertarget{global_8h_a8e81dc631606df43e027513e611108ca}{}\label{global_8h_a8e81dc631606df43e027513e611108ca}
+The first memory address for accessing G\+P\+IO pins. \index{global.\+h@{global.\+h}!G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+I\+ZE@{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+I\+ZE}}
+\index{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+I\+ZE@{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+I\+ZE}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+I\+ZE}{GPIO_CLEAR_SIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+I\+ZE~4}\hypertarget{global_8h_a663071c046d4ab6fd8fd0cb68f1834d9}{}\label{global_8h_a663071c046d4ab6fd8fd0cb68f1834d9}
+The number of bytes allocated for clearing G\+P\+IO pins. \index{global.\+h@{global.\+h}!G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+T\+A\+RT@{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+T\+A\+RT}}
+\index{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+T\+A\+RT@{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+T\+A\+RT}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+T\+A\+RT}{GPIO_CLEAR_START}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+P\+I\+O\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+T\+A\+RT~0x20200028}\hypertarget{global_8h_aafecad3506413bdea88cf4203e575121}{}\label{global_8h_aafecad3506413bdea88cf4203e575121}
+The first memory address for clearing G\+P\+IO pins. \index{global.\+h@{global.\+h}!G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+I\+ZE@{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+I\+ZE}}
+\index{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+I\+ZE@{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+I\+ZE}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+I\+ZE}{GPIO_SET_SIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+I\+ZE~4}\hypertarget{global_8h_ac6cd7746692ddb8dfd5dd611950f046c}{}\label{global_8h_ac6cd7746692ddb8dfd5dd611950f046c}
+The number of bytes allocated for setting G\+P\+IO pins. \index{global.\+h@{global.\+h}!G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+T\+A\+RT@{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+T\+A\+RT}}
+\index{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+T\+A\+RT@{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+T\+A\+RT}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+T\+A\+RT}{GPIO_SET_START}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+P\+I\+O\+\_\+\+S\+E\+T\+\_\+\+S\+T\+A\+RT~0x2020001C}\hypertarget{global_8h_a453005beda34a89be984293ecfc31f84}{}\label{global_8h_a453005beda34a89be984293ecfc31f84}
+The first memory address for setting G\+P\+IO pins. \index{global.\+h@{global.\+h}!I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}
+\index{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}{INITIAL_ARRAY_SIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE~64}\hypertarget{global_8h_a2cf7e08e9f0ea5859e1e746098d798ce}{}\label{global_8h_a2cf7e08e9f0ea5859e1e746098d798ce}
+The initial array size used by array structs \index{global.\+h@{global.\+h}!M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}}
+\index{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}{MASK_FIRST_4}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4~0x\+F\+F\+F\+F\+F\+FF}\hypertarget{global_8h_ae35d143ccbd08a6f59f162b3ce9a3141}{}\label{global_8h_ae35d143ccbd08a6f59f162b3ce9a3141}
+A mask which removes the first 4 bits when used with bitwise and. \index{global.\+h@{global.\+h}!M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8}}
+\index{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8}{MASK_FIRST_8}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8~0x\+F\+F\+F\+F\+FF}\hypertarget{global_8h_a87629b54aa0d4536f565c1eacbe73c1b}{}\label{global_8h_a87629b54aa0d4536f565c1eacbe73c1b}
+A mask which removes the first 8 bits when used with bitwise and. \index{global.\+h@{global.\+h}!M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH@{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}}
+\index{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH@{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}{MAX_LABEL_LENGTH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH~20}\hypertarget{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}{}\label{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}
+The maximum length of labels accepted by a symbol table \index{global.\+h@{global.\+h}!N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES@{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}}
+\index{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES@{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}{NUM_ADDRESSES}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES~65536}\hypertarget{global_8h_ad1d337f69c5203493cb37cb203c33e24}{}\label{global_8h_ad1d337f69c5203493cb37cb203c33e24}
+The total number of memory addresses. \index{global.\+h@{global.\+h}!N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS@{N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS}}
+\index{N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS@{N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS}{NUM_REGISTERS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS~17}\hypertarget{global_8h_a5efff3a4a48efbf589e3a2320997d9b9}{}\label{global_8h_a5efff3a4a48efbf589e3a2320997d9b9}
+The total number of registers. \index{global.\+h@{global.\+h}!PC@{PC}}
+\index{PC@{PC}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{PC}{PC}}]{\setlength{\rightskip}{0pt plus 5cm}\#define PC~15}\hypertarget{global_8h_a600721f0222b857dc8a3ae59e5077347}{}\label{global_8h_a600721f0222b857dc8a3ae59e5077347}
+The register number of the program counter. \index{global.\+h@{global.\+h}!W\+O\+R\+D\+\_\+\+S\+I\+ZE@{W\+O\+R\+D\+\_\+\+S\+I\+ZE}}
+\index{W\+O\+R\+D\+\_\+\+S\+I\+ZE@{W\+O\+R\+D\+\_\+\+S\+I\+ZE}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{W\+O\+R\+D\+\_\+\+S\+I\+ZE}{WORD_SIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\+O\+R\+D\+\_\+\+S\+I\+ZE~32}\hypertarget{global_8h_a92ed8507d1cd2331ad09275c5c4c1c89}{}\label{global_8h_a92ed8507d1cd2331ad09275c5c4c1c89}
+The architecture word size. 
+
+\subsection{Typedef Documentation}
+\index{global.\+h@{global.\+h}!address\+\_\+t@{address\+\_\+t}}
+\index{address\+\_\+t@{address\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{address\+\_\+t}{address_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint16\+\_\+t {\bf address\+\_\+t}}\hypertarget{global_8h_a8f4b132f56a25431714862229639be12}{}\label{global_8h_a8f4b132f56a25431714862229639be12}
+A type alias for a memory address (supports up to 2$^\wedge$16 addresses). \index{global.\+h@{global.\+h}!byte\+\_\+t@{byte\+\_\+t}}
+\index{byte\+\_\+t@{byte\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{byte\+\_\+t}{byte_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint8\+\_\+t {\bf byte\+\_\+t}}\hypertarget{global_8h_a0661d7d1353e0bca70c64563f635b034}{}\label{global_8h_a0661d7d1353e0bca70c64563f635b034}
+A type alias for a byte (8 bits). \index{global.\+h@{global.\+h}!reg\+\_\+address\+\_\+t@{reg\+\_\+address\+\_\+t}}
+\index{reg\+\_\+address\+\_\+t@{reg\+\_\+address\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{reg\+\_\+address\+\_\+t}{reg_address_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef int8\+\_\+t {\bf reg\+\_\+address\+\_\+t}}\hypertarget{global_8h_a462493a8f034b6ade38b69c49a39f52a}{}\label{global_8h_a462493a8f034b6ade38b69c49a39f52a}
+A type alias for a register number (supports up to 2$^\wedge$8 registers). \index{global.\+h@{global.\+h}!word\+\_\+t@{word\+\_\+t}}
+\index{word\+\_\+t@{word\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{word\+\_\+t}{word_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint32\+\_\+t {\bf word\+\_\+t}}\hypertarget{global_8h_a0e7744482eed560726581dae7d3cb8b2}{}\label{global_8h_a0e7744482eed560726581dae7d3cb8b2}
+A type alias for a word (32 bits). 
+
+\subsection{Enumeration Type Documentation}
+\index{global.\+h@{global.\+h}!condition\+\_\+t@{condition\+\_\+t}}
+\index{condition\+\_\+t@{condition\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{condition\+\_\+t}{condition_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf condition\+\_\+t}}\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2}
+
+
+An enum that identifies the type of condition. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{EQ@{EQ}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!EQ@{EQ}}\item[{\em 
+EQ\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a9efdc855f3c1477957fb50affec07f8f}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a9efdc855f3c1477957fb50affec07f8f}
+}]Equal. \index{NE@{NE}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!NE@{NE}}\item[{\em 
+NE\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a4d3f872f5054b256b01ee4f2c8cf51db}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a4d3f872f5054b256b01ee4f2c8cf51db}
+}]Not equal. \index{GE@{GE}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!GE@{GE}}\item[{\em 
+GE\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a558711b4a2a25070b970d85f5926d5ce}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a558711b4a2a25070b970d85f5926d5ce}
+}]Greater or equal. \index{LT@{LT}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!LT@{LT}}\item[{\em 
+LT\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a486aa221ceeeac475326e85d3d37f571}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a486aa221ceeeac475326e85d3d37f571}
+}]Less than. \index{GT@{GT}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!GT@{GT}}\item[{\em 
+GT\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a12f5476fa04803e6cc72f2198730d892}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a12f5476fa04803e6cc72f2198730d892}
+}]Greater than. \index{LE@{LE}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!LE@{LE}}\item[{\em 
+LE\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a662ed4b51721a45f07d645d4ca099a61}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2a662ed4b51721a45f07d645d4ca099a61}
+}]Less than or equal to. \index{AL@{AL}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!AL@{AL}}\item[{\em 
+AL\hypertarget{global_8h_a57ba194eedfb8000c1a101fd42abdcf2aa0e75d0447532591740f69308c1e7fcf}{}\label{global_8h_a57ba194eedfb8000c1a101fd42abdcf2aa0e75d0447532591740f69308c1e7fcf}
+}]No condition (always). \end{description}
+\end{Desc}
+\index{global.\+h@{global.\+h}!cpsr\+\_\+flags\+\_\+t@{cpsr\+\_\+flags\+\_\+t}}
+\index{cpsr\+\_\+flags\+\_\+t@{cpsr\+\_\+flags\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{cpsr\+\_\+flags\+\_\+t}{cpsr_flags_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf cpsr\+\_\+flags\+\_\+t}}\hypertarget{global_8h_a45ed788e3e7382703f62e6c5a7b528bd}{}\label{global_8h_a45ed788e3e7382703f62e6c5a7b528bd}
+
+
+An enum used for retrieving individual flag bits from C\+P\+SR register. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N@{N}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!N@{N}}\item[{\em 
+N\hypertarget{global_8h_a45ed788e3e7382703f62e6c5a7b528bda2c63acbe79d9f41ba6bb7766e9c37702}{}\label{global_8h_a45ed788e3e7382703f62e6c5a7b528bda2c63acbe79d9f41ba6bb7766e9c37702}
+}]N (bit 4)\+: the last result was negative. \index{Z@{Z}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!Z@{Z}}\item[{\em 
+Z\hypertarget{global_8h_a45ed788e3e7382703f62e6c5a7b528bdaa70478ce277ffc322f8e1e3418e07355}{}\label{global_8h_a45ed788e3e7382703f62e6c5a7b528bdaa70478ce277ffc322f8e1e3418e07355}
+}]Z (bit 3)\+: the last result was zero. \index{C@{C}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!C@{C}}\item[{\em 
+C\hypertarget{global_8h_a45ed788e3e7382703f62e6c5a7b528bda739ce3f516592d245d16fd8a3893472c}{}\label{global_8h_a45ed788e3e7382703f62e6c5a7b528bda739ce3f516592d245d16fd8a3893472c}
+}]C (bit 2)\+: the last result caused a bit to be carried out. \index{V@{V}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!V@{V}}\item[{\em 
+V\hypertarget{global_8h_a45ed788e3e7382703f62e6c5a7b528bda28f41f1144eee94834387e9a6a088bc1}{}\label{global_8h_a45ed788e3e7382703f62e6c5a7b528bda28f41f1144eee94834387e9a6a088bc1}
+}]V (bit 1)\+: the last result overflowed. \end{description}
+\end{Desc}
+\index{global.\+h@{global.\+h}!instruction\+\_\+type\+\_\+t@{instruction\+\_\+type\+\_\+t}}
+\index{instruction\+\_\+type\+\_\+t@{instruction\+\_\+type\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{instruction\+\_\+type\+\_\+t}{instruction_type_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf instruction\+\_\+type\+\_\+t}}\hypertarget{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40c}{}\label{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40c}
+
+
+An enum that identifies the format of the instruction. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{D\+PI@{D\+PI}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!D\+PI@{D\+PI}}\item[{\em 
+D\+PI\hypertarget{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40caa209bacc9f17fad46996fa40b38c45ae}{}\label{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40caa209bacc9f17fad46996fa40b38c45ae}
+}]Data processing instruction. \index{M\+UL@{M\+UL}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!M\+UL@{M\+UL}}\item[{\em 
+M\+UL\hypertarget{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca086ab1f2f4dac104b6826ebe0eaba8fd}{}\label{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca086ab1f2f4dac104b6826ebe0eaba8fd}
+}]Multiply instruction. \index{S\+DT@{S\+DT}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!S\+DT@{S\+DT}}\item[{\em 
+S\+DT\hypertarget{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca5aca85f088603150345b57705888081a}{}\label{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca5aca85f088603150345b57705888081a}
+}]Single data transfer instruction. \index{B\+RA@{B\+RA}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+RA@{B\+RA}}\item[{\em 
+B\+RA\hypertarget{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40cab516bd8e9126df5463cbfbdd511e303a}{}\label{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40cab516bd8e9126df5463cbfbdd511e303a}
+}]Branch instruction. \index{Z\+ER@{Z\+ER}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!Z\+ER@{Z\+ER}}\item[{\em 
+Z\+ER\hypertarget{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40cacb2a8193bc0a747134de34ceb540cdc8}{}\label{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40cacb2a8193bc0a747134de34ceb540cdc8}
+}]All zero (S\+T\+OP) instruction. \index{N\+UL@{N\+UL}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!N\+UL@{N\+UL}}\item[{\em 
+N\+UL\hypertarget{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca4c175fbb65c723226d182dbfd556136a}{}\label{global_8h_aaba7165f28fb81b63cf5b0f1f9dcb40ca4c175fbb65c723226d182dbfd556136a}
+}]N\+U\+LL (not present) instruction. \end{description}
+\end{Desc}
+\index{global.\+h@{global.\+h}!mnemonic\+\_\+t@{mnemonic\+\_\+t}}
+\index{mnemonic\+\_\+t@{mnemonic\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{mnemonic\+\_\+t}{mnemonic_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf mnemonic\+\_\+t}}\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0f}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0f}
+
+
+An enum used for storing the mnemonic in assembly. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{A\+D\+D\+\_\+M@{A\+D\+D\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!A\+D\+D\+\_\+M@{A\+D\+D\+\_\+M}}\item[{\em 
+A\+D\+D\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fab3854815bd3bcd2f20a7c1f8c4b30bcd}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fab3854815bd3bcd2f20a7c1f8c4b30bcd}
+}]Add. \index{S\+U\+B\+\_\+M@{S\+U\+B\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!S\+U\+B\+\_\+M@{S\+U\+B\+\_\+M}}\item[{\em 
+S\+U\+B\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa91b62db49317f0e3f1e26f9c5e1f3fed}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa91b62db49317f0e3f1e26f9c5e1f3fed}
+}]Subtract. \index{R\+S\+B\+\_\+M@{R\+S\+B\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!R\+S\+B\+\_\+M@{R\+S\+B\+\_\+M}}\item[{\em 
+R\+S\+B\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa2947e913c24fbb082dedae28d4758822}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa2947e913c24fbb082dedae28d4758822}
+}]Reverse subtract. \index{A\+N\+D\+\_\+M@{A\+N\+D\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!A\+N\+D\+\_\+M@{A\+N\+D\+\_\+M}}\item[{\em 
+A\+N\+D\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fad039ebe850d73e070a699bd05ff68d97}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fad039ebe850d73e070a699bd05ff68d97}
+}]And. \index{E\+O\+R\+\_\+M@{E\+O\+R\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!E\+O\+R\+\_\+M@{E\+O\+R\+\_\+M}}\item[{\em 
+E\+O\+R\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fadad5d7437be9ff1b2eadd8346fcff1e9}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fadad5d7437be9ff1b2eadd8346fcff1e9}
+}]Exclusive or. \index{O\+R\+R\+\_\+M@{O\+R\+R\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!O\+R\+R\+\_\+M@{O\+R\+R\+\_\+M}}\item[{\em 
+O\+R\+R\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fae1ceb9a25525170dc8fdd381e436684a}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fae1ceb9a25525170dc8fdd381e436684a}
+}]Or. \index{M\+O\+V\+\_\+M@{M\+O\+V\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!M\+O\+V\+\_\+M@{M\+O\+V\+\_\+M}}\item[{\em 
+M\+O\+V\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac4bc3f3d4c7348e45ccceb4f8a20d2a7}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac4bc3f3d4c7348e45ccceb4f8a20d2a7}
+}]Move. \index{T\+S\+T\+\_\+M@{T\+S\+T\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!T\+S\+T\+\_\+M@{T\+S\+T\+\_\+M}}\item[{\em 
+T\+S\+T\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac3326420e81a392360777f222d7e7852}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac3326420e81a392360777f222d7e7852}
+}]Test. \index{T\+E\+Q\+\_\+M@{T\+E\+Q\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!T\+E\+Q\+\_\+M@{T\+E\+Q\+\_\+M}}\item[{\em 
+T\+E\+Q\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faff88eea8d277e8b3539d54ba0380ee74}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faff88eea8d277e8b3539d54ba0380ee74}
+}]Is equal. \index{C\+M\+P\+\_\+M@{C\+M\+P\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!C\+M\+P\+\_\+M@{C\+M\+P\+\_\+M}}\item[{\em 
+C\+M\+P\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa0ee57ba3c8c5437c5b7b37539256b114}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa0ee57ba3c8c5437c5b7b37539256b114}
+}]Compare. \index{M\+U\+L\+\_\+M@{M\+U\+L\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!M\+U\+L\+\_\+M@{M\+U\+L\+\_\+M}}\item[{\em 
+M\+U\+L\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac44a93c7f93e6c74a0545224f83de879}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac44a93c7f93e6c74a0545224f83de879}
+}]Multiply. \index{M\+L\+A\+\_\+M@{M\+L\+A\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!M\+L\+A\+\_\+M@{M\+L\+A\+\_\+M}}\item[{\em 
+M\+L\+A\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac773d984ca53eec2ea683a1b81178b97}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fac773d984ca53eec2ea683a1b81178b97}
+}]Multiply with addition. \index{L\+D\+R\+\_\+M@{L\+D\+R\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!L\+D\+R\+\_\+M@{L\+D\+R\+\_\+M}}\item[{\em 
+L\+D\+R\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa24a4c20527e1d5b158762346d40b8f30}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa24a4c20527e1d5b158762346d40b8f30}
+}]Load. \index{S\+T\+R\+\_\+M@{S\+T\+R\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!S\+T\+R\+\_\+M@{S\+T\+R\+\_\+M}}\item[{\em 
+S\+T\+R\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa98f5c2db5a230853eab208df56e61e49}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa98f5c2db5a230853eab208df56e61e49}
+}]Store. \index{B\+E\+Q\+\_\+M@{B\+E\+Q\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+E\+Q\+\_\+M@{B\+E\+Q\+\_\+M}}\item[{\em 
+B\+E\+Q\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fadbe8fc7744ddb2bb0ea61172e53f14da}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fadbe8fc7744ddb2bb0ea61172e53f14da}
+}]Branch if equal. \index{B\+N\+E\+\_\+M@{B\+N\+E\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+N\+E\+\_\+M@{B\+N\+E\+\_\+M}}\item[{\em 
+B\+N\+E\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa88df54ad817bade67f2269b51200cd19}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa88df54ad817bade67f2269b51200cd19}
+}]Branch if negative. \index{B\+G\+E\+\_\+M@{B\+G\+E\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+G\+E\+\_\+M@{B\+G\+E\+\_\+M}}\item[{\em 
+B\+G\+E\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa944a56e508df5c763b6b04994b039543}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa944a56e508df5c763b6b04994b039543}
+}]Branch if greater than or equal. \index{B\+L\+T\+\_\+M@{B\+L\+T\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+L\+T\+\_\+M@{B\+L\+T\+\_\+M}}\item[{\em 
+B\+L\+T\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faa2a39cb1e72d364a487431627a51faad}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faa2a39cb1e72d364a487431627a51faad}
+}]Branch if less than. \index{B\+G\+T\+\_\+M@{B\+G\+T\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+G\+T\+\_\+M@{B\+G\+T\+\_\+M}}\item[{\em 
+B\+G\+T\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa0088905c8dac9e7b58794a12c5b71520}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa0088905c8dac9e7b58794a12c5b71520}
+}]Branch if greater than. \index{B\+L\+E\+\_\+M@{B\+L\+E\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+L\+E\+\_\+M@{B\+L\+E\+\_\+M}}\item[{\em 
+B\+L\+E\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faef3376ee01ff854848e7bc2f4c2869f4}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0faef3376ee01ff854848e7bc2f4c2869f4}
+}]Branch if less than or equal. \index{B\+\_\+M@{B\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!B\+\_\+M@{B\+\_\+M}}\item[{\em 
+B\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa258b6ae0cd63d36ca21ac05ddb6629d4}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa258b6ae0cd63d36ca21ac05ddb6629d4}
+}]Unconditional branch. \index{S\+H\+I\+F\+T\+\_\+M@{S\+H\+I\+F\+T\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!S\+H\+I\+F\+T\+\_\+M@{S\+H\+I\+F\+T\+\_\+M}}\item[{\em 
+S\+H\+I\+F\+T\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa85c692640d338703cebfbb3aa070eb67}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fa85c692640d338703cebfbb3aa070eb67}
+}]Shift. \index{A\+N\+D\+E\+Q\+\_\+M@{A\+N\+D\+E\+Q\+\_\+M}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!A\+N\+D\+E\+Q\+\_\+M@{A\+N\+D\+E\+Q\+\_\+M}}\item[{\em 
+A\+N\+D\+E\+Q\+\_\+M\hypertarget{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fad6523e831da50e0caf43e8124cbf77e8}{}\label{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0fad6523e831da50e0caf43e8124cbf77e8}
+}]And eq, an all zero command. \end{description}
+\end{Desc}
+\index{global.\+h@{global.\+h}!opcode\+\_\+t@{opcode\+\_\+t}}
+\index{opcode\+\_\+t@{opcode\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{opcode\+\_\+t}{opcode_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf opcode\+\_\+t}}\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7d}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7d}
+
+
+An enum used for defining the opcode. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{A\+ND@{A\+ND}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!A\+ND@{A\+ND}}\item[{\em 
+A\+ND\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7da865555c9f2e0458a7078486aa1b3254f}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7da865555c9f2e0458a7078486aa1b3254f}
+}]And. \index{E\+OR@{E\+OR}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!E\+OR@{E\+OR}}\item[{\em 
+E\+OR\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7da4730d67b92a52e0e6ef813e8805c1623}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7da4730d67b92a52e0e6ef813e8805c1623}
+}]Exclusive or. \index{S\+UB@{S\+UB}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!S\+UB@{S\+UB}}\item[{\em 
+S\+UB\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7da12b733d4941495e86811fe6ceeeff9da}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7da12b733d4941495e86811fe6ceeeff9da}
+}]Subtract. \index{R\+SB@{R\+SB}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!R\+SB@{R\+SB}}\item[{\em 
+R\+SB\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7da1c03efb20082e397c67e1b95c87af195}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7da1c03efb20082e397c67e1b95c87af195}
+}]Reverse subtract. \index{A\+DD@{A\+DD}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!A\+DD@{A\+DD}}\item[{\em 
+A\+DD\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7dacfcf145f2788bf340ff3f3098bc54909}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7dacfcf145f2788bf340ff3f3098bc54909}
+}]Add. \index{T\+ST@{T\+ST}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!T\+ST@{T\+ST}}\item[{\em 
+T\+ST\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7da8a789f931f4c133b3e7b8491e9a9887c}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7da8a789f931f4c133b3e7b8491e9a9887c}
+}]And, set flags only. \index{T\+EQ@{T\+EQ}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!T\+EQ@{T\+EQ}}\item[{\em 
+T\+EQ\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7dac293a3d3f0e7c00325a674d939016c0e}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7dac293a3d3f0e7c00325a674d939016c0e}
+}]Exclusive or, set flags only. \index{C\+MP@{C\+MP}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!C\+MP@{C\+MP}}\item[{\em 
+C\+MP\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7da7fd9a97abde63f8c83a4756769aa899e}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7da7fd9a97abde63f8c83a4756769aa899e}
+}]Subtract, set flags only. \index{O\+RR@{O\+RR}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!O\+RR@{O\+RR}}\item[{\em 
+O\+RR\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7da51e6b781fcc0468896f60da150026bd5}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7da51e6b781fcc0468896f60da150026bd5}
+}]Or. \index{M\+OV@{M\+OV}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!M\+OV@{M\+OV}}\item[{\em 
+M\+OV\hypertarget{global_8h_a8d0559dcae6e251ff5663e79d5581c7daa1535ce8fd6caf08009dcae925741d9b}{}\label{global_8h_a8d0559dcae6e251ff5663e79d5581c7daa1535ce8fd6caf08009dcae925741d9b}
+}]Move. \end{description}
+\end{Desc}
+\index{global.\+h@{global.\+h}!shift\+\_\+t@{shift\+\_\+t}}
+\index{shift\+\_\+t@{shift\+\_\+t}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{shift\+\_\+t}{shift_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf shift\+\_\+t}}\hypertarget{global_8h_a22746cb89e8b2ed0a61876e36446f37f}{}\label{global_8h_a22746cb89e8b2ed0a61876e36446f37f}
+
+
+An enum used for defining the type of shift for the shifter to use. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{L\+SL@{L\+SL}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!L\+SL@{L\+SL}}\item[{\em 
+L\+SL\hypertarget{global_8h_a22746cb89e8b2ed0a61876e36446f37fa0226b11632995cf028f321326046753e}{}\label{global_8h_a22746cb89e8b2ed0a61876e36446f37fa0226b11632995cf028f321326046753e}
+}]Logical shift left. \index{L\+SR@{L\+SR}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!L\+SR@{L\+SR}}\item[{\em 
+L\+SR\hypertarget{global_8h_a22746cb89e8b2ed0a61876e36446f37fa298da67ff8599a09829a91ad0ad3069b}{}\label{global_8h_a22746cb89e8b2ed0a61876e36446f37fa298da67ff8599a09829a91ad0ad3069b}
+}]Logical shift right. \index{A\+SR@{A\+SR}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!A\+SR@{A\+SR}}\item[{\em 
+A\+SR\hypertarget{global_8h_a22746cb89e8b2ed0a61876e36446f37faf84b730277d260fd0ff17ce3ec05ed5d}{}\label{global_8h_a22746cb89e8b2ed0a61876e36446f37faf84b730277d260fd0ff17ce3ec05ed5d}
+}]Arithmetic shift right. \index{R\+OR@{R\+OR}!global.\+h@{global.\+h}}\index{global.\+h@{global.\+h}!R\+OR@{R\+OR}}\item[{\em 
+R\+OR\hypertarget{global_8h_a22746cb89e8b2ed0a61876e36446f37fa7b369e7350ac1a6585413ed60a0d6e10}{}\label{global_8h_a22746cb89e8b2ed0a61876e36446f37fa7b369e7350ac1a6585413ed60a0d6e10}
+}]Rotate right. \end{description}
+\end{Desc}

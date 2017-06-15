@@ -1,0 +1,7 @@
+<map id="assemble_utils/tokenizer.c" name="assemble_utils/tokenizer.c">
+<area shape="rect" id="node2" href="$tokenizer_8h.html" title="Header file for tokenizer.c. " alt="" coords="94,80,181,107"/>
+<area shape="rect" id="node3" href="$assemble__toolbox_8h.html" title="Header file for assemble_toolbox.c. " alt="" coords="68,155,207,181"/>
+<area shape="rect" id="node6" href="$string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="194,229,302,256"/>
+<area shape="rect" id="node7" href="$string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="35,304,136,331"/>
+<area shape="rect" id="node9" href="$global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="161,304,239,331"/>
+</map>

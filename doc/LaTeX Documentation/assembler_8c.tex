@@ -1,0 +1,171 @@
+\hypertarget{assembler_8c}{}\section{assemble\+\_\+utils/assembler.c File Reference}
+\label{assembler_8c}\index{assemble\+\_\+utils/assembler.\+c@{assemble\+\_\+utils/assembler.\+c}}
+
+
+File for functions used to assemble.  
+
+
+{\ttfamily \#include \char`\"{}assembler.\+h\char`\"{}}\\*
+Include dependency graph for assembler.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{assembler_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{assembler_8c_a930d40001ccd528f1c5f150cd940d368}{assemble\+\_\+dpi} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$tokens)
+\begin{DoxyCompactList}\small\item\em Assembles a data processing instruction. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{assembler_8c_a86ced3059d8f3781b185321ba56f02bb}{assemble\+\_\+spl} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$tokens)
+\begin{DoxyCompactList}\small\item\em Assembles a special instruction. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{assembler_8c_adae87e254776fd0289d6971f9ab8cc7c}{assemble\+\_\+mul} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$tokens)
+\begin{DoxyCompactList}\small\item\em Assembles a multiply instruction. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{assembler_8c_a820825258386ac0cf2a755a761205dad}{assemble\+\_\+sdt} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$tokens, \hyperlink{structword__array__t}{word\+\_\+array\+\_\+t} $\ast$extra\+\_\+words, int current\+\_\+line, int max\+\_\+lines)
+\begin{DoxyCompactList}\small\item\em Assembles a single data transfer instruction. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{assembler_8c_a8fee0cbc72459a4b026ba484e8fcdf1c}{assemble\+\_\+bra} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$tokens, \hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$symbol\+\_\+table, \hyperlink{global_8h_a8f4b132f56a25431714862229639be12}{address\+\_\+t} instruction\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Assembles a branch instruction. \end{DoxyCompactList}\item 
+void \hyperlink{assembler_8c_abc4c124b181d1f9c52a4fc1fdee32698}{assemble\+\_\+all\+\_\+instructions} (\hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} $\ast$instructions, \hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$symbol\+\_\+table, \hyperlink{structword__array__t}{word\+\_\+array\+\_\+t} $\ast$words)
+\begin{DoxyCompactList}\small\item\em Assembles word arrays of tokenized instructions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File for functions used to assemble. 
+
+
+
+\subsection{Function Documentation}
+\index{assembler.\+c@{assembler.\+c}!assemble\+\_\+all\+\_\+instructions@{assemble\+\_\+all\+\_\+instructions}}
+\index{assemble\+\_\+all\+\_\+instructions@{assemble\+\_\+all\+\_\+instructions}!assembler.\+c@{assembler.\+c}}
+\subsubsection[{\texorpdfstring{assemble\+\_\+all\+\_\+instructions(string\+\_\+arrays\+\_\+t $\ast$instructions, symbol\+\_\+table\+\_\+t $\ast$symbol\+\_\+table, word\+\_\+array\+\_\+t $\ast$words)}{assemble_all_instructions(string_arrays_t *instructions, symbol_table_t *symbol_table, word_array_t *words)}}]{\setlength{\rightskip}{0pt plus 5cm}void assemble\+\_\+all\+\_\+instructions (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+arrays\+\_\+t} $\ast$}]{instructions, }
+\item[{{\bf symbol\+\_\+table\+\_\+t} $\ast$}]{symbol\+\_\+table, }
+\item[{{\bf word\+\_\+array\+\_\+t} $\ast$}]{words}
+\end{DoxyParamCaption}
+)}\hypertarget{assembler_8c_abc4c124b181d1f9c52a4fc1fdee32698}{}\label{assembler_8c_abc4c124b181d1f9c52a4fc1fdee32698}
+
+
+Assembles word arrays of tokenized instructions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instructions} & A pointer to the tokenized instructions. \\
+\hline
+{\em symbol\+\_\+table} & A pointer to the table of labels and addresses. \\
+\hline
+{\em words} & A pointer to the array where assembled words are written. \\
+\hline
+\end{DoxyParams}
+\index{assembler.\+c@{assembler.\+c}!assemble\+\_\+bra@{assemble\+\_\+bra}}
+\index{assemble\+\_\+bra@{assemble\+\_\+bra}!assembler.\+c@{assembler.\+c}}
+\subsubsection[{\texorpdfstring{assemble\+\_\+bra(string\+\_\+array\+\_\+t $\ast$tokens, symbol\+\_\+table\+\_\+t $\ast$symbol\+\_\+table, address\+\_\+t instruction\+\_\+no)}{assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table, address_t instruction_no)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} assemble\+\_\+bra (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{tokens, }
+\item[{{\bf symbol\+\_\+table\+\_\+t} $\ast$}]{symbol\+\_\+table, }
+\item[{{\bf address\+\_\+t}}]{instruction\+\_\+no}
+\end{DoxyParamCaption}
+)}\hypertarget{assembler_8c_a8fee0cbc72459a4b026ba484e8fcdf1c}{}\label{assembler_8c_a8fee0cbc72459a4b026ba484e8fcdf1c}
+
+
+Assembles a branch instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The string to parse. \\
+\hline
+{\em symbol\+\_\+table} & The table of labels and addresses. \\
+\hline
+{\em instruction\+\_\+no} & The line number of this instruction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A machine code instruction. 
+\end{DoxyReturn}
+\index{assembler.\+c@{assembler.\+c}!assemble\+\_\+dpi@{assemble\+\_\+dpi}}
+\index{assemble\+\_\+dpi@{assemble\+\_\+dpi}!assembler.\+c@{assembler.\+c}}
+\subsubsection[{\texorpdfstring{assemble\+\_\+dpi(string\+\_\+array\+\_\+t $\ast$tokens)}{assemble_dpi(string_array_t *tokens)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} assemble\+\_\+dpi (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{tokens}
+\end{DoxyParamCaption}
+)}\hypertarget{assembler_8c_a930d40001ccd528f1c5f150cd940d368}{}\label{assembler_8c_a930d40001ccd528f1c5f150cd940d368}
+
+
+Assembles a data processing instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The string to parse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A machine code instruction. 
+\end{DoxyReturn}
+\index{assembler.\+c@{assembler.\+c}!assemble\+\_\+mul@{assemble\+\_\+mul}}
+\index{assemble\+\_\+mul@{assemble\+\_\+mul}!assembler.\+c@{assembler.\+c}}
+\subsubsection[{\texorpdfstring{assemble\+\_\+mul(string\+\_\+array\+\_\+t $\ast$tokens)}{assemble_mul(string_array_t *tokens)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} assemble\+\_\+mul (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{tokens}
+\end{DoxyParamCaption}
+)}\hypertarget{assembler_8c_adae87e254776fd0289d6971f9ab8cc7c}{}\label{assembler_8c_adae87e254776fd0289d6971f9ab8cc7c}
+
+
+Assembles a multiply instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The string to parse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A machine code instruction. 
+\end{DoxyReturn}
+\index{assembler.\+c@{assembler.\+c}!assemble\+\_\+sdt@{assemble\+\_\+sdt}}
+\index{assemble\+\_\+sdt@{assemble\+\_\+sdt}!assembler.\+c@{assembler.\+c}}
+\subsubsection[{\texorpdfstring{assemble\+\_\+sdt(string\+\_\+array\+\_\+t $\ast$tokens, word\+\_\+array\+\_\+t $\ast$extra\+\_\+words, int current\+\_\+line, int max\+\_\+lines)}{assemble_sdt(string_array_t *tokens, word_array_t *extra_words, int current_line, int max_lines)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} assemble\+\_\+sdt (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{tokens, }
+\item[{{\bf word\+\_\+array\+\_\+t} $\ast$}]{extra\+\_\+words, }
+\item[{int}]{current\+\_\+line, }
+\item[{int}]{max\+\_\+lines}
+\end{DoxyParamCaption}
+)}\hypertarget{assembler_8c_a820825258386ac0cf2a755a761205dad}{}\label{assembler_8c_a820825258386ac0cf2a755a761205dad}
+
+
+Assembles a single data transfer instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The string to parse. \\
+\hline
+{\em extra\+\_\+words} & An array to hold additional words required by ldr. \\
+\hline
+{\em current\+\_\+line} & The line number of this instruction. \\
+\hline
+{\em max\+\_\+lines} & The maximum number of instructions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A machine code instruction. 
+\end{DoxyReturn}
+\index{assembler.\+c@{assembler.\+c}!assemble\+\_\+spl@{assemble\+\_\+spl}}
+\index{assemble\+\_\+spl@{assemble\+\_\+spl}!assembler.\+c@{assembler.\+c}}
+\subsubsection[{\texorpdfstring{assemble\+\_\+spl(string\+\_\+array\+\_\+t $\ast$tokens)}{assemble_spl(string_array_t *tokens)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} assemble\+\_\+spl (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{tokens}
+\end{DoxyParamCaption}
+)}\hypertarget{assembler_8c_a86ced3059d8f3781b185321ba56f02bb}{}\label{assembler_8c_a86ced3059d8f3781b185321ba56f02bb}
+
+
+Assembles a special instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The string to parse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A machine code instruction. 
+\end{DoxyReturn}

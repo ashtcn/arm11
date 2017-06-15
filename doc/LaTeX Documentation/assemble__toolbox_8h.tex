@@ -1,0 +1,151 @@
+\hypertarget{assemble__toolbox_8h}{}\section{assemble\+\_\+utils/assemble\+\_\+toolbox.h File Reference}
+\label{assemble__toolbox_8h}\index{assemble\+\_\+utils/assemble\+\_\+toolbox.\+h@{assemble\+\_\+utils/assemble\+\_\+toolbox.\+h}}
+
+
+Header file for \hyperlink{assemble__toolbox_8c}{assemble\+\_\+toolbox.\+c}.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}string\+\_\+arrays.\+h\char`\"{}}\\*
+Include dependency graph for assemble\+\_\+toolbox.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{assemble__toolbox_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{assemble__toolbox_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{assemble__toolbox_8h_a67872dcf40da4b6e1c1967c4ea3113e8}{save\+\_\+file} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} $\ast$data, char $\ast$file\+\_\+name, int ile\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Saves an array of words to a file. \end{DoxyCompactList}\item 
+int \hyperlink{assemble__toolbox_8h_a74a3c7c2b45f527495a82dbad294e35e}{lines\+\_\+in\+\_\+file} (char $\ast$file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Returns the number of lines in a file. \end{DoxyCompactList}\item 
+char $\ast$$\ast$ \hyperlink{assemble__toolbox_8h_a0c8b35ddb601462246a881a6555d3ef8}{load\+\_\+source\+\_\+file} (char $\ast$load\+\_\+filename, int lines)
+\begin{DoxyCompactList}\small\item\em Returns a 2D array of the given source file. \end{DoxyCompactList}\item 
+char $\ast$$\ast$ \hyperlink{assemble__toolbox_8h_a22b291ee90ad75af5405e176fc42a653}{create\+\_\+2d\+\_\+array} (unsigned int rows, unsigned int cols)
+\begin{DoxyCompactList}\small\item\em Allocates the memory for a 2D array of chars. \end{DoxyCompactList}\item 
+void \hyperlink{assemble__toolbox_8h_a03b5c0be337e8aa4f74072ddf3418a59}{free\+\_\+2d\+\_\+array} (char $\ast$$\ast$arr, int rows)
+\begin{DoxyCompactList}\small\item\em Frees all memory used for the 2D array of chars. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{assemble__toolbox_8c}{assemble\+\_\+toolbox.\+c}. 
+
+
+
+\subsection{Function Documentation}
+\index{assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}!create\+\_\+2d\+\_\+array@{create\+\_\+2d\+\_\+array}}
+\index{create\+\_\+2d\+\_\+array@{create\+\_\+2d\+\_\+array}!assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}}
+\subsubsection[{\texorpdfstring{create\+\_\+2d\+\_\+array(unsigned int rows, unsigned int cols)}{create_2d_array(unsigned int rows, unsigned int cols)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ create\+\_\+2d\+\_\+array (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{rows, }
+\item[{unsigned int}]{cols}
+\end{DoxyParamCaption}
+)}\hypertarget{assemble__toolbox_8h_a22b291ee90ad75af5405e176fc42a653}{}\label{assemble__toolbox_8h_a22b291ee90ad75af5405e176fc42a653}
+
+
+Allocates the memory for a 2D array of chars. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rows} & Rows of the 2D array. \\
+\hline
+{\em cols} & Columns of the 2D array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer to the first element of the 2D array. 
+\end{DoxyReturn}
+\index{assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}!free\+\_\+2d\+\_\+array@{free\+\_\+2d\+\_\+array}}
+\index{free\+\_\+2d\+\_\+array@{free\+\_\+2d\+\_\+array}!assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}}
+\subsubsection[{\texorpdfstring{free\+\_\+2d\+\_\+array(char $\ast$$\ast$arr, int rows)}{free_2d_array(char **arr, int rows)}}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+2d\+\_\+array (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{arr, }
+\item[{int}]{rows}
+\end{DoxyParamCaption}
+)}\hypertarget{assemble__toolbox_8h_a03b5c0be337e8aa4f74072ddf3418a59}{}\label{assemble__toolbox_8h_a03b5c0be337e8aa4f74072ddf3418a59}
+
+
+Frees all memory used for the 2D array of chars. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arr} & The 2D array to free. \\
+\hline
+{\em rows} & Number of rows of the 2D array. \\
+\hline
+\end{DoxyParams}
+\index{assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}!lines\+\_\+in\+\_\+file@{lines\+\_\+in\+\_\+file}}
+\index{lines\+\_\+in\+\_\+file@{lines\+\_\+in\+\_\+file}!assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}}
+\subsubsection[{\texorpdfstring{lines\+\_\+in\+\_\+file(char $\ast$file\+\_\+name)}{lines_in_file(char *file_name)}}]{\setlength{\rightskip}{0pt plus 5cm}int lines\+\_\+in\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{file\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{assemble__toolbox_8h_a74a3c7c2b45f527495a82dbad294e35e}{}\label{assemble__toolbox_8h_a74a3c7c2b45f527495a82dbad294e35e}
+
+
+Returns the number of lines in a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & Address of the file to read from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of lines in a file. 
+\end{DoxyReturn}
+\index{assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}!load\+\_\+source\+\_\+file@{load\+\_\+source\+\_\+file}}
+\index{load\+\_\+source\+\_\+file@{load\+\_\+source\+\_\+file}!assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}}
+\subsubsection[{\texorpdfstring{load\+\_\+source\+\_\+file(char $\ast$load\+\_\+filename, int lines)}{load_source_file(char *load_filename, int lines)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ load\+\_\+source\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{load\+\_\+filename, }
+\item[{int}]{lines}
+\end{DoxyParamCaption}
+)}\hypertarget{assemble__toolbox_8h_a0c8b35ddb601462246a881a6555d3ef8}{}\label{assemble__toolbox_8h_a0c8b35ddb601462246a881a6555d3ef8}
+
+
+Returns a 2D array of the given source file. 
+
+The 2D array is constructed such that is an array of strings, where each string is a line from the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em load\+\_\+filename} & Address of the file to load from. \\
+\hline
+{\em lines} & Number of lines in the file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 2D array made from the file. 
+\end{DoxyReturn}
+\index{assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}!save\+\_\+file@{save\+\_\+file}}
+\index{save\+\_\+file@{save\+\_\+file}!assemble\+\_\+toolbox.\+h@{assemble\+\_\+toolbox.\+h}}
+\subsubsection[{\texorpdfstring{save\+\_\+file(word\+\_\+t $\ast$data, char $\ast$file\+\_\+name, int ile\+\_\+size)}{save_file(word_t *data, char *file_name, int ile_size)}}]{\setlength{\rightskip}{0pt plus 5cm}void save\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t} $\ast$}]{data, }
+\item[{char $\ast$}]{file\+\_\+name, }
+\item[{int}]{file\+\_\+size}
+\end{DoxyParamCaption}
+)}\hypertarget{assemble__toolbox_8h_a67872dcf40da4b6e1c1967c4ea3113e8}{}\label{assemble__toolbox_8h_a67872dcf40da4b6e1c1967c4ea3113e8}
+
+
+Saves an array of words to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Array of words to write to the file. \\
+\hline
+{\em file\+\_\+name} & Address of the file to save to. \\
+\hline
+{\em file\+\_\+size} & Size of the word array. \\
+\hline
+\end{DoxyParams}

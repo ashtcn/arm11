@@ -1,0 +1,105 @@
+\hypertarget{print__compliant_8h}{}\section{emulate\+\_\+utils/print\+\_\+compliant.h File Reference}
+\label{print__compliant_8h}\index{emulate\+\_\+utils/print\+\_\+compliant.\+h@{emulate\+\_\+utils/print\+\_\+compliant.\+h}}
+
+
+Header file for \hyperlink{print__compliant_8c}{print\+\_\+compliant.\+c}.  
+
+
+{\ttfamily \#include \char`\"{}print.\+h\char`\"{}}\\*
+Include dependency graph for print\+\_\+compliant.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{print__compliant_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{print__compliant_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{print__compliant_8h_a53e74af552445098554650a9cd55871d}{print\+\_\+system\+\_\+state\+\_\+compliant} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints system state details for test cases. \end{DoxyCompactList}\item 
+void \hyperlink{print__compliant_8h_aec17ac1dfe2ed696d104fda9a65359e4}{print\+\_\+registers\+\_\+compliant} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints the values of the registers of the machine for test cases. \end{DoxyCompactList}\item 
+void \hyperlink{print__compliant_8h_aa8b4d6004e6a83724b3af18db9ca31a4}{print\+\_\+memory\+\_\+compliant} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Prints non-\/zero memory entries for test cases. \end{DoxyCompactList}\item 
+void \hyperlink{print__compliant_8h_abe651d4f119a46084e83caed390671b9}{print\+\_\+value\+\_\+compliant} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} value)
+\begin{DoxyCompactList}\small\item\em Prints a value for test cases, in hex and two\textquotesingle{}s complement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{print__compliant_8c}{print\+\_\+compliant.\+c}. 
+
+
+
+\subsection{Function Documentation}
+\index{print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}!print\+\_\+memory\+\_\+compliant@{print\+\_\+memory\+\_\+compliant}}
+\index{print\+\_\+memory\+\_\+compliant@{print\+\_\+memory\+\_\+compliant}!print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+memory\+\_\+compliant(system\+\_\+state\+\_\+t $\ast$machine)}{print_memory_compliant(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+memory\+\_\+compliant (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print__compliant_8h_aa8b4d6004e6a83724b3af18db9ca31a4}{}\label{print__compliant_8h_aa8b4d6004e6a83724b3af18db9ca31a4}
+
+
+Prints non-\/zero memory entries for test cases. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}!print\+\_\+registers\+\_\+compliant@{print\+\_\+registers\+\_\+compliant}}
+\index{print\+\_\+registers\+\_\+compliant@{print\+\_\+registers\+\_\+compliant}!print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+registers\+\_\+compliant(system\+\_\+state\+\_\+t $\ast$machine)}{print_registers_compliant(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+registers\+\_\+compliant (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print__compliant_8h_aec17ac1dfe2ed696d104fda9a65359e4}{}\label{print__compliant_8h_aec17ac1dfe2ed696d104fda9a65359e4}
+
+
+Prints the values of the registers of the machine for test cases. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}!print\+\_\+system\+\_\+state\+\_\+compliant@{print\+\_\+system\+\_\+state\+\_\+compliant}}
+\index{print\+\_\+system\+\_\+state\+\_\+compliant@{print\+\_\+system\+\_\+state\+\_\+compliant}!print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+system\+\_\+state\+\_\+compliant(system\+\_\+state\+\_\+t $\ast$machine)}{print_system_state_compliant(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+system\+\_\+state\+\_\+compliant (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{print__compliant_8h_a53e74af552445098554650a9cd55871d}{}\label{print__compliant_8h_a53e74af552445098554650a9cd55871d}
+
+
+Prints system state details for test cases. 
+
+Prints the current system state. Prints all register values, any memory values which are not 0. Prints in test case format. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}!print\+\_\+value\+\_\+compliant@{print\+\_\+value\+\_\+compliant}}
+\index{print\+\_\+value\+\_\+compliant@{print\+\_\+value\+\_\+compliant}!print\+\_\+compliant.\+h@{print\+\_\+compliant.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+value\+\_\+compliant(word\+\_\+t value)}{print_value_compliant(word_t value)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+value\+\_\+compliant (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+t}}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{print__compliant_8h_abe651d4f119a46084e83caed390671b9}{}\label{print__compliant_8h_abe651d4f119a46084e83caed390671b9}
+
+
+Prints a value for test cases, in hex and two\textquotesingle{}s complement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The word to print. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,183 @@
+\hypertarget{decode_8h}{}\section{emulate\+\_\+utils/decode.h File Reference}
+\label{decode_8h}\index{emulate\+\_\+utils/decode.\+h@{emulate\+\_\+utils/decode.\+h}}
+
+
+Header file for \hyperlink{decode_8c}{decode.\+c}.  
+
+
+{\ttfamily \#include \char`\"{}../toolbox.\+h\char`\"{}}\\*
+Include dependency graph for decode.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{decode_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{decode_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{decode_8h_ab6398a4c7d3377837b94bb0386f062c6}{decode\+\_\+instruction} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Decodes the fetched instruction in current system state. \end{DoxyCompactList}\item 
+void \hyperlink{decode_8h_a3d488112b7f20aa0ab705253c3aa6ec3}{halt} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Sets decoded\+\_\+instruction type to a stop (Z\+ER) instruction. \end{DoxyCompactList}\item 
+void \hyperlink{decode_8h_a2a0f621c80c6894c383548f8dd225f2d}{branch} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Set branch instruction data in decoded\+\_\+instruction. \end{DoxyCompactList}\item 
+void \hyperlink{decode_8h_af5da0fb4f844c3c75f81601b5d648b6f}{single\+\_\+data\+\_\+transfer} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Set single\+\_\+data\+\_\+transfer instruction data in decoded\+\_\+instruction. \end{DoxyCompactList}\item 
+void \hyperlink{decode_8h_af5cd2d82cc551d03c65948e27e3dea1d}{multiply} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Set multiply instruction data in decoded\+\_\+instruction. \end{DoxyCompactList}\item 
+void \hyperlink{decode_8h_a7f2d97f06ba3dcb9b484decf650c5067}{data\+\_\+processing} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Set data\+\_\+processing instruction data in decoded\+\_\+instruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{decode_8c}{decode.\+c}. 
+
+
+
+\subsection{Function Documentation}
+\index{decode.\+h@{decode.\+h}!branch@{branch}}
+\index{branch@{branch}!decode.\+h@{decode.\+h}}
+\subsubsection[{\texorpdfstring{branch(system\+\_\+state\+\_\+t $\ast$machine)}{branch(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void branch (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{decode_8h_a2a0f621c80c6894c383548f8dd225f2d}{}\label{decode_8h_a2a0f621c80c6894c383548f8dd225f2d}
+
+
+Set branch instruction data in decoded\+\_\+instruction. 
+
+The offset (24 bits) is bit 0 to 23 of the branch instruction. It is then bit shifted to the left by 2 and then sign extended to 32 bits. The offset is stored in the immediate\+\_\+value of the decoded\+\_\+instruction. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{decode.\+h@{decode.\+h}!data\+\_\+processing@{data\+\_\+processing}}
+\index{data\+\_\+processing@{data\+\_\+processing}!decode.\+h@{decode.\+h}}
+\subsubsection[{\texorpdfstring{data\+\_\+processing(system\+\_\+state\+\_\+t $\ast$machine)}{data_processing(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void data\+\_\+processing (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{decode_8h_a7f2d97f06ba3dcb9b484decf650c5067}{}\label{decode_8h_a7f2d97f06ba3dcb9b484decf650c5067}
+
+
+Set data\+\_\+processing instruction data in decoded\+\_\+instruction. 
+
+The fields in decoded\+\_\+instruction are used as follows\+:
+\begin{DoxyItemize}
+\item flag\+\_\+0 stores the I bit\+:
+\begin{DoxyItemize}
+\item If set, the Operand2 is used as an immediate constant.
+\item Otherwise, Operand2 is used as a shifted register.
+\end{DoxyItemize}
+\item flag\+\_\+1 stores the S bit (if set, C\+P\+SR flags are set when executed).
+\item operation is used to store the corresponding opcode\+\_\+t enum to the opcode. provided in the fetched\+\_\+instruction.
+\item rd is the source/destination register address.
+\item rn is the first operand register. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\index{decode.\+h@{decode.\+h}!decode\+\_\+instruction@{decode\+\_\+instruction}}
+\index{decode\+\_\+instruction@{decode\+\_\+instruction}!decode.\+h@{decode.\+h}}
+\subsubsection[{\texorpdfstring{decode\+\_\+instruction(system\+\_\+state\+\_\+t $\ast$machine)}{decode_instruction(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void decode\+\_\+instruction (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{decode_8h_ab6398a4c7d3377837b94bb0386f062c6}{}\label{decode_8h_ab6398a4c7d3377837b94bb0386f062c6}
+
+
+Decodes the fetched instruction in current system state. 
+
+Given the pointer to the current system state, it moves the fetched instruction information into the decoded\+\_\+instruction struct (for use when executing the decoded instruction). 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{decode.\+h@{decode.\+h}!halt@{halt}}
+\index{halt@{halt}!decode.\+h@{decode.\+h}}
+\subsubsection[{\texorpdfstring{halt(system\+\_\+state\+\_\+t $\ast$machine)}{halt(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void halt (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{decode_8h_a3d488112b7f20aa0ab705253c3aa6ec3}{}\label{decode_8h_a3d488112b7f20aa0ab705253c3aa6ec3}
+
+
+Sets decoded\+\_\+instruction type to a stop (Z\+ER) instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+\index{decode.\+h@{decode.\+h}!multiply@{multiply}}
+\index{multiply@{multiply}!decode.\+h@{decode.\+h}}
+\subsubsection[{\texorpdfstring{multiply(system\+\_\+state\+\_\+t $\ast$machine)}{multiply(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void multiply (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{decode_8h_af5cd2d82cc551d03c65948e27e3dea1d}{}\label{decode_8h_af5cd2d82cc551d03c65948e27e3dea1d}
+
+
+Set multiply instruction data in decoded\+\_\+instruction. 
+
+The fields in decoded\+\_\+instruction are used as follows\+:
+\begin{DoxyItemize}
+\item flag\+\_\+0 stores the A bit (if set, perform multiply and accumulate).
+\item flag\+\_\+1 stores the S bit (if set, C\+P\+SR flags are set when executed).
+\item rd is the destination register address.
+\item rn, rs and rm are the addresses of the operand registers. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\index{decode.\+h@{decode.\+h}!single\+\_\+data\+\_\+transfer@{single\+\_\+data\+\_\+transfer}}
+\index{single\+\_\+data\+\_\+transfer@{single\+\_\+data\+\_\+transfer}!decode.\+h@{decode.\+h}}
+\subsubsection[{\texorpdfstring{single\+\_\+data\+\_\+transfer(system\+\_\+state\+\_\+t $\ast$machine)}{single_data_transfer(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void single\+\_\+data\+\_\+transfer (
+\begin{DoxyParamCaption}
+\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
+\end{DoxyParamCaption}
+)}\hypertarget{decode_8h_af5da0fb4f844c3c75f81601b5d648b6f}{}\label{decode_8h_af5da0fb4f844c3c75f81601b5d648b6f}
+
+
+Set single\+\_\+data\+\_\+transfer instruction data in decoded\+\_\+instruction. 
+
+The fields in decoded\+\_\+instruction are used as follows\+:
+\begin{DoxyItemize}
+\item flag\+\_\+0 stores the I bit\+:
+\begin{DoxyItemize}
+\item If set, Offset is used as a shifted register.
+\item Otherwise, Offset is used as an unsigned 12 bit immediate offset).
+\end{DoxyItemize}
+\item flag\+\_\+1 stores the P bit\+:
+\begin{DoxyItemize}
+\item If set, pre-\/indexing is used.
+\item Otherwise, post-\/indexing is used.
+\end{DoxyItemize}
+\item flag\+\_\+2 stores the U bit\+:
+\begin{DoxyItemize}
+\item If set, Offset is added to the base register.
+\item Otherwise, Offset is subtracted from the base register.
+\end{DoxyItemize}
+\item flag\+\_\+3 stores the L bit\+:
+\begin{DoxyItemize}
+\item If set, the word is loaded from memory.
+\item Otherwise, the word is stored into memory.
+\end{DoxyItemize}
+\item rd is the source/destination register address.
+\item rn is the base register. 
+\begin{DoxyParams}{Parameters}
+{\em machine} & The current system state. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

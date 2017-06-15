@@ -1,0 +1,33 @@
+<map id="global.h" name="global.h">
+<area shape="rect" id="node2" href="$string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="425,169,571,211"/>
+<area shape="rect" id="node15" href="$word__array_8h.html" title="A header to define the word_array_t type. " alt="" coords="750,80,891,121"/>
+<area shape="rect" id="node17" href="$instruction_8h.html" title="A header to define the instruction_t type. " alt="" coords="953,87,1046,114"/>
+<area shape="rect" id="node32" href="$value__carry_8h.html" title="A header to define the value_carry_t type. " alt="" coords="1147,80,1281,121"/>
+<area shape="rect" id="node3" href="$assemble__toolbox_8h.html" title="Header file for assemble_toolbox.c. " alt="" coords="156,259,325,300"/>
+<area shape="rect" id="node8" href="$symbol__table_8h.html" title="A header to define the symbol_table_t type. " alt="" coords="350,259,505,300"/>
+<area shape="rect" id="node14" href="$string__arrays_8c.html" title="Functions to use string_arrays_t. " alt="" coords="529,259,675,300"/>
+<area shape="rect" id="node4" href="$tokenizer_8h.html" title="Header file for tokenizer.c. " alt="" coords="5,355,183,382"/>
+<area shape="rect" id="node7" href="$assemble__toolbox_8c.html" title="Miscellaneous functions for assemble. " alt="" coords="207,348,376,389"/>
+<area shape="rect" id="node5" href="$assemble_8c.html" title="The main functionality for the ARM11 assembler. " alt="" coords="156,534,245,561"/>
+<area shape="rect" id="node6" href="$tokenizer_8c.html" title="File for functions to tokenize assembly input. " alt="" coords="132,445,309,471"/>
+<area shape="rect" id="node9" href="$parser_8h.html" title="Header file for parser.c. " alt="" coords="630,355,790,382"/>
+<area shape="rect" id="node13" href="$symbol__table_8c.html" title="File for functions for using and making symbol tables. " alt="" coords="401,348,555,389"/>
+<area shape="rect" id="node10" href="$assembler_8h.html" title="Header file for assembler.c. " alt="" coords="377,445,561,471"/>
+<area shape="rect" id="node12" href="$parser_8c.html" title="File for functions used to parse an assembly input. " alt="" coords="627,445,787,471"/>
+<area shape="rect" id="node11" href="$assembler_8c.html" title="File for functions used to assemble. " alt="" coords="377,534,561,561"/>
+<area shape="rect" id="node16" href="$word__array_8c.html" title="Functions for using word arrays. " alt="" coords="750,169,891,211"/>
+<area shape="rect" id="node18" href="$encode_8h.html" title="Header file for encode.c. " alt="" coords="916,177,1083,203"/>
+<area shape="rect" id="node20" href="$system__state_8h.html" title="A header to define the system_state_t type. " alt="" coords="1107,169,1254,211"/>
+<area shape="rect" id="node19" href="$encode_8c.html" title="Functions to encode an instruction_t. " alt="" coords="916,266,1083,293"/>
+<area shape="rect" id="node21" href="$toolbox_8h.html" title="Header file for toolbox.c. " alt="" coords="1150,266,1225,293"/>
+<area shape="rect" id="node22" href="$print_8h.html" title="Header file for print.c. " alt="" coords="947,355,1086,382"/>
+<area shape="rect" id="node27" href="$decode_8h.html" title="Header file for decode.c. " alt="" coords="1111,355,1267,382"/>
+<area shape="rect" id="node29" href="$execute_8h.html" title="Header file for execute.c. " alt="" coords="1291,355,1451,382"/>
+<area shape="rect" id="node31" href="$toolbox_8c.html" title="Miscellaneous functions that are widely used throughout the code. " alt="" coords="1475,355,1550,382"/>
+<area shape="rect" id="node23" href="$print__compliant_8h.html" title="Header file for print_compliant.c. " alt="" coords="811,437,939,479"/>
+<area shape="rect" id="node26" href="$print_8c.html" title="Functions for printing system details to standard output. " alt="" coords="963,445,1102,471"/>
+<area shape="rect" id="node24" href="$emulate_8c.html" title="The main functionality for the ARM11 emulator. " alt="" coords="1100,534,1179,561"/>
+<area shape="rect" id="node25" href="$print__compliant_8c.html" title="Functions for printing system details to match test cases. " alt="" coords="811,527,939,568"/>
+<area shape="rect" id="node28" href="$decode_8c.html" title="Functions for the decode cycle. " alt="" coords="1177,445,1333,471"/>
+<area shape="rect" id="node30" href="$execute_8c.html" title="Functions for the execute cycle. " alt="" coords="1409,445,1569,471"/>
+</map>

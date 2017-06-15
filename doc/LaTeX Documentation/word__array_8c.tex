@@ -1,0 +1,81 @@
+\hypertarget{word__array_8c}{}\section{assemble\+\_\+utils/word\+\_\+array.c File Reference}
+\label{word__array_8c}\index{assemble\+\_\+utils/word\+\_\+array.\+c@{assemble\+\_\+utils/word\+\_\+array.\+c}}
+
+
+Functions for using word arrays.  
+
+
+{\ttfamily \#include \char`\"{}word\+\_\+array.\+h\char`\"{}}\\*
+Include dependency graph for word\+\_\+array.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{word__array_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structword__array__t}{word\+\_\+array\+\_\+t} $\ast$ \hyperlink{word__array_8c_a0c1e6f98d11534a8acccf59d107c0cef}{make\+\_\+word\+\_\+array} (void)
+\begin{DoxyCompactList}\small\item\em Initialises a word array. \end{DoxyCompactList}\item 
+void \hyperlink{word__array_8c_a7712df4702d2800df0c6a2351f43453e}{add\+\_\+word\+\_\+array} (\hyperlink{structword__array__t}{word\+\_\+array\+\_\+t} $\ast$word\+\_\+array, \hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} word)
+\begin{DoxyCompactList}\small\item\em Adds a word to a word array. \end{DoxyCompactList}\item 
+void \hyperlink{word__array_8c_a832086087afa229859db25a03398a97b}{free\+\_\+word\+\_\+array} (\hyperlink{structword__array__t}{word\+\_\+array\+\_\+t} $\ast$word\+\_\+array)
+\begin{DoxyCompactList}\small\item\em Frees all memory used in a word array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for using word arrays. 
+
+
+
+\subsection{Function Documentation}
+\index{word\+\_\+array.\+c@{word\+\_\+array.\+c}!add\+\_\+word\+\_\+array@{add\+\_\+word\+\_\+array}}
+\index{add\+\_\+word\+\_\+array@{add\+\_\+word\+\_\+array}!word\+\_\+array.\+c@{word\+\_\+array.\+c}}
+\subsubsection[{\texorpdfstring{add\+\_\+word\+\_\+array(word\+\_\+array\+\_\+t $\ast$word\+\_\+array, word\+\_\+t word)}{add_word_array(word_array_t *word_array, word_t word)}}]{\setlength{\rightskip}{0pt plus 5cm}void add\+\_\+word\+\_\+array (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+array\+\_\+t} $\ast$}]{word\+\_\+array, }
+\item[{{\bf word\+\_\+t}}]{word}
+\end{DoxyParamCaption}
+)}\hypertarget{word__array_8c_a7712df4702d2800df0c6a2351f43453e}{}\label{word__array_8c_a7712df4702d2800df0c6a2351f43453e}
+
+
+Adds a word to a word array. 
+
+If more memory is required it doubles the array size. 
+\begin{DoxyParams}{Parameters}
+{\em word\+\_\+array} & The word array to add the word to. \\
+\hline
+{\em word} & The word to add to the array. \\
+\hline
+\end{DoxyParams}
+\index{word\+\_\+array.\+c@{word\+\_\+array.\+c}!free\+\_\+word\+\_\+array@{free\+\_\+word\+\_\+array}}
+\index{free\+\_\+word\+\_\+array@{free\+\_\+word\+\_\+array}!word\+\_\+array.\+c@{word\+\_\+array.\+c}}
+\subsubsection[{\texorpdfstring{free\+\_\+word\+\_\+array(word\+\_\+array\+\_\+t $\ast$word\+\_\+array)}{free_word_array(word_array_t *word_array)}}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+word\+\_\+array (
+\begin{DoxyParamCaption}
+\item[{{\bf word\+\_\+array\+\_\+t} $\ast$}]{word\+\_\+array}
+\end{DoxyParamCaption}
+)}\hypertarget{word__array_8c_a832086087afa229859db25a03398a97b}{}\label{word__array_8c_a832086087afa229859db25a03398a97b}
+
+
+Frees all memory used in a word array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em word\+\_\+array} & The word array to free. \\
+\hline
+\end{DoxyParams}
+\index{word\+\_\+array.\+c@{word\+\_\+array.\+c}!make\+\_\+word\+\_\+array@{make\+\_\+word\+\_\+array}}
+\index{make\+\_\+word\+\_\+array@{make\+\_\+word\+\_\+array}!word\+\_\+array.\+c@{word\+\_\+array.\+c}}
+\subsubsection[{\texorpdfstring{make\+\_\+word\+\_\+array(void)}{make_word_array(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+array\+\_\+t}$\ast$ make\+\_\+word\+\_\+array (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{word__array_8c_a0c1e6f98d11534a8acccf59d107c0cef}{}\label{word__array_8c_a0c1e6f98d11534a8acccf59d107c0cef}
+
+
+Initialises a word array. 
+
+Mallocs the memory for the array, exits the program if that was not possible. It initialises the size of the array to I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE, a \#define in \hyperlink{global_8h}{global.\+h}. \begin{DoxyReturn}{Returns}
+An initinalised word array. 
+\end{DoxyReturn}

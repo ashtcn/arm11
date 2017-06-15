@@ -1,0 +1,162 @@
+\hypertarget{symbol__table_8c}{}\section{assemble\+\_\+utils/symbol\+\_\+table.c File Reference}
+\label{symbol__table_8c}\index{assemble\+\_\+utils/symbol\+\_\+table.\+c@{assemble\+\_\+utils/symbol\+\_\+table.\+c}}
+
+
+File for functions for using and making symbol tables.  
+
+
+{\ttfamily \#include \char`\"{}symbol\+\_\+table.\+h\char`\"{}}\\*
+Include dependency graph for symbol\+\_\+table.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{symbol__table_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$ \hyperlink{symbol__table_8c_a676f92724865d99f50aea40b66797659}{create\+\_\+table} (uint16\+\_\+t row\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Creates and initialises a symbol table. \end{DoxyCompactList}\item 
+void \hyperlink{symbol__table_8c_a31539694ff1aa25f3af81365fb85f8e7}{add\+\_\+row} (\hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$table, char $\ast$label, \hyperlink{global_8h_a8f4b132f56a25431714862229639be12}{address\+\_\+t} address)
+\begin{DoxyCompactList}\small\item\em Adds a row to a symbol table. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a8f4b132f56a25431714862229639be12}{address\+\_\+t} \hyperlink{symbol__table_8c_af70661235a95a1f862ca2e04150b6d5c}{get\+\_\+address} (\hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$table, char $\ast$label)
+\begin{DoxyCompactList}\small\item\em Gets the address of a label in a symbol table. \end{DoxyCompactList}\item 
+bool \hyperlink{symbol__table_8c_ac39a951f471607cffd7609a55ce34158}{is\+\_\+label\+\_\+in\+\_\+table} (\hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$table, char $\ast$label)
+\begin{DoxyCompactList}\small\item\em Checks if the label is in the table. \end{DoxyCompactList}\item 
+\hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$ \hyperlink{symbol__table_8c_a950658f8dcac4324b29f3c18c980afbb}{generate\+\_\+symbol\+\_\+table} (\hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} $\ast$tokens)
+\begin{DoxyCompactList}\small\item\em Generates a symbol table given a block of assembly. \end{DoxyCompactList}\item 
+void \hyperlink{symbol__table_8c_a0d8e0f524754e4756526205d4b6fcf96}{free\+\_\+table} (\hyperlink{structsymbol__table__t}{symbol\+\_\+table\+\_\+t} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Frees all memory used by a symbol table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File for functions for using and making symbol tables. 
+
+
+
+\subsection{Function Documentation}
+\index{symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}!add\+\_\+row@{add\+\_\+row}}
+\index{add\+\_\+row@{add\+\_\+row}!symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}}
+\subsubsection[{\texorpdfstring{add\+\_\+row(symbol\+\_\+table\+\_\+t $\ast$table, char $\ast$label, address\+\_\+t address)}{add_row(symbol_table_t *table, char *label, address_t address)}}]{\setlength{\rightskip}{0pt plus 5cm}void add\+\_\+row (
+\begin{DoxyParamCaption}
+\item[{{\bf symbol\+\_\+table\+\_\+t} $\ast$}]{table, }
+\item[{char $\ast$}]{label, }
+\item[{{\bf address\+\_\+t}}]{address}
+\end{DoxyParamCaption}
+)}\hypertarget{symbol__table_8c_a31539694ff1aa25f3af81365fb85f8e7}{}\label{symbol__table_8c_a31539694ff1aa25f3af81365fb85f8e7}
+
+
+Adds a row to a symbol table. 
+
+Given a label and a address, will allocate memory for the row, and add it to the table. It will dynamically increase the array size if more labels are added.
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & The table to add the row to. \\
+\hline
+{\em label} & The string of the label. \\
+\hline
+{\em address} & The address of the label. \\
+\hline
+\end{DoxyParams}
+\index{symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}!create\+\_\+table@{create\+\_\+table}}
+\index{create\+\_\+table@{create\+\_\+table}!symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}}
+\subsubsection[{\texorpdfstring{create\+\_\+table(uint16\+\_\+t row\+\_\+number)}{create_table(uint16_t row_number)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf symbol\+\_\+table\+\_\+t}$\ast$ create\+\_\+table (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{row\+\_\+number}
+\end{DoxyParamCaption}
+)}\hypertarget{symbol__table_8c_a676f92724865d99f50aea40b66797659}{}\label{symbol__table_8c_a676f92724865d99f50aea40b66797659}
+
+
+Creates and initialises a symbol table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+number} & Initial maximum size of the table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An initialised symbol table. 
+\end{DoxyReturn}
+\index{symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}!free\+\_\+table@{free\+\_\+table}}
+\index{free\+\_\+table@{free\+\_\+table}!symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}}
+\subsubsection[{\texorpdfstring{free\+\_\+table(symbol\+\_\+table\+\_\+t $\ast$table)}{free_table(symbol_table_t *table)}}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+table (
+\begin{DoxyParamCaption}
+\item[{{\bf symbol\+\_\+table\+\_\+t} $\ast$}]{table}
+\end{DoxyParamCaption}
+)}\hypertarget{symbol__table_8c_a0d8e0f524754e4756526205d4b6fcf96}{}\label{symbol__table_8c_a0d8e0f524754e4756526205d4b6fcf96}
+
+
+Frees all memory used by a symbol table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & The table to free. \\
+\hline
+\end{DoxyParams}
+\index{symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}!generate\+\_\+symbol\+\_\+table@{generate\+\_\+symbol\+\_\+table}}
+\index{generate\+\_\+symbol\+\_\+table@{generate\+\_\+symbol\+\_\+table}!symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}}
+\subsubsection[{\texorpdfstring{generate\+\_\+symbol\+\_\+table(string\+\_\+arrays\+\_\+t $\ast$tokens)}{generate_symbol_table(string_arrays_t *tokens)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf symbol\+\_\+table\+\_\+t}$\ast$ generate\+\_\+symbol\+\_\+table (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+arrays\+\_\+t} $\ast$}]{tokens}
+\end{DoxyParamCaption}
+)}\hypertarget{symbol__table_8c_a950658f8dcac4324b29f3c18c980afbb}{}\label{symbol__table_8c_a950658f8dcac4324b29f3c18c980afbb}
+
+
+Generates a symbol table given a block of assembly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The assembly, tokenised. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The complete symbol table. 
+\end{DoxyReturn}
+\index{symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}!get\+\_\+address@{get\+\_\+address}}
+\index{get\+\_\+address@{get\+\_\+address}!symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}}
+\subsubsection[{\texorpdfstring{get\+\_\+address(symbol\+\_\+table\+\_\+t $\ast$table, char $\ast$label)}{get_address(symbol_table_t *table, char *label)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf address\+\_\+t} get\+\_\+address (
+\begin{DoxyParamCaption}
+\item[{{\bf symbol\+\_\+table\+\_\+t} $\ast$}]{table, }
+\item[{char $\ast$}]{label}
+\end{DoxyParamCaption}
+)}\hypertarget{symbol__table_8c_af70661235a95a1f862ca2e04150b6d5c}{}\label{symbol__table_8c_af70661235a95a1f862ca2e04150b6d5c}
+
+
+Gets the address of a label in a symbol table. 
+
+If the label is not in the table it will print an error and stop the program.
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & The table which the label is in. \\
+\hline
+{\em label} & The string of the label. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The address that corresponds to the label. 
+\end{DoxyReturn}
+\index{symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}!is\+\_\+label\+\_\+in\+\_\+table@{is\+\_\+label\+\_\+in\+\_\+table}}
+\index{is\+\_\+label\+\_\+in\+\_\+table@{is\+\_\+label\+\_\+in\+\_\+table}!symbol\+\_\+table.\+c@{symbol\+\_\+table.\+c}}
+\subsubsection[{\texorpdfstring{is\+\_\+label\+\_\+in\+\_\+table(symbol\+\_\+table\+\_\+t $\ast$table, char $\ast$label)}{is_label_in_table(symbol_table_t *table, char *label)}}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+\_\+label\+\_\+in\+\_\+table (
+\begin{DoxyParamCaption}
+\item[{{\bf symbol\+\_\+table\+\_\+t} $\ast$}]{table, }
+\item[{char $\ast$}]{label}
+\end{DoxyParamCaption}
+)}\hypertarget{symbol__table_8c_ac39a951f471607cffd7609a55ce34158}{}\label{symbol__table_8c_ac39a951f471607cffd7609a55ce34158}
+
+
+Checks if the label is in the table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & The table to check if the label is in. \\
+\hline
+{\em label} & The string of the label. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the label is in the table, false otherwise. 
+\end{DoxyReturn}

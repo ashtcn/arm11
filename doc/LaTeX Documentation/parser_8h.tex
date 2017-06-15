@@ -1,0 +1,209 @@
+\hypertarget{parser_8h}{}\section{assemble\+\_\+utils/parser.h File Reference}
+\label{parser_8h}\index{assemble\+\_\+utils/parser.\+h@{assemble\+\_\+utils/parser.\+h}}
+
+
+Header file for \hyperlink{parser_8c}{parser.\+c}.  
+
+
+{\ttfamily \#include \char`\"{}word\+\_\+array.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}symbol\+\_\+table.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}encode.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../toolbox.\+h\char`\"{}}\\*
+Include dependency graph for parser.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{parser_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{parser_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0f}{mnemonic\+\_\+t} \hyperlink{parser_8h_a33eccc89a89f92296b1c8ec2b6e5d2b2}{string\+\_\+to\+\_\+mnemonic} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Returns the mnemonic for a given operator string. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a57ba194eedfb8000c1a101fd42abdcf2}{condition\+\_\+t} \hyperlink{parser_8h_a74eaa1a69f67039ba94cb459d9fff21b}{string\+\_\+to\+\_\+condition} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Returns the condition for a given condition string. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a8d0559dcae6e251ff5663e79d5581c7d}{opcode\+\_\+t} \hyperlink{parser_8h_af5ad57db71ad31ea5b6fb364f310d96f}{mnemonic\+\_\+to\+\_\+opcode} (\hyperlink{global_8h_a1fa5d60cdf5faa508dcdc99db8928e0f}{mnemonic\+\_\+t} mnemonic)
+\begin{DoxyCompactList}\small\item\em Returns the opcode for a given mnemonic. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a462493a8f034b6ade38b69c49a39f52a}{reg\+\_\+address\+\_\+t} \hyperlink{parser_8h_aebd66a8e129157a4d39b81f2ab97884d}{string\+\_\+to\+\_\+reg\+\_\+address} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Returns the address for a given address string. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a22746cb89e8b2ed0a61876e36446f37f}{shift\+\_\+t} \hyperlink{parser_8h_a704739d87d491efaf381da35cce990e8}{string\+\_\+to\+\_\+shift} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Returns the shift for a given shift string. \end{DoxyCompactList}\item 
+void \hyperlink{parser_8h_a7b3ae37007869ad7fe5e1d585738a3ea}{parse\+\_\+shift} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$tokens, \hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
+\begin{DoxyCompactList}\small\item\em Parses the shift and adds it to the given instruction. \end{DoxyCompactList}\item 
+void \hyperlink{parser_8h_a38f242db41338cdf696a52101537e7d0}{parse\+\_\+operand} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$tokens, \hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
+\begin{DoxyCompactList}\small\item\em Parses the operand and adds it to the given instruction. \end{DoxyCompactList}\item 
+\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{parser_8h_acb14c092efdf0d93015c32a52d858523}{parse\+\_\+immediate\+\_\+value} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Parses an immediate value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{parser_8c}{parser.\+c}. 
+
+
+
+\subsection{Function Documentation}
+\index{parser.\+h@{parser.\+h}!mnemonic\+\_\+to\+\_\+opcode@{mnemonic\+\_\+to\+\_\+opcode}}
+\index{mnemonic\+\_\+to\+\_\+opcode@{mnemonic\+\_\+to\+\_\+opcode}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{mnemonic\+\_\+to\+\_\+opcode(mnemonic\+\_\+t mnemonic)}{mnemonic_to_opcode(mnemonic_t mnemonic)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf opcode\+\_\+t} mnemonic\+\_\+to\+\_\+opcode (
+\begin{DoxyParamCaption}
+\item[{{\bf mnemonic\+\_\+t}}]{mnemonic}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_af5ad57db71ad31ea5b6fb364f310d96f}{}\label{parser_8h_af5ad57db71ad31ea5b6fb364f310d96f}
+
+
+Returns the opcode for a given mnemonic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & A mnemonic. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The opcode of the given mnemonic. 
+\end{DoxyReturn}
+\index{parser.\+h@{parser.\+h}!parse\+\_\+immediate\+\_\+value@{parse\+\_\+immediate\+\_\+value}}
+\index{parse\+\_\+immediate\+\_\+value@{parse\+\_\+immediate\+\_\+value}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+immediate\+\_\+value(char $\ast$str)}{parse_immediate_value(char *str)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} parse\+\_\+immediate\+\_\+value (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_acb14c092efdf0d93015c32a52d858523}{}\label{parser_8h_acb14c092efdf0d93015c32a52d858523}
+
+
+Parses an immediate value. 
+
+This immediate value could be in hex or in decimal.
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & The string to parse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The immediate value. 
+\end{DoxyReturn}
+\index{parser.\+h@{parser.\+h}!parse\+\_\+operand@{parse\+\_\+operand}}
+\index{parse\+\_\+operand@{parse\+\_\+operand}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+operand(string\+\_\+array\+\_\+t $\ast$tokens, instruction\+\_\+t $\ast$instruction)}{parse_operand(string_array_t *tokens, instruction_t *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}void parse\+\_\+operand (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{tokens, }
+\item[{{\bf instruction\+\_\+t} $\ast$}]{instruction}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_a38f242db41338cdf696a52101537e7d0}{}\label{parser_8h_a38f242db41338cdf696a52101537e7d0}
+
+
+Parses the operand and adds it to the given instruction. 
+
+There are many different cases for op2 in data processing instructions so this function is called to parse them.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The string to parse. \\
+\hline
+{\em instruction} & The instruction to add the operand to. \\
+\hline
+\end{DoxyParams}
+\index{parser.\+h@{parser.\+h}!parse\+\_\+shift@{parse\+\_\+shift}}
+\index{parse\+\_\+shift@{parse\+\_\+shift}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+shift(string\+\_\+array\+\_\+t $\ast$tokens, instruction\+\_\+t $\ast$instruction)}{parse_shift(string_array_t *tokens, instruction_t *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}void parse\+\_\+shift (
+\begin{DoxyParamCaption}
+\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{tokens, }
+\item[{{\bf instruction\+\_\+t} $\ast$}]{instruction}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_a7b3ae37007869ad7fe5e1d585738a3ea}{}\label{parser_8h_a7b3ae37007869ad7fe5e1d585738a3ea}
+
+
+Parses the shift and adds it to the given instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The string to parse. \\
+\hline
+{\em instruction} & The instruction to add the shift to. \\
+\hline
+\end{DoxyParams}
+\index{parser.\+h@{parser.\+h}!string\+\_\+to\+\_\+condition@{string\+\_\+to\+\_\+condition}}
+\index{string\+\_\+to\+\_\+condition@{string\+\_\+to\+\_\+condition}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{string\+\_\+to\+\_\+condition(char $\ast$str)}{string_to_condition(char *str)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf condition\+\_\+t} string\+\_\+to\+\_\+condition (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_a74eaa1a69f67039ba94cb459d9fff21b}{}\label{parser_8h_a74eaa1a69f67039ba94cb459d9fff21b}
+
+
+Returns the condition for a given condition string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & A condition string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A condition\+\_\+t representing the given string. 
+\end{DoxyReturn}
+\index{parser.\+h@{parser.\+h}!string\+\_\+to\+\_\+mnemonic@{string\+\_\+to\+\_\+mnemonic}}
+\index{string\+\_\+to\+\_\+mnemonic@{string\+\_\+to\+\_\+mnemonic}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{string\+\_\+to\+\_\+mnemonic(char $\ast$str)}{string_to_mnemonic(char *str)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mnemonic\+\_\+t} string\+\_\+to\+\_\+mnemonic (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_a33eccc89a89f92296b1c8ec2b6e5d2b2}{}\label{parser_8h_a33eccc89a89f92296b1c8ec2b6e5d2b2}
+
+
+Returns the mnemonic for a given operator string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & An operator string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A mnemonic\+\_\+t representing the given string. 
+\end{DoxyReturn}
+\index{parser.\+h@{parser.\+h}!string\+\_\+to\+\_\+reg\+\_\+address@{string\+\_\+to\+\_\+reg\+\_\+address}}
+\index{string\+\_\+to\+\_\+reg\+\_\+address@{string\+\_\+to\+\_\+reg\+\_\+address}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{string\+\_\+to\+\_\+reg\+\_\+address(char $\ast$str)}{string_to_reg_address(char *str)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+address\+\_\+t} string\+\_\+to\+\_\+reg\+\_\+address (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_aebd66a8e129157a4d39b81f2ab97884d}{}\label{parser_8h_aebd66a8e129157a4d39b81f2ab97884d}
+
+
+Returns the address for a given address string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & An address string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The register number given by the string. 
+\end{DoxyReturn}
+\index{parser.\+h@{parser.\+h}!string\+\_\+to\+\_\+shift@{string\+\_\+to\+\_\+shift}}
+\index{string\+\_\+to\+\_\+shift@{string\+\_\+to\+\_\+shift}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{string\+\_\+to\+\_\+shift(char $\ast$str)}{string_to_shift(char *str)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf shift\+\_\+t} string\+\_\+to\+\_\+shift (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_a704739d87d491efaf381da35cce990e8}{}\label{parser_8h_a704739d87d491efaf381da35cce990e8}
+
+
+Returns the shift for a given shift string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & A shift string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A shift\+\_\+t representing the given string. 
+\end{DoxyReturn}
