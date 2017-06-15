@@ -14,7 +14,7 @@
  * @param fname The filename containing object code to be loaded.
  * @param memory A pointer to the first byte of memory to be written to.
  */
- void load_file(char *fname, byte_t *memory) {
+void load_file(char *fname, byte_t *memory) {
    // Try to open the file
    FILE *file = fopen(fname, "rb");
    if (file == NULL) {
