@@ -46,7 +46,7 @@ We structured our emulator as follows:
 \begin{minipage}{0.35\linewidth}
 
 \centering
-\includegraphics[scale=0.3]{Checkpoint/emulate.png}
+\includegraphics[scale=0.28]{Checkpoint/emulate.png}
 \caption{Dependency Graph for \texttt{emulate.c}}
 
 \end{minipage}
@@ -68,7 +68,7 @@ We then have headers for each \texttt{.c} file, as well as the following headers
 \item \texttt{value\_carry.h}, which contains an extremely simple struct \texttt{value\_carry.h}, which is used by the shifter to output a value and a carry.
 \end{itemize}
 
-For further details on the implementation, see the full documentation, which is on the GitLab repository and located at \texttt{/doc/Emulate Documentation.pdf}.
+For further details on the implementation, see the full documentation, which is on the GitLab repository and located at \texttt{doc/LaTeX Documentation/refman.pdf}.
 
 \subsection{Implementation of \texttt{assemble.c}}
 
@@ -76,7 +76,7 @@ For further details on the implementation, see the full documentation, which is 
 
 Again, we have a \texttt{main} function in \texttt{assemble.c}, which calls helper functions throughout several other files, each themselves calling further helper functions. This is to allow us to each write different functions on seperate files, making version control really simple.
 
-\subsection{Further Challenges and the Implementation of the Extension}
+\subsection{Further Challenges and Implementation of the Extension}
 
 It is difficult to say what tasks we will find difficult later on when we are not yet sure what our extension will be. I'm sure that we will find some of the tasks in our extension challenging (otherwise we have not chose a good enough extension), but at this point we do not know what they will be. For this reason, we are planning to finish Parts I to III by the beginning of next week, giving us plenty of time to work on the extension.
 

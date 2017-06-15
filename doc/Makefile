@@ -2,6 +2,7 @@ EXTRA_SRC =
 TEX = pdflatex
 
 all: Report.pdf Checkpoint.pdf
+	make -C LaTeX\ Documentation
 
 .phony: all clean
 
@@ -11,6 +12,8 @@ all: Report.pdf Checkpoint.pdf
 	 done
 
 clean:
+	rm -f *.pdf
 	rm -f *.aux
 	rm -f *.log
 	rm -f *.synctex.gz
+	make clean -C LaTeX\ Documentation

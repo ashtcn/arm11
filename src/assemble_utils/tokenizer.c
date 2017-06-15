@@ -5,6 +5,14 @@
 
 #include "tokenizer.h"
 
+static bool is_label(char *instruction);
+static char *trim(char *string);
+static char *trim_token(char *string);
+static char *split_token(string_array_t *result, int *cur_section, char *operands, int i);
+
+static string_array_t *tokenize_operand_instruction(string_array_t *result, char *instruction_op, char *operands);
+static string_array_t *tokenize_instruction(char *instruction);
+
 /**
  * @brief Returns true iff the provided instruction is a label.
  *
@@ -12,7 +20,7 @@
  * @param instruction The instruction string to check.
  * @returns True iff the provided instruction is a label.
  */
-bool is_label(char *instruction) {
+static bool is_label(char *instruction) {
   return instruction[strlen(instruction) - 1] == ':';
 }
 
@@ -23,7 +31,7 @@ bool is_label(char *instruction) {
  * @param string The string to trim.
  * @returns The string with surrounding whitespace removed.
  */
-char *trim(char *string) {
+static char *trim(char *string) {
   // Remove leading whitespace.
   while (' ' == *string) {
     string++;
@@ -44,7 +52,7 @@ char *trim(char *string) {
  * @param string The string to trim.
  * @returns The string with leading whitespace and commas removed.
  */
-char *trim_token(char *string) {
+static char *trim_token(char *string) {
   while (' ' == *string || ',' == *string) {
     string++;
   }
@@ -80,7 +88,7 @@ string_arrays_t *tokenize_input(char **input, int input_lines) {
  * @param instruction The instructions string.
  * @returns A string array of the tokenized instruction.
  */
-string_array_t *tokenize_instruction(char *instruction) {
+static string_array_t *tokenize_instruction(char *instruction) {
   string_array_t *result = malloc(sizeof(string_array_t));
   if (!result) {
     perror("Error allocating memory for tokens.");
@@ -108,7 +116,7 @@ string_array_t *tokenize_instruction(char *instruction) {
   return result;
 }
 
-char *split_token(string_array_t *result, int *cur_section, char *operands,
+static char *split_token(string_array_t *result, int *cur_section, char *operands,
                   int i) {
   strncpy(result->array[*cur_section], operands, i);
   result->array[*cur_section][i] = '\0';
@@ -125,7 +133,7 @@ char *split_token(string_array_t *result, int *cur_section, char *operands,
  * @param operands The operands of the instruction.
  * @returns The updated string array.
  */
-string_array_t *tokenize_operand_instruction(string_array_t *result,
+static string_array_t *tokenize_operand_instruction(string_array_t *result,
                                              char *instruction_op,
                                              char *operands) {
   int split_count = 0;

@@ -7,7 +7,7 @@
 
 \begin{document}
 
-\title{\vspace{-2cm}Programming in C: Group 21 Project Report}
+\title{\vspace{-2cm}ARM11 Final Report}
 \author{\small Alexander CLARKE, Qiang FENG, Jordan SPOONER, Laurence SQUIRES}
 
 \maketitle
@@ -17,66 +17,127 @@
 The folder structure for the project is as follows:
 
 \begin{itemize}
-\item \texttt{emulate\_utils/} contains the files containing the constants, structs and helper functions for our emulator.
-\item \texttt{assemble\_utils/} contains the files containing the constants, structs and helper functions for our assembler.
+\item \texttt{src/} holds the \texttt{emulate.c} and \texttt{assemble.c} files, as well as files used by both emulate and assemble.
+\item \texttt{src/emulate\_utils/} contains the files containing the constants, structs and helper functions used by emulate.
+\item \texttt{src/assemble\_utils/} contains the files containing the constants, structs and helper functions used by assemble.
 \end{itemize}
-
-\begin{figure}[H]
-\begin{minipage}{0.6\linewidth}
 
 \subsection{Emulator Implementation}
 
-We structured our emulator as follows:
+See \texttt{doc/Checkpoint.pdf} for a brief overview of our implementation and \texttt{doc/LaTeX Documentation/refman.pdf} for full documentation.
+
+\begin{figure}[H]
+\begin{minipage}{0.5\linewidth}
+
+\subsection{Assembler Implementation}
+
+We structured our assembler as follows:
 
 \begin{itemize}
-\item \texttt{emulate.c} contains the function \texttt{main}, which takes a single parameter of the filename containing ARM11 object code. \texttt{main} calls the function \texttt{load\_file} from \texttt{toolbox.h} to load the file into memory, \texttt{decode\_instruction} and \texttt{execute} from \texttt{emulate\_utils/decode.h} and \texttt{emulate\_utils/execute.h} respectively, for the main fetch-decode-execute cycle, and \texttt{print\_system\_state\_compliant} from \texttt{emulate\_utils/print\_compliant.h}, which prints the registers and non-zeroed memory in a format which passes the automated tests.
-\item \texttt{unit\_tests.c} contains a suite of simple tests that check the functionality of each of the called functions. Rather than using a unit testing framework, we opted for a simple macro and use of \texttt{assert.h} to check our functions work as documented.
-\item \texttt{emulate\_utils/print\_compliant.c} contains functions for printing output to \texttt{stdout} in a way that passes test cases. It defines \texttt{print\_system\_state\_compliant} as well as several helper functions.
+\item \texttt{assemble.c} contains the function \texttt{main}, which takes two arguments. The first is a filename for a text file containing valid ARM11 assembly instructions. The second is a filename to which the assembled ARM11 binary object code is written. \texttt{main} is responsible for reading in the assembly instructions, tokenizing them using the helper functions in \texttt{tokenize.c}, creating a symbol table, assembling the tokenized input using the helper functions in \texttt{assembler.c}, and writing the object code to a binary file. It is also responsible for freeing any remaining allocated memory in order to avoid memory leaks.
+\item \texttt{unit\_tests.c} contains a simple test suite that uses assertions to check that called functions meet their documented functionality.
 \end{itemize}
 
 \end{minipage}
 \hspace{0.05\linewidth}
-\begin{minipage}{0.35\linewidth}
+\begin{minipage}{0.45\linewidth}
 
 \centering
-\includegraphics[scale=0.3]{Checkpoint/emulate.png}
-\caption{Dependency Graph for \texttt{emulate.c}}
+\includegraphics[scale=0.28]{Report/assemble.png}
+\caption{Dependency Graph for \texttt{assemble.c}}
 
 \end{minipage}
 \end{figure}
 
 \begin{itemize}
-\item \texttt{emulate\_utils/print.c} contains functions for printing output that is extremely helpful for debugging. Some of these functions are also called by the compliant printing functions. Setting \texttt{COMPLIANT\_MODE} to \texttt{false} in \texttt{global.h} uses these functions instead of the compliant ones. The output no longer passes tests, but more details, such as the most recently fetched and decoded instructions, will be printed.
-\item \texttt{emulate\_utils/decode.c} contains the function \texttt{decode\_instruction} and helper functions to decode each type (data processing, multiply, single data transfer, branch) of instruction.
-\item \texttt{emulate\_utils/execute.c} contains the function \texttt{execute} and helper functions for each type of instruction.
-\item \texttt{toolbox.c} contains a number of useful helper functions used throughout the code. It includes the function \texttt{load\_file}, as well as \texttt{exit\_program}, which prints the current system state before exiting cleanly, functions to read and write to memory (\texttt{get\_word\_compliant} and \texttt{set\_word} respectively), functions for working with two's complement numbers, and the \texttt{shifter} function, which emulates a shifter. \texttt{get\_word\_compliant} and \texttt{set\_word} already implement the requirements of Part III, by printing to \texttt{stdout} each time the GPIO pins are accessed, set or cleared.
+\item \texttt{tokenizer.c} TODO.
+\item \texttt{assemble\_toolbox.c} TODO.
+\item \texttt{string\_arrays.c} TODO. \texttt{string\_array.h} TODO.
+\item \texttt{assembler.c} TODO.
+\item \texttt{parser.c} TODO.
+\item \texttt{encode.c} TODO. \texttt{instruction.h} TODO.
+\item \texttt{symbol\_table.c} TODO.
+\item \texttt{word\_array.c} TODO.
+\item \texttt{toolbox.c} TODO.
+\item \texttt{global.h} TODO.
 \end{itemize}
 
-We then have headers for each \texttt{.c} file, as well as the following headers, which are used to define constants and type aliases:
+See \texttt{doc/LaTeX Documentation/refman.pdf} for full documentation.
 
-\begin{itemize}
-\item \texttt{global.h}, which defines constants such as the word size, the number of registers, and the number of memory addresses, as well as the following type aliases: \texttt{byte\_t}, \texttt{address\_t}, \texttt{reg\_address\_t} and \texttt{word\_t}, which are aliases for differently sized numbers, and which make function definitions much clearer. It also defines the enumerations \texttt{condition\_t}, \texttt{instruction\_type\_t}, \texttt{opcode\_t} and \texttt{cpsr\_flags\_t}, whose functionality is clear from their type aliases.
-\item \texttt{instruction.h}, which contains the \texttt{instruction\_t} struct, which can define a decoded instruction. It specifies the instruction type and the condition, as well as the register numbers (of which there can be a maximum of 4), an opcode (if necessary), an immediate offset or operand (if necessary), a shift type and amount (if necessary), and any other relevant bits (of which there can be a maximum of 4).
-\item \texttt{emulate\_utils/system\_state.h}, which contains the \texttt{system\_state\_t} struct, which specifies all of the information required to determine the exact state of an ARM11 machine. Specifically, it contains the contents of all registers and memory locations, the last fetched instruction, and the last decoded instruction.
-\item \texttt{emulate\_utils/value\_carry.h}, which contains an extremely simple struct \texttt{value\_carry.h}, which is used by the shifter to output a value and a carry.
-\end{itemize}
+\subsection{Quality Assurance and Testing}
 
-For further details on the implementation, see the full documentation, which is on the GitLab repository and located at \texttt{/doc/Emulate Documentation.pdf}.
+\subsubsection{Quality Assurance}
 
-\subsection{Assembler Implementation}
+\paragraph{Style Guide}
+TODO.
 
-We decided it would be best to use 2 passes over the source code as it would be the simplest to implement.
+\paragraph{Code Reviews}
+TODO.
 
-\texttt{assemble.c} reuses several parts of the emulator code. In particular, we reused constants and types in \texttt{global.h}, the printing functions in \texttt{emulate\_utils/print.h} (for debugging) and the \texttt{instruction\_t} struct from \texttt{instruction.h}.
+\subsubsection{Testing}
 
-Below is the implementation of our assembler:
+\paragraph{Automated Testing}
+TODO.
 
-\begin{itemize}
-\item \texttt{assemble.c} contains the function \texttt{main}, which takes a 2 parameters:  a file name for a file containing ARM11 assembly instructions, and a file location to which the resulting ARM11 binary object code file will be written.
-\end{itemize}
+\paragraph{Unit Tests}
+TODO.
 
-\section{Terminal-based Flappy Bird using OpenCV}
+\paragraph{Memory Checks}
+TODO.
+
+\paragraph{Ruby Test Suite}
+TODO.
+
+\section{Terminal-based Motion-controlled Game Engine using OpenCV}
+
+\subsection{Introduction}
+
+Our group’s chosen extension comes in two parts. The first part is a versatile ASCII-graphics game engine. The second part is a hand tracking program built using OpenCV. Together they can be used to create simplified kinetic type game system. The game engine can be used to create many different 2D games. We created both flappy bird and snake to show its utility. The games can be controlled by keyboard or using our hand tracking program. Our hand tracking program uses a webcam to return the position of where it believes the hands are which would then be used by our game engine. Together they create an engaging game experience.
+
+\subsection{Implementation}
+
+\subsubsection{Terminal-based ASCII Game Engine}
+
+TODO. Discussion of difficulties.
+
+\subsubsection{Hand Tracking using OpenCV}
+
+TODO. Discussion of difficulties.
+
+\subsection{Quality Assurance and Testing}
+
+TODO.
 
 \section{Project Evaluation}
+
+\subsection{Group Working and Communication}
+
+Our group initially came together to work out what structure our project would have. We then worked out all of the data types that we would need to implement our design for the structure and then implemented them. Using these, we came up with function prototypes.
+
+Our group created a shared Google Docs spreadsheet to track all of the functions we thought we needed to implement. There were three jobs for each function. These were: complete the code, create unit tests for the code and review (and sign off) the code. We then assigned jobs to different team members, but sometimes we completed other people's jobs if it improved our groups workflow. Often we would implement functions inside different files to make version control easier.
+
+We found that the most effective form of communication was always face-to-face, so we tried to spend as much time as possible in the Computing labs, where communication was easiest. At other times, we were able to continue working by using Slack and our shared spreadsheet.
+
+Overall, our group worked well together. The communication and organisation between members in our group meant that we were always aware of what we should be doing, and also what other members were doing. We split up the work well, with all members of the team contributing fairly equally.
+
+\paragraph{Benefits}
+TODO.
+
+\paragraph{Drawbacks}
+TODO.
+
+\subsection{Individual Reflections}
+
+\paragraph{Alexander CLARKE}
+TODO.
+
+\paragraph{Qiang FENG}
+TODO.
+
+\paragraph{Jordan SPOONER}
+TODO.
+
+\paragraph{Laurence SQUIRES}
+TODO.
 
 \end{document}
