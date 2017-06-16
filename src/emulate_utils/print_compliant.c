@@ -5,6 +5,10 @@
 
 #include "print_compliant.h"
 
+static void print_registers_compliant(system_state_t *machine);
+static void print_memory_compliant(system_state_t *machine);
+static void print_value_compliant(word_t value);
+
 /**
  * @brief Prints system state details for test cases.
  *
@@ -24,7 +28,7 @@ void print_system_state_compliant(system_state_t *machine) {
  *
  * @param machine The current system state.
  */
-void print_registers_compliant(system_state_t *machine) {
+static void print_registers_compliant(system_state_t *machine) {
   for (uint8_t i = 0; i <= 12; ++i) {
     word_t value = machine->registers[i];
     printf("$%-2d : ", i);
@@ -43,7 +47,7 @@ void print_registers_compliant(system_state_t *machine) {
  *
  * @param machine The current system state.
  */
-void print_memory_compliant(system_state_t *machine) {
+static void print_memory_compliant(system_state_t *machine) {
   for (uint32_t i = 0; i < NUM_ADDRESSES; i += 4) {
     word_t value = get_word_compliant(machine, i);
     if (value) {
@@ -57,6 +61,6 @@ void print_memory_compliant(system_state_t *machine) {
  *
  * @param value The word to print.
  */
-void print_value_compliant(word_t value) {
+static void print_value_compliant(word_t value) {
   printf("%10ld (0x%08x)\n", twos_complement_to_long(value), value);
 }

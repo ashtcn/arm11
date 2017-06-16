@@ -5,6 +5,8 @@
 
 #include "execute.h"
 
+static int condition(system_state_t *machine);
+
 /**
  * @brief Returns whether the condition is met.
  *
@@ -13,7 +15,7 @@
  * @param machine The current system state.
  * @returns Whether condition is met.
  */
-int condition(system_state_t *machine) {
+static int condition(system_state_t *machine) {
   // Want the first 4 bits
   char flags = machine->registers[CPSR] >> (WORD_SIZE - 4);
 

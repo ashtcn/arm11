@@ -5,6 +5,16 @@
 
 #include "print.h"
 
+static char *get_cond(condition_t cond);
+static char *get_opcode(opcode_t operation);
+static char *get_shift(shift_t shift);
+static void print_value(word_t value);
+static void print_binary_value(word_t value);
+static void print_fetched_instruction(system_state_t *machine);
+static void print_decoded_instruction(system_state_t *machine);
+static void print_registers(system_state_t *machine);
+static void print_memory(system_state_t *machine);
+
 /**
  * @brief Prints a given number of bytes, from an array of bytes.
  *
@@ -47,7 +57,7 @@ void print_system_state(system_state_t *machine) {
  * Prints the values held in each of the NUM_REGISTERS registers.
  * @param machine The current system state.
  */
-void print_registers(system_state_t *machine) {
+static void print_registers(system_state_t *machine) {
   printf("Register State:\n");
   for (uint8_t i = 0; i < NUM_REGISTERS; ++i) {
     word_t value = machine->registers[i];
@@ -63,7 +73,7 @@ void print_registers(system_state_t *machine) {
  * Prints any non-zero words from memory and their addresses.
  * @param machine The current system state.
  */
-void print_memory(system_state_t *machine) {
+static void print_memory(system_state_t *machine) {
   printf("Memory State:\n");
   for (uint32_t i = 0; i < NUM_ADDRESSES; i += 4) {
     word_t value = get_word(machine, i);
@@ -86,9 +96,9 @@ void print_memory(system_state_t *machine) {
  * * For single data transfer instructions, prints flags, registers and offset.
  * @param machine The current system state.
  */
- void print_decoded_instruction(system_state_t *machine) {
-   print_instruction(machine->decoded_instruction);
- }
+static void print_decoded_instruction(system_state_t *machine) {
+  print_instruction(machine->decoded_instruction);
+}
 
  /**
   * @brief Prints details for the instruction.
@@ -192,7 +202,7 @@ void print_instruction(instruction_t *instruction) {
  *
  * @param machine The current system state.
  */
-void print_fetched_instruction(system_state_t *machine) {
+static void print_fetched_instruction(system_state_t *machine) {
   if (machine->has_fetched_instruction) {
     printf("Fetched Instruction, ");
     print_value(machine->fetched_instruction);
@@ -206,7 +216,7 @@ void print_fetched_instruction(system_state_t *machine) {
  *
  * @param value The word to print.
  */
-void print_value(word_t value) {
+static void print_value(word_t value) {
   printf("Value: ");
   print_binary_value(value);
   printf(" (0x%08x) (%ld)\n", value, twos_complement_to_long(value));
@@ -218,7 +228,7 @@ void print_value(word_t value) {
  * Prints WORD_SIZE bits.
  * @param value The word for printing.
  */
-void print_binary_value(word_t value) {
+static void print_binary_value(word_t value) {
   for (int i = 0; i < WORD_SIZE; ++i) {
     printf("%u", value >> (WORD_SIZE - 1));
     value <<= 1;
@@ -231,7 +241,7 @@ void print_binary_value(word_t value) {
  * @param cond The condition type.
  * @returns The string of the condition type for printing.
  */
-char *get_cond(condition_t cond) {
+static char *get_cond(condition_t cond) {
   switch (cond) {
     case EQ:
       return "EQ";
@@ -258,7 +268,7 @@ char *get_cond(condition_t cond) {
  * @param operation The opcode.
  * @returns The string of the opcode for printing.
  */
-char *get_opcode(opcode_t operation) {
+static char *get_opcode(opcode_t operation) {
   switch (operation) {
     case AND:
       return "AND";
@@ -291,7 +301,7 @@ char *get_opcode(opcode_t operation) {
  * @param operation The type of shift.
  * @returns The string of the type of shift for printing.
  */
-char *get_shift(shift_t shift) {
+static char *get_shift(shift_t shift) {
   switch (shift) {
     case LSL:
       return "LSL";
