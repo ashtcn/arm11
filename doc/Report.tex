@@ -66,6 +66,10 @@ We structured our assembler as follows:
 
 See \texttt{doc/LaTeX Documentation/refman.pdf} for full documentation.
 
+\subsection{LED Blinking Implementation}
+
+Our simple assembly program is located in \texttt{programs/gpio.s}. After assembling the program using our assembler, we emulated it using our emulator and tested it on the Raspberry Pi. It meets the required specification.
+
 \subsection{Quality Assurance and Testing}
 
 \subsubsection{Quality Assurance}
@@ -112,7 +116,7 @@ The game engine can be used to create many different 2D games. We created both f
 \item \texttt{main\_snake.c} calls the mentioned snake functions, using WASD controls for the direction of the snake. A different main file is used to use the game with the webcam.
 \end{itemize}
 
-See \texttt{doc/LaTeX Documentation/refman.pdf} for full documentation.
+See \texttt{opencv-game-engine/LaTeX Documentation/refman.pdf} for full documentation.
 
 \subsubsection{Hand Tracking using OpenCV}
 
