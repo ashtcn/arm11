@@ -112,6 +112,8 @@ The game engine can be used to create many different 2D games. We created both f
 \item \texttt{main\_snake.c} calls the mentioned snake functions, using WASD controls for the direction of the snake. A different main file is used to use the game with the webcam.
 \end{itemize}
 
+See \texttt{doc/LaTeX Documentation/refman.pdf} for full documentation.
+
 \subsubsection{Hand Tracking using OpenCV}
 
 \begin{itemize}
@@ -122,9 +124,13 @@ The game engine can be used to create many different 2D games. We created both f
 \item \texttt{uchar\_array.c} contains a struct for encoding lists of unsigned chars as well as functions to calculate the average and standard deviation of all the values in the list.
 \end{itemize}
 
+See \texttt{opencv-game-engine/LaTeX Documentation/refman.pdf} for full documentation.
+
 \subsection{Quality Assurance and Testing}
 
-TODO.
+We tested the game engine by creating unit tests testing our object list (\texttt{object\_list\_tests.c}). As our game engine is based upon the object list code, once we were confident with that working, our games should work correctly. To test our game we would play the game, testing edge cases, ensuring that it would always play in the expected manner. Playing the game was the best way of testing our game given our type of project.
+
+We were constantly testing our motion control code, testing different values and functions to try to insure the most accurate and reliable tracking possible. We also played our game a lot to insure that our game with our motion control would perform as expected.  We got different people to play it to insure that it would be reliable. This was the best way to test our code given our type of project.
 
 \section{Project Evaluation}
 
