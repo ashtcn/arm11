@@ -111,9 +111,6 @@ Include dependency graph for execute.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5cc462b6d65eef64aaf4600e1b12d5a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="execute_8c.html#a5cc462b6d65eef64aaf4600e1b12d5a1">condition</a> (<a class="el" href="structsystem__state__t.html">system_state_t</a> *machine)</td></tr>
-<tr class="memdesc:a5cc462b6d65eef64aaf4600e1b12d5a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the condition is met.  <a href="#a5cc462b6d65eef64aaf4600e1b12d5a1">More...</a><br /></td></tr>
-<tr class="separator:a5cc462b6d65eef64aaf4600e1b12d5a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31c5a2d2e957a126e3e1dc7e57719321"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="execute_8c.html#a31c5a2d2e957a126e3e1dc7e57719321">execute</a> (<a class="el" href="structsystem__state__t.html">system_state_t</a> *machine)</td></tr>
 <tr class="memdesc:a31c5a2d2e957a126e3e1dc7e57719321"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one execute cycle.  <a href="#a31c5a2d2e957a126e3e1dc7e57719321">More...</a><br /></td></tr>
 <tr class="separator:a31c5a2d2e957a126e3e1dc7e57719321"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,31 +130,6 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions for the execute cycle. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a5cc462b6d65eef64aaf4600e1b12d5a1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int condition </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structsystem__state__t.html">system_state_t</a> *&#160;</td>
-          <td class="paramname"><em>machine</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns whether the condition is met. </p>
-<p>Returns true if and only if the condition required by the current decoded instruction is met by the current state of the flags register (CPSR). </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">machine</td><td>The current system state. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether condition is met. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="a31c5a2d2e957a126e3e1dc7e57719321"></a>
 <div class="memitem">
 <div class="memproto">

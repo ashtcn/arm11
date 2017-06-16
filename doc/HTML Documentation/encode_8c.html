@@ -113,18 +113,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a9a0cbc62e10bd0aca11be898fab31f88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8c.html#a9a0cbc62e10bd0aca11be898fab31f88">add_cond</a> (<a class="el" href="structinstruction__t.html">instruction_t</a> *instruction)</td></tr>
 <tr class="memdesc:a9a0cbc62e10bd0aca11be898fab31f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the condition code in the correct bit position.  <a href="#a9a0cbc62e10bd0aca11be898fab31f88">More...</a><br /></td></tr>
 <tr class="separator:a9a0cbc62e10bd0aca11be898fab31f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad602e8be44465efa1784455a6f5ed074"><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8c.html#ad602e8be44465efa1784455a6f5ed074">encode_dpi</a> (<a class="el" href="structinstruction__t.html">instruction_t</a> *instruction)</td></tr>
-<tr class="memdesc:ad602e8be44465efa1784455a6f5ed074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes data processing instructions.  <a href="#ad602e8be44465efa1784455a6f5ed074">More...</a><br /></td></tr>
-<tr class="separator:ad602e8be44465efa1784455a6f5ed074"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8b9e300e3de0e4757325a8997d9c73a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8c.html#af8b9e300e3de0e4757325a8997d9c73a">encode_mul</a> (<a class="el" href="structinstruction__t.html">instruction_t</a> *instruction)</td></tr>
-<tr class="memdesc:af8b9e300e3de0e4757325a8997d9c73a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes multiply instructions.  <a href="#af8b9e300e3de0e4757325a8997d9c73a">More...</a><br /></td></tr>
-<tr class="separator:af8b9e300e3de0e4757325a8997d9c73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13a86695c8c1835f328612d745542a0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8c.html#a13a86695c8c1835f328612d745542a0a">encode_sdt</a> (<a class="el" href="structinstruction__t.html">instruction_t</a> *instruction)</td></tr>
-<tr class="memdesc:a13a86695c8c1835f328612d745542a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes single data transfer instructions.  <a href="#a13a86695c8c1835f328612d745542a0a">More...</a><br /></td></tr>
-<tr class="separator:a13a86695c8c1835f328612d745542a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d43bf95d82955b9f8bcda938bf85212"><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8c.html#a1d43bf95d82955b9f8bcda938bf85212">encode_branch</a> (<a class="el" href="structinstruction__t.html">instruction_t</a> *instruction)</td></tr>
-<tr class="memdesc:a1d43bf95d82955b9f8bcda938bf85212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes branch instructions.  <a href="#a1d43bf95d82955b9f8bcda938bf85212">More...</a><br /></td></tr>
-<tr class="separator:a1d43bf95d82955b9f8bcda938bf85212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions to encode an <a class="el" href="structinstruction__t.html" title="A struct that holds information about a decoded instruction. ">instruction_t</a>. </p>
@@ -151,110 +139,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The condiiton code. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a1d43bf95d82955b9f8bcda938bf85212"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a> encode_branch </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structinstruction__t.html">instruction_t</a> *&#160;</td>
-          <td class="paramname"><em>instruction</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Encodes branch instructions. </p>
-<p>Given a branch instruction this will return the 32 bit instruction corresponding with given <a class="el" href="structinstruction__t.html" title="A struct that holds information about a decoded instruction. ">instruction_t</a>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">instruction</td><td>Given instruction. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>32 bit instruction. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ad602e8be44465efa1784455a6f5ed074"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a> encode_dpi </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structinstruction__t.html">instruction_t</a> *&#160;</td>
-          <td class="paramname"><em>instruction</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Encodes data processing instructions. </p>
-<p>Given a data processing instruction this will return the 32 bit instruction corresponding with given <a class="el" href="structinstruction__t.html" title="A struct that holds information about a decoded instruction. ">instruction_t</a>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">instruction</td><td>Given instruction. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>32 bit instruction. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="af8b9e300e3de0e4757325a8997d9c73a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a> encode_mul </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structinstruction__t.html">instruction_t</a> *&#160;</td>
-          <td class="paramname"><em>instruction</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Encodes multiply instructions. </p>
-<p>Given a multiply instruction this will return the 32 bit instruction corresponding with given <a class="el" href="structinstruction__t.html" title="A struct that holds information about a decoded instruction. ">instruction_t</a>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">instruction</td><td>Given instruction. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>32 bit instruction. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a13a86695c8c1835f328612d745542a0a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a> encode_sdt </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structinstruction__t.html">instruction_t</a> *&#160;</td>
-          <td class="paramname"><em>instruction</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Encodes single data transfer instructions. </p>
-<p>Given a single data transfer instruction this will return the 32 bit instruction corresponding with given <a class="el" href="structinstruction__t.html" title="A struct that holds information about a decoded instruction. ">instruction_t</a>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">instruction</td><td>Given instruction. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>32 bit instruction. </dd></dl>
 
 </div>
 </div>

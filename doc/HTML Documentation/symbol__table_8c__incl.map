@@ -1,6 +1,6 @@
 <map id="assemble_utils/symbol_table.c" name="assemble_utils/symbol_table.c">
-<area shape="rect" id="node2" href="$symbol__table_8h.html" title="A header to define the symbol_table_t type. " alt="" coords="77,95,188,121"/>
-<area shape="rect" id="node5" href="$string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="195,169,303,196"/>
-<area shape="rect" id="node6" href="$string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="35,244,137,271"/>
-<area shape="rect" id="node8" href="$global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="161,244,240,271"/>
+<area shape="rect" id="node2" href="$symbol__table_8h.html" title="A header to define the symbol_table_t type. " alt="" coords="82,95,193,121"/>
+<area shape="rect" id="node5" href="$string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="194,169,302,196"/>
+<area shape="rect" id="node8" href="$global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="255,244,334,271"/>
+<area shape="rect" id="node10" href="$string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="359,244,460,271"/>
 </map>

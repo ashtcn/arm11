@@ -1,14 +1,14 @@
 <map id="assemble_utils/parser.c" name="assemble_utils/parser.c">
-<area shape="rect" id="node2" href="$parser_8h.html" title="Header file for parser.c. " alt="" coords="413,80,483,107"/>
-<area shape="rect" id="node3" href="$word__array_8h.html" title="A header to define the word_array_t type. " alt="" coords="275,237,373,263"/>
-<area shape="rect" id="node8" href="$symbol__table_8h.html" title="A header to define the symbol_table_t type. " alt="" coords="838,155,949,181"/>
-<area shape="rect" id="node13" href="$encode_8h.html" title="Header file for encode.c. " alt="" coords="5,237,80,263"/>
-<area shape="rect" id="node15" href="$toolbox_8h.html" title="Header file for toolbox.c. " alt="" coords="474,155,561,181"/>
-<area shape="rect" id="node6" href="$global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="623,408,702,435"/>
-<area shape="rect" id="node11" href="$string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="895,237,1003,263"/>
-<area shape="rect" id="node12" href="$string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="935,408,1036,435"/>
-<area shape="rect" id="node14" href="$instruction_8h.html" title="A header to define the instruction_t type. " alt="" coords="153,326,258,353"/>
-<area shape="rect" id="node17" href="$system__state_8h.html" title="A header to define the system_state_t type. " alt="" coords="104,229,251,271"/>
-<area shape="rect" id="node18" href="$value__carry_8h.html" title="A header to define the value_carry_t type. " alt="" coords="701,319,835,360"/>
-<area shape="rect" id="node19" href="$print_8h.html" title="Header file for print.c. " alt="" coords="448,237,587,263"/>
+<area shape="rect" id="node2" href="$parser_8h.html" title="Header file for parser.c. " alt="" coords="648,80,717,107"/>
+<area shape="rect" id="node3" href="$toolbox_8h.html" title="Header file for toolbox.c. " alt="" coords="277,155,363,181"/>
+<area shape="rect" id="node14" href="$encode_8h.html" title="Header file for encode.c. " alt="" coords="584,237,659,263"/>
+<area shape="rect" id="node15" href="$symbol__table_8h.html" title="A header to define the symbol_table_t type. " alt="" coords="805,155,915,181"/>
+<area shape="rect" id="node19" href="$word__array_8h.html" title="A header to define the word_array_t type. " alt="" coords="683,237,781,263"/>
+<area shape="rect" id="node7" href="$system__state_8h.html" title="A header to define the system_state_t type. " alt="" coords="312,229,459,271"/>
+<area shape="rect" id="node12" href="$value__carry_8h.html" title="A header to define the value_carry_t type. " alt="" coords="323,319,458,360"/>
+<area shape="rect" id="node13" href="$print_8h.html" title="Header file for print.c. " alt="" coords="5,237,144,263"/>
+<area shape="rect" id="node8" href="$instruction_8h.html" title="A header to define the instruction_t type. " alt="" coords="534,326,639,353"/>
+<area shape="rect" id="node10" href="$global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="729,408,796,435"/>
+<area shape="rect" id="node17" href="$string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="857,237,965,263"/>
+<area shape="rect" id="node18" href="$string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="860,408,961,435"/>
 </map>

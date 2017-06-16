@@ -94,17 +94,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>A header to define the <a class="el" href="structsymbol__table__t.html" title="A struct to represent a symbol table. ">symbol_table_t</a> type.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="string__arrays_8h_source.html">string_arrays.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for symbol_table.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="symbol__table_8h__incl.png" border="0" usemap="#assemble__utils_2symbol__table_8h" alt=""/></div>
 <map name="assemble__utils_2symbol__table_8h" id="assemble__utils_2symbol__table_8h">
-<area shape="rect" id="node4" href="string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="195,95,303,121"/>
-<area shape="rect" id="node5" href="string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="35,169,137,196"/>
-<area shape="rect" id="node7" href="global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="161,169,240,196"/>
+<area shape="rect" id="node4" href="string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="194,95,302,121"/>
+<area shape="rect" id="node7" href="global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="255,169,334,196"/>
+<area shape="rect" id="node9" href="string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="359,169,460,196"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -134,96 +134,19 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac39a951f471607cffd7609a55ce34158"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#ac39a951f471607cffd7609a55ce34158">is_label_in_table</a> (<a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *table, char *label)</td></tr>
-<tr class="memdesc:ac39a951f471607cffd7609a55ce34158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the label is in the table.  <a href="#ac39a951f471607cffd7609a55ce34158">More...</a><br /></td></tr>
-<tr class="separator:ac39a951f471607cffd7609a55ce34158"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af70661235a95a1f862ca2e04150b6d5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_8h.html#a8f4b132f56a25431714862229639be12">address_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#af70661235a95a1f862ca2e04150b6d5c">get_address</a> (<a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *table, char *label)</td></tr>
-<tr class="memdesc:af70661235a95a1f862ca2e04150b6d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the address of a label in a symbol table.  <a href="#af70661235a95a1f862ca2e04150b6d5c">More...</a><br /></td></tr>
-<tr class="separator:af70661235a95a1f862ca2e04150b6d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a676f92724865d99f50aea40b66797659"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a676f92724865d99f50aea40b66797659">create_table</a> (uint16_t row_number)</td></tr>
-<tr class="memdesc:a676f92724865d99f50aea40b66797659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and initialises a symbol table.  <a href="#a676f92724865d99f50aea40b66797659">More...</a><br /></td></tr>
-<tr class="separator:a676f92724865d99f50aea40b66797659"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31539694ff1aa25f3af81365fb85f8e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a31539694ff1aa25f3af81365fb85f8e7">add_row</a> (<a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *table, char *label, <a class="el" href="global_8h.html#a8f4b132f56a25431714862229639be12">address_t</a> address)</td></tr>
-<tr class="memdesc:a31539694ff1aa25f3af81365fb85f8e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a row to a symbol table.  <a href="#a31539694ff1aa25f3af81365fb85f8e7">More...</a><br /></td></tr>
-<tr class="separator:a31539694ff1aa25f3af81365fb85f8e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d8e0f524754e4756526205d4b6fcf96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a0d8e0f524754e4756526205d4b6fcf96">free_table</a> (<a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *table)</td></tr>
-<tr class="memdesc:a0d8e0f524754e4756526205d4b6fcf96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all memory used by a symbol table.  <a href="#a0d8e0f524754e4756526205d4b6fcf96">More...</a><br /></td></tr>
-<tr class="separator:a0d8e0f524754e4756526205d4b6fcf96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a950658f8dcac4324b29f3c18c980afbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a950658f8dcac4324b29f3c18c980afbb">generate_symbol_table</a> (<a class="el" href="structstring__arrays__t.html">string_arrays_t</a> *tokens)</td></tr>
 <tr class="memdesc:a950658f8dcac4324b29f3c18c980afbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a symbol table given a block of assembly.  <a href="#a950658f8dcac4324b29f3c18c980afbb">More...</a><br /></td></tr>
 <tr class="separator:a950658f8dcac4324b29f3c18c980afbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af70661235a95a1f862ca2e04150b6d5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_8h.html#a8f4b132f56a25431714862229639be12">address_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#af70661235a95a1f862ca2e04150b6d5c">get_address</a> (<a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *table, char *label)</td></tr>
+<tr class="memdesc:af70661235a95a1f862ca2e04150b6d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the address of a label in a symbol table.  <a href="#af70661235a95a1f862ca2e04150b6d5c">More...</a><br /></td></tr>
+<tr class="separator:af70661235a95a1f862ca2e04150b6d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d8e0f524754e4756526205d4b6fcf96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a0d8e0f524754e4756526205d4b6fcf96">free_table</a> (<a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *table)</td></tr>
+<tr class="memdesc:a0d8e0f524754e4756526205d4b6fcf96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all memory used by a symbol table.  <a href="#a0d8e0f524754e4756526205d4b6fcf96">More...</a><br /></td></tr>
+<tr class="separator:a0d8e0f524754e4756526205d4b6fcf96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A header to define the <a class="el" href="structsymbol__table__t.html" title="A struct to represent a symbol table. ">symbol_table_t</a> type. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a31539694ff1aa25f3af81365fb85f8e7"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void add_row </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>label</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_8h.html#a8f4b132f56a25431714862229639be12">address_t</a>&#160;</td>
-          <td class="paramname"><em>address</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Adds a row to a symbol table. </p>
-<p>Given a label and a address, will allocate memory for the row, and add it to the table. It will dynamically increase the array size if more labels are added.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">table</td><td>The table to add the row to. </td></tr>
-    <tr><td class="paramname">label</td><td>The string of the label. </td></tr>
-    <tr><td class="paramname">address</td><td>The address of the label. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a676f92724865d99f50aea40b66797659"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structsymbol__table__t.html">symbol_table_t</a>* create_table </td>
-          <td>(</td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>row_number</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates and initialises a symbol table. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">row_number</td><td>Initial maximum size of the table. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>An initialised symbol table. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="a0d8e0f524754e4756526205d4b6fcf96"></a>
 <div class="memitem">
 <div class="memproto">
@@ -307,42 +230,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The address that corresponds to the label. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac39a951f471607cffd7609a55ce34158"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool is_label_in_table </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structsymbol__table__t.html">symbol_table_t</a> *&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>label</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks if the label is in the table. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">table</td><td>The table to check if the label is in. </td></tr>
-    <tr><td class="paramname">label</td><td>The string of the label. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the label is in the table, false otherwise. </dd></dl>
 
 </div>
 </div>

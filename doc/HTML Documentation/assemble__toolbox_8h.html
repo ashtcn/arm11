@@ -94,16 +94,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Header file for <a class="el" href="assemble__toolbox_8c.html" title="Miscellaneous functions for assemble. ">assemble_toolbox.c</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="string__arrays_8h_source.html">string_arrays.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="global_8h_source.html">../global.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for assemble_toolbox.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="assemble__toolbox_8h__incl.png" border="0" usemap="#assemble__utils_2assemble__toolbox_8h" alt=""/></div>
 <map name="assemble__utils_2assemble__toolbox_8h" id="assemble__utils_2assemble__toolbox_8h">
-<area shape="rect" id="node4" href="string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="194,95,302,121"/>
-<area shape="rect" id="node5" href="string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="35,169,136,196"/>
-<area shape="rect" id="node7" href="global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="161,169,239,196"/>
+<area shape="rect" id="node6" href="global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="367,95,446,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -122,21 +122,21 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a67872dcf40da4b6e1c1967c4ea3113e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a67872dcf40da4b6e1c1967c4ea3113e8">save_file</a> (<a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a> *data, char *file_name, int ile_size)</td></tr>
-<tr class="memdesc:a67872dcf40da4b6e1c1967c4ea3113e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves an array of words to a file.  <a href="#a67872dcf40da4b6e1c1967c4ea3113e8">More...</a><br /></td></tr>
-<tr class="separator:a67872dcf40da4b6e1c1967c4ea3113e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74a3c7c2b45f527495a82dbad294e35e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a74a3c7c2b45f527495a82dbad294e35e">lines_in_file</a> (char *file_name)</td></tr>
-<tr class="memdesc:a74a3c7c2b45f527495a82dbad294e35e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of lines in a file.  <a href="#a74a3c7c2b45f527495a82dbad294e35e">More...</a><br /></td></tr>
-<tr class="separator:a74a3c7c2b45f527495a82dbad294e35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c8b35ddb601462246a881a6555d3ef8"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a0c8b35ddb601462246a881a6555d3ef8">load_source_file</a> (char *load_filename, int lines)</td></tr>
-<tr class="memdesc:a0c8b35ddb601462246a881a6555d3ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a 2D array of the given source file.  <a href="#a0c8b35ddb601462246a881a6555d3ef8">More...</a><br /></td></tr>
-<tr class="separator:a0c8b35ddb601462246a881a6555d3ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22b291ee90ad75af5405e176fc42a653"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a22b291ee90ad75af5405e176fc42a653">create_2d_array</a> (unsigned int rows, unsigned int cols)</td></tr>
 <tr class="memdesc:a22b291ee90ad75af5405e176fc42a653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the memory for a 2D array of chars.  <a href="#a22b291ee90ad75af5405e176fc42a653">More...</a><br /></td></tr>
 <tr class="separator:a22b291ee90ad75af5405e176fc42a653"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03b5c0be337e8aa4f74072ddf3418a59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a03b5c0be337e8aa4f74072ddf3418a59">free_2d_array</a> (char **arr, int rows)</td></tr>
 <tr class="memdesc:a03b5c0be337e8aa4f74072ddf3418a59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all memory used for the 2D array of chars.  <a href="#a03b5c0be337e8aa4f74072ddf3418a59">More...</a><br /></td></tr>
 <tr class="separator:a03b5c0be337e8aa4f74072ddf3418a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74a3c7c2b45f527495a82dbad294e35e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a74a3c7c2b45f527495a82dbad294e35e">lines_in_file</a> (char *file_name)</td></tr>
+<tr class="memdesc:a74a3c7c2b45f527495a82dbad294e35e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of lines in a file.  <a href="#a74a3c7c2b45f527495a82dbad294e35e">More...</a><br /></td></tr>
+<tr class="separator:a74a3c7c2b45f527495a82dbad294e35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c8b35ddb601462246a881a6555d3ef8"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a0c8b35ddb601462246a881a6555d3ef8">load_source_file</a> (char *load_filename, int lines)</td></tr>
+<tr class="memdesc:a0c8b35ddb601462246a881a6555d3ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a 2D array of the given source file.  <a href="#a0c8b35ddb601462246a881a6555d3ef8">More...</a><br /></td></tr>
+<tr class="separator:a0c8b35ddb601462246a881a6555d3ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67872dcf40da4b6e1c1967c4ea3113e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assemble__toolbox_8h.html#a67872dcf40da4b6e1c1967c4ea3113e8">save_file</a> (<a class="el" href="global_8h.html#a0e7744482eed560726581dae7d3cb8b2">word_t</a> *data, char *file_name, int ile_size)</td></tr>
+<tr class="memdesc:a67872dcf40da4b6e1c1967c4ea3113e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves an array of words to a file.  <a href="#a67872dcf40da4b6e1c1967c4ea3113e8">More...</a><br /></td></tr>
+<tr class="separator:a67872dcf40da4b6e1c1967c4ea3113e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header file for <a class="el" href="assemble__toolbox_8c.html" title="Miscellaneous functions for assemble. ">assemble_toolbox.c</a>. </p>

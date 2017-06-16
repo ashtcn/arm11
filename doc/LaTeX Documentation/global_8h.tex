@@ -6,7 +6,8 @@ Definition of useful constants and type aliases.
 
 
 {\ttfamily \#include $<$stdint.\+h$>$}\\*
-Include dependency graph for global.\+h\+:\nopagebreak
+Include dependency graph for global.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -52,7 +53,9 @@ This graph shows which files directly or indirectly include this file\+:
 \item 
 \#define \hyperlink{global_8h_a2cf7e08e9f0ea5859e1e746098d798ce}{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}~64
 \item 
-\#define \hyperlink{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}~20
+\#define \hyperlink{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}~64
+\item 
+\#define \hyperlink{global_8h_af0f2173e3b202ddf5756531b4471dcb2}{M\+A\+X\+\_\+\+L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}~512
 \item 
 \#define \hyperlink{global_8h_ae8dd6ba4eeb558fa0dda9626d038dd6d}{C\+O\+M\+P\+L\+I\+A\+N\+T\+\_\+\+M\+O\+DE}~true
 \begin{DoxyCompactList}\small\item\em A setting which determines the format of output. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -192,7 +195,7 @@ The number of bytes allocated for setting G\+P\+IO pins. \index{global.\+h@{glob
 The first memory address for setting G\+P\+IO pins. \index{global.\+h@{global.\+h}!I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}
 \index{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}!global.\+h@{global.\+h}}
 \subsubsection[{\texorpdfstring{I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}{INITIAL_ARRAY_SIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+N\+I\+T\+I\+A\+L\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE~64}\hypertarget{global_8h_a2cf7e08e9f0ea5859e1e746098d798ce}{}\label{global_8h_a2cf7e08e9f0ea5859e1e746098d798ce}
-The initial array size used by array structs \index{global.\+h@{global.\+h}!M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}}
+The initial array size used by array structs. \index{global.\+h@{global.\+h}!M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}}
 \index{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}!global.\+h@{global.\+h}}
 \subsubsection[{\texorpdfstring{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4}{MASK_FIRST_4}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+4~0x\+F\+F\+F\+F\+F\+FF}\hypertarget{global_8h_ae35d143ccbd08a6f59f162b3ce9a3141}{}\label{global_8h_ae35d143ccbd08a6f59f162b3ce9a3141}
 A mask which removes the first 4 bits when used with bitwise and. \index{global.\+h@{global.\+h}!M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8@{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8}}
@@ -200,8 +203,11 @@ A mask which removes the first 4 bits when used with bitwise and. \index{global.
 \subsubsection[{\texorpdfstring{M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8}{MASK_FIRST_8}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+S\+K\+\_\+\+F\+I\+R\+S\+T\+\_\+8~0x\+F\+F\+F\+F\+FF}\hypertarget{global_8h_a87629b54aa0d4536f565c1eacbe73c1b}{}\label{global_8h_a87629b54aa0d4536f565c1eacbe73c1b}
 A mask which removes the first 8 bits when used with bitwise and. \index{global.\+h@{global.\+h}!M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH@{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}}
 \index{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH@{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}!global.\+h@{global.\+h}}
-\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}{MAX_LABEL_LENGTH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH~20}\hypertarget{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}{}\label{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}
-The maximum length of labels accepted by a symbol table \index{global.\+h@{global.\+h}!N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES@{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH}{MAX_LABEL_LENGTH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+L\+A\+B\+E\+L\+\_\+\+L\+E\+N\+G\+TH~64}\hypertarget{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}{}\label{global_8h_a40953fb1d014188b77bbf6d21d0b3e6c}
+The maximum length of labels accepted by a symbol table. \index{global.\+h@{global.\+h}!M\+A\+X\+\_\+\+L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH@{M\+A\+X\+\_\+\+L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}}
+\index{M\+A\+X\+\_\+\+L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH@{M\+A\+X\+\_\+\+L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}{MAX_LINE_LENGTH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH~512}\hypertarget{global_8h_af0f2173e3b202ddf5756531b4471dcb2}{}\label{global_8h_af0f2173e3b202ddf5756531b4471dcb2}
+The maximum line length for the assembly file to be loaded. \index{global.\+h@{global.\+h}!N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES@{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}}
 \index{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES@{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}!global.\+h@{global.\+h}}
 \subsubsection[{\texorpdfstring{N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES}{NUM_ADDRESSES}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+U\+M\+\_\+\+A\+D\+D\+R\+E\+S\+S\+ES~65536}\hypertarget{global_8h_ad1d337f69c5203493cb37cb203c33e24}{}\label{global_8h_ad1d337f69c5203493cb37cb203c33e24}
 The total number of memory addresses. \index{global.\+h@{global.\+h}!N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS@{N\+U\+M\+\_\+\+R\+E\+G\+I\+S\+T\+E\+RS}}

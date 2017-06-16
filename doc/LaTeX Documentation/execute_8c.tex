@@ -6,7 +6,8 @@ Functions for the execute cycle.
 
 
 {\ttfamily \#include \char`\"{}execute.\+h\char`\"{}}\\*
-Include dependency graph for execute.\+c\+:\nopagebreak
+Include dependency graph for execute.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,8 +17,6 @@ Include dependency graph for execute.\+c\+:\nopagebreak
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{execute_8c_a5cc462b6d65eef64aaf4600e1b12d5a1}{condition} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
-\begin{DoxyCompactList}\small\item\em Returns whether the condition is met. \end{DoxyCompactList}\item 
 void \hyperlink{execute_8c_a31c5a2d2e957a126e3e1dc7e57719321}{execute} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
 \begin{DoxyCompactList}\small\item\em Runs one execute cycle. \end{DoxyCompactList}\item 
 void \hyperlink{execute_8c_a9e2db6093fbac9addda00ff4486a1144}{execute\+\_\+dpi} (\hyperlink{structsystem__state__t}{system\+\_\+state\+\_\+t} $\ast$machine)
@@ -36,25 +35,6 @@ Functions for the execute cycle.
 
 
 \subsection{Function Documentation}
-\index{execute.\+c@{execute.\+c}!condition@{condition}}
-\index{condition@{condition}!execute.\+c@{execute.\+c}}
-\subsubsection[{\texorpdfstring{condition(system\+\_\+state\+\_\+t $\ast$machine)}{condition(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}int condition (
-\begin{DoxyParamCaption}
-\item[{{\bf system\+\_\+state\+\_\+t} $\ast$}]{machine}
-\end{DoxyParamCaption}
-)}\hypertarget{execute_8c_a5cc462b6d65eef64aaf4600e1b12d5a1}{}\label{execute_8c_a5cc462b6d65eef64aaf4600e1b12d5a1}
-
-
-Returns whether the condition is met. 
-
-Returns true if and only if the condition required by the current decoded instruction is met by the current state of the flags register (C\+P\+SR). 
-\begin{DoxyParams}{Parameters}
-{\em machine} & The current system state. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Whether condition is met. 
-\end{DoxyReturn}
 \index{execute.\+c@{execute.\+c}!execute@{execute}}
 \index{execute@{execute}!execute.\+c@{execute.\+c}}
 \subsubsection[{\texorpdfstring{execute(system\+\_\+state\+\_\+t $\ast$machine)}{execute(system_state_t *machine)}}]{\setlength{\rightskip}{0pt plus 5cm}void execute (

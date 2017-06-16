@@ -6,16 +6,20 @@ Header file for \hyperlink{assemble__toolbox_8c}{assemble\+\_\+toolbox.\+c}.
 
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
 {\ttfamily \#include $<$string.\+h$>$}\\*
-{\ttfamily \#include \char`\"{}string\+\_\+arrays.\+h\char`\"{}}\\*
-Include dependency graph for assemble\+\_\+toolbox.\+h\+:\nopagebreak
+{\ttfamily \#include \char`\"{}../global.\+h\char`\"{}}\\*
+Include dependency graph for assemble\+\_\+toolbox.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{assemble__toolbox_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -25,16 +29,16 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{assemble__toolbox_8h_a67872dcf40da4b6e1c1967c4ea3113e8}{save\+\_\+file} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} $\ast$data, char $\ast$file\+\_\+name, int ile\+\_\+size)
-\begin{DoxyCompactList}\small\item\em Saves an array of words to a file. \end{DoxyCompactList}\item 
+char $\ast$$\ast$ \hyperlink{assemble__toolbox_8h_a22b291ee90ad75af5405e176fc42a653}{create\+\_\+2d\+\_\+array} (unsigned int rows, unsigned int cols)
+\begin{DoxyCompactList}\small\item\em Allocates the memory for a 2D array of chars. \end{DoxyCompactList}\item 
+void \hyperlink{assemble__toolbox_8h_a03b5c0be337e8aa4f74072ddf3418a59}{free\+\_\+2d\+\_\+array} (char $\ast$$\ast$arr, int rows)
+\begin{DoxyCompactList}\small\item\em Frees all memory used for the 2D array of chars. \end{DoxyCompactList}\item 
 int \hyperlink{assemble__toolbox_8h_a74a3c7c2b45f527495a82dbad294e35e}{lines\+\_\+in\+\_\+file} (char $\ast$file\+\_\+name)
 \begin{DoxyCompactList}\small\item\em Returns the number of lines in a file. \end{DoxyCompactList}\item 
 char $\ast$$\ast$ \hyperlink{assemble__toolbox_8h_a0c8b35ddb601462246a881a6555d3ef8}{load\+\_\+source\+\_\+file} (char $\ast$load\+\_\+filename, int lines)
 \begin{DoxyCompactList}\small\item\em Returns a 2D array of the given source file. \end{DoxyCompactList}\item 
-char $\ast$$\ast$ \hyperlink{assemble__toolbox_8h_a22b291ee90ad75af5405e176fc42a653}{create\+\_\+2d\+\_\+array} (unsigned int rows, unsigned int cols)
-\begin{DoxyCompactList}\small\item\em Allocates the memory for a 2D array of chars. \end{DoxyCompactList}\item 
-void \hyperlink{assemble__toolbox_8h_a03b5c0be337e8aa4f74072ddf3418a59}{free\+\_\+2d\+\_\+array} (char $\ast$$\ast$arr, int rows)
-\begin{DoxyCompactList}\small\item\em Frees all memory used for the 2D array of chars. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \hyperlink{assemble__toolbox_8h_a67872dcf40da4b6e1c1967c4ea3113e8}{save\+\_\+file} (\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} $\ast$data, char $\ast$file\+\_\+name, int ile\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Saves an array of words to a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}

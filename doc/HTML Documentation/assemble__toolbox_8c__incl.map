@@ -1,6 +1,4 @@
 <map id="assemble_utils/assemble_toolbox.c" name="assemble_utils/assemble_toolbox.c">
-<area shape="rect" id="node2" href="$assemble__toolbox_8h.html" title="Header file for assemble_toolbox.c. " alt="" coords="68,95,207,121"/>
-<area shape="rect" id="node5" href="$string__arrays_8h.html" title="A header to define the string_arrays_t type. " alt="" coords="194,169,302,196"/>
-<area shape="rect" id="node6" href="$string__array_8h.html" title="A header to define the string_array_t type. " alt="" coords="35,244,136,271"/>
-<area shape="rect" id="node8" href="$global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="161,244,239,271"/>
+<area shape="rect" id="node2" href="$assemble__toolbox_8h.html" title="Header file for assemble_toolbox.c. " alt="" coords="152,95,291,121"/>
+<area shape="rect" id="node7" href="$global_8h.html" title="Definition of useful constants and type aliases. " alt="" coords="367,169,446,196"/>
 </map>

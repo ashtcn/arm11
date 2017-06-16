@@ -15,7 +15,8 @@ Include dependency graph for encode.\+h\+:
 \includegraphics[width=244pt]{encode_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -29,15 +30,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 
 \item 
 \hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{encode_8h_a9a0cbc62e10bd0aca11be898fab31f88}{add\+\_\+cond} (\hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
-\begin{DoxyCompactList}\small\item\em Returns the condition code in the correct bit position. \end{DoxyCompactList}\item 
-\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{encode_8h_ad602e8be44465efa1784455a6f5ed074}{encode\+\_\+dpi} (\hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
-\begin{DoxyCompactList}\small\item\em Encodes data processing instructions. \end{DoxyCompactList}\item 
-\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{encode_8h_af8b9e300e3de0e4757325a8997d9c73a}{encode\+\_\+mul} (\hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
-\begin{DoxyCompactList}\small\item\em Encodes multiply instructions. \end{DoxyCompactList}\item 
-\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{encode_8h_a13a86695c8c1835f328612d745542a0a}{encode\+\_\+sdt} (\hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
-\begin{DoxyCompactList}\small\item\em Encodes single data transfer instructions. \end{DoxyCompactList}\item 
-\hyperlink{global_8h_a0e7744482eed560726581dae7d3cb8b2}{word\+\_\+t} \hyperlink{encode_8h_a1d43bf95d82955b9f8bcda938bf85212}{encode\+\_\+branch} (\hyperlink{structinstruction__t}{instruction\+\_\+t} $\ast$instruction)
-\begin{DoxyCompactList}\small\item\em Encodes branch instructions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the condition code in the correct bit position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -64,88 +57,4 @@ Returns the condition code in the correct bit position.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The condiiton code. 
-\end{DoxyReturn}
-\index{encode.\+h@{encode.\+h}!encode\+\_\+branch@{encode\+\_\+branch}}
-\index{encode\+\_\+branch@{encode\+\_\+branch}!encode.\+h@{encode.\+h}}
-\subsubsection[{\texorpdfstring{encode\+\_\+branch(instruction\+\_\+t $\ast$instruction)}{encode_branch(instruction_t *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} encode\+\_\+branch (
-\begin{DoxyParamCaption}
-\item[{{\bf instruction\+\_\+t} $\ast$}]{instruction}
-\end{DoxyParamCaption}
-)}\hypertarget{encode_8h_a1d43bf95d82955b9f8bcda938bf85212}{}\label{encode_8h_a1d43bf95d82955b9f8bcda938bf85212}
-
-
-Encodes branch instructions. 
-
-Given a branch instruction this will return the 32 bit instruction corresponding with given \hyperlink{structinstruction__t}{instruction\+\_\+t}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em instruction} & Given instruction. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-32 bit instruction. 
-\end{DoxyReturn}
-\index{encode.\+h@{encode.\+h}!encode\+\_\+dpi@{encode\+\_\+dpi}}
-\index{encode\+\_\+dpi@{encode\+\_\+dpi}!encode.\+h@{encode.\+h}}
-\subsubsection[{\texorpdfstring{encode\+\_\+dpi(instruction\+\_\+t $\ast$instruction)}{encode_dpi(instruction_t *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} encode\+\_\+dpi (
-\begin{DoxyParamCaption}
-\item[{{\bf instruction\+\_\+t} $\ast$}]{instruction}
-\end{DoxyParamCaption}
-)}\hypertarget{encode_8h_ad602e8be44465efa1784455a6f5ed074}{}\label{encode_8h_ad602e8be44465efa1784455a6f5ed074}
-
-
-Encodes data processing instructions. 
-
-Given a data processing instruction this will return the 32 bit instruction corresponding with given \hyperlink{structinstruction__t}{instruction\+\_\+t}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em instruction} & Given instruction. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-32 bit instruction. 
-\end{DoxyReturn}
-\index{encode.\+h@{encode.\+h}!encode\+\_\+mul@{encode\+\_\+mul}}
-\index{encode\+\_\+mul@{encode\+\_\+mul}!encode.\+h@{encode.\+h}}
-\subsubsection[{\texorpdfstring{encode\+\_\+mul(instruction\+\_\+t $\ast$instruction)}{encode_mul(instruction_t *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} encode\+\_\+mul (
-\begin{DoxyParamCaption}
-\item[{{\bf instruction\+\_\+t} $\ast$}]{instruction}
-\end{DoxyParamCaption}
-)}\hypertarget{encode_8h_af8b9e300e3de0e4757325a8997d9c73a}{}\label{encode_8h_af8b9e300e3de0e4757325a8997d9c73a}
-
-
-Encodes multiply instructions. 
-
-Given a multiply instruction this will return the 32 bit instruction corresponding with given \hyperlink{structinstruction__t}{instruction\+\_\+t}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em instruction} & Given instruction. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-32 bit instruction. 
-\end{DoxyReturn}
-\index{encode.\+h@{encode.\+h}!encode\+\_\+sdt@{encode\+\_\+sdt}}
-\index{encode\+\_\+sdt@{encode\+\_\+sdt}!encode.\+h@{encode.\+h}}
-\subsubsection[{\texorpdfstring{encode\+\_\+sdt(instruction\+\_\+t $\ast$instruction)}{encode_sdt(instruction_t *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf word\+\_\+t} encode\+\_\+sdt (
-\begin{DoxyParamCaption}
-\item[{{\bf instruction\+\_\+t} $\ast$}]{instruction}
-\end{DoxyParamCaption}
-)}\hypertarget{encode_8h_a13a86695c8c1835f328612d745542a0a}{}\label{encode_8h_a13a86695c8c1835f328612d745542a0a}
-
-
-Encodes single data transfer instructions. 
-
-Given a single data transfer instruction this will return the 32 bit instruction corresponding with given \hyperlink{structinstruction__t}{instruction\+\_\+t}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em instruction} & Given instruction. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-32 bit instruction. 
 \end{DoxyReturn}

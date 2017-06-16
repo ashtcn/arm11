@@ -6,14 +6,17 @@ Header file for \hyperlink{tokenizer_8c}{tokenizer.\+c}.
 
 
 {\ttfamily \#include \char`\"{}assemble\+\_\+toolbox.\+h\char`\"{}}\\*
-Include dependency graph for tokenizer.\+h\+:\nopagebreak
+{\ttfamily \#include \char`\"{}string\+\_\+arrays.\+h\char`\"{}}\\*
+Include dependency graph for tokenizer.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{tokenizer_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -23,24 +26,8 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{tokenizer_8h_af7fee8bc8d52aaae124ed861f906a98f}{is\+\_\+label} (char $\ast$instruction)
-\begin{DoxyCompactList}\small\item\em Returns true iff the provided instruction is a label. \end{DoxyCompactList}\item 
-char $\ast$ \hyperlink{tokenizer_8h_ab232d19ba15f15bd6ecbef240240236a}{trim} (char $\ast$string)
-\begin{DoxyCompactList}\small\item\em Removes surrounding whitespace. \end{DoxyCompactList}\item 
-char $\ast$ \hyperlink{tokenizer_8h_a6d85de59ac48fa53e961360153553f96}{trim\+\_\+token} (char $\ast$string)
-\begin{DoxyCompactList}\small\item\em Removes leading whitespace and commas. \end{DoxyCompactList}\item 
-char $\ast$ {\bfseries split\+\_\+token} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$result, int $\ast$cur\+\_\+section, char $\ast$operands, int i)\hypertarget{tokenizer_8h_aca2142158a95ccfafd99bf542b8d72db}{}\label{tokenizer_8h_aca2142158a95ccfafd99bf542b8d72db}
-
-\item 
-void {\bfseries free\+\_\+tokens} (\hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} $\ast$tokenized\+\_\+input)\hypertarget{tokenizer_8h_af735b06613a9820a9316bd4ebef9a7fa}{}\label{tokenizer_8h_af735b06613a9820a9316bd4ebef9a7fa}
-
-\item 
 \hyperlink{structstring__arrays__t}{string\+\_\+arrays\+\_\+t} $\ast$ \hyperlink{tokenizer_8h_a34eb193f689b818c120184384b5c29b0}{tokenize\+\_\+input} (char $\ast$$\ast$input, int input\+\_\+lines)
-\begin{DoxyCompactList}\small\item\em Tokenizes input into an array of string arrays. \end{DoxyCompactList}\item 
-\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$ \hyperlink{tokenizer_8h_acf3ea1402ba3a781eed7525335fb8a72}{tokenize\+\_\+operand\+\_\+instruction} (\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$result, char $\ast$instruction\+\_\+op, char $\ast$operands)
-\begin{DoxyCompactList}\small\item\em A helper function for tokenize\+\_\+instruction. \end{DoxyCompactList}\item 
-\hyperlink{structstring__array__t}{string\+\_\+array\+\_\+t} $\ast$ \hyperlink{tokenizer_8h_a7345c8f81d4c0f38cf1c0c24c71b470a}{tokenize\+\_\+instruction} (char $\ast$instruction)
-\begin{DoxyCompactList}\small\item\em Tokenizes a single instruction into a string array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Tokenizes input into an array of string arrays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -49,25 +36,6 @@ Header file for \hyperlink{tokenizer_8c}{tokenizer.\+c}.
 
 
 \subsection{Function Documentation}
-\index{tokenizer.\+h@{tokenizer.\+h}!is\+\_\+label@{is\+\_\+label}}
-\index{is\+\_\+label@{is\+\_\+label}!tokenizer.\+h@{tokenizer.\+h}}
-\subsubsection[{\texorpdfstring{is\+\_\+label(char $\ast$instruction)}{is_label(char *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+\_\+label (
-\begin{DoxyParamCaption}
-\item[{char $\ast$}]{instruction}
-\end{DoxyParamCaption}
-)}\hypertarget{tokenizer_8h_af7fee8bc8d52aaae124ed861f906a98f}{}\label{tokenizer_8h_af7fee8bc8d52aaae124ed861f906a98f}
-
-
-Returns true iff the provided instruction is a label. 
-
-An instruction is a label iff its final character is a colon. 
-\begin{DoxyParams}{Parameters}
-{\em instruction} & The instruction string to check. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True iff the provided instruction is a label. 
-\end{DoxyReturn}
 \index{tokenizer.\+h@{tokenizer.\+h}!tokenize\+\_\+input@{tokenize\+\_\+input}}
 \index{tokenize\+\_\+input@{tokenize\+\_\+input}!tokenizer.\+h@{tokenizer.\+h}}
 \subsubsection[{\texorpdfstring{tokenize\+\_\+input(char $\ast$$\ast$input, int input\+\_\+lines)}{tokenize_input(char **input, int input_lines)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string\+\_\+arrays\+\_\+t}$\ast$ tokenize\+\_\+input (
@@ -89,86 +57,4 @@ Tokenizes all instructions from the input, using tokenize\+\_\+instruction.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 String arrays, one for each instruction. 
-\end{DoxyReturn}
-\index{tokenizer.\+h@{tokenizer.\+h}!tokenize\+\_\+instruction@{tokenize\+\_\+instruction}}
-\index{tokenize\+\_\+instruction@{tokenize\+\_\+instruction}!tokenizer.\+h@{tokenizer.\+h}}
-\subsubsection[{\texorpdfstring{tokenize\+\_\+instruction(char $\ast$instruction)}{tokenize_instruction(char *instruction)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string\+\_\+array\+\_\+t}$\ast$ tokenize\+\_\+instruction (
-\begin{DoxyParamCaption}
-\item[{char $\ast$}]{instruction}
-\end{DoxyParamCaption}
-)}\hypertarget{tokenizer_8h_a7345c8f81d4c0f38cf1c0c24c71b470a}{}\label{tokenizer_8h_a7345c8f81d4c0f38cf1c0c24c71b470a}
-
-
-Tokenizes a single instruction into a string array. 
-
-Breaks up an instruction into single pieces of information (seperated by commas, spaces, brackets). 
-\begin{DoxyParams}{Parameters}
-{\em instruction} & The instructions string. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A string array of the tokenized instruction. 
-\end{DoxyReturn}
-\index{tokenizer.\+h@{tokenizer.\+h}!tokenize\+\_\+operand\+\_\+instruction@{tokenize\+\_\+operand\+\_\+instruction}}
-\index{tokenize\+\_\+operand\+\_\+instruction@{tokenize\+\_\+operand\+\_\+instruction}!tokenizer.\+h@{tokenizer.\+h}}
-\subsubsection[{\texorpdfstring{tokenize\+\_\+operand\+\_\+instruction(string\+\_\+array\+\_\+t $\ast$result, char $\ast$instruction\+\_\+op, char $\ast$operands)}{tokenize_operand_instruction(string_array_t *result, char *instruction_op, char *operands)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string\+\_\+array\+\_\+t}$\ast$ tokenize\+\_\+operand\+\_\+instruction (
-\begin{DoxyParamCaption}
-\item[{{\bf string\+\_\+array\+\_\+t} $\ast$}]{result, }
-\item[{char $\ast$}]{instruction\+\_\+op, }
-\item[{char $\ast$}]{operands}
-\end{DoxyParamCaption}
-)}\hypertarget{tokenizer_8h_acf3ea1402ba3a781eed7525335fb8a72}{}\label{tokenizer_8h_acf3ea1402ba3a781eed7525335fb8a72}
-
-
-A helper function for tokenize\+\_\+instruction. 
-
-Tokenizes operands. 
-\begin{DoxyParams}{Parameters}
-{\em result} & A pointer the the string array to write to. \\
-\hline
-{\em instruction\+\_\+op} & The operation of the instruction. \\
-\hline
-{\em operands} & The operands of the instruction. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The updated string array. 
-\end{DoxyReturn}
-\index{tokenizer.\+h@{tokenizer.\+h}!trim@{trim}}
-\index{trim@{trim}!tokenizer.\+h@{tokenizer.\+h}}
-\subsubsection[{\texorpdfstring{trim(char $\ast$string)}{trim(char *string)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ trim (
-\begin{DoxyParamCaption}
-\item[{char $\ast$}]{string}
-\end{DoxyParamCaption}
-)}\hypertarget{tokenizer_8h_ab232d19ba15f15bd6ecbef240240236a}{}\label{tokenizer_8h_ab232d19ba15f15bd6ecbef240240236a}
-
-
-Removes surrounding whitespace. 
-
-Removes leading and trailing whitespace. 
-\begin{DoxyParams}{Parameters}
-{\em string} & The string to trim. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The string with surrounding whitespace removed. 
-\end{DoxyReturn}
-\index{tokenizer.\+h@{tokenizer.\+h}!trim\+\_\+token@{trim\+\_\+token}}
-\index{trim\+\_\+token@{trim\+\_\+token}!tokenizer.\+h@{tokenizer.\+h}}
-\subsubsection[{\texorpdfstring{trim\+\_\+token(char $\ast$string)}{trim_token(char *string)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ trim\+\_\+token (
-\begin{DoxyParamCaption}
-\item[{char $\ast$}]{string}
-\end{DoxyParamCaption}
-)}\hypertarget{tokenizer_8h_a6d85de59ac48fa53e961360153553f96}{}\label{tokenizer_8h_a6d85de59ac48fa53e961360153553f96}
-
-
-Removes leading whitespace and commas. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em string} & The string to trim. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The string with leading whitespace and commas removed. 
 \end{DoxyReturn}

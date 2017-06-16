@@ -7,6 +7,7 @@ var searchData=
   ['mask_5ffirst_5f8',['MASK_FIRST_8',['../global_8h.html#a87629b54aa0d4536f565c1eacbe73c1b',1,'global.h']]],
   ['max_5felements',['max_elements',['../structstring__arrays__t.html#a44302bf32cb7eede15f027da880e884e',1,'string_arrays_t::max_elements()'],['../structword__array__t.html#a6ee8bec82913800ec8b2b8d3e71d9c46',1,'word_array_t::max_elements()']]],
   ['max_5flabel_5flength',['MAX_LABEL_LENGTH',['../global_8h.html#a40953fb1d014188b77bbf6d21d0b3e6c',1,'global.h']]],
+  ['max_5fline_5flength',['MAX_LINE_LENGTH',['../global_8h.html#af0f2173e3b202ddf5756531b4471dcb2',1,'global.h']]],
   ['max_5fsize',['max_size',['../structsymbol__table__t.html#ab237aa4717eabb6db3618c1626cf4286',1,'symbol_table_t']]],
   ['memory',['memory',['../structsystem__state__t.html#ade4e6995025b3b8eeeb62bdb38408765',1,'system_state_t']]],
   ['mla_5fm',['MLA_M',['../global_8h.html#a1fa5d60cdf5faa508dcdc99db8928e0fac773d984ca53eec2ea683a1b81178b97',1,'global.h']]],
