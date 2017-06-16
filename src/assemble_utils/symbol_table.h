@@ -31,11 +31,8 @@ typedef struct {
   symbol_table_row_t *rows;
 } symbol_table_t;
 
-bool is_label_in_table(symbol_table_t *table, char *label);
-address_t get_address(symbol_table_t *table, char *label);
-symbol_table_t *create_table(uint16_t row_number);
-void add_row(symbol_table_t *table, char *label, address_t address);
-void free_table(symbol_table_t *table);
 symbol_table_t *generate_symbol_table(string_arrays_t *tokens);
+address_t get_address(symbol_table_t *table, char *label);
+void free_table(symbol_table_t *table);
 
 #endif

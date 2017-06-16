@@ -5,6 +5,14 @@
 
 #include "assembler.h"
 
+static word_t assemble_dpi(string_array_t *tokens);
+static word_t assemble_spl(string_array_t *tokens);
+static word_t assemble_mul(string_array_t *tokens);
+static word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words,
+                    int current_line, int max_lines);
+static word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table,
+                    address_t current_line);
+
 /** An empty instruction constant. */
 static const instruction_t NULL_INSTRUCTION = {
   .type = NUL,
@@ -26,7 +34,7 @@ static const instruction_t NULL_INSTRUCTION = {
  * @param tokens The string to parse.
  * @returns A machine code instruction.
  */
-word_t assemble_dpi(string_array_t *tokens) {
+static word_t assemble_dpi(string_array_t *tokens) {
   instruction_t instruction = NULL_INSTRUCTION;
   char **sections = tokens->array;
 
@@ -82,7 +90,7 @@ word_t assemble_dpi(string_array_t *tokens) {
  * @param tokens The string to parse.
  * @returns A machine code instruction.
  */
-word_t assemble_spl(string_array_t *tokens) {
+static word_t assemble_spl(string_array_t *tokens) {
   instruction_t instruction = NULL_INSTRUCTION;
 
   if (4 == tokens->size) {
@@ -131,7 +139,7 @@ word_t assemble_spl(string_array_t *tokens) {
  * @param tokens The string to parse.
  * @returns A machine code instruction.
  */
-word_t assemble_mul(string_array_t *tokens) {
+static word_t assemble_mul(string_array_t *tokens) {
   instruction_t instruction = NULL_INSTRUCTION;
 
   instruction.type = MUL;
@@ -158,7 +166,7 @@ word_t assemble_mul(string_array_t *tokens) {
  * @param max_lines The maximum number of instructions.
  * @returns A machine code instruction.
  */
-word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words,
+static word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words,
                     int current_line, int max_lines) {
   instruction_t instruction = NULL_INSTRUCTION;
   char **sections = tokens->array;
@@ -304,7 +312,7 @@ word_t assemble_sdt(string_array_t *tokens, word_array_t *extra_words,
  * @param instruction_no The line number of this instruction.
  * @returns A machine code instruction.
  */
-word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table,
+static word_t assemble_bra(string_array_t *tokens, symbol_table_t *symbol_table,
                     address_t instruction_no) {
   instruction_t instruction = NULL_INSTRUCTION;
 

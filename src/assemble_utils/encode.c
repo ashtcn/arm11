@@ -5,6 +5,11 @@
 
 #include "encode.h"
 
+static word_t encode_dpi(instruction_t *instruction);
+static word_t encode_mul(instruction_t *instruction);
+static word_t encode_sdt(instruction_t *instruction);
+static word_t encode_branch(instruction_t *instruction);
+
 word_t encode(instruction_t *instruction) {
   switch (instruction->type) {
     case DPI:
@@ -49,7 +54,7 @@ word_t add_cond(instruction_t *instruction) {
  * @param instruction Given instruction.
  * @returns 32 bit instruction.
  */
-word_t encode_dpi(instruction_t *instruction) {
+static word_t encode_dpi(instruction_t *instruction) {
   word_t binary = 0;
   binary |= ((word_t) instruction->operation) << 21;
   binary |= ((word_t) instruction->flag_0) << 25;
@@ -87,7 +92,7 @@ word_t encode_dpi(instruction_t *instruction) {
  * @param instruction Given instruction.
  * @returns 32 bit instruction.
  */
-word_t encode_mul(instruction_t *instruction) {
+static word_t encode_mul(instruction_t *instruction) {
   word_t binary = 0x90;
   binary |= ((word_t) instruction->rd) << 16;
   binary |= ((word_t) instruction->rs) << 8;
@@ -110,7 +115,7 @@ word_t encode_mul(instruction_t *instruction) {
  * @param instruction Given instruction.
  * @returns 32 bit instruction.
  */
-word_t encode_sdt(instruction_t *instruction) {
+static word_t encode_sdt(instruction_t *instruction) {
   word_t binary = 0x04000000;
   binary |= ((word_t) instruction->flag_0) << 25;
   binary |= ((word_t) instruction->flag_1) << 24;
@@ -149,7 +154,7 @@ word_t encode_sdt(instruction_t *instruction) {
  * @param instruction Given instruction.
  * @returns 32 bit instruction.
  */
-word_t encode_branch(instruction_t *instruction) {
+static word_t encode_branch(instruction_t *instruction) {
   word_t binary = 0x0A000000;
   binary |= MASK_FIRST_8 & instruction->immediate_value;
   return binary | add_cond(instruction);

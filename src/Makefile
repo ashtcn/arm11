@@ -3,9 +3,9 @@ CFLAGS  = -Wall -g -D_POSIX_SOURCE -D_DEFAULT_SOURCE -std=c99 -Werror -pedantic 
 
 .SUFFIXES: .c .o
 
-.PHONY: all tests clean
+.PHONY: all tests full_tests clean
 
-all: emulate assemble unit_tests
+all: emulate assemble unit_tests tests
 
 emulate: emulate.o emulate_utils/decode.o emulate_utils/execute.o emulate_utils/print_compliant.o emulate_utils/print.o toolbox.o
 assemble: assemble.o assemble_utils/assemble_toolbox.o assemble_utils/string_arrays.o assemble_utils/symbol_table.o assemble_utils/tokenizer.o assemble_utils/assembler.o assemble_utils/parser.o assemble_utils/encode.o toolbox.o assemble_utils/word_array.o emulate_utils/print.o
@@ -30,6 +30,9 @@ assemble_utils/tokenizer.o: assemble_utils/string_array.h
 unit_tests.o: emulate_utils/decode.h emulate_utils/execute.h emulate_utils/print_compliant.h
 
 tests:
+	./run_quick_tests
+
+full_tests:
 	./run_tests
 
 clean:

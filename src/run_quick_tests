@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo -e "\033[1;32mRunning valgrind on emulate. Any errors will appear below:\e[m"
+valgrind --tool=memcheck --leak-check=yes -q ./emulate ../test_suite/test_cases/factorial > /dev/null
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mRunning valgrind on assemble. Any errors will appear below:\e[m"
+mkdir out
+valgrind --tool=memcheck --leak-check=yes -q ./assemble ../test_suite/test_cases/factorial.s out/factorial > /dev/null
+rm -rf out
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mRunning unit tests. All results will appear below:\e[m"
+valgrind --tool=memcheck --leak-check=yes -q ./unit_tests
+echo -e "\033[1;32mChecks complete!\e[m"
+echo
+
+echo -e "\033[1;32mRunning our extended ruby test suite. Press Ctrl-C when done to continue:\e[m"
+ruby ../test_suite/testserver.rb ./
+echo -e "\033[1;32mChecks complete!\e[m"
+echo

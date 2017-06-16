@@ -6,56 +6,6 @@
 #include "assemble_toolbox.h"
 
 /**
- * @brief Saves an array of words to a file.
- *
- * @param data Array of words to write to the file.
- * @param file_name Address of the file to save to.
- * @param file_size Size of the word array.
- */
-void save_file(word_t *data, char *file_name, int file_size) {
-  FILE *file = fopen(file_name, "wb");
-  if (file == NULL) {
-    perror("Error in opening save file");
-    exit(EXIT_FAILURE);
-  }
-
-  for (int i = 0; i < file_size; i++) {
-    fwrite(&data[i], sizeof(word_t), 1, file);
-  }
-
-  fclose(file);
-}
-
-/**
- * @brief Returns the number of lines in a file.
- *
- * @param file_name Address of the file to read from.
- * @returns Number of lines in a file.
- */
-int lines_in_file(char *file_name) {
-  int lines = 0;
-  char ch;
-  FILE *file = fopen(file_name, "r");
-  if (file == NULL) {
-    perror("Error in opening source file");
-    exit(EXIT_FAILURE);
-  }
-  bool on_new_line = true;
-  while ((ch = getc(file)) != EOF) {
-    if (ch == '\n') {
-      if (!on_new_line) {
-        lines++;
-      }
-      on_new_line = true;
-    } else {
-      on_new_line = false;
-    }
-  }
-  fclose(file);
-  return lines;
-}
-
-/**
  * @brief Allocates the memory for a 2D array of chars.
  *
  * @param rows Rows of the 2D array.
@@ -94,6 +44,35 @@ void free_2d_array(char **arr, int rows) {
 }
 
 /**
+ * @brief Returns the number of lines in a file.
+ *
+ * @param file_name Address of the file to read from.
+ * @returns Number of lines in a file.
+ */
+int lines_in_file(char *file_name) {
+  int lines = 0;
+  char ch;
+  FILE *file = fopen(file_name, "r");
+  if (file == NULL) {
+    perror("Error in opening source file");
+    exit(EXIT_FAILURE);
+  }
+  bool on_new_line = true;
+  while ((ch = getc(file)) != EOF) {
+    if (ch == '\n') {
+      if (!on_new_line) {
+        lines++;
+      }
+      on_new_line = true;
+    } else {
+      on_new_line = false;
+    }
+  }
+  fclose(file);
+  return lines;
+}
+
+/**
  * @brief Returns a 2D array of the given source file.
  *
  * The 2D array is constructed such that is an array of strings, where each
@@ -104,7 +83,6 @@ void free_2d_array(char **arr, int rows) {
  * @returns A 2D array made from the file.
  */
 char **load_source_file(char *load_filename, int lines) {
-  int max_line_length = 512; //put in global
   FILE *file = fopen(load_filename, "r");
   if (file == NULL) {
     perror("Error in opening source file");
@@ -112,11 +90,11 @@ char **load_source_file(char *load_filename, int lines) {
   }
 
   //Set up the correct size array;
-  char **loaded_file = create_2d_array(lines, max_line_length);
+  char **loaded_file = create_2d_array(lines, MAX_LINE_LENGTH);
 
   // Try to read the file line by line
   int size = 0;
-  while (size < lines && fgets(loaded_file[size], max_line_length, file)) {
+  while (size < lines && fgets(loaded_file[size], MAX_LINE_LENGTH, file)) {
     // Strips any trailing newlinesword_size
     if (loaded_file[size][0] != '\n' && loaded_file[size][0] != '\r') {
       loaded_file[size][strcspn(loaded_file[size], "\n")] = 0;
@@ -125,4 +103,25 @@ char **load_source_file(char *load_filename, int lines) {
 	}
   fclose(file);
   return loaded_file;
+}
+
+/**
+ * @brief Saves an array of words to a file.
+ *
+ * @param data Array of words to write to the file.
+ * @param file_name Address of the file to save to.
+ * @param file_size Size of the word array.
+ */
+void save_file(word_t *data, char *file_name, int file_size) {
+  FILE *file = fopen(file_name, "wb");
+  if (file == NULL) {
+    perror("Error in opening save file");
+    exit(EXIT_FAILURE);
+  }
+
+  for (int i = 0; i < file_size; i++) {
+    fwrite(&data[i], sizeof(word_t), 1, file);
+  }
+
+  fclose(file);
 }

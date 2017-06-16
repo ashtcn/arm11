@@ -35,10 +35,12 @@
 /** The number of bytes allocated for setting GPIO pins. */
 #define GPIO_SET_SIZE 4
 
-/** The initial array size used by array structs */
+/** The initial array size used by array structs. */
 #define INITIAL_ARRAY_SIZE 64
-/** The maximum length of labels accepted by a symbol table */
-#define MAX_LABEL_LENGTH 20
+/** The maximum length of labels accepted by a symbol table. */
+#define MAX_LABEL_LENGTH 64
+/** The maximum line length for the assembly file to be loaded. */
+#define MAX_LINE_LENGTH 512
 
 /**
  * @brief A setting which determines the format of output.
