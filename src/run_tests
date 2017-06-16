@@ -144,8 +144,9 @@ valgrind --tool=memcheck --leak-check=yes -q ./unit_tests
 echo -e "\033[1;32mChecks complete!\e[m"
 echo
 
-echo -e "\033[1;32mRunning Maria's ruby test suite. Press Ctrl-C when done to continue:\e[m"
+echo -e "\033[1;32mCloning a fresh test suite:\e[m"
 git clone git@gitlab.doc.ic.ac.uk:mvalerae/arm11_1617_testsuite.git
+echo -e "\033[1;32mRunning Maria's ruby test suite. Press Ctrl-C when done to continue:\e[m"
 ruby arm11_1617_testsuite/testserver.rb ./
 rm -rf arm11_1617_testsuite
 echo -e "\033[1;32mChecks complete!\e[m"
