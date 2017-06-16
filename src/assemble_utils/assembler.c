@@ -88,7 +88,7 @@ word_t assemble_spl(string_array_t *tokens) {
   if (4 == tokens->size) {
     // Is an ANDEQ instruction
     instruction.type = ZER;
-  } else {
+  } else if (3 == tokens->size) {
     // Build the tokens for assemble_dpi to make into a MOV instruction
     string_array_t *mov_tokens = malloc(sizeof(string_array_t));
     if (!mov_tokens) {
@@ -117,6 +117,9 @@ word_t assemble_spl(string_array_t *tokens) {
     free(mov_tokens);
 
     return mov_instruction;
+  } else {
+    fprintf(stderr, "Incorrect number of operands for shift or andeq\n");
+    exit(EXIT_FAILURE);
   }
 
   return encode(&instruction);

@@ -120,7 +120,11 @@ condition_t string_to_condition(char *str) {
   if (!strcmp(str, "le")) {
     return LE;
   }
-  return AL;
+  if (!strcmp(str, "al") || 0 == strlen(str)) {
+    return AL;
+  }
+  fprintf(stderr, "No such condition found.\n");
+  exit(EXIT_FAILURE);
 }
 
 /**
@@ -214,9 +218,12 @@ void parse_shift(string_array_t *tokens, instruction_t *instruction) {
     // In the form <#expression>
     char *number = &tokens->array[1][1];
     instruction->shift_amount = parse_immediate_value(number);
-  } else {
+  } else if ('r' == tokens->array[1][0]) {
     // Is a register
     instruction->rs = string_to_reg_address(tokens->array[1]);
+  } else {
+    fprintf(stderr, "Shift not number or register");
+    exit(EXIT_FAILURE);
   }
 }
 
@@ -265,6 +272,9 @@ void parse_operand(string_array_t *tokens, instruction_t *instruction) {
       parse_shift(shift_tokens, instruction);
       free(shift_tokens);
     }
+  } else {
+    fprintf(stderr, "Operand not number or register");
+    exit(EXIT_FAILURE);
   }
 }
 
