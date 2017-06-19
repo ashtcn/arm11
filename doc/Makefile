@@ -1,7 +1,7 @@
 EXTRA_SRC =
 TEX = pdflatex
 
-all: Report.pdf Checkpoint.pdf
+all: Report.pdf Checkpoint.pdf Presentation.pdf
 	make -C LaTeX\ Documentation
 
 .phony: all clean
