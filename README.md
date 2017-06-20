@@ -37,3 +37,5 @@ See `programs` for the Part III GPIO program. This can be assembled using `assem
 ## Extension: OpenCV Game Engine
 
 See the submodule `open-cv-game-engine`. It has a seperate README that describes use. LaTeX documentation is available in the `LaTeX Documentation` directory.
+
+To build the extension, simple use the script `./setup_engine`.
