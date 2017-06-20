@@ -1,10 +1,11 @@
 \documentclass{beamer}
 
 \title{Terminal-based Motion-controlled Game Engine using OpenCV}
-\author{Group 21}
+\author{A Clarke, Q Feng, J Spooner, L Squires}
 
 \usecolortheme{whale}
 \usepackage{graphicx}
+\usepackage{calc}
 
 \begin{document}
 	
@@ -12,6 +13,29 @@
 
 \begin{frame}
 	\frametitle{ARM Emulator and Assembler}
+	Emulator:
+	\begin{itemize}
+		\item Load binary file into a \texttt{system\_state\_t} struct.
+		\item Main loop:
+		\begin{itemize}
+			\item Execute the last decoded instruction, updating the \texttt{system\_state\_t} struct.
+			\item Decode the last fetched instruction, producing an \texttt{instruction\_t} struct.
+			\item Fetch the next instruction from memory, updating the PC.
+		\end{itemize}
+		\item Print the final system state.
+	\end{itemize}
+	Assembler:
+	\begin{itemize}
+		\item Load the assembly file.
+		\item Tokenize instructions and generate symbol table.
+		\item Create an \texttt{instruction\_t} struct representation of each instruction from tokens.
+		\item Decode \texttt{instruction\_t} instructions into binary code.
+		\item Write out binary file.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{ARM Emulator and Assembler (continued)}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
@@ -22,16 +46,27 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
-				\includegraphics[width=\textwidth]{Presentation/emulate.png}
+				\includegraphics[width=\columnwidth-\columnsep]{Presentation/emulate.png}
 			\end{figure}
 		\end{column}
 	\end{columns}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Overview of our Extension}
+	\begin{itemize}
+		\item Versatile ASCII game engine
+		\item Arm tracking using OpenCV
+		\item Getting started guide and full documentation
+		\item Unit test suite
+		\item Three example implementations (flappy bird, snake, pong)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Terminal-based Game Engine}
 	\begin{columns}
-		\begin{column}{0.65\textwidth}
+		\begin{column}{0.625\textwidth}
 			\emph{Makes it easy to write terminal-based games}
 			
 			In the function template \texttt{init\_game}:
@@ -48,88 +83,93 @@
 				\end{enumerate}
 				\item Create collections of items (using \texttt{object\_list\_t}).
 				\item Choose the \texttt{FRAMERATE}.
-				\item Set up colour pairs (used by \texttt{ncurses}).
+				\item Set up colour pairs.
 			\end{enumerate}
 		\end{column}
-		\begin{column}{0.35\textwidth}
+		\begin{column}{0.375\textwidth}
 			\begin{figure}
-				\includegraphics[width=\textwidth]{Presentation/snake.png}
+				\includegraphics[width=\columnwidth-\columnsep]{Presentation/snake.png}
 			\end{figure}
 		\end{column}
 	\end{columns}
 \end{frame}
 
 \begin{frame}
-\frametitle{Terminal-based Game Engine (continued)}
-\begin{columns}
-	\begin{column}{0.55\textwidth}
-		\begin{figure}
-			\includegraphics[width=\textwidth]{Presentation/flappy.png}
-		\end{figure}
-	\end{column}
-	\begin{column}{0.45\textwidth}
-		Write some simple helper functions to call on objects:
-		\begin{enumerate}
-			\setcounter{enumi}{3}
-			\item E.g. \texttt{move}.
-			\item E.g. \texttt{detect\_collision} (can use \texttt{is\_covering}).
-		\end{enumerate}
-		Complete the main game loop:
-		\begin{enumerate}
-			\setcounter{enumi}{5}
-			\item Use \texttt{for\_all} to call \texttt{move} on objects.
-			\item Call \texttt{print\_game}.
-			\item Receive input using \texttt{getch}.
-			\item Check game logic.
-		\end{enumerate}
-	\end{column}
-\end{columns}
+	\frametitle{Terminal-based Game Engine (continued)}
+	\begin{columns}
+		\begin{column}{0.55\textwidth}
+			\begin{figure}
+				\includegraphics[width=\columnwidth]{Presentation/flappy.png}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			Write some simple helper functions to call on objects:
+			\begin{enumerate}
+				\setcounter{enumi}{3}
+				\item E.g. \texttt{move}.
+				\item E.g. \texttt{detect\_collision} (can use \texttt{is\_covering}).
+			\end{enumerate}
+			Complete the main game loop:
+			\begin{enumerate}
+				\setcounter{enumi}{5}
+				\item Use \texttt{for\_all} to call \texttt{move} on objects.
+				\item Call \texttt{print\_game}.
+				\item Receive input using \texttt{getch}.
+				\item Check game logic.
+			\end{enumerate}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}
-\frametitle{Motion control using OpenCV}
-\begin{columns}
-	\begin{column}{0.65\textwidth}
-		\begin{itemize}
-			\item Calibrate engine to users skin colour
-			\item Apply threshold to image using skin colour
-			\item Median blur to remove noise
-			\item Apply hand tracking algorithm
-		\end{itemize}
-	\end{column}
-	\begin{column}{0.35\textwidth}
-		\begin{figure}
-			\includegraphics[width=\textwidth]{Presentation/calibration.png}
-		\end{figure}
-	\end{column}
-\end{columns}
-\begin{figure}
-	\includegraphics[width=\textwidth]{Presentation/opencv.png}
-\end{figure}
+	\frametitle{Motion control using OpenCV}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{itemize}
+				\item Calibrate engine to users skin colour.
+				\item Apply threshold to image using skin colour.
+				\item Median blur to remove noise.
+				\item Apply hand tracking algorithm.
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\begin{figure}
+				\includegraphics[width=\columnwidth-2\columnsep]{Presentation/calibration.png}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Presentation/opencv.png}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{Motion control using OpenCV {hand tracking}}
-\begin{itemize}
-	\item Two points are initalised in the "guess" positiond
-	\item Update each frame, moving away from the centre and towards high density regions of skin nearby
-	\item If they wander out of bounds then reposition to the guess points
-	\item If the points enter certain regions then we classify this as "left hand up", "right hand down" ...
-\end{itemize}
+	\frametitle{Motion control using OpenCV (continued)}
+	\begin{itemize}
+		\item Initialises to a guess position
+		\item Updates each frame, moving towards high density regions
+		\item If out of bounds, resets to guess
+		\item Classifies based on position
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Demonstration}
-\begin{itemize}
-	\item TODO
-\end{itemize}
+	\frametitle{Demonstration}
+	\texttt{setup\_engine}
+	\begin{itemize}
+		\item \texttt{open-cv-game-engine/flappy\_bird}
+		\item \texttt{open-cv-game-engine/snake}
+		\item \texttt{open-cv-game-engine/pong}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Testing}
-\begin{itemize}
-	\item TODO
-\end{itemize}
+	\frametitle{Testing}
+	\begin{itemize}
+		\item Test script \texttt{open-cv-game-engine/run\_tests}
+		\item Visual testing of motion control code
+		\item Implementation of example games
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -144,11 +184,11 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Reflection}
+\frametitle{Reflection (continued)}
 \begin{itemize}
 	\item Split up the work well, so all members of the team contributing fairly equally.
-	\item Could have started our extension earlier.
-	\item We would definitely keep our group’s work ethic for the next project.
+	\item Could have researched and started our extension earlier.
+	\item We would definitely keep our group's work ethic for the next project.
 \end{itemize}
 \end{frame}
 

@@ -18,5 +18,6 @@ clean:
 	rm -f *.snm
 	rm -f *.toc
 	rm -f *.nav
+	rm -f *.out
 	rm -f *.synctex.gz
 	make clean -C LaTeX\ Documentation
