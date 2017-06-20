@@ -15,5 +15,8 @@ clean:
 	rm -f *.pdf
 	rm -f *.aux
 	rm -f *.log
+	rm -f *.snm
+	rm -f *.toc
+	rm -f *.nav
 	rm -f *.synctex.gz
 	make clean -C LaTeX\ Documentation
