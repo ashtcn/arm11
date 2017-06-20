@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Initialise the submodules
+cd opencv-game-engine
+git submodule update --init
+cd opencv
+git submodule update --init
+
+# Build OpenCV
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=Release ..
+make -j7
+cd ../..
+
+# Build our game
+cmake .
+make
+
+clear
