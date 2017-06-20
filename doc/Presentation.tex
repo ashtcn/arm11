@@ -111,8 +111,8 @@
 \begin{frame}
 \frametitle{Motion control using OpenCV {hand tracking}}
 \begin{itemize}
-	\item Two points are initalised in the "guess" position
-	\item Update each frame, mvoing away from the centre and towards high density regions of skin
+	\item Two points are initalised in the "guess" positiond
+	\item Update each frame, moving away from the centre and towards high density regions of skin nearby
 	\item If they wander out of bounds then reposition to the guess points
 	\item If the points enter certain regions then we classify this as "left hand up", "right hand down" ...
 \end{itemize}
