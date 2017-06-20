@@ -4,6 +4,7 @@
 \author{Group 21}
 
 \usecolortheme{whale}
+\usepackage{graphicx}
 
 \begin{document}
 	
@@ -11,18 +12,78 @@
 
 \begin{frame}
 	\frametitle{ARM Emulator and Assembler}
-	\begin{itemize}
-		\item \href{run:../src/run_tests}{Test script} \texttt{../src/run\_tests}
-		\item Debug mode
-		\item Raspberry Pi GPIO
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Test script \texttt{src/run\_tests}
+				\item Debug mode
+				\item Raspberry Pi GPIO
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Presentation/emulate.png}
+			\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Terminal-based Game Engine}
-	\begin{itemize}
-		\item TODO
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.65\textwidth}
+			\emph{Makes it easy to write terminal-based games}
+			
+			In the function template \texttt{init\_game}:
+			\begin{enumerate}
+				\item Define objects using \texttt{object\_list\_elem\_t}.
+				\begin{enumerate}
+					\item Type
+					\item Position
+					\item Velocity
+					\item Acceleration
+					\item ASCII representation (string, colour, size)
+					\item Depth
+					\item Pointer to another object
+				\end{enumerate}
+				\item Create collections of items (using \texttt{object\_list\_t}).
+				\item Choose the \texttt{FRAMERATE}.
+				\item Set up colour pairs (used by \texttt{ncurses}).
+			\end{enumerate}
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Presentation/snake.png}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Terminal-based Game Engine (continued)}
+\begin{columns}
+	\begin{column}{0.55\textwidth}
+		\begin{figure}
+			\includegraphics[width=\textwidth]{Presentation/flappy.png}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.45\textwidth}
+		Write some simple helper functions to call on objects:
+		\begin{enumerate}
+			\setcounter{enumi}{3}
+			\item E.g. \texttt{move}.
+			\item E.g. \texttt{detect\_collision} (can use \texttt{is\_covering}).
+		\end{enumerate}
+		Complete the main game loop:
+		\begin{enumerate}
+			\setcounter{enumi}{5}
+			\item Use \texttt{for\_all} to call \texttt{move} on objects.
+			\item Call \texttt{print\_game}.
+			\item Receive input using \texttt{getch}.
+			\item Check game logic.
+		\end{enumerate}
+	\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
